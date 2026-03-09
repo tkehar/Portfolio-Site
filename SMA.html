@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMA</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="project-page sma-project">
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <a href="Index.html" class="back-button">
+                <span class="icon"><img src="Assets/Icons/Home.png" alt="Back"></span>
+                <span class="text">Back to Portfolio</span>
+            </a>
+            <button id="sidebarToggle" class="sidebar-toggle"><img src="Assets/Icons/Close.png" alt="Close Menu"></button>
+            <div class="sidebar-content-wrapper">
+                <p>Table of Contents</p>
+                <ul class="toc-list" id="toc-list">
+                    <!-- Links will be generated here -->
+                </ul>
+            </div>
+        </div>
+        <div class="main-content project-content">
+            <img src="Assets/SMA/Header-Image.svg" alt="SMA Header Image" class="header-image" style=" margin-bottom: 60px;">
+            <div style="display: flex; justify-content: center; margin-top: -5px;">
+                <a href="https://sabeenmahmudarchive.com/" class="visit-button" target="_blank">Visit Project</a>
+            </div>
+            <div class="content-row">
+                <div class="image-column">
+
+                    <img src="Assets/SMA/Sabeen.png" alt="Sabeen Mahmud" style="width: 100%; height: auto;">
+                </div>
+                <div class="text-column" style="padding: 10%;">
+                    <h2>Sabeen Mahmud (1974 - 2015)</h2>
+                    <p>Sabeen Mahmud was a Pakistani human rights activist, entrepreneur and self taught designer.She stood for community, culture and open dialogue and with these principles founded The Second Floor (T2F), a coffee house and community space.T2F hosted a range of public events like; film screenings, poetry readings, stand-up comedy, and panels on human rights, science lectures, and other topics. Sabeen brought poets, politicians, artists, and activists together to share ideas over a cup of tea. In 2015 after hosting a panel titled “Unsilencing Balochistan” Sabeen was shot at a signal as she was leaving the event.</p>
+                </div>
+            </div>
+            <div class="content-row" style="align-items: normal;">
+                <div class="text-column" style="padding-left: 10%;">
+                    <h2>Context</h2>
+                    <p>The act of collecting this data began in 2015 by members of the Sabeen Mahmud Forum. This involved photographing Sabeen’s spaces and belongings, scanning family albums, recovering blogs, tweets, social media posts by Sabeen, and interviewing Sabeen’s friends and family. After reaching a critical junction this project was let go as there was no consensus on what form this archive should take.</p>
+                </div>
+                <div class="text-column" style="padding-right: 10%;">
+                    <h2>Abstract</h2>
+                    <p>The Sabeen Mahmud Archive is a digital platform that allows viewers to get to know Sabeen and her work posthumously and allows contributors to add to this archive. Through the use of documents (objects of significance) and accounts from people in her life. In Sabeen’s own words technology is the biggest driver of change so it is fitting to use new media to facilitate this storytelling. This archive moves beyond being a repository of knowledge and immerses viewers in an experience where they can follow a trail of Sabeen's interests.</p>
+                </div>
+            </div>
+            
+            
+            <div class="content-row">
+                <div class="text-column" style="padding-left: 10%; padding-right: 10%;">
+                    <h2>Stakeholder Map</h2>
+                    <p>Identifying the stakeholders and their needs was crucial to designing a solution that would be meaningful and impactful. The stakeholder map below shows the different groups of people who have an interest in Sabeen's legacy and the archive, along with their specific needs and motivations. For the first iteration of the archive, the focus was on stakeholder groups 1, 2 and 3.</p>
+                    <br></br>
+                    <p style="text-align: center;"><I>Click on the numbers to learn more about each stakeholder group.</I></p>
+                    <div class="stakeholder-map-container">
+                        <img src="Assets/SMA/Stakeholder-Map.png" alt="Stakeholder Map">
+                        <svg class="connector-lines">
+                    <path id="connector-path" d="" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                
+                <button class="hotspot" style="top: 40%; left: 25%;" data-target="popup-audience-1" title="New/Wider Audiences">5</button>
+                <div id="popup-audience-1" class="hotspot-popup">
+                    <h3>5. New/Wider Audiences</h3>
+                    <p>Need an introduction to Sabeen and her work and context for the stories and a way to access the archive</p>
+                </div>
+
+                <button class="hotspot" style="top: 51%; left: 45%;" data-target="popup-audience-2" title="Pakistani Audiences">4</button>
+                <div id="popup-audience-2" class="hotspot-popup">
+                    <h3>4.Pakistani Audiences</h3>
+                    <p>Have some knowledge of Sabeen and her work but interested in specific details and aspects.</p>
+                </div>
+
+                <button class="hotspot" style="top: 62%; left: 65%;" data-target="popup-collab" title="Collaborators & Contributors">3</button>
+                <div id="popup-collab" class="hotspot-popup">
+                    <h3>3. Collaborators & Contributors</h3>
+                    <p>Need a place to store and showcase the work done and stories collected that gives them credit.</p>
+                </div>
+
+                <button class="hotspot" style="top: 73%; left: 85%;" data-target="popup-friends" title="Friends, Family and Colleagues">2</button>
+                <div id="popup-friends" class="hotspot-popup">
+                    <h3>2. Friends, Family and Colleagues</h3>
+                    <p>Need catharsis, healing and an authentic representation of Sabeen and her legacy.</p>
+                </div>
+
+                <button class="hotspot" style="top: 78%; left: 95%;" data-target="popup-sabeen" title="Sabeen">1</button>
+                <div id="popup-sabeen" class="hotspot-popup">
+                    <h3>1. Sabeen</h3>
+                    <p>Deserves authentic representation, and a place to be honored and remembered in a way that also inspires more young people.</p>
+                </div>
+            </div>
+            
+            <div class="content-row">
+                <div class="image-column">
+                    <h2>Roles & Responsibilities</h2>
+                    <!-- Add image here -->
+                    <img src="Assets/SMA/Roles.png" alt="Roles" style="width: 100%; height: auto;">
+                </div>
+                <div class="text-column">
+                    <p>1. Cataloging the existing data.</p>
+                    <p>2. Curating and formatting a selection of the data.</p>
+                    <p>3. Developing a design system to ensure consistency.</p>
+                    <p>4. Designing assets for VR Environments.</p>
+                    <p>5. UX design for Web VR platforms.</p>
+                    <p>6. Coding and developing the solution.</p>
+                    <p>7. Designing a launch/exhibition for the project.</p>
+                    <p>8. Designing a way for people to add to the archive.</p>
+                </div>
+            </div>
+            
+            <h2>Content Catalogue</h2>
+           
+           <div class="grid-3-col">
+                <div class="grid-item">
+                    <p><b>Total Data: 43.75 GB</b></p>
+                </div>
+                <div class="grid-item">
+                    <p><b>Unique Data: 36.88 GB</b></p>
+                </div>
+                <div class="grid-item">
+                    <p><b>Cataloged Data: 36.88 GB</b></p>
+                </div>
+            </div>
+            <p style="text-align: center;"><b>Inherited Themes</b></p> 
+            <div class="tags-container">
+                <div class="content-tag">
+                    <p>Childhood</p>
+                    <div class="tag-value">(120)</div>
+                </div>
+                <div class="content-tag">
+                    <p>Teenage</p>
+                    <div class="tag-value">(15)</div>
+                </div>
+                <div class="content-tag">
+                    <p>Adulthood</p>
+                    <div class="tag-value">(30)</div>
+                </div>
+                <div class="content-tag">
+                    <p>Design</p>
+                    <div class="tag-value">(50)</div>
+                </div>
+                <div class="content-tag">
+                    <p>Technology</p>
+                    <div class="tag-value">(120)</div>
+                </div>
+                <div class="content-tag">
+                    <p>Cricket & Sports</p>
+                    <div class="tag-value">(15)</div>
+                </div>
+                <div class="content-tag">
+                    <p>After Sabeen</p>
+                    <div class="tag-value">(30)</div>
+                </div>
+                <div class="content-tag">
+                    <p>Music</p>
+                    <div class="tag-value">(120)</div>
+                </div>
+                <div class="content-tag">
+                    <p>Politics & Advocacy</p>
+                    <div class="tag-value">(15)</div>
+                </div>
+                <div class="content-tag">
+                    <p>Uncategorized</p>
+                    <div class="tag-value">(15)</div>
+                </div>
+            </div>
+            <p style="text-align: center;"><b>Mediums</b></p> 
+            <div class="tags-container">
+                <div class="content-tag">
+                    <img src="Assets/SMA/Icons/Images.png" alt="Images Icon">
+                    <p>Images</p>
+                    <div class="tag-value">(120)</div>
+                </div>
+                <div class="content-tag">
+                    <img src="Assets/SMA/Icons/Videos.png" alt="Videos Icon">
+                    <p>Videos</p>
+                    <div class="tag-value">(15)</div>
+                </div>
+                <div class="content-tag">
+                    <img src="Assets/SMA/Icons/audio.png" alt="Audios Icon">
+                    <p>Audios</p>
+                    <div class="tag-value">(30)</div>
+                </div>
+                <div class="content-tag">
+                    <img src="Assets/SMA/Icons/Documents.png" alt="Documents Icon">
+                    <p>Documents</p>
+                    <div class="tag-value">(50)</div>
+                </div>
+            </div>
+            <p style="text-align: center;"><b>Classification:</b></p> 
+            <div class="tags-container">
+                <div class="content-tag">
+                    <img src="Assets/SMA/Icons/Artefacts.png" alt="Artefacts Icon">
+                    <p>Artefacts</p>
+                    <div class="tag-value">(120)</div>
+                </div>
+                <div class="content-tag">
+                    <img src="Assets/SMA/Icons/Memorials.png" alt="Memorials Icon">
+                    <p>Memorials</p>
+                    <div class="tag-value">(15)</div>
+                </div>
+                <div class="content-tag">
+                    <img src="Assets/SMA/Icons/Space.png" alt="Space Icon">
+                    <p>Space</p>
+                    <div class="tag-value">(30)</div>
+                </div>
+                <div class="content-tag">
+                    <img src="Assets/SMA/Icons/Journals.png" alt="Journals Icon">
+                    <p>Journals</p>
+                    <div class="tag-value">(50)</div>
+                </div>
+                <div class="content-tag">
+                    <img src="Assets/SMA/Icons/Autobiographic.png" alt="Autobiographic Data Icon">
+                    <p>Autobiographic Data</p>
+                    <div class="tag-value">(120)</div>
+                </div>
+                <div class="content-tag">
+                    <img src="Assets/SMA/Icons/Biographic.png" alt="Biographic Data Icon">
+                    <p>Biographic Data</p>
+                    <div class="tag-value">(15)</div>
+                </div>
+                <div class="content-tag">
+                    <img src="Assets/SMA/Icons/Instructions.png" alt="Instructional Doc Icon">
+                    <p>Instructional Doc</p>
+                    <div class="tag-value">(30)</div>
+                </div>
+                <div class="content-tag">
+                    <img src="Assets/SMA/Icons/Interview.png" alt="Interview Icon">
+                    <p>Interview</p>
+                    <div class="tag-value">(50)</div>
+                </div>
+            </div>
+
+            <h2>Archival Methodology</h2>
+            <table class="methodology-table">
+                <thead>
+                    <tr>
+                        <th>Literature</th>
+                        <th>Learnings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>"The space of a document, be it visual or audiovisual, becomes the only space in which the performance takes place."
+                            <p class="citation"><b>- Nataša Petrešin-Bachelez, Living archive: The performative potential of a document</b></p>
+                        </td>
+                        <td>A “document” has a performative aspect. This performance establishes a relationship with the viewer. Spatial context matters as document outside it’s context changes meaning,</td>
+                    </tr>
+                    <tr>
+                        <td>"Performances function as vital acts of transfer, transmitting social knowledge, memory, and a sense of identity through reiterated, or ...‘twice-behaved behavior."
+                            <p class="citation"><b>- Diana Taylor, The Archive and the Repertoire: Performing Cultural Memory in the Americas</b></p>
+                        </td>
+                        <td>Performance is an “act of transfer”, it holds vital cultural/social knowledge and memory</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Case Studies</h2>
+            <div class="grid-3-col">
+                <div class="grid-item">
+                    <img src="Assets/SMA/Casestudy-1.png" alt="Case Study 1">
+                    <div><p><b>The Anne Frank House Online</b></p>
+                    <p>A virtual tour of the Anne Frank House that features narration and guidance.</p>
+                    </div>
+                    <a href="https://www.annefrank.org/en/museum/web-and-digital/" class="visit-button" style="margin-bottom: 10px;" target="_blank">Link</a>
+                </div>
+                <div class="grid-item">
+                    <img src="Assets/SMA/Casestudy-2.png" alt="Case Study 2">
+                    <div><p><b>LGBTQ+ VR MUSEUM</b></p>
+                    <p>A virtual museum that uses VR to share stories and artefacts curated directly from the queer community.</p>
+                    </div>
+                    <a href="https://lgbtqvrmuseum.com/" class="visit-button" style="margin-bottom: 10px;" target="_blank">Link</a>
+                </div>
+                <div class="grid-item">
+                    <img src="Assets/SMA/Casestudy-3.png" alt="Case Study 3">
+                    <div><p><b>Saydnaya - Inside a Syrian torture Prison</b></p>
+                    <p>A virtual reconstruction of a Syrian torture prison that uses testimony of survivors visualize and document atrocities in the prison</p>
+                    </div>
+                    <a href="https://forensic-architecture.org/investigation/saydnaya" class="visit-button" style="margin-bottom: 10px;" target="_blank">Link</a>
+                </div>
+            </div>
+
+        
+            <div class="content-row">
+                <div class="image-column">
+                    <div class="lightbox-container" style="width: 80%;">
+                        <img src="Assets/SMA/Concept Sketch.png" alt="User Journey" class="lightbox-image" style="width: 100%; height: auto; border-radius: 10px;">
+                    </div>
+                </div>
+                <div class="text-column">
+                    <h2>Early Concept</h2>
+                    <p>The initial concept arose out of a visit to Sabeen’s bedroom. Having been preserved just as she left it, this space evoked her and each object told a story. This is how I began to explore the idea of space as interface and artefacts as performers in this space. By linking artefacts with memories I started making associations that helped me select Images and audio files from the dataset. </p>
+                     <a href="https://miro.com/app/board/uXjVJMgzjtE=/" class="visit-button" style="margin-bottom: 10px;" target="_blank">View Ideation on Miro</a>
+                </div>
+            </div>
+
+            <div class="content-row">
+                <div class="text-column">
+                    <h2>Proof of Concept</h2>
+                    <p>Using the content that was shared a short trailer was created to explain the concept. This was shared Sabeen’s mother, Mahenaz Mahmud.</p>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin-top: 20px; margin-bottom: 20px;">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                src="https://www.youtube.com/embed/F1Woir7LNuA" 
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-row" style="align-items: normal;">
+                <div class="text-column" style="align-content: left;">
+                    <h2>Designing The Environments</h2>
+                    <p>Recreating rooms from photographs and 3D scans led to gaps in spatial data. For this reason I began drawing the environments for the initial prototype. This also solved the problem of scanning spaces that no longer existed or had changed since Sabeen’s death.</p>
+                    <p>I decided to limit my scope and draw 4 rooms for the first iteration. The selection of these spaces were based on the data that I had as well as my own understanding of Sabeen. The rooms were drawn on top of an Equirectangular grid and then rendered using a watercolour paint style on procreate. The advantage of a digital drawing is also the low effort stake of adding and subtracting from it.</p>
+                </div>
+                <div class="image-column" style="padding-top: 10px;">
+                    <img src="Assets/SMA/17_09_2025.gif" alt="Environments" style="width: 70%; height: auto; margin-left: 20%; border-radius: 10px;">
+                    <p style="text-align: center;"><I>3D scan of Sabeen’s room made using Polycam.</I></p>
+                </div>
+            </div>
+
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin-top: 20px; margin-bottom: 20px;">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                src="https://www.youtube.com/embed/bQLppvgIUHM" 
+                                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+            <div><p style="text-align: center;"><I>Equirectangular reconstruction of Sabeen’s bedroom using images on Touchdesigner.</I></p></div>
+
+            <div class="content-row">
+                <div class="image-column" style="padding-top: 10px; display: flex; flex-direction: column; gap: 20px;">
+                    <p style="text-align: center;"><I>Equirectangular Sketches</I></p>
+                    <div class="lightbox-container">
+                        <img src="Assets/SMA/Bedroom_Sketch.png" alt="Environments" class="lightbox-image" style="width: 100%; height: auto; border-radius: 10px;">
+                    </div>
+                    <div class="lightbox-container">
+                        <img src="Assets/SMA/Office_Sketch.png" alt="Environments" class="lightbox-image" style="width: 100%; height: auto; border-radius: 10px;">
+                    </div>
+                    <div class="lightbox-container">
+                        <img src="Assets/SMA/Cafe_Sketch.png" alt="Environments" class="lightbox-image" style="width: 100%; height: auto; border-radius: 10px;">
+                    </div>
+                    <div class="lightbox-container">
+                        <img src="Assets/SMA/Babybox_Sketch.png" alt="Environments" class="lightbox-image" style="width: 100%; height: auto; border-radius: 10px;">
+                    </div>
+                </div>
+                <div class="image-column" style="padding-top: 10px; display: flex; flex-direction: column; gap: 20px;">
+                    <p style="text-align: center;"><I>Rendered Environments</I></p>
+                    <div class="lightbox-container">
+                        <img src="Assets/SMA/Bedroom_Render.png" alt="Environments" class="lightbox-image" style="width: 100%; height: auto; border-radius: 10px;">
+                    </div>
+                    <div class="lightbox-container">
+                        <img src="Assets/SMA/Office_Render.png" alt="Environments" class="lightbox-image" style="width: 100%; height: auto; border-radius: 10px;">
+                    </div>
+                    <div class="lightbox-container">
+                        <img src="Assets/SMA/Cafe_Render.png" alt="Environments" class="lightbox-image" style="width: 100%; height: auto; border-radius: 10px;">
+                    </div>
+                    <div class="lightbox-container">
+                        <img src="Assets/SMA/Babybox_Render.png" alt="Environments" class="lightbox-image" style="width: 100%; height: auto; border-radius: 10px;">
+                    </div>
+                </div>
+            </div>
+            <Br></Br>
+            <div class="content-row" style="align-items: normal;">
+                <div class="text-column">
+                <h2>Designing The Identity</h2>
+                <p>Using Sabeen’s signature and selected character from the last sticky note she wrote, we created a typeface that we could use to create the logo of the archive.</p>
+            
+                </div>
+                <div class="image-column">
+                    <img src="Assets/SMA/Identity.png" alt="Identity" style="width: 100%; height: auto;">
+                </div>
+            </div>
+            <Br></Br>
+            <div class="text-column">
+                    <h2>UI & UX Design</h2>
+                    <p>Developing the website required an initial wireframe of the interface, experience and userflows. To keep things simple the experience only allows viewers the option to view images, play audios and switch between rooms. These flows were roughly mapped out on Figma and are viewable below.</p>
+                </div>
+            <div class="content-row">
+                <div class="image-column">
+                    <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="450" src="https://embed.figma.com/proto/FbPIgKhNg0Ym7qtSMiI8fX/Under-the-Amaltaas-Tree?node-id=305-723&viewport=442%2C429%2C0.04&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=305%3A723&show-proto-sidebar=1&page-id=305%3A679&embed-host=share" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <div class="content-row">
+                <div class="text-column">
+                    <h2>Exhibition Design</h2>
+                    <p>The project culminated in a one day pop-up where visitors were able to try the experience in VR and also learn a bit about the process of making this experience. The exhibition divided the space into three zones; introduction where viewers are oriented with brochures, a curatorial note, and a short introductory video, trial where they can experience the VR or try out on desktop, and feedback where they can leave a comment.</p>
+                </div>
+                <div class="image-column">
+                    <div class="slider-container" id="exhibition-slider">
+                        <!-- Replace these with your actual image paths -->
+                        <img src="Assets/SMA/IMG_2141 1.png" alt="Exhibition Image 1" class="slider-image active">
+                        <img src="Assets/SMA/IMG_2145 1.png" alt="Exhibition Image 2" class="slider-image">
+                        <img src="Assets/SMA/IMG_2146 1.png" alt="Exhibition Image 3" class="slider-image">
+                        <img src="Assets/SMA/IMG_2152 1.png" alt="Exhibition Image 4" class="slider-image">
+                        <img src="Assets/SMA/IMG_2153 1.png" alt="Exhibition Image 5" class="slider-image">
+                        <img src="Assets/SMA/IMG_2159 1.png" alt="Exhibition Image 6" class="slider-image">
+                        <img src="Assets/SMA/IMG_2163 1.png" alt="Exhibition Image 7" class="slider-image">
+                        <img src="Assets/SMA/IMG_2188 1.png" alt="Exhibition Image 8" class="slider-image">
+                        <img src="Assets/SMA/IMG_2189 1.png" alt="Exhibition Image 9" class="slider-image">
+                        <img src="Assets/SMA/IMG_2202 1.png" alt="Exhibition Image 10" class="slider-image">
+                        <img src="Assets/SMA/IMG_2204 1.png" alt="Exhibition Image 11" class="slider-image">
+                        <img src="Assets/SMA/IMG_3302 1.png" alt="Exhibition Image 12" class="slider-image">
+                    </div>
+                    <div class="slider-nav" id="slider-nav"></div>
+                </div>
+            </div>
+
+            <h2>Technical Development</h2>
+        
+            <div class="grid-4-col">
+                <div class="grid-item" style="background-color: #E8E6D7;">
+                    <p>Landing Page</p>
+                    <img src="Assets/SMA/image 15.png" alt="Tech Detail 1" style="width: auto ;height: 10%;">
+                    <p>Using a HTML5 we created a landing page with sections where the viewer can learn and read about the archive.</p>
+                    <p>Why: Provides context and assets to loadtime.</p>
+                </div>
+                <div class="grid-item" style="background-color: #E8E6D7;">
+                    <p>Database Management</p>
+                    <img src="Assets/SMA/image 14.png" alt="Tech Detail 2" style="width: auto ;height: 10%;">
+                    <p>Using a JavaScript database, where every item is cataloged with its own metadata, allows viewers to see the source of every image, audio, and text.</p>
+                    <p>Why: Scalability to add a new memory.</p>
+                </div>
+                <div class="grid-item" style="background-color: #E8E6D7;">
+                    <p>3D Space Development</p>
+                    <img src="Assets/SMA/image 13.png" alt="Tech Detail 3" style="width: auto ;height: 10%;">
+                    <p>Using a web-based VR framework allowed us to build 3D environments that run directly in a browser.</p>
+                    <p>Why:Accessible Cross-Platform Responsive Design.</p>
+                </div>
+                <div class="grid-item" style="background-color: #E8E6D7;">
+                    <p>Interaction Design</p>
+                    <img src="Assets/SMA/image 16.png" alt="Tech Detail 4" style="width: auto ;height: 10%;">
+                    <p>Using a DOM (Document Object Model) event system we allowed viewers to interact with the environment by clicking to trigger data.</p>
+                    <p>Why:Accessible Cross-Platform Responsive Design.</p>
+                </div>
+            </div>
+
+            <h2>Project Management</h2>
+
+            <div class="grid-4-col">
+                <div class="grid-item" style="background-color: #E8E6D7;">
+                    <img src="Assets/SMA/image 11.png" alt="Tech Detail 1" style="width: auto; height: auto; max-width: 100%; margin-top: 20px; margin-bottom: 10px;">
+                    <p>Documentation, cataloging, & notation.</p>
+                </div>
+                <div class="grid-item" style="background-color: #E8E6D7;">
+                    <img src="Assets/SMA/Frame 68.png" alt="Tech Detail 2" style="width: auto; height: auto; max-width: 100%; margin-top: 20px; margin-bottom: 10px;">
+                    <p>Time Tracking (integrated with Notion)</p>
+                </div>
+                <div class="grid-item" style="background-color: #E8E6D7;">
+                    <img src="Assets/SMA/Frame 69.png" alt="Tech Detail 3" style="width: auto; height: auto; max-width: 100%; margin-top: 20px; margin-bottom: 10px;">
+                    <p>Transcribing & recording online meetings.</p>
+                </div>
+                <div class="grid-item" style="background-color: #E8E6D7;">
+                    <img src="Assets/SMA/Frame 70.png" alt="Tech Detail 4" style="width: auto; height: auto; max-width: 100%; margin-top: 20px; margin-bottom: 10px;">
+                    <p>Managing the repository & version history.</p>
+                </div>
+            </div>
+
+            
+
+            <h2>Insights & Challenges</h2>
+            <div class="content-row">
+                <div class="text-column">
+                    <p>Insight into the design process, research, and methodology used throughout the project.</p>
+                </div>
+                <div class="image-column">
+                    <!-- Add image here -->
+                    <img src="https://via.placeholder.com/400x300" alt="Challenges" style="width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script>
+        // Toggle Sidebar
+        const sidebar = document.getElementById('sidebar');
+        const toggle = document.getElementById('sidebarToggle');
+        const toggleIcon = toggle.querySelector('img');
+
+        toggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            if (sidebar.classList.contains('collapsed')) {
+                toggleIcon.src = 'Assets/Icons/Open.png';
+                toggleIcon.alt = 'Open Menu';
+            } else {
+                toggleIcon.src = 'Assets/Icons/Close.png';
+                toggleIcon.alt = 'Close Menu';
+            }
+        });
+
+        // Generate Table of Contents
+        const content = document.querySelector('.project-content');
+        const tocList = document.getElementById('toc-list');
+        const headings = content.querySelectorAll('h1, h2, h3:not(.hotspot-popup h3)');
+        
+        headings.forEach((heading, index) => {
+            const id = heading.id || `heading-${index}`;
+            heading.id = id;
+            
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = `#${id}`;
+            a.textContent = heading.textContent;
+            li.appendChild(a);
+            tocList.appendChild(li);
+        });
+
+        // Scrollspy for Mobile Markers
+        const projectContent = document.querySelector('.project-content');
+        
+        projectContent.addEventListener('scroll', () => {
+            let currentId = '';
+            
+            headings.forEach(heading => {
+                if (projectContent.scrollTop >= heading.offsetTop - 100) {
+                    currentId = heading.id;
+                }
+            });
+
+            const tocLinks = document.querySelectorAll('.toc-list a');
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentId}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Hotspots functionality
+        const hotspots = document.querySelectorAll('.hotspot');
+        const connectorPath = document.getElementById('connector-path');
+        hotspots.forEach(hotspot => {
+            hotspot.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const targetId = hotspot.getAttribute('data-target');
+                
+                // Close all other popups
+                document.querySelectorAll('.hotspot-popup').forEach(p => {
+                    if (p.id !== targetId) p.classList.remove('active');
+                });
+
+                const popup = document.getElementById(targetId);
+                popup.classList.toggle('active');
+
+                if (popup.classList.contains('active')) {
+                    // Calculate positions for the connector line
+                    const containerRect = document.querySelector('.stakeholder-map-container').getBoundingClientRect();
+                    const hotspotRect = hotspot.getBoundingClientRect();
+                    const popupRect = popup.getBoundingClientRect();
+
+                    // Start point (center of hotspot) relative to container
+                    const startX = hotspotRect.left - containerRect.left + hotspotRect.width / 2;
+                    const startY = hotspotRect.top - containerRect.top + hotspotRect.height / 2;
+
+                    // End point (closest edge of popup) relative to container
+                    // Connect to the center-right of the popup
+                    const endX = popupRect.right - containerRect.left;
+                    const endY = popupRect.top - containerRect.top + popupRect.height / 2;
+
+                    // Create a curved path
+                    // M startX startY Q controlX controlY endX endY
+                    const controlX = (startX + endX) / 2;
+                    const controlY = endY;
+                    
+                    connectorPath.setAttribute('d', `M ${startX} ${startY} C ${startX} ${startY}, ${controlX} ${controlY}, ${endX} ${endY}`);
+                }
+            });
+        });
+
+        // Close popups when clicking outside
+        document.addEventListener('click', () => {
+             document.querySelectorAll('.hotspot-popup').forEach(p => {
+                p.classList.remove('active');
+                connectorPath.setAttribute('d', ''); // Clear line
+            });
+        });
+        
+        // Prevent closing when clicking inside popup
+        document.querySelectorAll('.hotspot-popup').forEach(popup => {
+            popup.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxImages = document.querySelectorAll('.lightbox-image');
+        const closeBtn = document.querySelector('.lightbox-close');
+
+        lightboxImages.forEach(image => {
+            image.addEventListener('click', () => {
+                lightbox.style.display = 'block';
+                lightboxImg.src = image.src;
+            });
+        });
+
+        const closeLightbox = () => {
+            lightbox.style.display = 'none';
+        }
+
+        closeBtn.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            // Close if the overlay is clicked, but not the image itself
+            if (e.target !== lightboxImg) {
+                closeLightbox();
+            }
+        });
+
+        // Exhibition Slider
+        const sliderContainer = document.getElementById('exhibition-slider');
+        if (sliderContainer) {
+            const slides = sliderContainer.querySelectorAll('.slider-image');
+            const navContainer = document.getElementById('slider-nav');
+            let currentSlide = 0;
+            let slideInterval;
+
+            if (slides.length > 1) {
+                // Create dots
+                slides.forEach((slide, index) => {
+                    const dot = document.createElement('span');
+                    dot.classList.add('slider-dot');
+                    dot.dataset.index = index;
+                    if (index === 0) dot.classList.add('active');
+                    navContainer.appendChild(dot);
+                });
+
+                const dots = navContainer.querySelectorAll('.slider-dot');
+
+                function showSlide(index) {
+                    slides[currentSlide].classList.remove('active');
+                    dots[currentSlide].classList.remove('active');
+                    currentSlide = index;
+                    slides[currentSlide].classList.add('active');
+                    dots[currentSlide].classList.add('active');
+                }
+
+                function startInterval() {
+                    slideInterval = setInterval(() => {
+                        showSlide((currentSlide + 1) % slides.length);
+                    }, 3000); // Change image every 3 seconds
+                }
+
+                dots.forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        showSlide(parseInt(dot.dataset.index));
+                        clearInterval(slideInterval);
+                        startInterval();
+                    });
+                });
+
+                startInterval();
+            }
+        }
+    </script>
+</body>
+</html>
