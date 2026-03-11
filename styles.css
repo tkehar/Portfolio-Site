@@ -280,7 +280,7 @@ body.project-page {
     background-repeat: no-repeat;
 }
 .oms-project {
-    background-image: url('Assets/OMS/BG.png');
+    background-image: url('Assets/OMS/OMS-BG.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -292,13 +292,13 @@ body.project-page {
     background-repeat: no-repeat;
 }
 .tw-project {
-    background-image: url('Assets/TW/BG.png');
+    background-image: url('Assets/TW/TW-BG.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 .stms-project {
-    background-image: url('Assets/STMS/BG.png');
+    background-image: url('Assets/STMS/STMS-BG.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
