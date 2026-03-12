@@ -947,8 +947,8 @@ body.project-page {
 .face.right  { transform: rotateY(90deg) translateZ(150px); }
 .face.back   { transform: rotateY(180deg) translateZ(150px); }
 .face.left   { transform: rotateY(-90deg) translateZ(150px); }
-.face.top    { transform: rotateX(90deg) translateZ(150px); }
-.face.bottom { transform: rotateX(-90deg) translateZ(150px); }
+.face.top    { transform: rotateX(90deg) rotateZ(90deg) translateZ(150px); }
+.face.bottom { transform: rotateX(-90deg) rotateZ(-90deg) translateZ(150px); }
 
 .cube-shadow {
     position: absolute;
@@ -962,24 +962,6 @@ body.project-page {
     z-index: -1;
 }
 
-.scroll-text-track {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 5;
-    pointer-events: none;
-    transition: opacity 0.5s linear;
-}
-
-.project-scroll-group {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    pointer-events: none;
-}
-
 /* Page Transition Animation */
 body.page-exit-animation .sticky-stage {
     transform: translateX(-100%) scale(0.3);
@@ -990,27 +972,26 @@ body.page-exit-animation .scroll-text-track {
     opacity: 0;
 }
 
-.project-info-container {
+.project-info-display {
     position: absolute;
     bottom: 8%;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    z-index: 10;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
     box-sizing: border-box;
-    max-width: 90%;
     gap: 5px;
-    pointer-events: none;
+    pointer-events: auto;
     background: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 20px;
+    border-radius: 20px 20px 0 0;
     padding: 20px 30px;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-    transition: opacity 0.1s ease-out;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .project-title-scroll {
@@ -1029,16 +1010,27 @@ body.page-exit-animation .scroll-text-track {
     pointer-events: auto;
     text-decoration: none;
     text-align: center;
-    white-space: nowrap;
+    white-space: normal; /* Allow title to wrap */
 }
 
 .project-tags-scroll {
     text-align: center;
     pointer-events: auto;
-    font-size: 1rem;
+    margin: 5px 0;
+}
+
+.project-info-tag {
+    display: inline-block;
+    background: none;
+    border: 1px solid #555;
+    border-radius: 15px;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    margin: 4px;
     color: #333;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    font-weight: normal;
 }
 
 .scroll-indicator {
@@ -1075,9 +1067,8 @@ body.page-exit-animation .scroll-text-track {
 .project-description-scroll {
     font-size: 1.2rem;
     color: #666;
-    max-width: 100%;
-    text-align: left;
-    font-family: Helvetica, Arial, sans-serif;
+    max-width: 90%;
+    text-align: center;
     pointer-events: auto;
 }
 
@@ -1113,12 +1104,25 @@ body.page-exit-animation .scroll-text-track {
     min-height: 2.2rem; /* Prevents layout shift as text length changes */
     margin-top: 0;
     margin-bottom: 0;
+    display: inline-block;
+    padding: 2px 6px;
+    font-style: oblique;
+    font-weight: bold;
+}
+
+#software-typing-animation {
+    background-color: #f04cb9;
+    color: #FFFFFF;
+}
+
+#typing-animation {
+    background-color: #A1FF5F;
+    color: #000000;
 }
 
 #typing-animation::after, #software-typing-animation::after {
     content: '|';
     animation: blink 1s step-end infinite;
-    color: #000000;
 }
 
 @keyframes blink {

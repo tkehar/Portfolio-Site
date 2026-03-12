@@ -10,15 +10,19 @@
     <div class="container">
         <div class="sidebar" id="sidebar">
             <div class="sidebar-content" style="margin-bottom: 10%;">
-                <div><h1 style="color: #FFFFFF; margin-bottom: 0;">TALHA KEHAR</h1></div>
-                <div class="sidebar-text" style="margin-top: 4%;"><p style="color: #FFFFFF; margin-top: 0;">Designer & Researcher specializing in user experience, extended reality and data-driven storytelling. Exploring the synergy between technology and human experience.</p></div>
+                <div><h1 style="margin-bottom: 0;">TALHA KEHAR</h1></div>
+                <div class="sidebar-text" style="margin-top: 10%;">
+                    <p><a href="mailto:talha.a.kehar@gmail.com" class="email-link" style="font-style: oblique;">Email Me</a></p>
+                    <p><a href="https://www.linkedin.com/in/talha-kehar-8a89ba120/" target="_blank" class="email-link" style="font-style: oblique;"> My LinkedIn</a></p>
+                    <p><a href="-" target="_blank" class="email-link" style="font-style: oblique;">My Resume</a></p>
+                </div>
                 <div class="sidebar-text">
-                    <div class="filter-title" style="color: #FFFFFF";>I Work on:</div>
-                    <p id="software-typing-animation" style="color: #f04cb9; font-style: oblique; font-weight: bold;"></p>
-                    <div class="filter-title" style="color: #FFFFFF; margin-top: 25px;">I Focus on:</div>
-                    <p id="typing-animation" style="color: #A1FF5F; font-style: oblique; font-weight: bold;"></p>
+                    <div class="filter-title";>My Stack:</div>
+                    <p id="software-typing-animation" style="background-color: #f04cb9;color: #FFFFFF; font-style: oblique; font-weight: bold;"></p>
+                    <div class="filter-title" style="margin-top: 25px;">My Focus:</div>
+                    <p id="typing-animation" style="background-color: #A1FF5F; color: #000000; font-style: oblique; font-weight: bold;"></p>
                     <br></br>
-                    <a href="mailto:talha.a.kehar@gmail.com" class="email-link" style="color: #FFFFFF; font-style: oblique;">talha.a.kehar@gmail.com</a>
+                    
                     </div>
                 </div>
             </div>
@@ -33,6 +37,11 @@
                             <button class="filter-btn" data-tag="Research">Research</button>
                         </div>
                     </div>
+            <div class="project-info-display" id="projectInfoDisplay">
+                <a class="project-title-scroll" id="projectTitle"></a>
+                <div class="project-tags-scroll" id="projectTags"></div>
+                <p class="project-description-scroll" id="projectDescription"></p>
+            </div>
             <div class="home-scroll-container" id="scrollContainer">
                 <div class="scroll-track" id="scrollTrack"></div>
                 <div class="sticky-stage">
@@ -50,7 +59,6 @@
                     </div>
                     <button class="nav-arrow next-arrow" id="nextBtn">&#10095;</button>
                 </div>
-                <div class="scroll-text-track" id="scrollTextTrack"></div>
             </div>
             <div class="project-grid" id="projectSource" style="display: none;">
                 <a href="SMA.html" class="project-card" data-tags="Research, Experience Design, Extended Reality" data-bg="Assets/SMA/BG.png" data-description="A Web-VR digital archive aimed at preserving the memory and legacy of Sabeen Mahmud.">
@@ -128,9 +136,8 @@
             const startSlide = {
                 href: '#',
                 img: 'Assets/Profile_Banner.png',
-                title: 'Scroll to see selected works or use the arrows',
-                description: '',
-                tags: [],
+                title: 'About Me',
+                description: ' I am a New Media Artist & Researcher that blends user-centric research with XR and data-driven storytelling. My practice is is rooted in the belief that technology should be as intentional, inclusive and care-filled, ensuring that every digital interaction is crafted with precision and purpose',
                 color: bgColors[0],
                 bg: 'Assets/START- BG.png'
             };
@@ -140,7 +147,6 @@
                 img: 'Assets/Land_Banner.png',
                 title: "Thank you for your time!",
                 description: '',
-                tags: [],
                 color: bgColors[bgColors.length - 1],
                 bg: 'Assets/END-BG.png'
             };
@@ -149,12 +155,17 @@
 
             const scrollContainer = document.getElementById('scrollContainer');
             const scrollTrack = document.getElementById('scrollTrack');
-            const scrollTextTrack = document.getElementById('scrollTextTrack');
             const scrollPerProject = 800; 
 
             const cube = document.getElementById('cube');
             const stickyStage = document.querySelector('.sticky-stage');
             const faces = Array.from(document.querySelectorAll('.face'));
+
+            const projectInfoDisplay = document.getElementById('projectInfoDisplay');
+            const projectTitle = document.getElementById('projectTitle');
+            const projectTags = document.getElementById('projectTags');
+            const projectDescription = document.getElementById('projectDescription');
+            let lastDisplayedIndex = -1;
 
             let time = 0;
 
@@ -168,36 +179,6 @@
                 
                 const totalScroll = (projects.length - 1) * scrollPerProject;
                 scrollTrack.style.height = `${totalScroll + window.innerHeight}px`;
-                
-                // Generate scrolling text
-                scrollTextTrack.innerHTML = '';
-                projects.forEach((p, i) => {
-                    const group = document.createElement('div');
-                    group.className = 'project-scroll-group';
-                    group.style.top = `${i * scrollPerProject}px`;
-                    
-                    const infoContainer = document.createElement('div');
-                    infoContainer.className = 'project-info-container';
-                    
-                    const title = document.createElement('a');
-                    title.className = 'project-title-scroll';
-                    title.href = p.href;
-                    title.textContent = p.title;
-                    
-                    const tags = document.createElement('div');
-                    tags.className = 'project-tags-scroll';
-                    tags.textContent = p.tags.length > 0 ? p.tags.join(' / ') : '';
-
-                    const desc = document.createElement('div');
-                    desc.className = 'project-description-scroll';
-                    desc.textContent = p.description;
-                    
-                    infoContainer.appendChild(title);
-                    infoContainer.appendChild(tags);
-                    infoContainer.appendChild(desc);
-                    group.appendChild(infoContainer);
-                    scrollTextTrack.appendChild(group);
-                });
 
                 scrollContainer.scrollTop = 0;
                 updateCube();
@@ -292,19 +273,31 @@
                     } 
                 });
 
-                // Fade in/out logic for info cards
-                const scrollGroups = scrollTextTrack.querySelectorAll('.project-scroll-group');
-                scrollGroups.forEach((group, i) => {
-                    const dist = Math.abs(progress - i);
-                    // Opacity is 1 when centered (dist=0), and 0 when halfway to the next/prev project (dist=0.5)
-                    const opacity = Math.max(0, 1 - dist * 2);
+                // Update project info display
+                const currentIndex = Math.round(progress);
+                if (currentIndex !== lastDisplayedIndex && projects[currentIndex]) {
+                    lastDisplayedIndex = currentIndex;
+                    const currentProject = projects[currentIndex];
 
-                    const infoContainer = group.querySelector('.project-info-container');
-                    if (infoContainer) {
-                        infoContainer.style.opacity = opacity;
-                        infoContainer.style.pointerEvents = opacity > 0.1 ? 'auto' : 'none';
-                    }
-                });
+                    projectInfoDisplay.style.opacity = 0;
+
+                    setTimeout(() => {
+                        projectTitle.textContent = currentProject.title;
+                        projectTitle.href = currentProject.href;
+                        projectDescription.textContent = currentProject.description;
+
+                        projectTags.innerHTML = '';
+                        if (currentProject.tags && currentProject.tags.length > 0) {
+                            currentProject.tags.forEach(tag => {
+                                const tagEl = document.createElement('span');
+                                tagEl.className = 'project-info-tag';
+                                tagEl.textContent = tag;
+                                projectTags.appendChild(tagEl);
+                            });
+                        }
+                        projectInfoDisplay.style.opacity = 1;
+                    }, 300); // Corresponds to CSS transition duration
+                }
                 requestAnimationFrame(updateCube);
             }
 
