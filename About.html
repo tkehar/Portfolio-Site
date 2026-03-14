@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Talha Kehar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="project-page about-me-page">
+    <div class="container">
+        <div class="sidebar" id="sidebar">
+            <a href="index.html" class="back-button">
+                <span class="icon"><img src="Assets/Icons/Home.png" alt="Back"></span>
+                <span class="text">Back to Portfolio</span>
+            </a>
+            <button id="sidebarToggle" class="sidebar-toggle"><img src="Assets/Icons/Close.png" alt="Close Menu"></button>
+            <div class="sidebar-content-wrapper">
+                <p>Table of Contents</p>
+                <ul class="toc-list" id="toc-list">
+                    <!-- Links will be generated here -->
+                </ul>
+            </div>
+        </div>
+        <div class="main-content project-content">
+            
+            <div class="content-row" style="gap: 10px;">
+                <div class="text-column" style="padding: 10%; width: 50%;">
+                    
+                    <p style="font-size: 2.5rem; line-height: 1.6;font-weight: bold;">I am a Berlin-based New Media Artist & Researcher that blends user-centric research with XR and data-driven storytelling. My practice is rooted in the belief that technology should be as intentional, inclusive and care-filled, ensuring that every digital interaction is crafted with precision and purpose.</p>
+                </div>
+            </div>
+            
+            <div class="text-column" style="padding-left: 10%; padding-right: 10%;">
+            
+                <p style="font-size: 2.5rem; line-height: 1.6;font-weight: bold;">My work centers around the intersection of design, technology, and storytelling. I specialize in creating immersive experiences that bridge the gap between physical and digital worlds, using tools like Unity, Touchdesigner, and web technologies.</p>
+            </div>
+
+            <div class="text-column" style="padding-top: 4%; padding-bottom: 4%; padding-left: 10%; padding-right: 10%;">
+                
+                <p style="font-size: 2.5rem; line-height: 1.6;font-weight: bold;">I believe in design as a medium for social change and heritage preservation. Whether it's through augmented reality platforms or digital archives, my goal is to create meaningful connections between users and the narratives that shape our culture.</p>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        // Toggle Sidebar
+        const sidebar = document.getElementById('sidebar');
+        const toggle = document.getElementById('sidebarToggle');
+        const toggleIcon = toggle.querySelector('img');
+
+        toggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            if (sidebar.classList.contains('collapsed')) {
+                toggleIcon.src = 'Assets/Icons/Open.png';
+                toggleIcon.alt = 'Open Menu';
+            } else {
+                toggleIcon.src = 'Assets/Icons/Close.png';
+                toggleIcon.alt = 'Close Menu';
+            }
+        });
+
+        // Generate Table of Contents
+        const content = document.querySelector('.project-content');
+        const tocList = document.getElementById('toc-list');
+        const headings = content.querySelectorAll('h1, h2, h3:not(.hotspot-popup h3)');
+        
+        headings.forEach((heading, index) => {
+            const id = heading.id || `heading-${index}`;
+            heading.id = id;
+            
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = `#${id}`;
+            a.textContent = heading.textContent;
+            li.appendChild(a);
+            tocList.appendChild(li);
+        });
+
+        // Scrollspy for TOC Markers
+        const projectContent = document.querySelector('.project-content');
+        projectContent.addEventListener('scroll', () => {
+            let currentId = '';
+            headings.forEach(heading => {
+                if (projectContent.scrollTop >= heading.offsetTop - 100) {
+                    currentId = heading.id;
+                }
+            });
+            const tocLinks = document.querySelectorAll('.toc-list a');
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentId}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -11,18 +11,45 @@
         <div class="sidebar" id="sidebar">
             <div class="sidebar-content" style="margin-bottom: 10%;">
                 <div><h1 style="margin-bottom: 0;">TALHA KEHAR</h1></div>
-                <div class="sidebar-text" style="margin-top: 10%;">
-                    <p><a href="mailto:talha.a.kehar@gmail.com" class="email-link" style="font-style: oblique;">Email Me</a></p>
-                    <p><a href="https://www.linkedin.com/in/talha-kehar-8a89ba120/" target="_blank" class="email-link" style="font-style: oblique;"> My LinkedIn</a></p>
-                    <p><a href="-" target="_blank" class="email-link" style="font-style: oblique;">My Resume</a></p>
+                <div class="sidebar-text" style="margin-top: 1%;">
+                    <div class="software-icons">
+                        <div class="software-icon" data-tooltip="Email Me" ><img src="Assets/Icons/Mail.png" alt="Mail" onclick="window.location.href='mailto:talha.a.kehar@gmail.com'"></div>
+                        <div class="software-icon" data-tooltip="Resume"><img src="Assets/Icons/CV.png" alt="Resume" onclick="window.open('https://drive.google.com/file/d/1CWLHV35JuPkYnu6m-MDJmqtJCgySnnU7/view?usp=sharing')"></div>
+                        <div class="software-icon" data-tooltip="Linkedin"><img src="Assets/Icons/Linkedin.png" onclick="window.open('https://www.linkedin.com/in/talha-kehar-8a89ba120/')"></div>
+                    </div>
                 </div>
                 <div class="sidebar-text">
-                    <div class="filter-title";>My Stack:</div>
-                    <p id="software-typing-animation" style="background-color: #f04cb9;color: #FFFFFF; font-style: oblique; font-weight: bold;"></p>
+                     <div class="filter-title">Creative Engines:</div>
+                    <div class="software-icons">
+                        <div class="software-icon" data-tooltip="Unity 3D"><img src="Assets/Icons/Unity.png" alt="Unity 3D"></div>
+                        <div class="software-icon" data-tooltip="Touchdesigner"><img src="Assets/Icons/Touchdesigner.png" alt="Touchdesigner"></div>
+                        
+                    </div>
+
+                    <div class="filter-title" style="margin-top: 10px;">Codebase:</div>
+                    <div class="software-icons">
+                        <div class="software-icon" data-tooltip="VS Code"><img src="Assets/Icons/VS Code.png" alt="VS Code"></div>
+                        <div class="software-icon" data-tooltip="HTML 5"><img src="Assets/Icons/HTML.png" alt="HTML"></div>
+                        <div class="software-icon" data-tooltip="Javascript"><img src="Assets/Icons/JS.png" alt="Javascript"></div>
+                        <div class="software-icon" data-tooltip="CSS 3"><img src="Assets/Icons/CSS.png" alt="CSS"></div>                    
+                    </div>
+
+                    <div class="filter-title" style="margin-top: 10px;">Design Tools:</div>
+                    <div class="software-icons">
+                        <div class="software-icon" data-tooltip="Figma"><img src="Assets/Icons/Figma.png" alt="Figma"></div>
+                        <div class="software-icon" data-tooltip="Adobe Suite"><img src="Assets/Icons/Adobe.png" alt="Adobe Suite"></div>
+                        <div class="software-icon" data-tooltip="Procreate"><img src="Assets/Icons/Procreate.png" alt="Procreate"></div>
+                        <div class="software-icon" data-tooltip="Blender"><img src="Assets/Icons/Blender.png" alt="Blender"></div>
+                    </div>
+                    <div class="filter-title" style="margin-top: 10px;">Planning Tools:</div>
+                    <div class="software-icons">
+                        <div class="software-icon" data-tooltip="Miro"><img src="Assets/Icons/Miro.png" alt="Miro"></div>
+                        <div class="software-icon" data-tooltip="Notion"><img src="Assets/Icons/Notion.png" alt="Notion"></div>
+                        
+                    </div>
                     <div class="filter-title" style="margin-top: 25px;">My Focus:</div>
                     <p id="typing-animation" style="background-color: #A1FF5F; color: #000000; font-style: oblique; font-weight: bold;"></p>
                     <br></br>
-                    
                     </div>
                 </div>
             </div>
@@ -39,7 +66,6 @@
                     </div>
             <div class="project-info-display" id="projectInfoDisplay">
                 <a class="project-title-scroll" id="projectTitle"></a>
-                <div class="project-tags-scroll" id="projectTags"></div>
                 <p class="project-description-scroll" id="projectDescription"></p>
             </div>
             <div class="home-scroll-container" id="scrollContainer">
@@ -61,6 +87,10 @@
                 </div>
             </div>
             <div class="project-grid" id="projectSource" style="display: none;">
+                <a href="TDTD.html" class="project-card" data-tags="Research" data-bg="Assets/TDTD/TDTD-BG.png" data-description="My Master's thesis is an intersectional critique of Big Tech Imperialism in the development of Artificial Intelligence.">
+                    <img src="Assets/TDTD/TDTD_Banner.png" alt="Project 11">
+                    <div class="overlay">Teardown The Data Centers!</div>
+                </a>
                 <a href="SMA.html" class="project-card" data-tags="Research, Experience Design, Extended Reality" data-bg="Assets/SMA/BG.png" data-description="A Web-VR digital archive aimed at preserving the memory and legacy of Sabeen Mahmud.">
                     <img src="Assets/SMA/SMA_Banner.png" alt="Project 1">
                     <div class="overlay">Under The Amaltaas Tree - The Sabeen Mahmud Archive</div>
@@ -68,6 +98,10 @@
                 <a href="MAN.html" class="project-card" data-tags="Research, Experience Design" data-bg="Assets/MAN/MAN- BG.png" data-description="An AI-powered note-taking feature for a SAAS platform catering to original equipment manufacturers.">
                     <img src="Assets/MAN/MAN_Banner.png" alt="Project 2">
                     <div class="overlay">Makula - AI Notetaker</div>
+                </a>
+                <a href="DVR.html" class="project-card" data-tags="Experience Design, Extended Reality" data-bg="Assets/DVR/DVR-BG.png" data-description="A VR experience that employs jungian psychology principles to create a immersive environment where viewers confront their shadow selves.">
+                    <img src="Assets/DVR/DVR_Banner.png" alt="Project 12">
+                    <div class="overlay">Descent VR</div>
                 </a>
                 <a href="EH.html" class="project-card" data-tags="Experience Design" data-bg="Assets/EH/EH- BG.png" data-description="An immersive installation using live data to visualize and sonify the Schumann Resonance.">
                     <img src="Assets/EH/EH_Banner.png" alt="Project 3">
@@ -134,7 +168,7 @@
             }));
 
             const startSlide = {
-                href: '#',
+                href: 'About.html',
                 img: 'Assets/Profile_Banner.png',
                 title: 'About Me',
                 description: ' I am a New Media Artist & Researcher that blends user-centric research with XR and data-driven storytelling. My practice is is rooted in the belief that technology should be as intentional, inclusive and care-filled, ensuring that every digital interaction is crafted with precision and purpose',
@@ -147,6 +181,7 @@
                 img: 'Assets/Land_Banner.png',
                 title: "Thank you for your time!",
                 description: '',
+                tags: [],
                 color: bgColors[bgColors.length - 1],
                 bg: 'Assets/END-BG.png'
             };
@@ -163,7 +198,6 @@
 
             const projectInfoDisplay = document.getElementById('projectInfoDisplay');
             const projectTitle = document.getElementById('projectTitle');
-            const projectTags = document.getElementById('projectTags');
             const projectDescription = document.getElementById('projectDescription');
             let lastDisplayedIndex = -1;
 
@@ -174,14 +208,16 @@
                 let filtered = allRawProjects;
                 if (tag !== 'All') {
                     filtered = allRawProjects.filter(p => p.tags.includes(tag));
+                    projects = [...filtered, endSlide];
+                } else {
+                    projects = [startSlide, ...filtered, endSlide];
                 }
-                projects = [startSlide, ...filtered, endSlide];
                 
                 const totalScroll = (projects.length - 1) * scrollPerProject;
                 scrollTrack.style.height = `${totalScroll + window.innerHeight}px`;
 
                 scrollContainer.scrollTop = 0;
-                updateCube();
+                lastDisplayedIndex = -1;
             }
 
             const filterButtons = document.querySelectorAll('.filter-btn');
@@ -286,15 +322,6 @@
                         projectTitle.href = currentProject.href;
                         projectDescription.textContent = currentProject.description;
 
-                        projectTags.innerHTML = '';
-                        if (currentProject.tags && currentProject.tags.length > 0) {
-                            currentProject.tags.forEach(tag => {
-                                const tagEl = document.createElement('span');
-                                tagEl.className = 'project-info-tag';
-                                tagEl.textContent = tag;
-                                projectTags.appendChild(tagEl);
-                            });
-                        }
                         projectInfoDisplay.style.opacity = 1;
                     }, 300); // Corresponds to CSS transition duration
                 }
@@ -303,6 +330,7 @@
 
             // Initialize
             applyFilter('All');
+            updateCube();
 
             function handlePageTransition(event) {
                 const link = event.target.closest('a');
@@ -375,7 +403,7 @@
                 type();
             }
 
-            createTypingEffect('typing-animation', ["Design", "Technology", "Product", "Strategy", "Research","Prototyping","Testing"]);
+            createTypingEffect('typing-animation', ["Design", "Technology", "Product", "Strategy", "Storytelling","Prototyping","Civic Tech","Data Visualization"]);
             createTypingEffect('software-typing-animation', ["Figma", "Touchdesigner", "Adobe Suite", "Procreate", "VS Code", "Miro", "Unity 3D", "Notion"]);
         });
     </script>

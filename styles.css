@@ -35,6 +35,18 @@ html {
     margin-bottom: 10px;
     border-bottom: 1px solid #eee;
 }
+
+.sidebar-content-wrapper {
+    flex: 1; /* Allow wrapper to fill available space */
+    min-height: 0; /* Crucial for allowing flex children to shrink and scroll */
+    overflow-y: auto; /* Enable vertical scrolling when content overflows */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+.sidebar-content-wrapper::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
 .main-content {
     flex: 4.5;
     display: flex;
@@ -204,7 +216,7 @@ p {
     margin-top: 20px;
 }
 .filter-title {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 5px;
@@ -252,6 +264,13 @@ body.project-page {
 .back-button:hover {
     background-color: rgba(0, 0, 0, 0.1);
     color: #000;
+}
+
+.about-me-page {
+    background-image: url('Assets/About-BG.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .sma-project {
@@ -311,6 +330,20 @@ body.project-page {
 }
 .dk-project {
     background-image: url('Assets/DK/BG.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.tdtd-project {
+    background-image: url('Assets/TDTD/TDTD-BG.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.dvr-project {
+    background-image: url('Assets/DVR/DVR-BG.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -773,12 +806,32 @@ body.project-page {
     gap: 12px;
     width: auto;
     box-sizing: border-box;
+    position: relative;
 }
 
 .content-tag:hover {
     background-color: #f0f0f0;
     border-color: #333;
     cursor: pointer;
+}
+
+/* Tooltip Styles */
+.content-tag[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 100;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .content-tag img {
@@ -916,7 +969,7 @@ body.project-page {
     height: 300px;
     left: 0;
     top: 0;
-    background: #D5D5D5;
+    background: #f6f3f3;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -975,9 +1028,12 @@ body.page-exit-animation .scroll-text-track {
 .project-info-display {
     position: absolute;
     bottom: 8%;
-    left: 0;
+    left: 20px;
+    right: 20px;
     z-index: 10;
-    width: 100%;
+    width: auto;
+    max-width: 900px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -988,7 +1044,7 @@ body.page-exit-animation .scroll-text-track {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 20px 20px 0 0;
+    border-radius: 20px;
     padding: 20px 30px;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
     transition: opacity 0.3s ease-in-out;
@@ -1011,26 +1067,6 @@ body.page-exit-animation .scroll-text-track {
     text-decoration: none;
     text-align: center;
     white-space: normal; /* Allow title to wrap */
-}
-
-.project-tags-scroll {
-    text-align: center;
-    pointer-events: auto;
-    margin: 5px 0;
-}
-
-.project-info-tag {
-    display: inline-block;
-    background: none;
-    border: 1px solid #555;
-    border-radius: 15px;
-    padding: 4px 10px;
-    font-size: 0.8rem;
-    margin: 4px;
-    color: #333;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: normal;
 }
 
 .scroll-indicator {
@@ -1185,15 +1221,15 @@ body.page-exit-animation .scroll-text-track {
 }
 
 .lightbox-container::after {
-    content: url('Assets/Icons/Zoom-in.png');
+    content: url('Assets/Icons/Zoom-in.svg');
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-80%, -80%);
-    width: 60px;
-    height: 60px;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
     background: rgba(0, 0, 0, 0.5);
-    color: white;
+    color: rgb(255, 255, 255);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1256,4 +1292,65 @@ body.page-exit-animation .scroll-text-track {
 .slider-dot:hover,
 .slider-dot.active {
     background-color: #333;
+}
+
+/* Software Icons Row */
+.software-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.software-icon {
+    width: 28px;
+    height: 28px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.software-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+.software-icon:hover {
+    transform: scale(1.1);
+}
+.software-icon[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 100;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.icon-paragraph {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.icon-paragraph img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.icon-paragraph p {
+    margin: 0;
 }
