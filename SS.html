@@ -8,20 +8,21 @@
 </head>
 <body class="project-page ss-project">
     <div class="container">
-        <div class="sidebar" id="sidebar">
-            <a href="index.html" class="back-button">
-                <span class="icon"><img src="Assets/Icons/Home.png" alt="Back"></span>
-                <span class="text">Back to Portfolio</span>
-            </a>
-            <button id="sidebarToggle" class="sidebar-toggle"><img src="Assets/Icons/Close.png" alt="Close Menu"></button>
-            <div class="sidebar-content-wrapper">
-                <p>Table of Contents</p>
-                <ul class="toc-list" id="toc-list">
-                    <!-- Links will be generated here -->
-                </ul>
-            </div>
-        </div>
+        <header class="navbar">
+            <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
+            <nav class="nav-links">
+                <a href="index.html#about" class="nav-tab">About</a>
+                <a href="index.html#projects" class="nav-tab">Projects</a>
+                <a href="index.html#resume" class="nav-tab">Resume</a>
+                <a href="index.html#contact" class="nav-tab">Contact</a>
+            </nav>
+        </header>
         <div class="main-content project-content">
+            <h1>Salesflo Sellorate</h1>
+            <div>
+                <p>Role: Designer/Developer/ Curator</p>
+                <p>Year: 2026</p>
+                <p>Team: Sabeen Mahmud Forum</p>
             <img src="Assets/SMA/Header-Image.svg" alt="Header Image" class="header-image" style=" margin-bottom: 60px;">
             <div style="display: flex; justify-content: center;">
                 <a href="#" class="visit-button" target="_blank">Visit Project</a>
@@ -41,60 +42,6 @@
         </div>
     </div>
 
-    <script>
-        // Toggle Sidebar
-        const sidebar = document.getElementById('sidebar');
-        const toggle = document.getElementById('sidebarToggle');
-        const toggleIcon = toggle.querySelector('img');
-
-        toggle.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
-            if (sidebar.classList.contains('collapsed')) {
-                toggleIcon.src = 'Assets/Icons/Open.png';
-                toggleIcon.alt = 'Open Menu';
-            } else {
-                toggleIcon.src = 'Assets/Icons/Close.png';
-                toggleIcon.alt = 'Close Menu';
-            }
-        });
-
-        // Generate Table of Contents
-        const content = document.querySelector('.project-content');
-        const tocList = document.getElementById('toc-list');
-        const headings = content.querySelectorAll('h1, h2, h3:not(.hotspot-popup h3)');
-        
-        headings.forEach((heading, index) => {
-            const id = heading.id || `heading-${index}`;
-            heading.id = id;
-            
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = `#${id}`;
-            a.textContent = heading.textContent;
-            li.appendChild(a);
-            tocList.appendChild(li);
-        });
-
-        // Scrollspy for Mobile Markers
-        const projectContent = document.querySelector('.project-content');
-        
-        projectContent.addEventListener('scroll', () => {
-            let currentId = '';
-            
-            headings.forEach(heading => {
-                if (projectContent.scrollTop >= heading.offsetTop - 100) {
-                    currentId = heading.id;
-                }
-            });
-
-            const tocLinks = document.querySelectorAll('.toc-list a');
-            tocLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentId}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
+    <script></script>
 </body>
 </html>

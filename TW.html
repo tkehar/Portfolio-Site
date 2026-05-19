@@ -8,29 +8,30 @@
 </head>
 <body class="project-page tw-project">
     <div class="container">
-        <div class="sidebar" id="sidebar">
-            <a href="index.html" class="back-button">
-                <span class="icon"><img src="Assets/Icons/Home.png" alt="Back"></span>
-                <span class="text">Back to Portfolio</span>
-            </a>
-            <button id="sidebarToggle" class="sidebar-toggle"><img src="Assets/Icons/Close.png" alt="Close Menu"></button>
-            <div class="sidebar-content-wrapper">
-                <p>Table of Contents</p>
-                <ul class="toc-list" id="toc-list">
-                    <!-- Links will be generated here -->
-                </ul>
-            </div>
-        </div>
+        <header class="navbar">
+            <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
+            <nav class="nav-links">
+                <a href="index.html#about" class="nav-tab">About</a>
+                <a href="index.html#projects" class="nav-tab">Projects</a>
+                <a href="index.html#resume" class="nav-tab">Resume</a>
+                <a href="index.html#contact" class="nav-tab">Contact</a>
+            </nav>
+        </header>
         <div class="main-content project-content">
-            
-            
+            <h1>Ticketwala - Identity Design</h1>
+            <div>
+              <p>Role: Designer/Developer/ Curator</p>
+              <p>Year: 2026</p>
+              <p>Team: Sabeen Mahmud Forum</p>
+            </div>
             <div class="content-row">
                 <div class="image-column">
                     <!-- Add image here -->
                     <img src="Assets/TW/Ticket wala- logo_black.png" alt="Project Image" style="width: 100%; height: auto;">
                 </div>
                 <div class="text-column" style="padding: 10%;">
-                    <h2>Ticketwala - Identity Design</h2>
+                    
+
                     <p>This identity design project was a learning experience for me. The client was an online booking platform for event tickets, in Pakistan. The identity and brand was significant for them as they were catering to a wide range of users. The only specifications provided were the name and that the logo should be modern, playful, and grounded in the local context.</p>
                     <p>For this project I closely collaborated with the client and developed various iterations of the logo, playing with language, typography and even using my calligraphic skills.</p>
                 </div>
@@ -109,59 +110,6 @@
     </div>
 
     <script>
-        // Toggle Sidebar
-        const sidebar = document.getElementById('sidebar');
-        const toggle = document.getElementById('sidebarToggle');
-        const toggleIcon = toggle.querySelector('img');
-
-        toggle.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
-            if (sidebar.classList.contains('collapsed')) {
-                toggleIcon.src = 'Assets/Icons/Open.png';
-                toggleIcon.alt = 'Open Menu';
-            } else {
-                toggleIcon.src = 'Assets/Icons/Close.png';
-                toggleIcon.alt = 'Close Menu';
-            }
-        });
-
-        // Generate Table of Contents
-        const content = document.querySelector('.project-content');
-        const tocList = document.getElementById('toc-list');
-        const headings = content.querySelectorAll('h1, h2, h3:not(.hotspot-popup h3)');
-        
-        headings.forEach((heading, index) => {
-            const id = heading.id || `heading-${index}`;
-            heading.id = id;
-            
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = `#${id}`;
-            a.textContent = heading.textContent;
-            li.appendChild(a);
-            tocList.appendChild(li);
-        });
-
-        // Scrollspy for Mobile Markers
-        const projectContent = document.querySelector('.project-content');
-        
-        projectContent.addEventListener('scroll', () => {
-            let currentId = '';
-            
-            headings.forEach(heading => {
-                if (projectContent.scrollTop >= heading.offsetTop - 100) {
-                    currentId = heading.id;
-                }
-            });
-
-            const tocLinks = document.querySelectorAll('.toc-list a');
-            tocLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentId}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
     </script>
 </body>
 </html>

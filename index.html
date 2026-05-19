@@ -1,373 +1,365 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Talha Kehar | Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talha Ahmed Kehar | Portfolio</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<body>
 
-    <body class="home-page">
-    <div id="bg-image-container"></div>
     <div class="container">
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-content" style="margin-bottom: 10%;">
-                <div><h1 style="margin-bottom: 0;">TALHA KEHAR</h1></div>
-                <div class="sidebar-text" style="margin-top: 1%;">
-                    <div class="software-icons">
-                        <div class="software-icon" data-tooltip="Email Me" ><img src="Assets/Icons/Mail.png" alt="Mail" onclick="window.location.href='mailto:talha.a.kehar@gmail.com'"></div>
-                        <div class="software-icon" data-tooltip="Resume"><img src="Assets/Icons/CV.png" alt="Resume" onclick="window.open('https://drive.google.com/file/d/1CWLHV35JuPkYnu6m-MDJmqtJCgySnnU7/view?usp=sharing')"></div>
-                        <div class="software-icon" data-tooltip="Linkedin"><img src="Assets/Icons/Linkedin.png" onclick="window.open('https://www.linkedin.com/in/talha-kehar-8a89ba120/')"></div>
-                    </div>
-                </div>
-                <div class="sidebar-text">
-                     <div class="filter-title">Creative Engines:</div>
-                    <div class="software-icons">
-                        <div class="software-icon" data-tooltip="Unity 3D"><img src="Assets/Icons/Unity.png" alt="Unity 3D"></div>
-                        <div class="software-icon" data-tooltip="Touchdesigner"><img src="Assets/Icons/Touchdesigner.png" alt="Touchdesigner"></div>
-                        
-                    </div>
+        <header class="navbar">
+            <div class="logo">TALHA AHMED KEHAR</div>
+            <nav class="nav-links">
+                <button class="nav-tab active" data-target="about">About</button>
+                <button class="nav-tab" data-target="projects">Projects</button>
+                <button class="nav-tab" data-target="resume">Resume</button>
+                <button class="nav-tab" data-target="contact">Contact</button>
+            </nav>
+        </header>
 
-                    <div class="filter-title" style="margin-top: 10px;">Codebase:</div>
-                    <div class="software-icons">
-                        <div class="software-icon" data-tooltip="VS Code"><img src="Assets/Icons/VS Code.png" alt="VS Code"></div>
-                        <div class="software-icon" data-tooltip="HTML 5"><img src="Assets/Icons/HTML.png" alt="HTML"></div>
-                        <div class="software-icon" data-tooltip="Javascript"><img src="Assets/Icons/JS.png" alt="Javascript"></div>
-                        <div class="software-icon" data-tooltip="CSS 3"><img src="Assets/Icons/CSS.png" alt="CSS"></div>                    
-                    </div>
+        <main class="content-wrapper">
 
-                    <div class="filter-title" style="margin-top: 10px;">Design Tools:</div>
-                    <div class="software-icons">
-                        <div class="software-icon" data-tooltip="Figma"><img src="Assets/Icons/Figma.png" alt="Figma"></div>
-                        <div class="software-icon" data-tooltip="Adobe Suite"><img src="Assets/Icons/Adobe.png" alt="Adobe Suite"></div>
-                        <div class="software-icon" data-tooltip="Procreate"><img src="Assets/Icons/Procreate.png" alt="Procreate"></div>
-                        <div class="software-icon" data-tooltip="Blender"><img src="Assets/Icons/Blender.png" alt="Blender"></div>
+            <section id="about" class="page-view active">
+                <div class="about-grid">
+                    <div class="about-visual">
+                        <img src="Assets/Color-test.gif" alt="Portfolio Visual" style="width: 650px; height: 650px;">
                     </div>
-                    <div class="filter-title" style="margin-top: 10px;">Planning Tools:</div>
-                    <div class="software-icons">
-                        <div class="software-icon" data-tooltip="Miro"><img src="Assets/Icons/Miro.png" alt="Miro"></div>
-                        <div class="software-icon" data-tooltip="Notion"><img src="Assets/Icons/Notion.png" alt="Notion"></div>
-                        
-                    </div>
-                    <div class="filter-title" style="margin-top: 25px;">My Focus:</div>
-                    <p id="typing-animation" style="background-color: #A1FF5F; color: #000000; font-style: oblique; font-weight: bold;"></p>
-                    <br></br>
-                    </div>
-                </div>
-            </div>
-        <div class="main-content">  
-                    <div class="header-section">
-                        <h2 class="home-title">Selected Works</h3>
-                        <div class="filter-buttons">
-                            <button class="filter-btn active" data-tag="All">All</button>
-                            <button class="filter-btn" data-tag="Experience Design">Experience Design</button>
-                            <button class="filter-btn" data-tag="Extended Reality">Extended Reality</button>
-                            <button class="filter-btn" data-tag="Branding">Branding</button>
-                            <button class="filter-btn" data-tag="Research">Research</button>
+                    
+                    <div class="about-info">
+                        <h2>DESIGNING INTENTIONAL, EMPATHETIC, AND DATA DRIVEN, DIGITAL EXPERIENCES.</h2>
+                        <br></br>
+                        <div class="skills-section">
+                            <div class="skill-row">
+                                <span class="skill-label">Design Tools:</span>
+                                <div class="skill-icons">
+                                    <div class="software-icon" data-tooltip="Figma"><img src="Assets/Icons/Figma.png" alt="Figma"></div>
+                                    <div class="software-icon" data-tooltip="Adobe Suite"><img src="Assets/Icons/Adobe.png" alt="Adobe Suite"></div>
+                                    <div class="software-icon" data-tooltip="Blender"><img src="Assets/Icons/Blender.png" alt="Blender"></div>
+                                    <div class="software-icon" data-tooltip="Procreate"><img src="Assets/Icons/Procreate.png" alt="Procreate"></div>
+                                </div>
+                            </div>
+                            <div class="skill-row">
+                                <span class="skill-label">Creative Engines:</span>
+                                <div class="skill-icons">
+                                    <div class="software-icon" data-tooltip="Unity 3D"><img src="Assets/Icons/Unity.png" alt="Unity 3D"></div>
+                                    <div class="software-icon" data-tooltip="Touchdesigner"><img src="Assets/Icons/Touchdesigner.png" alt="Touchdesigner"></div>
+                                </div>
+                            </div>
+                            <div class="skill-row">
+                                <span class="skill-label">Codebase:</span>
+                                <div class="skill-icons">
+                                    <div class="software-icon" data-tooltip="VS Code"><img src="Assets/Icons/VS Code.png" alt="VS Code"></div>
+                                    <div class="software-icon" data-tooltip="HTML 5"><img src="Assets/Icons/HTML.png" alt="HTML"></div>
+                                    <div class="software-icon" data-tooltip="Javascript"><img src="Assets/Icons/JS.png" alt="Javascript"></div>
+                                    <div class="software-icon" data-tooltip="CSS 3"><img src="Assets/Icons/CSS.png" alt="CSS"></div>
+                                </div>
+                            </div>
+                            <div class="skill-row">
+                                <span class="skill-label">Planning Tools:</span>
+                                <div class="skill-icons">
+                                    <div class="software-icon" data-tooltip="Notion"><img src="Assets/Icons/Notion.png" alt="Notion"></div>
+                                    <div class="software-icon" data-tooltip="Miro"><img src="Assets/Icons/Miro.png" alt="Miro"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-            <div class="project-info-display" id="projectInfoDisplay">
-                <a class="project-title-scroll" id="projectTitle"></a>
-                <p class="project-description-scroll" id="projectDescription"></p>
-            </div>
-            <div class="home-scroll-container" id="scrollContainer">
-                <div class="scroll-track" id="scrollTrack"></div>
-                <div class="sticky-stage">
-                    <button class="nav-arrow prev-arrow" id="prevBtn">&#10094;</button>
-                    <div class="cube-container">
-                        <div class="cube" id="cube">
-                            <div class="face front"></div>
-                            <div class="face right"></div>
-                            <div class="face back"></div>
-                            <div class="face left"></div>
-                            <div class="face top"></div>
-                            <div class="face bottom"></div>
-                        </div>
-                        <div class="cube-shadow"></div>
-                    </div>
-                    <button class="nav-arrow next-arrow" id="nextBtn">&#10095;</button>
                 </div>
-            </div>
-            <div class="project-grid" id="projectSource" style="display: none;">
-                <a href="TDTD.html" class="project-card" data-tags="Research" data-bg="Assets/TDTD/TDTD-BG.png" data-description="My Master's thesis is an intersectional critique of Big Tech Imperialism in the development of Artificial Intelligence.">
-                    <img src="Assets/TDTD/TDTD_Banner.png" alt="Project 11">
-                    <div class="overlay">Teardown The Data Centers!</div>
-                </a>
-                <a href="SMA.html" class="project-card" data-tags="Research, Experience Design, Extended Reality" data-bg="Assets/SMA/BG.png" data-description="A Web-VR digital archive aimed at preserving the memory and legacy of Sabeen Mahmud.">
-                    <img src="Assets/SMA/SMA_Banner.png" alt="Project 1">
-                    <div class="overlay">Under The Amaltaas Tree - The Sabeen Mahmud Archive</div>
-                </a>
-                <a href="MAN.html" class="project-card" data-tags="Research, Experience Design" data-bg="Assets/MAN/MAN- BG.png" data-description="An AI-powered note-taking feature for a SAAS platform catering to original equipment manufacturers.">
-                    <img src="Assets/MAN/MAN_Banner.png" alt="Project 2">
-                    <div class="overlay">Makula - AI Notetaker</div>
-                </a>
-                <a href="DVR.html" class="project-card" data-tags="Experience Design, Extended Reality" data-bg="Assets/DVR/DVR-BG.png" data-description="A VR experience that employs jungian psychology principles to create a immersive environment where viewers confront their shadow selves.">
-                    <img src="Assets/DVR/DVR_Banner.png" alt="Project 12">
-                    <div class="overlay">Descent VR</div>
-                </a>
-                <a href="EH.html" class="project-card" data-tags="Experience Design" data-bg="Assets/EH/EH- BG.png" data-description="An immersive installation using live data to visualize and sonify the Schumann Resonance.">
-                    <img src="Assets/EH/EH_Banner.png" alt="Project 3">
-                    <div class="overlay">The Earth's Heartbeat</div>
-                </a>
-                <a href="SS.html" class="project-card" data-tags="Experience Design" data-bg="Assets/SS/SS-BG.png" data-description="A sales enablement platform connecting Merchants and Distributors.">
-                    <img src="Assets/SS/SS_Banner.png" alt="Project 4">
-                    <div class="overlay">Salesflo Sellorate</div>
-                </a>
-                <a href="OMS.html" class="project-card" data-tags="Experience Design" data-bg="Assets/OMS/OMS-BG.png" data-description="An order management system for an online travel platform.">
-                    <img src="Assets/OMS/OMS_Banner.png" alt="Project 5">
-                    <div class="overlay">Sastaticket - Order Management System</div>
-                </a>
-                <a href="TSW.html" class="project-card" data-tags="Experience Design" data-bg="Assets/TSW/TSW-BG.png" data-description=" A curatorial project showcasing photographic work done by students from The School of Writing.">
-                    <img src="Assets/TSW/TSW_Banner.png" alt="Project 6">
-                    <div class="overlay">Look at the city from here</div>
-                </a>
-                <a href="TW.html" class="project-card" data-tags="Branding" data-bg="Assets/TW/TW-BG.png" data-description="Brand identity design for an event ticketing platform.">
-                    <img src="Assets/TW/TW_Banner.png" alt="Project 7">
-                    <div class="overlay">Ticketwala - Identity Design</div>
-                </a>
-                <a href="STMS.html" class="project-card" data-tags="Research" data-bg="Assets/STMS/STMS-BG.png" data-description="Market segmentation research for the travel industry.">
-                    <img src="Assets/STMS/STMS_Banner.png" alt="Project 8">
-                    <div class="overlay">Sastaticket - Market Segments Research</div>
-                </a>
-                <a href="ADA.html" class="project-card" data-tags="Branding, Experience Design" data-bg="Assets/ADA/ADA-BG.png" data-description="Design and event logistics for a magazine focused on architecture and design in Pakistan and the South Asia region.">
-                    <img src="Assets/ADA/ADA_Banner.png" alt="Project 9">
-                    <div class="overlay">Architecture Design Art Magazine</div>
-                </a>
-                <a href="DK.html" class="project-card" data-tags="Experience Design, Extended Reality" data-bg="Assets/DK/DK-BG.png" data-description="An augmented reality platform aimed at preserving Karachi's folklore and intangible heritage.">
-                    <img src="Assets/DK/DK_Banner.png" alt="Project 10">
-                    <div class="overlay">Dastaan-E-Karachi</div>
-                </a>
-            </div>
+            </section>
+
+            <section id="projects" class="page-view">
+                <div class="works-header">
+                    <h4 class="section-subtitle">SELECTED WORKS</h4>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="UI-UX">Product</button>
+                        <button class="filter-btn" data-filter="Installation">Installation</button>
+                        <button class="filter-btn" data-filter="NMD">New Media</button>
+                        <button class="filter-btn" data-filter="Illustration">Illustration</button>
+                        <button class="filter-btn" data-filter="Motion">Motion</button>
+                        <button class="filter-btn" data-filter="Brand">Brand</button>
+                        <button class="filter-btn" data-filter="Curation">Curation</button>
+                        <button class="filter-btn" data-filter="Layout">Editiorial</button>
+                    </div>
+                </div>
+
+                <div class="project-grid">
+                    <a href="SMA.html" class="project-card" data-category="NMD, Curation, UI-UX">
+                        <img src="Assets/SMA/SMA_Banner.png" alt="Sabeen Mahmud Archive">
+                        <h5>Sabeen Mahmud Archive</h5>
+                    </a>
+                    <a href="EH.html" class="project-card" data-category="Motion, Installation,NMD">
+                        <img src="Assets/EH/EH_Banner.png" alt="The Earth's Heartbeat">
+                        <h5>The Earth's Heartbeat</h5>
+                    </a>
+                    <a href="OMS.html" class="project-card" data-category="UI-UX">
+                        <img src="Assets/OMS/OMS_Banner.png" alt="Sastaticket OMS">
+                        <h5>Sastaticket OMS</h5>
+                    </a>
+                    <a href="TW.html" class="project-card" data-category="Brand">
+                        <img src="Assets/TW/TW_Banner.png" alt="TICKET WALA">
+                        <h5>Ticket Wala Identity Design</h5>
+                    </a>
+                    <a href="DK.html" class="project-card" data-category="Brand, Layout,UI-UX,NMD">
+                        <img src="Assets/DK/DK_Banner.png" alt="Dastaan-e-Karachi">
+                        <h5>Dastaan-e-Karachi</h5>
+                    </a>
+                    <a href="TSW.html" class="project-card" data-category="Curation,Installation,Layout">
+                        <img src="Assets/TSW/TSW_Banner.png" alt="Look at the City from here">
+                        <h5>Look at the City from here</h5>
+                    </a>
+                    <a href="SS.html" class="project-card" data-category="UI-UX">
+                        <img src="Assets/SS/SS_Banner.png" alt="Sellorate B2B">
+                        <h5>Sellorate B2B Retailer App</h5>
+                    </a>
+                    <a href="ADA.html" class="project-card" data-category="Brand,Layout">
+                        <img src="Assets/ADA/ADA_Banner.png" alt="ADA Magazine">
+                        <h5>ADA Magazine</h5>
+                    </a>
+                    <a href="MAN.html" class="project-card" data-category="UI-UX">
+                        <img src="Assets/MAN/MAN_Banner.png" alt="Makula AI Notetaker">
+                        <h5>Makula AI Notetaker</h5>
+                    </a>
+                    <a href="DVR.html" class="project-card" data-category="NMD">
+                        <img src="Assets/DVR/DVR_Banner.png" alt="Descent VR">
+                        <h5>Descent VR</h5>
+                    </a>
+                    <a href="SU.html" class="project-card" data-category="Motion,Brand">
+                        <img src="Assets/SU/SU_Banner.png" alt="Speak Up">
+                        <h5>Speak Up</h5>
+                    </a>
+                    <a href="STG.html" class="project-card" data-category="Layout,Illustration">
+                        <img src="Assets/STG/STG_Banner.png" alt="The Stained Glass Window">
+                        <h5>The Stained Glass Window</h5>
+                    </a>
+                    <a href="NFFN.html" class="project-card" data-category="Illustration, Layout">
+                        <img src="Assets/NFN/NFFN_Banner.png" alt="No Funeral For Nazia">
+                        <h5>No Funeral For Nazia</h5>
+                    </a>
+                    <a href="Vissibl.html" class="project-card" data-category="UI-UX">
+                        <img src="Assets/VIS/VIS_Banner.png" alt="The Stained Glass Window">
+                        <h5>Vissibl</h5>
+                    </a>
+                    <a href="WGTW.html" class="project-card" data-category="Curation, Brand, Product, Layout">
+                        <img src="Assets/WGTW/WGTW_Banner.png" alt="Who Gets To Talk About Whom">
+                        <h5>Who Gets To Talk About Whom</h5>
+                    </a>
+                    <a href="SE.html" class="project-card" data-category="Illustration">
+                        <img src="Assets/SE/SE_Banner.png" alt="Snake Eyes">
+                        <h5>Snake Eyes</h5>
+                    </a>
+                </div>
+            </section>
+
+            <section id="resume" class="page-view">
+                <div class="resume-layout">
+                    <div class="resume-left">
+                        <div class="resume-block">
+                            <h4>EDUCATION</h4>
+                            <p><strong>MA New Media Design</strong><br>University of Europe for Applied Sciences<br>July 2026 (Expected)</p>
+                            <p><strong>BA Communication Design</strong><br>Habib University - May 2018</p>
+                            <p><strong>O Levels and A Levels</strong><br>Karachi Grammar School - May 2012</p>
+                        </div>
+
+                        <div class="resume-block">
+                            <h4>CURATORIAL EXPERIENCE</h4>
+                            <p><strong>Curator - 2026</strong><br>Under The Amaltaas Tree<br>T2F, Karachi Pakistan</p>
+                            <p><strong>Assistant Curator - 2019</strong><br>Yahan Say Shehr Ko Dekho<br>Karachi Art Council</p>
+                            <p><strong>Communication Designer - 2018</strong><br>Who Gets To Talk About Whom<br>Gandhara Art Space</p>
+                        </div>
+
+                        <div class="resume-block">
+                            <h4>AWARDS</h4>
+                            <ul>
+                                <li>Best Capstone, 2018</li>
+                                <li>Deans' List, Spring 2017</li>
+                                <li>Kensett Medal, 2010</li>
+                            </ul>
+                        </div>
+
+                        <div class="resume-block">
+                            <h4>LANGUAGES</h4>
+                            <ul>
+                                <li>English (Native/Fluent)</li>
+                                <li>Urdu (Native)</li>
+                                <li>Sindhi (Native)</li>
+                                <li>German (A2, in progress)</li>
+                            </ul>
+                        </div>
+                        <div class="resume-block">
+                            <h4>META CURRICULAR</h4>
+                            <ul>
+                                <li>Founder & Moderator - Habib Feminist Collective  - Dec 2014 to Dec 2015</li>
+                                <li>Lead Communication Designer - TED X Habib University - Mar 2017 to May 2017</li>
+                                <li>Writer/Contributor - Arzu Anthology - Published 2018</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="resume-right">
+                        <h4>WORK EXPERIENCE</h4>
+                        
+                        <div class="job-entry">
+                            <div class="job-header">
+                                <span><strong>Makula | Freelance Product Designer</strong></span>
+                                <span class="job-date">Sept 9, 2024 — Dec 15, 2025</span>
+                            </div>
+                            <ul>
+                                <li>Spearheaded end-to-end UI/UX design and prototyping for the launch of an AI-powered notetaker MVP, targeting professional users.</li>
+                                <li>Iteratively improved product logic and UX across the MVP lifecycle, translating customer feedback into targeted fixes.</li>
+                            </ul>
+                        </div>
+
+                        <div class="job-entry">
+                            <div class="job-header">
+                                <span><strong>Sabeen Mahmud Forum | Volunteer Designer</strong></span>
+                                <span class="job-date">Jun 1, 2024 — Present</span>
+                            </div>
+                            <ul>
+                                <li>Designed and developed the Sabeen Mahmud Archive — a self-initiated digital archive encompassing Information Architecture, visual design, and front-end development.</li>
+                            </ul>
+                        </div>
+
+                        <div class="job-entry">
+                            <div class="job-header">
+                                <span><strong>Salesflo Pvt Ltd | UI/UX Lead</strong></span>
+                                <span class="job-date">Oct 16, 2023 — Apr 30, 2024</span>
+                            </div>
+                            <ul>
+                                <li>Established and deployed a comprehensive, component-based Design System (leveraging Figma) and a formal UX Playbook for a B2B SaaS platform serving major FMCG companies.</li>
+                                <li>Reduced design-to-development handoff time for the product to 1 week and ensured 100% cross-platform design consistency.</li>
+                            </ul>
+                        </div>
+
+                        <div class="job-entry">
+                            <div class="job-header">
+                                <span><strong>Sastaticket.pk | Product Design Lead</strong></span>
+                                <span class="job-date">Mar 1, 2022 — Oct 13, 2023</span>
+                            </div>
+                            <ul>
+                                <li>Led and mentored a team of three designers, defining team goals and implementing agile design processes to improve overall design quality and velocity.</li>
+                                <li>Drove product growth and feature discovery by leading user research, market segmentation, and problem discovery workshops.</li>
+                            </ul>
+                        </div>
+
+                        <div class="job-entry">
+                            <div class="job-header">
+                                <span><strong>Orenda | Visual Learning Designer</strong></span>
+                                <span class="job-date">Sep 14, 2020 - Jul 31, 2021</span>
+                            </div>
+                            <ul>
+                                <li>Adapted educational scripts and lesson plans into engaging, fully animated video lessons for children, utilized within the Taleemabad learning app.</li>
+                            </ul>
+                        </div>
+
+                        <div class="job-entry">
+                            <div class="job-header">
+                                <span><strong> ADA Magazine | Lead Designer </strong></span>
+                                <span class="job-date">Aug 10, 2018 - Aug 31, 2020</span>
+                            </div>
+                            <ul>
+                                <li>Managed all print and digital layout design and web development for a leading architecture and design magazine.</li>
+                            </ul>
+                        </div>
+
+                        <div class="job-entry">
+                            <div class="job-header">
+                                <span><strong> PeaceNiche | Admin Coordinator </strong></span>
+                                <span class="job-date">Feb 1, 2013—Jan 10, 2014</span>
+                            </div>
+                            <ul>
+                                <li>Facilitated successful event management and social media for a key cultural space in Karachi (The Second Floor)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="page-view">
+                <div class="contact-layout">
+                    <div class="contact-visual">
+                        <div class="boardgame-frame">
+                            <img src="Assets/Profile_Banner.png" alt="Board Game Vector Illustration" class="contact-artwork">
+                        </div>
+                    </div>
+                    <div class="contact-details">
+                        <p class="contact-meta"><strong>Email:</strong> <a href="mailto:talha.a.kehar@gmail.com">talha.a.kehar@gmail.com</a></p>
+                        <p class="contact-meta">Berlin, Germany</p>
+                        
+                        <div class="software-icons" style="margin-top: 24px;">
+                            <div class="software-icon" data-tooltip="Email Me"><img src="Assets/Icons/Mail.png" alt="Mail" onclick="window.location.href='mailto:talha.a.kehar@gmail.com'"></div>
+                            <div class="software-icon" data-tooltip="Resume"><img src="Assets/Icons/CV.png" alt="Resume" onclick="window.open('https://drive.google.com/file/d/1CWLHV35JuPkYnu6m-MDJmqtJCgySnnU7/view?usp=sharing')"></div>
+                            <div class="software-icon" data-tooltip="Linkedin"><img src="Assets/Icons/Linkedin.png" alt="LinkedIn" onclick="window.open('https://www.linkedin.com/in/talha-kehar-8a89ba120/')"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
     </div>
-    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const projectSource = document.getElementById('projectSource');
-            const cards = projectSource.querySelectorAll('.project-card');
             
-            const bgColors = [
-                '#EDD5BF', // Scroll to see more
-                '#D38686', // SMA
-                '#AF695C', // EH
-                '#FCBF4A', // SS
-                '#EBE519', // OMS
-                '#B7EB8F', // TSW
-                '#13C2C2', // STMS
-                '#006D75', // ADA
-                '#023C41', // Dastaan-E-Karachi
-                '#002F49', // End message
-                '#EAEAEA'  // Fallback
-            ];
+            // --- SPA ROUTER (TAB NAVIGATION CLICK ACTIONS) ---
+            const tabs = document.querySelectorAll('.nav-tab');
+            const pages = document.querySelectorAll('.page-view');
 
-            const allRawProjects = Array.from(cards).map((card, index) => ({
-                href: card.getAttribute('href'),
-                img: card.querySelector('img').src,
-                title: card.querySelector('.overlay').textContent,
-                description: card.getAttribute('data-description') || '',
-                tags: (card.getAttribute('data-tags') || '').split(',').map(t => t.trim()).filter(t => t),
-                color: bgColors[(index + 1) % bgColors.length],
-                bg: card.getAttribute('data-bg') || 'Assets/SMA/BG.png'
-            }));
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.getAttribute('data-target');
 
-            const startSlide = {
-                href: 'About.html',
-                img: 'Assets/Profile_Banner.png',
-                title: 'About Me',
-                description: ' I am a New Media Artist & Researcher that blends user-centric research with XR and data-driven storytelling. My practice is is rooted in the belief that technology should be as intentional, inclusive and care-filled, ensuring that every digital interaction is crafted with precision and purpose',
-                color: bgColors[0],
-                bg: 'Assets/START- BG.png'
-            };
-            
-            const endSlide = {
-                href: '#',
-                img: 'Assets/Land_Banner.png',
-                title: "Thank you for your time!",
-                description: '',
-                tags: [],
-                color: bgColors[bgColors.length - 1],
-                bg: 'Assets/END-BG.png'
-            };
+                    tabs.forEach(t => t.classList.remove('active'));
+                    pages.forEach(p => p.classList.remove('active'));
 
-            let projects = [];
-
-            const scrollContainer = document.getElementById('scrollContainer');
-            const scrollTrack = document.getElementById('scrollTrack');
-            const scrollPerProject = 800; 
-
-            const cube = document.getElementById('cube');
-            const stickyStage = document.querySelector('.sticky-stage');
-            const faces = Array.from(document.querySelectorAll('.face'));
-
-            const projectInfoDisplay = document.getElementById('projectInfoDisplay');
-            const projectTitle = document.getElementById('projectTitle');
-            const projectDescription = document.getElementById('projectDescription');
-            let lastDisplayedIndex = -1;
-
-            let time = 0;
-
-            // Filter Logic
-            function applyFilter(tag) {
-                let filtered = allRawProjects;
-                if (tag !== 'All') {
-                    filtered = allRawProjects.filter(p => p.tags.includes(tag));
-                    projects = [...filtered, endSlide];
-                } else {
-                    projects = [startSlide, ...filtered, endSlide];
-                }
-                
-                const totalScroll = (projects.length - 1) * scrollPerProject;
-                scrollTrack.style.height = `${totalScroll + window.innerHeight}px`;
-
-                scrollContainer.scrollTop = 0;
-                lastDisplayedIndex = -1;
-            }
-
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    filterButtons.forEach(b => b.classList.remove('active'));
-                    e.target.classList.add('active');
-                    applyFilter(e.target.getAttribute('data-tag'));
+                    tab.classList.add('active');
+                    document.getElementById(target).classList.add('active');
                 });
             });
 
-            function updateCube() {
-                const scrollTop = scrollContainer.scrollTop;
-                const scrollHeight = scrollContainer.scrollHeight;
-                const clientHeight = scrollContainer.clientHeight;
-                let progress = scrollTop / scrollPerProject;
+            // --- CATEGORIES MATRIX FILTER SYSTEM ---
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
 
-                if (progress < 0) progress = 0;
-                
-                // Define key rotation states for each face in the cycle
-                const baseStates = [
-                    { x: 0, y: 0 },      // 0: Front
-                    { x: 0, y: -90 },    // 1: Right
-                    { x: 0, y: -180 },   // 2: Back
-                    { x: 0, y: -270 },   // 3: Left
-                    { x: -90, y: -270 }, // 4: Top
-                    { x: 90, y: -270 }   // 5: Bottom
-                ];
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
 
-                const cycleIndex = Math.floor(progress);
-                const cycleProgress = progress - cycleIndex;
-                
-                const stateIndex = cycleIndex % 6;
-                const nextStateIndex = (stateIndex + 1) % 6;
+                    const filterValue = btn.getAttribute('data-filter');
+                    const filterValueLower = filterValue.toLowerCase();
 
-                const currentState = baseStates[stateIndex];
-                const nextState = baseStates[nextStateIndex];
-                
-                // Handle Y wrapping for continuity (shortest path)
-                let currentY = currentState.y;
-                let nextY = nextState.y;
-                if (nextY - currentY > 180) nextY -= 360;
-                if (nextY - currentY < -180) nextY += 360;
+                    projectCards.forEach(card => {
+                        const categories = (card.getAttribute('data-category') || '').toLowerCase();
+                        const categoryList = categories.split(',').map(c => c.trim());
 
-                // Add idle rotation (breathing effect)
-                time += 0.005;
-                const idleX = Math.sin(time) * 3;
-                const idleY = Math.cos(time * 0.8) * 3;
-
-                const rotX = currentState.x + (nextState.x - currentState.x) * cycleProgress + idleX;
-                const rotY = currentY + (nextY - currentY) * cycleProgress + idleY;
-
-                cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-
-                // Update background position to track cube center
-                const stageRect = stickyStage.getBoundingClientRect();
-                document.body.style.setProperty('--bg-x', `${stageRect.left + stageRect.width / 2}px`);
-                document.body.style.setProperty('--bg-y', `${stageRect.top + stageRect.height / 2}px`);
-
-                const activeFaceIndex = Math.round(progress) % 6;
-
-                faces.forEach((face, faceIndex) => {
-                    let closestProject = null;
-                    let minDist = Infinity;
-
-                    // Find the project that should be on this face based on proximity
-                    projects.forEach((p, i) => {
-                        if (i % 6 === faceIndex) {
-                            const dist = Math.abs(i - progress);
-                            if (dist < minDist) {
-                                minDist = dist;
-                                closestProject = p;
-                            }
+                        if (filterValue === 'all' || categoryList.includes(filterValueLower)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
                         }
                     });
-
-                    // Load image if it's close to being active, to prevent pop-in
-                    if (closestProject && minDist < 2.5) {
-                        const img = face.querySelector('img');
-                        if (!img || img.getAttribute('src') !== closestProject.img) {
-                            face.innerHTML = `<a href="${closestProject.href}"><img src="${closestProject.img}" alt="${closestProject.title}"></a>`;
-                        }
-                    }
-
-                    // Now, handle visibility. Only the truly active face gets the .active class.
-                    const img = face.querySelector('img');
-                    if (img) {
-                        img.style.opacity = (faceIndex === activeFaceIndex) ? '1' : '0';
-                    } 
                 });
+            });
 
-                // Update project info display
-                const currentIndex = Math.round(progress);
-                if (currentIndex !== lastDisplayedIndex && projects[currentIndex]) {
-                    lastDisplayedIndex = currentIndex;
-                    const currentProject = projects[currentIndex];
+            // --- AUTONOMOUS UNTETHERED 3D ROTATION LOOP ---
+            const autoCube = document.getElementById('autoCube');
+            let rotateX = -15;
+            let rotateY = 45;
 
-                    projectInfoDisplay.style.opacity = 0;
-
-                    setTimeout(() => {
-                        projectTitle.textContent = currentProject.title;
-                        projectTitle.href = currentProject.href;
-                        projectDescription.textContent = currentProject.description;
-
-                        projectInfoDisplay.style.opacity = 1;
-                    }, 300); // Corresponds to CSS transition duration
+            function renderLoop() {
+                rotateY += 0.25; 
+                rotateX = -15 + Math.sin(rotateY * 0.02) * 8; // Soft programmatic rhythmic breathing wave
+                
+                if (autoCube) {
+                    autoCube.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                 }
-                requestAnimationFrame(updateCube);
+                requestAnimationFrame(renderLoop);
             }
+            renderLoop();
 
-            // Initialize
-            applyFilter('All');
-            updateCube();
-
-            function handlePageTransition(event) {
-                const link = event.target.closest('a');
-
-                // Check if it's a link with a real destination (not just an anchor)
-                if (link && link.getAttribute('href') && link.getAttribute('href') !== '#') {
-                    event.preventDefault();
-                    const destination = link.href;
-
-                    document.body.classList.add('page-exit-animation');
-
-                    setTimeout(() => {
-                        window.location.href = destination;
-                    }, 1000); // Match CSS transition duration
-                }
-            }
-            scrollContainer.addEventListener('click', handlePageTransition);
-
-            // Navigation Arrows
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-
-            if (prevBtn && nextBtn) {
-                prevBtn.addEventListener('click', () => {
-                    const currentScroll = scrollContainer.scrollTop;
-                    const targetScroll = Math.round(currentScroll / scrollPerProject - 1) * scrollPerProject;
-                    scrollContainer.scrollTo({ top: targetScroll, behavior: 'smooth' });
-                });
-
-                nextBtn.addEventListener('click', () => {
-                    const currentScroll = scrollContainer.scrollTop;
-                    const targetScroll = Math.round(currentScroll / scrollPerProject + 1) * scrollPerProject;
-                    scrollContainer.scrollTo({ top: targetScroll, behavior: 'smooth' });
-                });
-            }
-
-            // Typing Animation
+            // --- TYPING SUB-ROUTINE MODULE ---
             function createTypingEffect(elementId, words) {
                 const element = document.getElementById(elementId);
                 if (!element) return;
@@ -404,8 +396,7 @@
             }
 
             createTypingEffect('typing-animation', ["Design", "Technology", "Product", "Strategy", "Storytelling","Prototyping","Civic Tech","Data Visualization"]);
-            createTypingEffect('software-typing-animation', ["Figma", "Touchdesigner", "Adobe Suite", "Procreate", "VS Code", "Miro", "Unity 3D", "Notion"]);
         });
     </script>
-    </body>
+</body>
 </html>

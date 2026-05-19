@@ -8,107 +8,146 @@
 </head>
 <body class="project-page oms-project">
     <div class="container">
-        <div class="sidebar" id="sidebar">
-            <a href="index.html" class="back-button">
-                <span class="icon"><img src="Assets/Icons/Home.png" alt="Back"></span>
-                <span class="text">Back to Portfolio</span>
-            </a>
-            <button id="sidebarToggle" class="sidebar-toggle"><img src="Assets/Icons/Close.png" alt="Close Menu"></button>
-            <div class="sidebar-content-wrapper">
-                <p>Table of Contents</p>
-                <ul class="toc-list" id="toc-list">
-                    <!-- Links will be generated here -->
-                </ul>
-            </div>
-        </div>
+        <header class="navbar">
+            <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
+            <nav class="nav-links">
+                <a href="index.html#about" class="nav-tab">About</a>
+                <a href="index.html#projects" class="nav-tab">Projects</a>
+                <a href="index.html#resume" class="nav-tab">Resume</a>
+                <a href="index.html#contact" class="nav-tab">Contact</a>
+            </nav>
+        </header>
         <div class="main-content project-content">
-            <div class="text-column" style="padding-left: 10%; padding-right: 10%;padding-top: 2%; padding-bottom: 5%;">
+            <div class="text-column">
                 <h1>Sastaticket - Order Management System</h1>
-                <p> One of my first professional projects as a product designer was redesigning the Order Management System of an online travel agency.</p>
+                <div class="grid-4-col">
+                    <div class="grid-item" style="height: fit-content;width: 100%; padding: 1; line-height: 1.5;">
+                        <p><b>Company:</b></p>
+                        <p>Sastaticket</p>
+                    </div>
+                    <div class="grid-item" style="height: fit-content;width: 100%;;padding: 1%;">
+                        <p><b>Role:</b></p>
+                        <p>Product Designer</p>
+                    </div>
+                    <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+                        <p><b>Year:</b></p>
+                        <p>2021</p>
+                    </div>
+                    <div class="grid-item" style="height: fit-content;width: 100%; ;padding: 1%;">
+                        <p><b>Team:</b></p>
+                        <p>Fatin Nawaz, Mustafa Hassan (Product Team)</p>
+                    </div>
+            </div>
+                <img src="Assets/OMS/Header.svg" alt="Header Image" class="header-image" style=" margin-bottom: 60px;">
             </div>
 
-            <img src="Assets/OMS/Header.svg" alt="Header Image" class="header-image" style=" margin-bottom: 60px;">
-            <div style="display: flex; justify-content: center;">
-            </div>
-            
-            <div class="text-column" style="padding-top: 2%; padding-bottom: 5%;">
-                <p> <div class="text-column" style="padding-left: 10%; padding-right: 10%;padding-top: 2%; padding-bottom: 5%;">
-                <h2>Responsibility Matrix</h2>
-                <p> This project had various stakeholder departments whose involvement is defined in the responsibility matrix.</p>
-            </div>
-            </div>
-            
-            <div class="image-column" style="padding-left: 10%; padding-right: 10%;">
-                    <!-- Add image here -->
-                    <img src="Assets/OMS/R-Matrix.svg" alt="Matrix" style="width: 100%; height: auto;">
-                </div>
-            
-            <div class="content-row">
-                <div class="text-column" style="padding: 10%;">
-                    <h2>Process Map</h2>
-                    <p>Stakeholder details...</p>
-                    <br></br>
-                    <p style="text-align: center;"><I>Click on the numbers to learn more about each stakeholder group.</I></p>
-                    <div class="stakeholder-map-container">
-                        <img src="Assets/OMS/Process Map.svg" alt="Process Map">
-                        <svg class="connector-lines">
-                    <path id="connector-path" d="" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" />
-                </svg>
-                
-                <!-- Hotspots would go here -->
-            </div>
-            
-            
-            <div class="content-row" style="align-items: normal;">
-                <div class="image-column" style="width: 70%; height: auto;">
-                    <img src="Assets/OMS/Survey.svg" alt="survey" style="width: 100%; height: auto;">
-                </div>
-                <div class="text-column">
-                    <h2>Survey for CS Agents</h2>
-                    <p>To better understand our target audience, we conducted a demographic survey of the customer service team. This helped us develop personas and cater to their needs. At the time of the survey, the CS team consisted of about 54 agents and 4 managerial leads.</p>
-                    <p>We began by understanding the make up of the CS team. At the time of the survey, the CS team consisted of about 54 agents and 4 managerial leads. </p>
-                    <p>In terms of gender the CS team is  balanced with almost equal ratios of men to women.</p>
-                    <p>A majority of the CS agents fell into two age brackets 25-30 and 31-35. The most illuminating factor however was length of employment which revealed that approximately 25% of  agents had been working for under 3 months, while over 47% had been working for over a year.</p>
-                    <p>Finally the CS team is also broken up into smaller teams based on what aspects of customer queries they deal with. Inbound calls is where the majority operate, with over laps into other teams.</p>
-                    <p>These insights helped us develop personas and cater to the needs of the different user groups.</p>
-                </div>
-            </div>
-
-            <h2>Customer Service Personas</h2>
-            <div class="grid-3-col">
-                <div class="grid-item" style="background-color: #597EF7; padding-top: 24px;">
-                    <img src="Assets/OMS/Persona 1.png" alt="Persona 1" style="width: auto; height: 100px;">
-                    <div><p style="color: #ffffff;"><b>The New Recruit</b></p>
-                    <p style="color: #ffffff;">Recently joined Sastaticket in the last year. Has worked mostly on inbound calls team. Struggles with new inqueries and relies on support form their seniors and manage.Finds it difficult to keep track of the workflows and may make mistakes in calculations.</p>
-                    </div>
-                </div>
-                <div class="grid-item" style="background-color: #597EF7; padding-top: 24px;">
-                    <img src="Assets/OMS/Persona 2.png" alt="Persona 2" style="width: auto; height: 100px;">
-                    <div><p style="color: #ffffff;"><b>The Experienced Agent</b></p>
-                    <p style="color: #ffffff;">Has worked between 1-2 Years at Sastaticket. Focused on customer satisfaction and time management. But, while multitasking, may struggle with miscommunication and miscommitment. Frustrated with the limitations of the current OMS.</p>
-                    </div>
-                </div>
-                <div class="grid-item" style="background-color: #597ef7; padding-top: 24px;">
-                    <img src="Assets/OMS/Persona 3.png" alt="Persona 3" style="width: auto; height: 100px;">
-                    <div><p style="color: #ffffff;"><b>The Seasoned Professional</b></p>
-                    <p style="color: #ffffff;">Has worked at Sastaticket for over 2 years. Has an adaptive approach to customer service. Knows how to speak to customers and has worked in 3-4 sub-teams of CS Dept. Has found ways to work around the limitations of the current OMS. Takes on the role of a guide or a leader.</p>
-                    </div>
-                </div>
-            </div>
-
-            
             <div class="content-row">
                 <div class="text-column" style="align-items: normal;">
-                    <h2>Design System</h2>
-                    <p>We developed a design system that presented order information clearly did not overwhelm the user and used a system of color coding to highlight important data.</p>
+                    <h2>Designing For Internal Users</h2>
+                    <p>Sastaticket's customer service team handles all queries from payment failures to last-minute cancellations. 
+                    For this they use an internal order management system. <b>Agents had to navigate a cluttered interface & cross 
+                    check data.</b> This was not an agent performance problem. It was a design problem..</p>
+                </div>
+            
+                <div class="text-column" style="align-items: right;">
+                
+                    <h2 style="color: #1D39C4;">242,064 UNIQUE USERS</h2>
+                    
+                    <h2 style="color: #1D39C4;">54 AGENTS</h2> 
+                    
+                    <h2 style="color: #1D39C4;">65% FIRST CALL RESOLUTION</h2>
+                    
+                </div>
+            </div>
+            
+        <div class="content-row"> 
+
+            <div class="image-column" style="width: 100%; height: auto;">
+                    <img src="Assets/OMS/Survey.png" alt="survey" style="width: 100%; height: auto;">
+                </div>    
+            <div class="text-column">
+                    <h2>Agent tenure data framed personas.</h2>
+                    <p>Surveys and interviews with the CS team revealed two distinct user groups, new agents and experienced agents. A solution was needed that onboarded the new agent without patronising the experienced one.</p>
+                   
+                    <table class="methodology-table">
+                <thead>
+                    <tr>
+                        <th>Persona</th>
+                        <th>Behaviour</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Agents under 3 months of experience (24%) </td>
+                        <td>Struggle with workflow complexity, makes frequent calculation errors, Needs guardrails in the system to prevent mistakes.</td>
+                    </tr>
+                     <tr>
+                        <td>Agents with over 1 year of experience (47%) </td>
+                        <td>Quietly built workarounds, Cross-checks OMS data for pricing, fare rules, and live flight information. The system never earned their trust.</td>
+                    </tr> 
+                </tbody> 
+            </table>
+            `     </div>
+
+            
+            
+        </div>
+
+        <div class="content-row">
+                <div class="text-column" style="align-items: normal;">
+                    <h2>Workshops identified problems and proposed solutions.</h2>
+                    <p>Internal stakeholders were able to pin point needs and brainstorm solutions. This revealed major pain points for agents and customers:</p>
+                    <p>- Delays in refunds & adjustments.</p>
+                    <p>- Miscalculations in price breakdowns & refund.</p>
+                    <p>- OMS did not show live data on flights.</p>
                 </div>
                 <div class="image-column">
-                    <img src="Assets/OMS/Design System.png" alt="Environments" style="width: 100%; height: auto; border-radius: 10px;">
+                    <div class="image-overlay-wrapper">
+                        <img src="Assets/OMS/Workshops.png" alt="workshops" style="width: 100%; height: auto; border-radius: 10px;">
+                        <a href="https://miro.com/app/board/o9J_ln787Oc=/" class="overlay-btn" target="_blank">
+                            <img src="Assets/Icons/Miro.png" alt="Miro">
+                            View Documentation
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <h2>Impact</h2>
-            <table class="methodology-table">
+        <div class="content-row">
+        <div class="image-column">
+                    <img src="Assets/OMS/Components.png" alt="Environments" style="width: 100%; height: auto; border-radius: 10px;">
+                </div>        
+        <div class="text-column" style="align-items: cen;">
+                    <h2>Re-designed component hierarchy with heatmaps</h2>
+                    <p>Using heatmaps of the identified the most clicked elements, grouping them by function and frequency of use.</p>
+                </div>
+                
+            </div>
+        
+        <div class="content-row">
+            <div class="text-column" style="align-items: cen;">
+                    <h2>Colour-coding order status reduced cognitive load.</h2>
+                    <p>This allowed agents to visually determine where a customer was in their journey and respond with speed and clarity.</p>
+                </div>
+
+            <div class="image-column">
+                    <img src="Assets/OMS/Order Status.png" alt="Environments" style="width: 60%; height: auto; border-radius: 10px; padding-left: 30%;">
+                </div>        
+
+            </div>   
+        
+         <div class="image-overlay-wrapper">
+                        <img src="Assets/OMS/Design System.png" alt="workshops" style="width: 100%; height: auto; border-radius: 10px;">
+                        <a href="https://www.figma.com/design/PNfPO9jXZmPFcY6vcPzV4a/OMS?node-id=965-166350" class="overlay-btn" target="_blank">
+                            <img src="Assets/Icons/Figma.png" alt="Figma">
+                            View Design System
+                        </a>
+                    </div>
+
+    
+        <div class="content-row">
+            <div class="text-column">
+                <h2> Measured improvement in efficiency and satisfaction.</h2>
+                <table class="methodology-table">
                 <thead>
                     <tr>
                         <th>User Metric</th>
@@ -118,32 +157,62 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>First Call Resolution</td>
+                        <td>First Call Resolution
+                            <div class="metric-info">
+                                <span class="info-icon">i</span>
+                                <div class="formula-tooltip">(Resolved on first call / Total cases) × 100</div>
+                            </div>
+                        </td>
                         <td>65%</td>
                         <td>Learning</td>
                     </tr>
                      <tr>
-                        <td>Average Handling Time</td>
+                        <td>Average Handling Time
+                            <div class="metric-info">
+                                <span class="info-icon">i</span>
+                                <div class="formula-tooltip">(Talk + Hold + Wrap time) / Total calls</div>
+                            </div>
+                        </td>
                         <td>4 mins</td>
                         <td>2.75 mins</td>
                     </tr> 
                     <tr>
-                        <td>Average Customer Wait Time </td>
+                        <td>Average Customer Wait Time
+                            <div class="metric-info">
+                                <span class="info-icon">i</span>
+                                <div class="formula-tooltip">Total wait time / Total calls</div>
+                            </div>
+                        </td>
                         <td>3 mins</td>
-                        <td>1.5 mins</tr>
+                        <td>1.5 mins</td>
                     </tr>   
                     <tr>
-                        <td>Customer Satisfaction Score</td>
-                        <td>3/5</td>
-                        <td>4/5</td>
+                        <td>Customer Satisfaction Score
+                            <div class="metric-info">
+                                <span class="info-icon">i</span>
+                                <div class="formula-tooltip">(Positive ratings / Total responses) × 100</div>
+                            </div>
+                        </td>
+                        <td>85%</td>
+                        <td>90%</td>
                     </tr>
                     <tr>
-                        <td>Net Promoter Score</td>
+                        <td>Net Promoter Score
+                            <div class="metric-info">
+                                <span class="info-icon">i</span>
+                                <div class="formula-tooltip">% Promoters - % Detractors</div>
+                            </div>
+                        </td>
                         <td>8</td>
                         <td>9</td>
                     </tr>
                      <tr>
-                        <td>User Satisfaction</td>
+                        <td>User Satisfaction
+                            <div class="metric-info">
+                                <span class="info-icon">i</span>
+                                <div class="formula-tooltip">(Avg. survey score / Max possible) × 100</div>
+                            </div>
+                        </td>
                         <td>70%</td>
                         <td>87.5%</td>
                     </tr>
@@ -151,63 +220,11 @@
                 
                    
             </table>
-        </div>
-    </div>
+            </div>
+        </div>      
+    
 
     <script>
-        // Toggle Sidebar
-        const sidebar = document.getElementById('sidebar');
-        const toggle = document.getElementById('sidebarToggle');
-        const toggleIcon = toggle.querySelector('img');
-
-        toggle.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
-            if (sidebar.classList.contains('collapsed')) {
-                toggleIcon.src = 'Assets/Icons/Open.png';
-                toggleIcon.alt = 'Open Menu';
-            } else {
-                toggleIcon.src = 'Assets/Icons/Close.png';
-                toggleIcon.alt = 'Close Menu';
-            }
-        });
-
-        // Generate Table of Contents
-        const content = document.querySelector('.project-content');
-        const tocList = document.getElementById('toc-list');
-        const headings = content.querySelectorAll('h1, h2, h3:not(.hotspot-popup h3)');
-        
-        headings.forEach((heading, index) => {
-            const id = heading.id || `heading-${index}`;
-            heading.id = id;
-            
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = `#${id}`;
-            a.textContent = heading.textContent;
-            li.appendChild(a);
-            tocList.appendChild(li);
-        });
-
-        // Scrollspy for Mobile Markers
-        const projectContent = document.querySelector('.project-content');
-        
-        projectContent.addEventListener('scroll', () => {
-            let currentId = '';
-            
-            headings.forEach(heading => {
-                if (projectContent.scrollTop >= heading.offsetTop - 100) {
-                    currentId = heading.id;
-                }
-            });
-
-            const tocLinks = document.querySelectorAll('.toc-list a');
-            tocLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentId}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
     </script>
 </body>
 </html>
