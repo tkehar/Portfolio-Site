@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talha Ahmed Kehar | Projects</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <script>
+        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+    </script>
+    <div class="container">
+        <header class="navbar">
+            <div class="logo"><a href="index.html">TALHA AHMED KEHAR</a></div>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-tab">About</a>
+                <a href="projects.html" class="nav-tab active">Projects</a>
+                <a href="resume.html" class="nav-tab">Resume</a>
+                <a href="contact.html" class="nav-tab">Contact</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+                    <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41z"/></svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24"><path d="M12.1 20.9c-.3-.5-.7-1-1.2-1.4-1.1-.8-2.4-1.2-3.7-1.2H4c-.3 0-.5.2-.5.5v1.3c0 .3.2.5.5.5h3.2c1.1 0 2.2.4 3.1 1.1.2.1.4.1.6 0 .2-.1.3-.3.2-.5zM20 12c0-4.4-3.6-8-8-8s-8 3.6-8 8 3.6 8 8 8 8-3.6 8-8zm-2 0c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6 6 2.7 6 6z"/></svg>
+                </button>
+            </nav>
+        </header>
+
+        <main class="content-wrapper">
+            <section id="projects" class="page-view active">
+                <div class="works-header">
+                    <h4 class="section-subtitle">SELECTED WORKS</h4>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="UI-UX">Product</button>
+                        <button class="filter-btn" data-filter="Installation">Installation</button>
+                        <button class="filter-btn" data-filter="NMD">New Media</button>
+                        <button class="filter-btn" data-filter="Illustration">Illustration</button>
+                        <button class="filter-btn" data-filter="Motion">Motion</button>
+                        <button class="filter-btn" data-filter="Brand">Brand</button>
+                        <button class="filter-btn" data-filter="Curation">Curation</button>
+                        <button class="filter-btn" data-filter="Layout">Editiorial</button>
+                        <button class="filter-btn" data-filter="Data">Data</button>
+                    </div>
+                </div>
+
+                <div class="project-grid">
+
+                    <a href="SMA.html" class="project-card" data-category="NMD, Curation, UI-UX, Data">
+                        <img src="Assets/SMA/SMA_Banner.png" alt="Sabeen Mahmud Archive">
+                        <h5>Sabeen Mahmud Archive</h5>
+                    </a>
+
+                    <a href="MAN.html" class="project-card" data-category="UI-UX">
+                        <img src="Assets/MAN/MAN_Banner.png" alt="Makula AI Notetaker">
+                        <h5>Makula AI Notetaker</h5>
+                    </a>
+
+                    <a href="EH.html" class="project-card" data-category="Motion, Installation, NMD, Data">
+                        <img src="Assets/EH/EH_Banner.png" alt="The Earth's Heartbeat">
+                        <h5>The Earth's Heartbeat</h5>
+                    </a>
+
+                    <a href="Vissibl.html" class="project-card" data-category="UI-UX">
+                        <img src="Assets/VIS/VIS_Banner.png" alt="Vissibl">
+                        <h5>Vissibl - ISO Compliance Tool</h5>
+                    </a>
+
+                    <a href="OMS.html" class="project-card" data-category="UI-UX, Data">
+                        <img src="Assets/OMS/OMS_Banner.png" alt="Sastaticket OMS">
+                        <h5>Sastaticket OMS</h5>
+                    </a>
+
+                    <a href="DVR.html" class="project-card" data-category="NMD">
+                        <img src="Assets/DVR/DVR_Banner.png" alt="Descent VR">
+                        <h5>Descent VR</h5>
+                    </a>
+
+                    <a href="SS.html" class="project-card" data-category="UI-UX">
+                        <img src="Assets/SS/SS_Banner.png" alt="Sellorate B2B">
+                        <h5>Salesflo - Sellorate B2B Retailer App</h5>
+                    </a>
+
+                    <a href="TSW.html" class="project-card" data-category="Curation,Installation,Layout">
+                        <img src="Assets/TSW/TSW_Banner.png" alt="Look at the City from here">
+                        <h5>Look at the City from here</h5>
+                    </a>
+
+                    <a href="TW.html" class="project-card" data-category="Brand">
+                        <img src="Assets/TW/TW_Banner.png" alt="TICKET WALA">
+                        <h5>Ticket Wala Identity Design</h5>
+                    </a>
+
+                    <a href="ADA.html" class="project-card" data-category="Brand,Layout">
+                        <img src="Assets/ADA/ADA_Banner.png" alt="ADA Magazine">
+                        <h5>ADA Magazine</h5>
+                    </a>
+
+                    <a href="SU.html" class="project-card" data-category="Motion,Brand">
+                        <img src="Assets/SU/SU_Banner.png" alt="Speak Up">
+                        <h5>Speak Up</h5>
+                    </a>
+                    <a href="STG.html" class="project-card" data-category="Layout,Illustration">
+                        <img src="Assets/STG/STG_Banner.png" alt="The Stained Glass Window">
+                        <h5>The Stained Glass Window</h5>
+                    </a>
+                    <a href="NFFN.html" class="project-card" data-category="Illustration,Layout">
+                        <img src="Assets/NFN/NFFN_Banner.png" alt="No Funeral For Nazia">
+                        <h5>No Funeral For Nazia</h5>
+                    </a>
+                    
+                    <a href="WGTW.html" class="project-card" data-category="Curation,Brand,Product,Layout">
+                        <img src="Assets/WGTW/WGTW_Banner.png" alt="Who Gets To Talk About Whom">
+                        <h5>Who Gets To Talk About Whom</h5>
+                    </a>
+                    <a href="DK.html" class="project-card" data-category="Brand, Layout,UI-UX,NMD">
+                        <img src="Assets/DK/DK_Banner.png" alt="Dastaan-e-Karachi">
+                        <h5>Dastaan-e-Karachi</h5>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- CATEGORIES MATRIX FILTER SYSTEM ---
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filterValue = btn.getAttribute('data-filter');
+                    const filterValueLower = filterValue.toLowerCase();
+
+                    projectCards.forEach(card => {
+                        const categories = (card.getAttribute('data-category') || '').toLowerCase();
+                        const categoryList = categories.split(',').map(c => c.trim());
+
+                        if (filterValue === 'all' || categoryList.includes(filterValueLower)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // --- THEME TOGGLE LOGIC ---
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+        });
+    </script>
+</body>
+</html>
