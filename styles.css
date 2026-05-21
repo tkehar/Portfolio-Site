@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: Verdana;
     background-color: #ffffff;
     color: #000000;
     line-height: 2;
@@ -43,7 +43,9 @@ a:link {
 .nav-links {
     display: flex;
     gap: 32px;
-    atext-decoration: none;
+    a {
+        text-decoration: none;
+    }
 }
 
 .nav-tab {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMA</title>
+    <title>Sabeen Mahmud Archive</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="project-page sma-project">
@@ -25,15 +25,41 @@
             </nav>
         </header>
         <div class="main-content project-content">
-            <img src="Assets/SMA/Header-Image.svg" alt="SMA Header Image" class="header-image" style=" margin-bottom: 60px;">
-            <div>
-              <p>Role: Designer/Developer/ Curator</p>
-              <p>Year: 2026</p>
-              <p>Team: Sabeen Mahmud Forum</p>
+            <h1>Sabeen Mahmud Archive</h1>
+            <div class="grid-4-col">
+                    <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+                        <p><b>Client:</b></p>
+                        <p>-</p>
+                    </div>
+                    <div class="grid-item" style="height: fit-content;width: 100%;;padding: 1%;">
+                        <p><b>Role:</b></p>
+                        <p>Designer/Developer/Curator</p>
+                    </div>
+                    <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+                        <p><b>Year:</b></p>
+                        <p>2026</p>
+                    </div>
+                    <div class="grid-item" style="height: fit-content;width: 100%; ;padding: 1%;">
+                        <p><b>Team:</b></p>
+                        <p>Sabeen Mahmud Forum</p>
+                    </div>
+                </div>
+
+                
+
+            <div class="content-row">
+                 <div class="text-column">
+                    <h2>A multi-platform WebVR experience that allows viewers to get to know Sabeen Mahmud, a Pakistani human rights activist, entrepreneur.
+
+                    </div>
+                 <div class="image-column">
+                    <img src="Assets/SMA/Header-Image.png" alt="SMA Header Image" class="header-image" style=" margin-bottom: 60px;">
+                 </div>
             </div>
+
             <div style="display: flex; justify-content: center; margin-top: -5px;">
-                <a href="https://sabeenmahmudarchive.com/" class="visit-button" target="_blank">Visit Project</a>
-            </div>
+                    <a href="https://sabeenmahmudarchive.com/" class="visit-button" target="_blank">Visit Project</a>
+                 </div>
             <div class="content-row">
                 <div class="image-column">
 
@@ -41,7 +67,7 @@
                 </div>
                 <div class="text-column" style="padding: 10%;">
                     <h2>Sabeen Mahmud (1974 - 2015)</h2>
-                    <p>Sabeen Mahmud was a Pakistani human rights activist, entrepreneur and self taught designer.She stood for community, culture and open dialogue and with these principles founded The Second Floor (T2F), a coffee house and community space.T2F hosted a range of public events like; film screenings, poetry readings, stand-up comedy, and panels on human rights, science lectures, and other topics. Sabeen brought poets, politicians, artists, and activists together to share ideas over a cup of tea. In 2015 after hosting a panel titled “Unsilencing Balochistan” Sabeen was shot at a signal as she was leaving the event.</p>
+                    <p>Sabeen Mahmud stood for community, culture and open dialogue and with these principles founded The Second Floor (T2F), a coffee house and community space.T2F hosted a range of public events like; film screenings, poetry readings, stand-up comedy, and panels on human rights, science lectures, and other topics. Sabeen brought poets, politicians, artists, and activists together to share ideas over a cup of tea. In 2015 after hosting a panel titled “Unsilencing Balochistan” Sabeen was shot at a signal as she was leaving the event.</p>
                 </div>
             </div>
 
@@ -569,6 +595,14 @@
     </div>
 
     <script>
+        //dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    
         // Hotspots functionality
         const hotspots = document.querySelectorAll('.hotspot');
         const connectorPath = document.getElementById('connector-path');
