@@ -51,12 +51,13 @@
                 <div class="image-column">
                    <img src="Assets/MAN/Landing Image.png" alt="Header Image" class="header-image" style=" margin-bottom: 60px;">
                 </div>
-                <div class="text-column">
-                    <h2>Makula helps facility management teams track work orders, machines, and service history. After visits, technicians had to document their findings manually which created reporting delays and information gaps for line managers.</h2>
+                <div class="text-column" style="padding-top: 10%;">
+                    <h2>Makula is SaaS platform that allows OEMs to track work orders, machines, and facilities.</h2>
+                    <h3>While making facility visits, service technicians had to document their findings manually which created reporting delays and information gaps for line managers.</h3>
                     </div>
             </div>
-            <h2>Field service technicians were losing time to manual note-taking during facility visits</h2>
-            <div class="content-row"> 
+        
+            <h2>Service Technician's Journey</h2>
             <table class="methodology-table">
                 <thead>
                     <tr>
@@ -89,74 +90,75 @@
             </table>
             </div>
             <div class="content-row">
-                <div class="text-column" style="align-items: normal;">
+                <div class="text-column" style="align-items: normal; padding-top: 10%;">
                     <h2>Publishing Notes to Assets</h2>
-                    <p>Linked documentation to a core part of the platform operational record.</p>
+                    <h3>Linked documentation to a core part of the platform operational record.</h3>
                 </div>
-                <div class="image-column">
+                <div class="image-column" style="text-align: center;">
                     <div class="image-overlay-wrapper">
                         <img src="Assets/MAN/Publish.png" alt="publish" style="width: 60%; height: auto;">
                         <a href="https://miro.com/app/board/o9J_ln787Oc=/" class="overlay-btn" target="_blank">
-                            <img src="Assets/Icons/Figma.png" alt="Figma">
+                            <img src="Assets/Icons/Figma.svg" alt="Figma">
                             View Flow
                         </a>
                     </div>
                 </div>
             </div>
             <div class="content-row">
-                <div class="image-column">
+                <div class="image-column" style="text-align: center;">
                     <div class="image-overlay-wrapper">
                         <img src="Assets/MAN/Summary.png" alt="Summary" style="width: 40%; height: auto;">
                         <a href="https://miro.com/app/board/o9J_ln787Oc=/" class="overlay-btn" target="_blank">
-                            <img src="Assets/Icons/Figma.png" alt="Figma">
+                            <img src="Assets/Icons/Figma.svg" alt="Figma">
                             View Flow
                         </a>
                     </div>
                 </div>
-                <div class="text-column" style="align-items: normal;">
+                <div class="text-column" style="align-items: normal; padding-top: 10%;">
                     <h2>Summary Types</h2>
-                    <p>Developed pre-structured outputs for key tasks and visit types, saving time & improving consistency.</p>
+                    <h3>Developed pre-structured outputs for key tasks and visit types, saving time & improving consistency.</h3>
                 </div>
             </div>
             <div class="content-row">
-                <div class="text-column" style="align-items: normal;">
+                <div class="text-column" style="align-items: normal; padding-top: 10%;">
                     <h2>Image Capture in Notes</h2>
                     <p>Allowed technicians to attach evidence and details to generated summaries.</p>
                 </div>
-                <div class="image-column">
+                <div class="image-column" style="text-align: center;">
                     <div class="image-overlay-wrapper">
                         <img src="Assets/MAN/Image Capture.png" alt="Image Capture" style="width: 60%; height: auto;">
                         <a href="https://miro.com/app/board/o9J_ln787Oc=/" class="overlay-btn" target="_blank">
-                            <img src="Assets/Icons/Figma.png" alt="Figma">
+                            <img src="Assets/Icons/Figma.svg" alt="Figma">
                             View Flow
                         </a>
                     </div>
                 </div>
             </div>
             <div class="content-row">
-                <div class="image-column">
+                <div class="image-column" style="text-align: center;">
                     <div class="image-overlay-wrapper">
                         <img src="Assets/MAN/Vocab.png" alt="vocab" style="width: 60%; height: auto;">
                         <a href="https://miro.com/app/board/o9J_ln787Oc=/" class="overlay-btn" target="_blank">
-                            <img src="Assets/Icons/Figma.png" alt="Figma">
+                            <img src="Assets/Icons/Figma.svg" alt="Figma">
                             View Flow
                         </a>
                     </div>
                 </div>
-                <div class="text-column" style="align-items: normal;">
+                <div class="text-column" style="align-items: normal; padding-top: 10%;">
                     <h2>Custom Vocabulary </h2>
-                    <p>Enabled admins to define domain-specific terminology to improve transcription quality.</p>
+                    <h3>Enabled admins to define domain-specific terminology to improve transcription quality.</h3>
                 </div>
             </div>
             <div class="content-row">
                 <div class="text-column" style="align-items: normal;">
-                    <h2> Users reported reduced time spent on documentation of facility visits. This was a strong enough signal to inform a product decision, giving all users 30 minutes of free transcription.</h2>
+                    <h2>Users reported reduced time spent on documentation of facility visits.</h2> 
+                    <h3>This was a strong enough signal to inform a product decision, giving all users 30 minutes of free transcription.</h3>
                 </div>
                 <div class="image-column">
                     <div class="image-overlay-wrapper">
                         <img src="Assets/MAN/Desktop.png" alt="Desktop" style="width: 100%; height: auto;">
                         <a href="https://miro.com/app/board/o9J_ln787Oc=/" class="overlay-btn" target="_blank">
-                            <img src="Assets/Icons/Figma.png" alt="Figma">
+                            <img src="Assets/Icons/Figma.svg" alt="Figma">
                             View Design File
                         </a>
                     </div>
@@ -166,11 +168,13 @@
     </div>
 
     <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
         });
     </script>
 </body>
