@@ -653,6 +653,12 @@ body.dark-mode .themed-icon .dark-mode-icon {
     border-color: #111 transparent transparent transparent;
 }
 
+/* Responsive table container */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+}
+
 /* Grids & Tables */
 .grid-3-col, .grid-4-col {
     display: grid;
@@ -689,23 +695,29 @@ body.dark-mode .themed-icon .dark-mode-icon {
 .tags-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
+    gap: 10px;
+    justify-content: left;
     margin: 30px 0;
 }
 
 .content-tag {
     background: #f0f0f0;
-    padding: 8px 18px;
-    border-radius: 20px;
+    padding: 8px 20px;
+    border-radius: 50px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.content-tag p {
+    margin: 0;
 }
 
 .content-tag img { width: 16px; height: 16px; object-fit: contain; }
-.tag-value { color: #999; font-weight: 600; }
+.tag-value { color: #000000; font-weight: 600; }
 
 /* Hotspots (Interactive Maps) */
 .stakeholder-map-container { position: relative; width: 100%; }
@@ -735,10 +747,27 @@ body.dark-mode .themed-icon .dark-mode-icon {
 
 .hotspot-popup.active { display: block; }
 
+/* Layout override for popups when placed in a text column (e.g. SMA stakeholder map) */
+.text-column .hotspot-popup {
+    position: relative;
+    width: 100%;
+    box-shadow: none;
+    padding: 20px 0;
+    margin-top: 15px;
+    background: transparent;
+    border-top: 1px solid #eaeaea;
+    border-radius: 0;
+}
+
+body.dark-mode .text-column .hotspot-popup {
+    border-top-color: #333 !important;
+}
+
 .connector-lines {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     pointer-events: none;
+    overflow: visible;
 }
 
 /* Lightbox & Sliders */
@@ -809,6 +838,10 @@ body.dark-mode .themed-icon .dark-mode-icon {
 
     /* Detail page mobile overrides */
     .content-row { flex-direction: column; gap: 30px; }
+    .project-content h1 { font-size: 32px; }
+    .project-content h2 { font-size: 24px; }
+    .project-content h3 { font-size: 20px; }
+    .project-content p { font-size: 15px; }
     .grid-3-col, .grid-4-col { grid-template-columns: 1fr; }
 }
 
@@ -949,7 +982,7 @@ body.dark-mode .metric-info .info-icon {
 }
 
 body.dark-mode .content-tag {
-    background: #1E1E1E !important;
+    background: #333 !important;
     color: #e0e0e0 !important;
 }
 
