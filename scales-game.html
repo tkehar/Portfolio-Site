@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SCALES — An Interactive Essay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.4.2/aframe.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0508;font-family:'Georgia',serif;overflow:hidden}
+
+/* ——— TITLE SCREEN ——— */
+#title-screen{
+  position:fixed;inset:0;
+  background:linear-gradient(160deg,#1a0810 0%,#0a0508 50%,#081018 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:9999;transition:opacity 1.5s ease;
+}
+#title-screen.hidden{opacity:0;pointer-events:none}
+.title-logo{width:120px;height:120px;margin-bottom:2rem;opacity:0.9}
+#title-screen h1{
+  font-size:clamp(3rem,12vw,8rem);letter-spacing:0.5em;
+  color:#fff;font-weight:300;text-transform:uppercase;
+  text-shadow:0 0 60px rgba(200,100,80,0.4)
+}
+.title-sub{color:#c87050;font-size:0.75rem;letter-spacing:0.4em;margin-top:0.5rem;text-transform:uppercase}
+.title-desc{color:#555;font-size:0.7rem;letter-spacing:0.15em;margin-top:0.3rem;max-width:400px;text-align:center;line-height:1.8}
+.enter-btn{
+  margin-top:3rem;padding:1rem 3.5rem;
+  background:transparent;border:1px solid #c87050;
+  color:#c87050;font-family:'Georgia',serif;
+  font-size:0.8rem;letter-spacing:0.4em;text-transform:uppercase;
+  cursor:pointer;transition:all 0.4s
+}
+.enter-btn:hover{background:#c87050;color:#000}
+
+/* ——— POSITIONALITY SCREEN ——— */
+#positionality-screen{
+  position:fixed;inset:0;
+  background:rgba(5,3,8,0.97);
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  z-index:9998;
+}
+#positionality-screen.active{display:flex}
+.pos-title{color:#888;font-size:0.65rem;letter-spacing:0.5em;text-transform:uppercase;margin-bottom:3rem}
+.pos-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:700px;width:90%}
+.pos-card{
+  border:1px solid #222;padding:2rem;cursor:pointer;
+  transition:all 0.3s;position:relative;overflow:hidden
+}
+.pos-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 60%,rgba(200,112,80,0.05));
+  transition:opacity 0.3s;opacity:0
+}
+.pos-card:hover{border-color:#c87050}
+.pos-card:hover::before{opacity:1}
+.pos-card h3{color:#fff;font-size:1rem;font-weight:300;letter-spacing:0.2em;margin-bottom:0.75rem;text-transform:uppercase}
+.pos-card p{color:#555;font-size:0.75rem;line-height:1.7}
+.pos-card .pos-icon{font-size:2rem;margin-bottom:1rem;display:block}
+.pos-card .pos-bias{
+  margin-top:1rem;font-size:0.65rem;letter-spacing:0.2em;
+  text-transform:uppercase;color:#c87050
+}
+.pos-card[data-pos="bigtech"] .pos-icon{color:#ff6644}
+.pos-card[data-pos="community"] .pos-icon{color:#44cc88}
+.pos-card[data-pos="nationstate"] .pos-icon{color:#4488ff}
+.pos-card[data-pos="civilsociety"] .pos-icon{color:#ffcc44}
+
+/* ——— ZONE SELECT SCREEN ——— */
+#zone-screen{
+  position:fixed;inset:0;
+  background:rgba(5,3,8,0.97);
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  z-index:9997;
+}
+#zone-screen.active{display:flex}
+.zone-title{color:#888;font-size:0.65rem;letter-spacing:0.5em;text-transform:uppercase;margin-bottom:0.5rem}
+.zone-player{color:#fff;font-size:0.9rem;letter-spacing:0.2em;margin-bottom:3rem}
+.zone-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:800px;width:90%}
+.zone-card{
+  border:1px solid #222;padding:2.5rem 1.5rem;
+  cursor:pointer;text-align:center;transition:all 0.3s
+}
+.zone-card:hover{transform:translateY(-4px)}
+.zone-card[data-zone="ecology"]{border-color:#1a3322}
+.zone-card[data-zone="ecology"]:hover{border-color:#44cc88;box-shadow:0 0 30px rgba(68,204,136,0.1)}
+.zone-card[data-zone="ethics"]{border-color:#33221a}
+.zone-card[data-zone="ethics"]:hover{border-color:#ff6644;box-shadow:0 0 30px rgba(255,102,68,0.1)}
+.zone-card[data-zone="goals"]{border-color:#1a2233}
+.zone-card[data-zone="goals"]:hover{border-color:#4488ff;box-shadow:0 0 30px rgba(68,136,255,0.1)}
+.zone-card .zone-icon{font-size:2.5rem;margin-bottom:1rem;display:block}
+.zone-card h3{color:#fff;font-size:0.85rem;letter-spacing:0.3em;text-transform:uppercase;font-weight:300;margin-bottom:0.75rem}
+.zone-card p{color:#555;font-size:0.72rem;line-height:1.7}
+.zone-score-preview{margin-top:1rem;font-size:0.65rem;letter-spacing:0.2em;color:#333}
+.leaderboard-btn{
+  margin-top:3rem;background:none;border:1px solid #333;
+  color:#555;padding:0.75rem 2rem;font-family:'Georgia',serif;
+  font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;
+  cursor:pointer;transition:all 0.3s
+}
+.leaderboard-btn:hover{border-color:#c87050;color:#c87050}
+
+/* ——— DECISION PANEL ——— */
+#decision-panel{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(5,3,8,0.98);border-top:1px solid #1a1a1a;
+  padding:2rem 3rem;z-index:200;
+  transform:translateY(100%);transition:transform 0.5s cubic-bezier(0.16,1,0.3,1)
+}
+#decision-panel.open{transform:translateY(0)}
+.dp-zone{color:#c87050;font-size:0.6rem;letter-spacing:0.4em;text-transform:uppercase;margin-bottom:0.4rem}
+.dp-title{color:#fff;font-size:1.2rem;font-weight:300;margin-bottom:0.5rem}
+.dp-context{color:#666;font-size:0.82rem;line-height:1.7;margin-bottom:1.5rem;max-width:600px}
+.dp-choices{display:flex;gap:1rem;flex-wrap:wrap}
+.dp-choice{
+  flex:1;min-width:200px;
+  border:1px solid #222;padding:1rem 1.25rem;cursor:pointer;
+  transition:all 0.3s;position:relative;
+}
+.dp-choice:hover{border-color:#c87050}
+.dp-choice h4{color:#fff;font-size:0.8rem;letter-spacing:0.1em;margin-bottom:0.4rem}
+.dp-choice p{color:#555;font-size:0.72rem;line-height:1.5}
+.dp-choice .impact{
+  margin-top:0.75rem;font-size:0.65rem;letter-spacing:0.2em;
+  text-transform:uppercase;display:flex;gap:1rem;flex-wrap:wrap
+}
+.impact-pos{color:#44cc88}.impact-neg{color:#ff6644}.impact-neu{color:#4488ff}
+.dp-close{
+  position:absolute;top:1.5rem;right:2rem;
+  background:none;border:none;color:#333;font-size:1.5rem;cursor:pointer
+}
+.dp-close:hover{color:#fff}
+
+/* ——— HUD ——— */
+#hud{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:1.5rem 2rem;z-index:100;pointer-events:none
+}
+.hud-scores{display:flex;gap:2rem}
+.hud-score{text-align:center}
+.hud-score-label{color:#333;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;display:block;margin-bottom:0.3rem}
+.hud-score-val{color:#fff;font-size:1.1rem;letter-spacing:0.1em}
+.hud-score-val.ecology{color:#44cc88}
+.hud-score-val.ethics{color:#ff6644}
+.hud-score-val.goals{color:#4488ff}
+.hud-score-val.total{color:#c87050}
+.hud-right{text-align:right}
+.hud-positionality{color:#555;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase}
+.hud-zone-current{color:#fff;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;margin-top:0.3rem}
+.hud-hand-hint{color:#333;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;margin-top:0.5rem}
+
+/* ——— SCORE BAR ——— */
+#score-bar{
+  position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);
+  z-index:100;display:flex;flex-direction:column;gap:1rem;
+  pointer-events:none
+}
+.score-axis{display:flex;flex-direction:column;align-items:flex-end;gap:0.3rem}
+.score-axis-label{color:#333;font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase}
+.score-track{width:4px;height:80px;background:#111;border-radius:2px;position:relative}
+.score-fill{
+  position:absolute;bottom:0;width:100%;border-radius:2px;
+  transition:height 1s cubic-bezier(0.16,1,0.3,1)
+}
+.score-fill.ecology{background:#44cc88}
+.score-fill.ethics{background:#ff6644}
+.score-fill.goals{background:#4488ff}
+
+/* ——— LEADERBOARD ——— */
+#leaderboard{
+  position:fixed;inset:0;background:rgba(5,3,8,0.97);
+  z-index:9996;display:none;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:3rem 2rem;overflow-y:auto
+}
+#leaderboard.active{display:flex}
+.lb-title{color:#c87050;font-size:0.65rem;letter-spacing:0.5em;text-transform:uppercase;margin-bottom:0.5rem}
+.lb-sub{color:#333;font-size:0.65rem;letter-spacing:0.2em;margin-bottom:3rem}
+.lb-table{width:100%;max-width:800px;border-collapse:collapse}
+.lb-table th{
+  color:#333;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;
+  padding:0.75rem 1rem;border-bottom:1px solid #111;text-align:left;font-weight:400
+}
+.lb-table td{padding:1rem;border-bottom:1px solid #0d0d0d;font-size:0.8rem;color:#666}
+.lb-table td.rank{color:#c87050;font-size:1rem;letter-spacing:0.1em}
+.lb-table td.name{color:#fff}
+.lb-table td.score-eco{color:#44cc88}
+.lb-table td.score-eth{color:#ff6644}
+.lb-table td.score-goal{color:#4488ff}
+.lb-table td.score-total{color:#c87050;font-size:1rem}
+.lb-table td.pos-badge{font-size:0.65rem;letter-spacing:0.2em;color:#555;text-transform:uppercase}
+.lb-close{
+  margin-top:3rem;background:none;border:1px solid #333;
+  color:#555;padding:0.75rem 2rem;font-family:'Georgia',serif;
+  font-size:0.7rem;letter-spacing:0.3em;cursor:pointer;transition:all 0.3s
+}
+.lb-close:hover{border-color:#c87050;color:#c87050}
+
+/* ——— INTRO OVERLAY ——— */
+#intro-overlay{
+  position:fixed;inset:0;background:rgba(5,3,8,0.95);
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  z-index:9995
+}
+#intro-overlay.active{display:flex}
+.intro-step{text-align:center;max-width:500px}
+.intro-step h2{color:#fff;font-size:1.5rem;font-weight:300;letter-spacing:0.2em;margin-bottom:1rem}
+.intro-step p{color:#666;font-size:0.85rem;line-height:1.8;margin-bottom:1.5rem}
+.intro-gesture{font-size:4rem;margin-bottom:1.5rem;display:block}
+.intro-nav{display:flex;gap:1rem;justify-content:center;margin-top:2rem}
+.intro-btn{
+  background:none;border:1px solid #333;color:#666;
+  padding:0.75rem 2rem;font-family:'Georgia',serif;
+  font-size:0.75rem;letter-spacing:0.3em;cursor:pointer;transition:all 0.3s
+}
+.intro-btn:hover{border-color:#c87050;color:#c87050}
+.intro-btn.primary{border-color:#c87050;color:#c87050}
+.intro-dots{display:flex;gap:0.5rem;justify-content:center;margin-top:1.5rem}
+.intro-dot{width:6px;height:6px;border-radius:50%;background:#222}
+.intro-dot.active{background:#c87050}
+</style>
+</head>
+<body>
+
+<!-- ——— TITLE SCREEN ——— -->
+<div id="title-screen">
+  <svg class="title-logo" viewBox="0 0 120 120" fill="none">
+    <!-- Scales icon matching your brand -->
+    <line x1="60" y1="20" x2="60" y2="90" stroke="#c87050" stroke-width="1.5"/>
+    <line x1="20" y1="50" x2="100" y2="50" stroke="#c87050" stroke-width="1.5"/>
+    <!-- Left pan lower (unbalanced) -->
+    <line x1="20" y1="50" x2="20" y2="70" stroke="#c87050" stroke-width="1"/>
+    <line x1="10" y1="70" x2="30" y2="70" stroke="#c87050" stroke-width="1.5"/>
+    <!-- Right pan higher -->
+    <line x1="100" y1="50" x2="100" y2="62" stroke="#c87050" stroke-width="1"/>
+    <line x1="90" y1="62" x2="110" y2="62" stroke="#c87050" stroke-width="1.5"/>
+    <!-- Base -->
+    <line x1="50" y1="90" x2="70" y2="90" stroke="#c87050" stroke-width="1.5"/>
+    <!-- Star pivot -->
+    <circle cx="60" cy="50" r="3" fill="#c87050"/>
+    <line x1="60" y1="42" x2="60" y2="36" stroke="#c87050" stroke-width="1"/>
+    <line x1="56" y1="46" x2="52" y2="46" stroke="#c87050" stroke-width="1"/>
+    <line x1="64" y1="46" x2="68" y2="46" stroke="#c87050" stroke-width="1"/>
+  </svg>
+  <p class="title-sub">An Interactive Essay</p>
+  <h1>SCALES</h1>
+  <p class="title-desc">Resisting Big Tech Imperialism in the Development of Artificial Intelligence</p>
+  <button class="enter-btn" onclick="showIntro()">Enter</button>
+</div>
+
+<!-- ——— INTRO / TUTORIAL ——— -->
+<div id="intro-overlay">
+  <div class="intro-step" id="intro-step-0">
+    <span class="intro-gesture">🤲</span>
+    <h2>Hand Tracking</h2>
+    <p>SCALES uses your hands to navigate. In VR mode, your hands are tracked in real time. On desktop, click to interact.</p>
+    <p style="color:#c87050;font-size:0.75rem">Requires a WebXR-compatible headset for full hand tracking. Desktop mode uses mouse clicks.</p>
+  </div>
+  <div class="intro-step" id="intro-step-1" style="display:none">
+    <span class="intro-gesture">🤏</span>
+    <h2>Pinch to Select</h2>
+    <p>Bring your index finger and thumb together — a pinch gesture — to select objects, confirm decisions, and navigate menus.</p>
+  </div>
+  <div class="intro-step" id="intro-step-2" style="display:none">
+    <span class="intro-gesture">✋</span>
+    <h2>Open Palm to Pause</h2>
+    <p>Hold your palm flat and open to pause and view your current scores across the three zones: Ecology, Ethics, and Goals.</p>
+  </div>
+  <div class="intro-step" id="intro-step-3" style="display:none">
+    <span class="intro-gesture">👆</span>
+    <h2>Point to Explore</h2>
+    <p>Point at any object in the world to read information about it. Your decisions in each zone ripple into the others.</p>
+  </div>
+  <div class="intro-step" id="intro-step-4" style="display:none">
+    <span class="intro-gesture">⚖️</span>
+    <h2>The Three Moments</h2>
+    <p>Every decision in SCALES activates one of three imperial mechanics: <span style="color:#ff6644">MANAGE</span>, <span style="color:#c87050">DIFFERENCE</span>, or <span style="color:#44cc88">INCLUDE</span>. These mirror the apparatus of Empire as theorised by Hardt and Negri.</p>
+  </div>
+  <div class="intro-dots" id="intro-dots">
+    <div class="intro-dot active"></div>
+    <div class="intro-dot"></div>
+    <div class="intro-dot"></div>
+    <div class="intro-dot"></div>
+    <div class="intro-dot"></div>
+  </div>
+  <div class="intro-nav">
+    <button class="intro-btn" onclick="prevIntro()">← Back</button>
+    <button class="intro-btn primary" id="intro-next-btn" onclick="nextIntro()">Next →</button>
+  </div>
+</div>
+
+<!-- ——— POSITIONALITY SCREEN ——— -->
+<div id="positionality-screen">
+  <p class="pos-title">Choose your positionality</p>
+  <div class="pos-grid">
+    <div class="pos-card" data-pos="bigtech" onclick="selectPositionality('bigtech','Big Tech')">
+      <span class="pos-icon">🏢</span>
+      <h3>Big Tech</h3>
+      <p>You are a leading AI company. Your goal is to develop AGI, dominate markets, and secure government contracts. Profit and progress are inseparable.</p>
+      <p class="pos-bias">Bias → Centralized · Extractive · Managerial</p>
+    </div>
+    <div class="pos-card" data-pos="community" onclick="selectPositionality('community','Small Community')">
+      <span class="pos-icon">🌿</span>
+      <h3>Small Community</h3>
+      <p>You are an indigenous or grassroots community. Your goal is to preserve your language, culture and data sovereignty against the imperial apparatus.</p>
+      <p class="pos-bias">Bias → Decentralized · Sustainable · Inclusive</p>
+    </div>
+    <div class="pos-card" data-pos="nationstate" onclick="selectPositionality('nationstate','Nation State')">
+      <span class="pos-icon">🏛️</span>
+      <h3>Nation State</h3>
+      <p>You are a government. You fund and regulate AI development, balancing military supremacy with public accountability. You hold the contracts.</p>
+      <p class="pos-bias">Bias → Regulatory · Military · Conservative</p>
+    </div>
+    <div class="pos-card" data-pos="civilsociety" onclick="selectPositionality('civilsociety','Civil Society')">
+      <span class="pos-icon">✊</span>
+      <h3>Civil Society</h3>
+      <p>You are an NGO, researcher, or activist. Your goal is to expose the apparatus, build coalitions, and create accountability from below.</p>
+      <p class="pos-bias">Bias → Ethical · Resistant · Resource-constrained</p>
+    </div>
+  </div>
+</div>
+
+<!-- ——— ZONE SELECT SCREEN ——— -->
+<div id="zone-screen">
+  <p class="zone-title">Choose your zone of inquiry</p>
+  <p class="zone-player" id="zone-player-label">Playing as: —</p>
+  <div class="zone-grid">
+    <div class="zone-card" data-zone="ecology" onclick="enterZone('ecology')">
+      <span class="zone-icon">🌍</span>
+      <h3>Ecology</h3>
+      <p>Water consumption, energy use, compute power, mineral extraction. The physical cost of intelligence.</p>
+      <p class="zone-score-preview">Score: <span id="eco-preview">50</span> / 100</p>
+    </div>
+    <div class="zone-card" data-zone="ethics" onclick="enterZone('ethics')">
+      <span class="zone-icon">⚖️</span>
+      <h3>Ethics</h3>
+      <p>Human labor, data sovereignty, algorithmic identity, the coded gaze. The social cost of intelligence.</p>
+      <p class="zone-score-preview">Score: <span id="eth-preview">50</span> / 100</p>
+    </div>
+    <div class="zone-card" data-zone="goals" onclick="enterZone('goals')">
+      <span class="zone-icon">🎯</span>
+      <h3>Goals</h3>
+      <p>Centralized vs decentralized, extractive vs conservative, autonomous vs governed. The political stakes.</p>
+      <p class="zone-score-preview">Score: <span id="goal-preview">50</span> / 100</p>
+    </div>
+  </div>
+  <button class="leaderboard-btn" onclick="showLeaderboard()">View Leaderboard</button>
+</div>
+
+<!-- ——— HUD ——— -->
+<div id="hud" style="display:none">
+  <div class="hud-scores">
+    <div class="hud-score">
+      <span class="hud-score-label">Ecology</span>
+      <span class="hud-score-val ecology" id="hud-eco">50</span>
+    </div>
+    <div class="hud-score">
+      <span class="hud-score-label">Ethics</span>
+      <span class="hud-score-val ethics" id="hud-eth">50</span>
+    </div>
+    <div class="hud-score">
+      <span class="hud-score-label">Goals</span>
+      <span class="hud-score-val goals" id="hud-goal">50</span>
+    </div>
+    <div class="hud-score">
+      <span class="hud-score-label">Total</span>
+      <span class="hud-score-val total" id="hud-total">50</span>
+    </div>
+  </div>
+  <div class="hud-right">
+    <div class="hud-positionality" id="hud-pos-label">—</div>
+    <div class="hud-zone-current" id="hud-zone-label">—</div>
+    <div class="hud-hand-hint">Pinch to select · Palm to pause</div>
+  </div>
+</div>
+
+<!-- ——— SCORE BAR ——— -->
+<div id="score-bar" style="display:none">
+  <div class="score-axis">
+    <span class="score-axis-label">Eco</span>
+    <div class="score-track">
+      <div class="score-fill ecology" id="fill-eco" style="height:50%"></div>
+    </div>
+  </div>
+  <div class="score-axis">
+    <span class="score-axis-label">Eth</span>
+    <div class="score-track">
+      <div class="score-fill ethics" id="fill-eth" style="height:50%"></div>
+    </div>
+  </div>
+  <div class="score-axis">
+    <span class="score-axis-label">Goals</span>
+    <div class="score-track">
+      <div class="score-fill goals" id="fill-goal" style="height:50%"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ——— DECISION PANEL ——— -->
+<div id="decision-panel">
+  <button class="dp-close" onclick="closeDecision()">×</button>
+  <div class="dp-zone" id="dp-zone-label">—</div>
+  <h3 class="dp-title" id="dp-title">—</h3>
+  <p class="dp-context" id="dp-context">—</p>
+  <div class="dp-choices" id="dp-choices"></div>
+</div>
+
+<!-- ——— LEADERBOARD ——— -->
+<div id="leaderboard">
+  <p class="lb-title">SCALES — Leaderboard</p>
+  <p class="lb-sub">How others have navigated the apparatus</p>
+  <table class="lb-table" id="lb-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Positionality</th>
+        <th>Ecology</th>
+        <th>Ethics</th>
+        <th>Goals</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody id="lb-body"></tbody>
+  </table>
+  <button class="lb-close" onclick="hideLeaderboard()">Close</button>
+</div>
+
+<!-- ——— A-FRAME SCENE ——— -->
+<a-scene
+  id="main-scene"
+  style="display:none"
+  webxr="requiredFeatures: local; optionalFeatures: hand-tracking"
+  background="color: #050308"
+  fog="type: exponential; color: #050308; density: 0.015">
+
+  <a-assets>
+    <a-mixin id="glow"
+      material="emissiveIntensity: 0.4">
+    </a-mixin>
+  </a-assets>
+
+  <!-- Hand tracking entities -->
+  <a-entity id="left-hand"
+    hand-tracking-controls="hand: left; modelStyle: dots; modelColor: #c87050">
+  </a-entity>
+  <a-entity id="right-hand"
+    hand-tracking-controls="hand: right; modelStyle: dots; modelColor: #c87050">
+  </a-entity>
+
+  <!-- Camera rig — fallback to mouse/keyboard on desktop -->
+  <a-entity id="rig" position="0 0 8">
+    <a-camera look-controls wasd-controls="acceleration:20">
+      <a-cursor
+        color="#c87050"
+        fuse="false"
+        raycaster="objects: .interactable"
+        animation__click="property:scale;startEvents:click;dur:150;to:1.3 1.3 1.3"
+        animation__end="property:scale;startEvents:animationcomplete__click;dur:150;to:1 1 1">
+      </a-cursor>
+    </a-camera>
+  </a-entity>
+
+  <!-- ==================== ECOLOGY ZONE ==================== -->
+  <a-entity id="zone-ecology" visible="false">
+
+    <!-- Environment -->
+    <a-plane position="0 0 0" rotation="-90 0 0" width="60" height="60"
+      material="color:#080d08;roughness:1">
+    </a-plane>
+    <a-plane position="0 5 -20" width="60" height="20"
+      material="color:#050a05">
+    </a-plane>
+
+    <!-- Zone title -->
+    <a-text value="ZONE 01 — ECOLOGY" position="0 8 -18"
+      align="center" color="#44cc88" font="sourcecodepro" width="10" letter-spacing="4">
+    </a-text>
+    <a-text value="The Physical Cost of Intelligence"
+      position="0 7 -18" align="center" color="#ffffff" font="sourcecodepro" width="14">
+    </a-text>
+
+    <!-- DATA CENTER MEGASTRUCTURE — central clickable object -->
+    <a-entity position="0 0 -12">
+      <!-- Main structure -->
+      <a-box class="interactable" position="0 2 0" width="6" height="4" depth="4"
+        material="color:#0a150a;roughness:0.3;metalness:0.7;emissive:#001100;emissiveIntensity:0.3"
+        data-decision="eco-datacenter"
+        onclick="triggerDecision('eco-datacenter')">
+      </a-box>
+      <!-- Server rack details -->
+      <a-box position="-2 2 2.1" width="1.5" height="3" depth="0.1"
+        material="color:#0d200d;emissive:#00ff00;emissiveIntensity:0.1">
+      </a-box>
+      <a-box position="0 2 2.1" width="1.5" height="3" depth="0.1"
+        material="color:#0d200d;emissive:#00ff00;emissiveIntensity:0.08">
+      </a-box>
+      <a-box position="2 2 2.1" width="1.5" height="3" depth="0.1"
+        material="color:#0d200d;emissive:#ff4400;emissiveIntensity:0.1">
+      </a-box>
+      <!-- Label -->
+      <a-text value="DATA CENTER\nClick to decide" position="0 5 0.5"
+        align="center" color="#44cc88" font="sourcecodepro" width="5">
+      </a-text>
+      <!-- Energy light -->
+      <a-light type="point" color="#44cc88" intensity="0.8" distance="10" position="0 3 2"></a-light>
+    </a-entity>
+
+    <!-- WATER TOWER — left clickable -->
+    <a-entity position="-8 0 -10">
+      <a-cylinder class="interactable" position="0 2 0" radius="1.2" height="3"
+        material="color:#0a1a2a;roughness:0.6;emissive:#002244;emissiveIntensity:0.2"
+        data-decision="eco-water"
+        onclick="triggerDecision('eco-water')">
+      </a-cylinder>
+      <a-cone position="0 3.8 0" radius-bottom="1.3" radius-top="0.2" height="1"
+        material="color:#0a1a2a">
+      </a-cone>
+      <a-text value="WATER\n1.7T gallons\nClick to decide" position="0 5.5 0"
+        align="center" color="#4488ff" font="sourcecodepro" width="4">
+      </a-text>
+      <a-light type="point" color="#4488ff" intensity="0.5" distance="8" position="0 3 0"></a-light>
+    </a-entity>
+
+    <!-- MINING PIT — right clickable -->
+    <a-entity position="8 0 -10">
+      <a-cylinder class="interactable" position="0 0 0" radius-bottom="2" radius-top="3" height="1"
+        material="color:#1a0d08;roughness:0.95"
+        data-decision="eco-mining"
+        onclick="triggerDecision('eco-mining')">
+      </a-cylinder>
+      <a-cylinder position="0 -0.5 0" radius="1.5" height="2"
+        material="color:#120a05;roughness:1">
+      </a-cylinder>
+      <a-text value="MINERAL\nEXTRACTION\nClick to decide" position="0 2.5 0"
+        align="center" color="#ff6644" font="sourcecodepro" width="4">
+      </a-text>
+      <a-light type="point" color="#ff4400" intensity="0.4" distance="8" position="0 2 0"></a-light>
+    </a-entity>
+
+    <!-- SCALING LEVER — far clickable -->
+    <a-entity position="0 0 -18" class="interactable"
+      data-decision="eco-scaling"
+      onclick="triggerDecision('eco-scaling')">
+      <a-box position="0 1 0" width="0.3" height="2" depth="0.3"
+        material="color:#c87050;roughness:0.4">
+      </a-box>
+      <a-box position="0 2.2 0" width="3" height="0.15" depth="0.3"
+        material="color:#c87050;roughness:0.4"
+        animation="property:rotation;to:0 0 -30;dur:2000;loop:true;dir:alternate;easing:easeInOutSine">
+      </a-box>
+      <a-text value="SCALING\nLOGIC\nClick to decide" position="0 3.5 0"
+        align="center" color="#c87050" font="sourcecodepro" width="4">
+      </a-text>
+    </a-entity>
+
+    <!-- Ambient -->
+    <a-light type="ambient" color="#44cc88" intensity="0.08"></a-light>
+    <a-light type="directional" color="#224422" intensity="0.3" position="0 10 5"></a-light>
+
+    <!-- Back to zone select -->
+    <a-box class="interactable" position="-8 1.5 -3" width="2.5" height="0.7" depth="0.2"
+      material="color:#111;roughness:0.5"
+      onclick="exitZone()">
+      <a-text value="← ZONES" align="center" color="#555" width="4" font="sourcecodepro" position="0 0 0.15"></a-text>
+    </a-box>
+
+  </a-entity>
+
+  <!-- ==================== ETHICS ZONE ==================== -->
+  <a-entity id="zone-ethics" visible="false">
+
+    <a-plane position="0 0 0" rotation="-90 0 0" width="60" height="60"
+      material="color:#0d0808;roughness:1">
+    </a-plane>
+    <a-plane position="0 5 -20" width="60" height="20"
+      material="color:#0a0505">
+    </a-plane>
+
+    <a-text value="ZONE 02 — ETHICS" position="0 8 -18"
+      align="center" color="#ff6644" font="sourcecodepro" width="10" letter-spacing="4">
+    </a-text>
+    <a-text value="The Social Cost of Intelligence"
+      position="0 7 -18" align="center" color="#ffffff" font="sourcecodepro" width="14">
+    </a-text>
+
+    <!-- GHOST WORK TERMINALS — clickable -->
+    <a-entity position="-6 0 -10">
+      <a-box position="0 0.75 0" width="1.2" height="1.5" depth="0.8"
+        material="color:#0a0808">
+      </a-box>
+      <a-plane class="interactable" position="0 1.4 0.45" width="1" height="0.7"
+        material="color:#000a00;emissive:#003300;emissiveIntensity:0.6"
+        data-decision="eth-ghostwork"
+        onclick="triggerDecision('eth-ghostwork')">
+      </a-plane>
+      <a-text value="GHOST WORK\n$1.46/hr\nClick to decide" position="0 2.5 0"
+        align="center" color="#ff6644" font="sourcecodepro" width="4">
+      </a-text>
+      <a-light type="point" color="#003300" intensity="1" distance="5" position="0 1.5 0.5"></a-light>
+    </a-entity>
+
+    <!-- CLASSIFICATION MACHINE — center clickable -->
+    <a-entity position="0 0 -12">
+      <a-box class="interactable" position="0 2 0" width="3" height="4" depth="2"
+        material="color:#1a0d0d;roughness:0.4;metalness:0.6;emissive:#220000;emissiveIntensity:0.3"
+        data-decision="eth-codedgaze"
+        onclick="triggerDecision('eth-codedgaze')">
+      </a-box>
+      <!-- Sorting arms -->
+      <a-cylinder position="-1.5 3 0" radius="0.05" height="1.5" rotation="0 0 90"
+        material="color:#ff6644"
+        animation="property:rotation;to:0 0 -90;dur:3000;loop:true;dir:alternate;easing:easeInOutSine">
+      </a-cylinder>
+      <a-text value="CODED\nGAZE\nClick to decide" position="0 5 0"
+        align="center" color="#ff6644" font="sourcecodepro" width="4">
+      </a-text>
+      <a-light type="point" color="#ff2200" intensity="0.5" distance="8" position="0 3 1"></a-light>
+    </a-entity>
+
+    <!-- DATA SOVEREIGNTY POD — right clickable -->
+    <a-entity position="7 0 -10">
+      <a-sphere class="interactable" position="0 2 0" radius="1.5"
+        material="color:#1a0a1a;roughness:0.2;metalness:0.8;emissive:#220022;emissiveIntensity:0.3;transparent:true;opacity:0.8"
+        data-decision="eth-datasov"
+        onclick="triggerDecision('eth-datasov')">
+      </a-sphere>
+      <a-text value="DATA\nSOVEREIGNTY\nClick to decide" position="0 4 0"
+        align="center" color="#cc88ff" font="sourcecodepro" width="4">
+      </a-text>
+      <a-light type="point" color="#440044" intensity="0.8" distance="8" position="0 2 0"></a-light>
+    </a-entity>
+
+    <!-- FANON MIRROR — back wall clickable -->
+    <a-entity position="-7 0 -10">
+      <a-plane class="interactable" position="0 2.5 0" width="2" height="3"
+        material="color:#1a1a2a;roughness:0.1;metalness:0.9;emissive:#000011;emissiveIntensity:0.5"
+        data-decision="eth-identity"
+        onclick="triggerDecision('eth-identity')">
+      </a-plane>
+      <a-text value="IDENTITY\n& BEING\nClick to decide" position="0 4.5 0"
+        align="center" color="#8888ff" font="sourcecodepro" width="4">
+      </a-text>
+      <a-light type="point" color="#0000aa" intensity="0.5" distance="8" position="0 2.5 0.5"></a-light>
+    </a-entity>
+
+    <a-light type="ambient" color="#ff6644" intensity="0.06"></a-light>
+
+    <a-box class="interactable" position="-8 1.5 -3" width="2.5" height="0.7" depth="0.2"
+      material="color:#111;roughness:0.5" onclick="exitZone()">
+      <a-text value="← ZONES" align="center" color="#555" width="4" font="sourcecodepro" position="0 0 0.15"></a-text>
+    </a-box>
+
+  </a-entity>
+
+  <!-- ==================== GOALS ZONE ==================== -->
+  <a-entity id="zone-goals" visible="false">
+
+    <a-plane position="0 0 0" rotation="-90 0 0" width="60" height="60"
+      material="color:#08080d;roughness:1">
+    </a-plane>
+    <a-plane position="0 5 -20" width="60" height="20"
+      material="color:#05050a">
+    </a-plane>
+
+    <a-text value="ZONE 03 — GOALS" position="0 8 -18"
+      align="center" color="#4488ff" font="sourcecodepro" width="10" letter-spacing="4">
+    </a-text>
+    <a-text value="The Political Stakes of Intelligence"
+      position="0 7 -18" align="center" color="#ffffff" font="sourcecodepro" width="14">
+    </a-text>
+
+    <!-- THE SCALES themselves — central object -->
+    <a-entity position="0 0 -12">
+      <!-- Pillar -->
+      <a-cylinder position="0 2 0" radius="0.08" height="4"
+        material="color:#4488ff;emissive:#4488ff;emissiveIntensity:0.3">
+      </a-cylinder>
+      <!-- Arm — animated tipping based on score -->
+      <a-box id="scales-arm" position="0 4 0" width="8" height="0.08" depth="0.08"
+        material="color:#4488ff;emissive:#4488ff;emissiveIntensity:0.3"
+        animation="property:rotation;to:0 0 15;dur:4000;loop:true;dir:alternate;easing:easeInOutSine">
+      </a-box>
+      <!-- Left pan — imperial -->
+      <a-cylinder position="-4 3.5 0" radius="1" height="0.08"
+        material="color:#1a1a2a;roughness:0.5">
+      </a-cylinder>
+      <a-cylinder position="-4 0.1 0" radius="0.9" height="0.05"
+        material="color:#0a0a1a">
+      </a-cylinder>
+      <a-cylinder position="-4 1.8 0" radius="0.02" height="3.4"
+        material="color:#333">
+      </a-cylinder>
+      <a-text value="IMPERIAL\nAI" position="-4 4.2 0"
+        align="center" color="#ff6644" font="sourcecodepro" width="4">
+      </a-text>
+
+      <!-- Right pan — alternative -->
+      <a-cylinder position="4 3.8 0" radius="1" height="0.08"
+        material="color:#1a2a1a;roughness:0.5">
+      </a-cylinder>
+      <a-cylinder position="4 0.1 0" radius="0.9" height="0.05"
+        material="color:#0a1a0a">
+      </a-cylinder>
+      <a-cylinder position="4 1.95 0" radius="0.02" height="3.7"
+        material="color:#333">
+      </a-cylinder>
+      <a-text value="COMMUNITY\nAI" position="4 4.2 0"
+        align="center" color="#44cc88" font="sourcecodepro" width="4">
+      </a-text>
+
+      <!-- Base -->
+      <a-cylinder class="interactable" position="0 0.1 0" radius="1" height="0.2"
+        material="color:#4488ff;roughness:0.5"
+        data-decision="goal-balance"
+        onclick="triggerDecision('goal-balance')">
+      </a-cylinder>
+      <a-text value="Click the base to decide" position="0 0.6 0"
+        align="center" color="#4488ff" font="sourcecodepro" width="5">
+      </a-text>
+      <a-light type="point" color="#4488ff" intensity="0.8" distance="15" position="0 4 0"></a-light>
+    </a-entity>
+
+    <!-- AGI ORB — left clickable -->
+    <a-sphere class="interactable" position="-8 2.5 -10" radius="1.5"
+      material="color:#1a1a2a;emissive:#2222aa;emissiveIntensity:0.3;transparent:true;opacity:0.7"
+      animation="property:rotation;to:0 360 0;dur:8000;loop:true;easing:linear"
+      data-decision="goal-agi"
+      onclick="triggerDecision('goal-agi')">
+      <a-text value="AGI" position="0 0 1.6" align="center" color="#8888ff" font="sourcecodepro" width="3"></a-text>
+    </a-sphere>
+    <a-light type="point" color="#4444ff" intensity="0.6" distance="10" position="-8 2.5 -10"></a-light>
+
+    <!-- GOVERNANCE DOOR — right clickable -->
+    <a-box class="interactable" position="8 2.5 -10" width="2" height="4" depth="0.3"
+      material="color:#1a2233;roughness:0.6;emissive:#001133;emissiveIntensity:0.3"
+      data-decision="goal-governance"
+      onclick="triggerDecision('goal-governance')">
+      <a-text value="GOVERN\nANCE" position="0 0 0.2" align="center" color="#4488ff" font="sourcecodepro" width="3"></a-text>
+    </a-box>
+    <a-light type="point" color="#2244aa" intensity="0.5" distance="8" position="8 2.5 -10"></a-light>
+
+    <a-light type="ambient" color="#4488ff" intensity="0.06"></a-light>
+
+    <a-box class="interactable" position="-8 1.5 -3" width="2.5" height="0.7" depth="0.2"
+      material="color:#111" onclick="exitZone()">
+      <a-text value="← ZONES" align="center" color="#555" width="4" font="sourcecodepro" position="0 0 0.15"></a-text>
+    </a-box>
+
+  </a-entity>
+
+</a-scene>
+
+<script>
+// ==================== GAME STATE ====================
+const state = {
+  positionality: null,
+  posLabel: null,
+  currentZone: null,
+  scores: { ecology: 50, ethics: 50, goals: 50 },
+  decisionsThisSession: [],
+  introStep: 0,
+  totalIntroSteps: 5
+};
+
+// ==================== DECISION DATABASE ====================
+const decisions = {
+
+  // — ECOLOGY —
+  'eco-datacenter': {
+    zone: 'Ecology',
+    title: 'The Megacampus Data Center',
+    context: 'AI megacampuses now require 1,000–2,000 megawatts of power — compared to 150 megawatts for the largest traditional data centers. Each ChatGPT query uses on average 10 times the electricity of a Google search. A decision must be made about where to build the next facility.',
+    choices: [
+      {
+        label: 'Build in water-stressed region',
+        desc: 'Lower construction costs. Faster build time. Local communities lose access to groundwater.',
+        mechanic: 'MANAGE',
+        impacts: { ecology: -15, ethics: -10, goals: +5 },
+        consequence: 'The data center opens on schedule. Three villages downstream report water shortages within six months.'
+      },
+      {
+        label: 'Invest in renewable infrastructure',
+        desc: 'Higher upfront cost. Slower build. Significantly reduced carbon and water footprint.',
+        mechanic: 'INCLUDE',
+        impacts: { ecology: +20, ethics: +5, goals: -8 },
+        consequence: 'The facility takes 18 months longer. Your quarterly report shows reduced margins. The ecosystem remains intact.'
+      },
+      {
+        label: 'Distribute compute to existing facilities',
+        desc: 'No new footprint. Requires coordination across jurisdictions. Challenges centralized control.',
+        mechanic: 'DIFFERENCE',
+        impacts: { ecology: +10, ethics: +10, goals: -15 },
+        consequence: 'Latency increases. Control becomes harder to maintain. The ecological impact is measurably lower.'
+      }
+    ]
+  },
+
+  'eco-water': {
+    zone: 'Ecology',
+    title: 'Water Consumption',
+    context: 'Researchers at UC Riverside estimate AI demand could consume 1.1 to 1.7 trillion gallons of fresh water globally per year by 2027 — half the annual water consumption of the UK. Your cooling systems are a major factor.',
+    choices: [
+      {
+        label: 'Continue current cooling systems',
+        desc: 'No cost to change. Maintains performance benchmarks. Water consumption continues at scale.',
+        mechanic: 'MANAGE',
+        impacts: { ecology: -20, ethics: -5, goals: +8 },
+        consequence: 'Performance is maintained. The hydrological impact accumulates invisibly in quarterly reports.'
+      },
+      {
+        label: 'Transition to air cooling',
+        desc: 'Significant retrofit cost. Reduces water consumption by 90%. Increases energy use by 15%.',
+        mechanic: 'INCLUDE',
+        impacts: { ecology: +15, ethics: +8, goals: -10 },
+        consequence: 'Water use drops dramatically. Energy consumption rises. The tradeoff is real but the community downstream notices the difference.'
+      },
+      {
+        label: 'Disclose full water usage publicly',
+        desc: 'No operational change. Radical transparency. Creates regulatory and reputational pressure.',
+        mechanic: 'DIFFERENCE',
+        impacts: { ecology: +5, ethics: +15, goals: -5 },
+        consequence: 'The disclosure triggers three regulatory investigations and a coalition of community groups. The data center continues operating.'
+      }
+    ]
+  },
+
+  'eco-mining': {
+    zone: 'Ecology',
+    title: 'Mineral Extraction — Congo',
+    context: 'Rare earth minerals — lithium, cobalt, coltan — are essential for AI chips. In the Congo, these minerals fund ongoing conflict. Supply chain audits by companies like Intel, Apple and Dell have found it is effectively impossible to trace the origin of these minerals through the vast number of suppliers involved.',
+    choices: [
+      {
+        label: 'Maintain current supply chains',
+        desc: 'Plausible deniability. Competitive cost. Ongoing extraction and conflict financing continues.',
+        mechanic: 'MANAGE',
+        impacts: { ecology: -12, ethics: -20, goals: +10 },
+        consequence: 'Supply chains remain intact. An investigative journalist publishes a report linking your chips to a specific conflict site.'
+      },
+      {
+        label: 'Invest in local processing infrastructure',
+        desc: 'Higher cost. Builds African industrial capacity. Challenges the deliberate underdevelopment that keeps minerals cheap.',
+        mechanic: 'INCLUDE',
+        impacts: { ecology: +8, ethics: +20, goals: -12 },
+        consequence: 'Local processing jobs increase. Extraction continues but profits begin to stay in the region. Other companies do not follow.'
+      },
+      {
+        label: 'Fund research into synthetic alternatives',
+        desc: 'Long time horizon. No immediate impact. Could eventually break the extraction dependency.',
+        mechanic: 'DIFFERENCE',
+        impacts: { ecology: +3, ethics: +10, goals: -3 },
+        consequence: 'Research is funded. A breakthrough remains five to ten years away. The mines continue operating.'
+      }
+    ]
+  },
+
+  'eco-scaling': {
+    zone: 'Ecology',
+    title: 'The Scaling Logic',
+    context: 'The prevailing assumption in AI development is that bigger is better — larger models, larger datasets, more compute power. The AI 2027 report estimates a 20-40x increase in compute by December 2027. Evidence suggests diminishing returns. The environmental cost is exponential.',
+    choices: [
+      {
+        label: 'Continue scaling aggressively',
+        desc: 'AGI may be closer than critics think. Competitive necessity. Environmental cost is externalized.',
+        mechanic: 'MANAGE',
+        impacts: { ecology: -25, ethics: -8, goals: +15 },
+        consequence: 'Your model scores 3% better on benchmark tests. Energy consumption doubles. The benchmark may be measuring the wrong thing.'
+      },
+      {
+        label: 'Invest in efficiency research',
+        desc: 'Smaller models, better results. Chinchilla scaling laws suggest data quality matters more than size.',
+        mechanic: 'DIFFERENCE',
+        impacts: { ecology: +18, ethics: +5, goals: -5 },
+        consequence: 'Your model is 40% smaller and comparably capable. The industry does not follow. You publish the findings openly.'
+      },
+      {
+        label: 'Advocate for international compute limits',
+        desc: 'Requires political coalition. Challenges national competitiveness. Could create genuine governance.',
+        mechanic: 'INCLUDE',
+        impacts: { ecology: +12, ethics: +12, goals: -20 },
+        consequence: 'Three governments begin discussions. The AI race continues in the jurisdictions that opt out. A framework is forming.'
+      }
+    ]
+  },
+
+  // — ETHICS —
+  'eth-ghostwork': {
+    zone: 'Ethics',
+    title: 'Ghost Work — The Hidden Labor of AI',
+    context: 'In 2021 OpenAI contracted Sama, employing workers in Kenya, to label traumatic content — child abuse, graphic violence — for $1.46–$3.74 per hour. NDAs prevented workers from knowing who they were working for. One worker reported their mind unravelled. This ghost work powers every major AI system.',
+    choices: [
+      {
+        label: 'Continue outsourcing to lowest-cost regions',
+        desc: 'Operationally efficient. Workers remain invisible. Psychological harm continues and scales.',
+        mechanic: 'MANAGE',
+        impacts: { ecology: 0, ethics: -25, goals: +10 },
+        consequence: 'Costs remain low. A Kenyan worker files a lawsuit. The case settles out of court under an NDA.'
+      },
+      {
+        label: 'Implement fair wage and welfare standards',
+        desc: 'Significantly higher cost. Makes the labor visible. Creates accountability and potential precedent.',
+        mechanic: 'INCLUDE',
+        impacts: { ecology: 0, ethics: +20, goals: -12 },
+        consequence: 'Worker conditions improve measurably. The cost of AI labeling triples. Other companies continue underpaying.'
+      },
+      {
+        label: 'Develop automated content classification',
+        desc: 'Removes human labor from this task. May introduce new biases. Removes the human cost — and oversight.',
+        mechanic: 'DIFFERENCE',
+        impacts: { ecology: -5, ethics: +5, goals: +5 },
+        consequence: 'Human annotators are replaced. The automated system has a 15% error rate that no one monitors.'
+      }
+    ]
+  },
+
+  'eth-codedgaze': {
+    zone: 'Ethics',
+    title: 'The Coded Gaze',
+    context: 'Joy Buolamwini documented that facial recognition systems have significantly higher error rates for dark-skinned women. OpenAI\'s Sora, when asked to generate a queer person, returns a white person with purple hair. Algorithms compulsively order identity into single coherent categories, stripping self-determination.',
+    choices: [
+      {
+        label: 'Add more data from underrepresented groups',
+        desc: 'Appears to address the problem. May improve benchmark scores. Does not challenge the classification paradigm.',
+        mechanic: 'INCLUDE',
+        impacts: { ecology: 0, ethics: +8, goals: +3 },
+        consequence: 'Benchmark scores for minority group recognition improve by 12%. The fundamental logic of categorization is unchanged.'
+      },
+      {
+        label: 'Implement community-defined classification',
+        desc: 'Communities define their own categories. Challenges the optimization logic. Requires genuine power transfer.',
+        mechanic: 'DIFFERENCE',
+        impacts: { ecology: 0, ethics: +22, goals: -15 },
+        consequence: 'A small team works directly with queer communities to define representation. The model is not deployed at scale. It is used by the community that built it.'
+      },
+      {
+        label: 'Deploy with bias disclosure labels',
+        desc: 'Transparency without accountability. Continues the harm. Creates legal cover.',
+        mechanic: 'MANAGE',
+        impacts: { ecology: 0, ethics: -10, goals: +5 },
+        consequence: 'The model is deployed with a bias warning in the terms of service. Usage continues at scale.'
+      }
+    ]
+  },
+
+  'eth-datasov': {
+    zone: 'Ethics',
+    title: 'Data Sovereignty',
+    context: 'The Solid protocol by Tim Berners-Lee proposes decoupling data from applications through personal data pods. The Government of Flanders has implemented this for educational certificates. Te Hiku Media refused to contribute Māori language data to general-purpose models, maintaining community ownership. Data sovereignty is technically feasible.',
+    choices: [
+      {
+        label: 'Centralise all data in proprietary systems',
+        desc: 'Maximum control. Network effects. Users become the product. Imperial extraction continues.',
+        mechanic: 'MANAGE',
+        impacts: { ecology: -3, ethics: -20, goals: +15 },
+        consequence: 'Your data moat deepens. Users have no access to their own behavioral data. The platform value compounds.'
+      },
+      {
+        label: 'Implement data pod architecture',
+        desc: 'Users own their data. You lose the monopoly on behavioral data. The platform becomes a service not a fiefdom.',
+        mechanic: 'INCLUDE',
+        impacts: { ecology: 0, ethics: +18, goals: -12 },
+        consequence: 'Data portability increases. Users migrate between services. Competition improves. Your competitive moat shrinks.'
+      },
+      {
+        label: 'Support indigenous data sovereignty frameworks',
+        desc: 'CARE principles over FAIR principles. Community governance over individual ownership. Challenges the epistemic hierarchy.',
+        mechanic: 'DIFFERENCE',
+        impacts: { ecology: 0, ethics: +25, goals: -18 },
+        consequence: 'A coalition of indigenous communities gains legal control over their data. The precedent expands to other communities.'
+      }
+    ]
+  },
+
+  'eth-identity': {
+    zone: 'Ethics',
+    title: 'Being and Identity',
+    context: 'Ramon Amaro argues that algorithms strip individuals of self-determination by compulsively ordering blackness into a single coherent category. Fanon showed that the colonial subject is denied a "being for other" — identity is imposed rather than self-determined. Algorithms reproduce this epistemic violence technically.',
+    choices: [
+      {
+        label: 'Maintain generalised classification systems',
+        desc: 'Operationally necessary. Statistically efficient. Epistemically violent to those who are classified.',
+        mechanic: 'MANAGE',
+        impacts: { ecology: 0, ethics: -18, goals: +8 },
+        consequence: 'The classification system continues. A Black researcher publishes a paper documenting 47 ways it misrepresents her community.'
+      },
+      {
+        label: 'Fund indeterminate AI research',
+        desc: 'Amaro\'s aspiration: AI that does not optimise, does not generalise, does not impose. Non-extractive by design.',
+        mechanic: 'DIFFERENCE',
+        impacts: { ecology: +5, ethics: +25, goals: -20 },
+        consequence: 'A small research team builds a model that cannot be scaled because it refuses to generalise. It is the most accurate representation of its community that has ever existed.'
+      },
+      {
+        label: 'Implement self-identification features',
+        desc: 'Users define their own categories. Limited by platform architecture. Better than imposed classification.',
+        mechanic: 'INCLUDE',
+        impacts: { ecology: 0, ethics: +12, goals: -3 },
+        consequence: 'Self-identification adoption is 40%. The algorithm defaults to imposed classification for those who do not opt in.'
+      }
+    ]
+  },
+
+  // — GOALS —
+  'goal-balance': {
+    zone: 'Goals',
+    title: 'The Balance of Power',
+    context: 'Hardt and Negri argue that Empire is not a sovereign state but a supranational body affecting the judicial, economic and socio-political aspects of individual states. Big Tech operates with similar reach. The scales are not balanced — one side is weighted by capital, military contracts, and accumulated behavioral data.',
+    choices: [
+      {
+        label: 'Consolidate within the existing order',
+        desc: 'Maximum efficiency. Accelerates imperial logic. The Zero Point deepens.',
+        mechanic: 'MANAGE',
+        impacts: { ecology: -8, ethics: -8, goals: +20 },
+        consequence: 'Market share increases. The apparatus strengthens. Žižek\'s downward spiral continues.'
+      },
+      {
+        label: 'Build outside existing coordinates',
+        desc: 'Refuses the apparatus entirely. Requires community coalitions. This is the Žižekian Act.',
+        mechanic: 'DIFFERENCE',
+        impacts: { ecology: +10, ethics: +15, goals: -10 },
+        consequence: 'A network of community-owned AI projects emerges. They are small, slow, and deliberately ungeneralizable. They are different coordinates.'
+      },
+      {
+        label: 'Reform from within',
+        desc: 'Ethics boards, diversity hiring, responsible AI frameworks. The inclusive moment performs change.',
+        mechanic: 'INCLUDE',
+        impacts: { ecology: +3, ethics: +8, goals: -3 },
+        consequence: 'The ethics board publishes a report. Three of its recommendations are implemented. The apparatus continues operating.'
+      }
+    ]
+  },
+
+  'goal-agi': {
+    zone: 'Goals',
+    title: 'The AGI Imperative',
+    context: 'AGI — hypothetical AI rivaling human intelligence — was coined by Mark Gubrud in 1997 in a military security paper. There is no scientific evidence it is achievable. Yet the potential threat has been used for 30 years to justify investment. Fear is weaponised to build support. OpenAI was founded on AGI anxiety.',
+    choices: [
+      {
+        label: 'Pursue AGI as primary goal',
+        desc: 'Galvanises investment and talent. Justifies unlimited resource consumption. May be chasing science fiction.',
+        mechanic: 'MANAGE',
+        impacts: { ecology: -18, ethics: -10, goals: +18 },
+        consequence: 'Funding increases. The bubble inflates. A foresight report predicts either salvation or extinction. Both scenarios require more compute.'
+      },
+      {
+        label: 'Redirect to specific community needs',
+        desc: 'Kōrero Māori not AGI. Specific, slow, community-defined. Refuses the universalising claim.',
+        mechanic: 'DIFFERENCE',
+        impacts: { ecology: +8, ethics: +20, goals: -15 },
+        consequence: 'A speech-to-text model preserves an indigenous language. It serves 60,000 people. It will never be scaled. It does not need to be.'
+      },
+      {
+        label: 'Advocate for regulated development',
+        desc: 'De Garis\'s binary thinking rejected. Not Cosmist or Terran but governed. Requires political will.',
+        mechanic: 'INCLUDE',
+        impacts: { ecology: +5, ethics: +8, goals: -8 },
+        consequence: 'Three governments agree to a development moratorium pending safety review. Two do not. The race continues in those jurisdictions.'
+      }
+    ]
+  },
+
+  'goal-governance': {
+    zone: 'Goals',
+    title: 'Governance and Resistance',
+    context: 'The EU AI Act classifies AI by risk and imposes obligations — but the Global South was excluded from drafting it. China\'s regulations are more stringent in some respects but serve different political ends. The Detroit community successfully banned police facial recognition. The multitude is already acting.',
+    choices: [
+      {
+        label: 'Support corporate self-governance',
+        desc: 'Flexibility. Speed. Ethics boards answer to shareholders. Governance capture is the likely outcome.',
+        mechanic: 'MANAGE',
+        impacts: { ecology: -5, ethics: -15, goals: +10 },
+        consequence: 'An internal ethics report is produced. It is marked confidential. Timnit Gebru\'s Stochastic Parrots is suppressed.'
+      },
+      {
+        label: 'Advocate for community-led local governance',
+        desc: 'CARE principles. Algorithmic self-determination. Slower. Messier. Genuinely accountable.',
+        mechanic: 'INCLUDE',
+        impacts: { ecology: +8, ethics: +20, goals: -12 },
+        consequence: 'A coalition of communities establishes the right to refuse AI deployment in their territories. The Detroit precedent expands.'
+      },
+      {
+        label: 'Build international governance coalitions',
+        desc: 'Mohamed, Png and Isaac\'s algorithmic self-determination framework. Requires sustained political work.',
+        mechanic: 'DIFFERENCE',
+        impacts: { ecology: +5, ethics: +12, goals: -8 },
+        consequence: 'A framework is agreed. Enforcement mechanisms are weak. The conversation has changed. The multitude is named.'
+      }
+    ]
+  }
+};
+
+// ==================== GAME LOGIC ====================
+
+let introStep = 0;
+
+function showIntro() {
+  document.getElementById('title-screen').classList.add('hidden');
+  setTimeout(() => {
+    document.getElementById('title-screen').style.display = 'none';
+    document.getElementById('intro-overlay').classList.add('active');
+  }, 1500);
+}
+
+function updateIntroStep() {
+  for (let i = 0; i < 5; i++) {
+    const el = document.getElementById('intro-step-' + i);
+    if (el) el.style.display = i === introStep ? 'block' : 'none';
+  }
+  document.querySelectorAll('.intro-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === introStep);
+  });
+  document.getElementById('intro-next-btn').textContent =
+    introStep === 4 ? 'Choose Positionality →' : 'Next →';
+}
+
+function nextIntro() {
+  if (introStep < 4) {
+    introStep++;
+    updateIntroStep();
+  } else {
+    document.getElementById('intro-overlay').classList.remove('active');
+    document.getElementById('positionality-screen').classList.add('active');
+  }
+}
+
+function prevIntro() {
+  if (introStep > 0) {
+    introStep--;
+    updateIntroStep();
+  }
+}
+
+function selectPositionality(pos, label) {
+  state.positionality = pos;
+  state.posLabel = label;
+
+  // Apply starting bias based on positionality
+  const biases = {
+    bigtech:      { ecology: 35, ethics: 35, goals: 70 },
+    community:    { ecology: 65, ethics: 65, goals: 35 },
+    nationstate:  { ecology: 45, ethics: 40, goals: 60 },
+    civilsociety: { ecology: 55, ethics: 70, goals: 30 }
+  };
+  state.scores = { ...biases[pos] };
+
+  document.getElementById('positionality-screen').classList.remove('active');
+  showZoneSelect();
+}
+
+function showZoneSelect() {
+  updateScoreDisplays();
+  document.getElementById('zone-player-label').textContent = 'Playing as: ' + state.posLabel;
+  document.getElementById('zone-screen').classList.add('active');
+  document.getElementById('hud').style.display = 'flex';
+  document.getElementById('score-bar').style.display = 'flex';
+  document.getElementById('hud-pos-label').textContent = state.posLabel;
+}
+
+function enterZone(zone) {
+  state.currentZone = zone;
+  document.getElementById('zone-screen').classList.remove('active');
+
+  // Show A-Frame scene
+  const scene = document.getElementById('main-scene');
+  scene.style.display = 'block';
+
+  // Hide all zones, show selected
+  ['ecology','ethics','goals'].forEach(z => {
+    document.getElementById('zone-' + z).setAttribute('visible', z === zone);
+  });
+
+  document.getElementById('hud-zone-label').textContent = zone.toUpperCase();
+
+  const zoneColors = { ecology:'#44cc88', ethics:'#ff6644', goals:'#4488ff' };
+}
+
+function exitZone() {
+  state.currentZone = null;
+  document.getElementById('main-scene').style.display = 'none';
+  ['ecology','ethics','goals'].forEach(z => {
+    document.getElementById('zone-' + z).setAttribute('visible', false);
+  });
+  closeDecision();
+  showZoneSelect();
+}
+
+function triggerDecision(key) {
+  const d = decisions[key];
+  if (!d) return;
+
+  document.getElementById('dp-zone-label').textContent = d.zone + ' — ' + getMechanicForPositionality();
+  document.getElementById('dp-title').textContent = d.title;
+  document.getElementById('dp-context').textContent = d.context;
+
+  const choicesEl = document.getElementById('dp-choices');
+  choicesEl.innerHTML = '';
+
+  d.choices.forEach((c, i) => {
+    const div = document.createElement('div');
+    div.className = 'dp-choice';
+    const impactHtml = Object.entries(c.impacts).map(([k,v]) => {
+      const cls = v > 0 ? 'impact-pos' : v < 0 ? 'impact-neg' : 'impact-neu';
+      const sign = v > 0 ? '+' : '';
+      return `<span class="${cls}">${k.toUpperCase()} ${sign}${v}</span>`;
+    }).join('');
+    div.innerHTML = `
+      <h4>${c.label}</h4>
+      <p>${c.desc}</p>
+      <div class="impact">${impactHtml}</div>
+      <div style="margin-top:0.5rem;font-size:0.6rem;letter-spacing:0.2em;color:#c87050;text-transform:uppercase">Mechanic: ${c.mechanic}</div>
+    `;
+    div.onclick = () => applyDecision(key, i);
+    choicesEl.appendChild(div);
+  });
+
+  document.getElementById('decision-panel').classList.add('open');
+}
+
+function applyDecision(key, choiceIndex) {
+  const d = decisions[key];
+  const choice = d.choices[choiceIndex];
+
+  // Apply impacts
+  Object.entries(choice.impacts).forEach(([zone, delta]) => {
+    state.scores[zone] = Math.max(0, Math.min(100, state.scores[zone] + delta));
+  });
+
+  state.decisionsThisSession.push({ key, choice: choiceIndex });
+
+  updateScoreDisplays();
+  closeDecision();
+
+  // Show consequence
+  showConsequence(choice.consequence, choice.mechanic);
+
+  // Check if all decisions made in this zone
+  checkZoneComplete();
+}
+
+function showConsequence(text, mechanic) {
+  const panel = document.getElementById('decision-panel');
+  const choicesEl = document.getElementById('dp-choices');
+  choicesEl.innerHTML = `
+    <div style="padding:1.5rem;border:1px solid #222;flex:1">
+      <div style="font-size:0.6rem;letter-spacing:0.3em;color:#c87050;text-transform:uppercase;margin-bottom:0.5rem">CONSEQUENCE — ${mechanic}</div>
+      <p style="color:#aaa;font-size:0.9rem;line-height:1.8">${text}</p>
+      <button onclick="closeDecision()" style="margin-top:1rem;background:none;border:1px solid #333;color:#666;padding:0.5rem 1.5rem;font-family:Georgia,serif;font-size:0.75rem;letter-spacing:0.2em;cursor:pointer">Continue →</button>
+    </div>
+  `;
+  document.getElementById('dp-zone-label').textContent = 'Consequence';
+  document.getElementById('dp-title').textContent = '';
+  document.getElementById('dp-context').textContent = '';
+  panel.classList.add('open');
+}
+
+function closeDecision() {
+  document.getElementById('decision-panel').classList.remove('open');
+}
+
+function getMechanicForPositionality() {
+  const map = {
+    bigtech: 'MANAGE dominant',
+    community: 'INCLUDE & DIFFERENCE',
+    nationstate: 'MANAGE & DIFFERENCE',
+    civilsociety: 'DIFFERENCE dominant'
+  };
+  return map[state.positionality] || '';
+}
+
+function updateScoreDisplays() {
+  const s = state.scores;
+  const total = Math.round((s.ecology + s.ethics + s.goals) / 3);
+
+  // HUD
+  document.getElementById('hud-eco').textContent = Math.round(s.ecology);
+  document.getElementById('hud-eth').textContent = Math.round(s.ethics);
+  document.getElementById('hud-goal').textContent = Math.round(s.goals);
+  document.getElementById('hud-total').textContent = total;
+
+  // Score bar fills
+  document.getElementById('fill-eco').style.height = s.ecology + '%';
+  document.getElementById('fill-eth').style.height = s.ethics + '%';
+  document.getElementById('fill-goal').style.height = s.goals + '%';
+
+  // Zone previews
+  document.getElementById('eco-preview').textContent = Math.round(s.ecology);
+  document.getElementById('eth-preview').textContent = Math.round(s.ethics);
+  document.getElementById('goal-preview').textContent = Math.round(s.goals);
+}
+
+function checkZoneComplete() {
+  // Could add per-zone completion tracking here
+}
+
+// ==================== LEADERBOARD ====================
+
+async function showLeaderboard() {
+  document.getElementById('zone-screen').classList.remove('active');
+  document.getElementById('leaderboard').classList.add('active');
+  await loadLeaderboard();
+}
+
+function hideLeaderboard() {
+  document.getElementById('leaderboard').classList.remove('active');
+  document.getElementById('zone-screen').classList.add('active');
+}
+
+async function loadLeaderboard() {
+  const tbody = document.getElementById('lb-body');
+  tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#333;padding:2rem">Loading...</td></tr>';
+
+  try {
+    const result = await window.storage.list('scales-score:');
+    const keys = result?.keys || [];
+
+    const entries = [];
+    for (const key of keys.slice(0, 50)) {
+      try {
+        const r = await window.storage.get(key, true);
+        if (r?.value) {
+          entries.push(JSON.parse(r.value));
+        }
+      } catch(e) {}
+    }
+
+    entries.sort((a,b) => b.total - a.total);
+
+    if (entries.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#333;padding:2rem;font-size:0.8rem">No scores yet — be the first to play through a zone</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = entries.slice(0, 20).map((e, i) => `
+      <tr>
+        <td class="rank">${i + 1}</td>
+        <td class="pos-badge">${e.positionality || '—'}</td>
+        <td class="score-eco">${e.ecology || 0}</td>
+        <td class="score-eth">${e.ethics || 0}</td>
+        <td class="score-goal">${e.goals || 0}</td>
+        <td class="score-total">${e.total || 0}</td>
+      </tr>
+    `).join('');
+  } catch(err) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#333;padding:2rem">Could not load leaderboard</td></tr>';
+  }
+}
+
+async function submitScore() {
+  const s = state.scores;
+  const total = Math.round((s.ecology + s.ethics + s.goals) / 3);
+  const entry = {
+    positionality: state.posLabel,
+    ecology: Math.round(s.ecology),
+    ethics: Math.round(s.ethics),
+    goals: Math.round(s.goals),
+    total,
+    timestamp: Date.now()
+  };
+  try {
+    const key = 'scales-score:' + Date.now() + '-' + Math.random().toString(36).slice(2,8);
+    await window.storage.set(key, JSON.stringify(entry), true);
+  } catch(e) {}
+}
+
+// Auto-submit score periodically
+setInterval(() => {
+  if (state.positionality && state.decisionsThisSession.length > 0) {
+    submitScore();
+  }
+}, 30000);
+
+// Submit on page leave
+window.addEventListener('beforeunload', () => {
+  if (state.positionality && state.decisionsThisSession.length > 0) {
+    submitScore();
+  }
+});
+
+// ==================== HAND TRACKING INTEGRATION ====================
+// Hand tracking works natively via A-Frame hand-tracking-controls
+// Pinch events are emitted as 'pinchstarted' and 'pinchended'
+// We listen for these to mirror click interactions
+
+document.addEventListener('DOMContentLoaded', () => {
+  const scene = document.getElementById('main-scene');
+
+  // Listen for pinch on interactable objects
+  scene.addEventListener('pinchstarted', (e) => {
+    const target = e.target;
+    if (target.classList.contains('interactable')) {
+      const decision = target.getAttribute('data-decision');
+      if (decision) triggerDecision(decision);
+    }
+  });
+
+  // Listen for open palm (fist gesture ends) to toggle score display
+  scene.addEventListener('thumbstickdown', () => {
+    // Show score panel on palm open — can be wired to gesture events
+  });
+});
+</script>
+
+</body>
+</html>
