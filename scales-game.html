@@ -460,12 +460,18 @@
         <a-entity light="type: directional; color: #ffffff; intensity: 0.6;" position="2 5 3"></a-entity>
 
         <a-entity id="camera-rig" position="0 0 0">
-            <a-camera id="main-cam" look-controls="enabled: true" wasd-controls="enabled: false">
-                <a-cursor id="mouse-pointer" raycaster="objects: .target-node" material="color: #000000; shader: flat;" geometry="primitive: ring; radiusInner: 0.007; radiusOuter: 0.013;"></a-cursor>
-            </a-camera>
+            <a-camera id="main-cam" look-controls="enabled: true" wasd-controls="enabled: false" cursor="rayOrigin: mouse;" raycaster="objects: .target-node"></a-camera>
 
-            <a-entity id="left-hand-cap" hand-tracking-controls="hand: left; modelStyle: mesh;"></a-entity>
-            <a-entity id="right-hand-cap" hand-tracking-controls="hand: right; modelStyle: mesh;"></a-entity>
+            <a-entity id="left-hand-cap" 
+                      hand-tracking-controls="hand: left; modelStyle: mesh;" 
+                      raycaster="objects: .target-node; far: 30; showLine: true;" 
+                      line="color: #fbbf24; opacity: 0.7" 
+                      cursor="downEvents: pinchstarted; upEvents: pinchended"></a-entity>
+            <a-entity id="right-hand-cap" 
+                      hand-tracking-controls="hand: right; modelStyle: mesh;" 
+                      raycaster="objects: .target-node; far: 30; showLine: true;" 
+                      line="color: #fbbf24; opacity: 0.7" 
+                      cursor="downEvents: pinchstarted; upEvents: pinchended"></a-entity>
         </a-entity>
 
     </a-scene>
@@ -662,7 +668,7 @@
         // --- TUTORIAL ONBOARDING SEQUENCING DICTIONARIES [cite: 204] ---
         const onboardingWizardSteps = [
             { title: "Systemic Spatial Matrix ", body: "Welcome to SCALES. You have interpolated into an interactive architectural mapping designed to reveal the resource extractions of artificial intelligence." },
-            { title: "Hardware Interaction Bridge", body: "On desktop platforms, look around using mouse tracking and click directly to examine targets. On VR platforms, leverage tracking controllers to execute interactions." },
+            { title: "Hardware Interaction Bridge", body: "On desktop platforms, look around using mouse tracking and click directly to examine targets. On VR platforms, point with your hands and pinch your fingers to select targets." },
             { title: "Structural Evaluation Scales", body: "Your strategic selections modify global Ecology and Policy infrastructure metrics. Balance resource limitations to achieve your alignment goals." }
         ];
 
@@ -678,8 +684,8 @@
             } else {
                 document.getElementById('onboarding-wizard').classList.add('hidden');
                 if (runtimeState.selectedPlatform === 'vr') {
-                    // Disable desktop cursor if fully immersive VR is requested [cite: 126]
-                    document.getElementById('mouse-pointer').setAttribute('visible', 'false');
+                    // Disable mouse-based cursor component if in VR to avoid conflict with hand controllers
+                    document.getElementById('main-cam').removeAttribute('cursor');
                 }
             }
         }
@@ -694,9 +700,29 @@
         // --- INTERACTIVE RAYCAST LISTENER ARRAYS [cite: 128] ---
         AFRAME.registerComponent('target-node-listener', {
             init: function() {
-                this.el.addEventListener('click', () => {
-                    const nodeKey = this.el.getAttribute('data-node');
+                const el = this.el;
+                const mesh = el.querySelector('a-box, a-cylinder, a-cone');
+                const originalColor = mesh.getAttribute('color');
+
+                // Interaction Example: Hover Highlight Indicator
+                el.addEventListener('mouseenter', () => {
+                    if (!runtimeState.visitedNodes.has(el.getAttribute('data-node'))) {
+                        mesh.setAttribute('color', '#fbbf24'); // Highlight on hover
+                        el.setAttribute('animation', {property: 'scale', to: '1.1 1.1 1.1', dur: 200});
+                    }
+                });
+
+                el.addEventListener('mouseleave', () => {
+                    if (!runtimeState.visitedNodes.has(el.getAttribute('data-node'))) {
+                        mesh.setAttribute('color', originalColor);
+                        el.setAttribute('animation', {property: 'scale', to: '1 1 1', dur: 200});
+                    }
+                });
+
+                el.addEventListener('click', () => {
+                    const nodeKey = el.getAttribute('data-node');
                     if (nodeKey && !runtimeState.visitedNodes.has(nodeKey)) {
+                        el.setAttribute('animation__pop', {property: 'scale', from: '1.2 1.2 1.2', to: '1.1 1.1 1.1', dur: 300});
                         openDecisionModal(nodeKey);
                     }
                 });
