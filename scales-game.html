@@ -34,7 +34,7 @@
             color: var(--text-dark);
         }
 
-        /* --- 2D HTML INTERFACES [cite: 190] --- */
+        /* --- 2D HTML INTERFACES --- */
         .ui-screen {
             position: absolute;
             top: 0;
@@ -46,7 +46,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: rgba(226, 232, 240, 0.85); /* Semi-transparent to reveal 360 background */
+            background-color: rgba(226, 232, 240, 0.85);
             backdrop-filter: blur(8px);
             padding: 2rem;
             transition: opacity 0.3s ease, visibility 0.3s;
@@ -58,7 +58,7 @@
             pointer-events: none;
         }
 
-        /* Global Structural Back Button [cite: 194, 196, 198] */
+        /* Global Structural Back Button */
         .back-btn {
             position: absolute;
             top: 2rem;
@@ -85,7 +85,7 @@
             margin-bottom: 2rem;
         }
         .logo-graphic {
-            width: 320px; /* Base width for 'long' image format */
+            width: 320px;
             height: auto;
             max-width: 90%;
             margin-bottom: 1rem;
@@ -110,7 +110,7 @@
             text-align: center;
         }
 
-        /* Uniform Button Framework [cite: 191, 194, 198] */
+        /* Uniform Button Framework */
         .btn-group {
             display: flex;
             gap: 1.5rem;
@@ -135,7 +135,7 @@
             color: #ffffff;
         }
 
-        /* Scoreboard Structural Rules [cite: 195] */
+        /* Scoreboard Structural Rules */
         .sb-layout {
             background: #ffffff;
             border-radius: 16px;
@@ -210,7 +210,7 @@
             font-size: 0.9rem;
         }
 
-        /* --- 3D INTERACTIVE UI PANELS & HUD overlays --- */
+        /* --- 3D INTERACTIVE UI PANELS & HUD OVERLAYS --- */
         #sim-hud {
             position: absolute;
             top: 1.5rem;
@@ -231,7 +231,7 @@
         }
         .hud-lbl { color: #64748b; margin-right: 0.25rem; }
 
-        /* Stage 6: The Sliding Decision Context Block [cite: 168] */
+        /* The Sliding Decision Context Block */
         #decision-panel {
             position: absolute;
             bottom: -100%;
@@ -279,7 +279,7 @@
 
         .consequence-text { font-size: 1rem; line-height: 1.5; color: #0f172a; margin-bottom: 1.5rem; font-style: italic; }
 
-        /* Stage 3.3: Interactive Tutorial Wizard Interface [cite: 204] */
+        /* Interactive Tutorial Wizard Interface */
         #onboarding-wizard {
             position: absolute;
             top: 0;
@@ -318,7 +318,7 @@
             <img src="Assets/Scales/logo.svg" class="logo-graphic" alt="Scales Logo">
         </div>
         <p class="prompt-text" style="max-width: 460px; font-weight: 400; color: #475569;">
-            This experience is for desktop and VR Headsets. To view the experience change you device.
+            This experience is for desktop and VR Headsets. To view the experience change your device.
         </p>
     </div>
 
@@ -338,7 +338,7 @@
         <div class="logo-box">
             <img src="Assets/Scales/logo.svg" class="logo-graphic" alt="Scales Logo">
         </div>
-        <p class="prompt-text">What device are you playing on? =</p>
+        <p class="prompt-text">What device are you playing on?</p>
         <div class="btn-group">
             <button class="btn-action" onclick="setPlatform('desktop')">🖥️ Desktop </button>
             <button class="btn-action" onclick="setPlatform('vr')">🥽 VR Headset </button>
@@ -436,22 +436,22 @@
             
             <a-entity id="node-datacenter" position="-6 1.5 -8" class="target-node" data-node="datacenter">
                 <a-box width="2" height="3" depth="2" color="#1e293b" material="roughness: 0.7;" animation__scale="property: scale; to: 1.1 1.1 1.1; dur: 200; startEvents: mouseenter;" animation__scale_leave="property: scale; to: 1 1 1; dur: 200; startEvents: mouseleave;"></a-box>
-                <a-text value="DATA CENTER" align="center" position="0 2.2 0" scale="1.2 1.2 1.2" font="montserrat" color="#000000"></a-text>
+                <a-text value="DATA CENTER" align="center" position="0 2.2 0" scale="1.2 1.2 1.2" font="kelson" color="#000000"></a-text>
             </a-entity>
 
             <a-entity id="node-watertower" position="-2 2 -10" class="target-node" data-node="watertower">
                 <a-cylinder radius="1" height="4" color="#334155" animation__scale="property: scale; to: 1.1 1.1 1.1; dur: 200; startEvents: mouseenter;" animation__scale_leave="property: scale; to: 1 1 1; dur: 200; startEvents: mouseleave;"></a-cylinder>
-                <a-text value="WATER TOWER" align="center" position="0 2.6 0" scale="1.2 1.2 1.2" font="montserrat" color="#000000"></a-text>
+                <a-text value="WATER TOWER" align="center" position="0 2.6 0" scale="1.2 1.2 1.2" font="kelson" color="#000000"></a-text>
             </a-entity>
 
             <a-entity id="node-mining" position="2 1 -10" class="target-node" data-node="mining">
                 <a-cone radius-bottom="1.75" radius-top="0.25" height="2.5" color="#475569" animation__scale="property: scale; to: 1.1 1.1 1.1; dur: 200; startEvents: mouseenter;" animation__scale_leave="property: scale; to: 1 1 1; dur: 200; startEvents: mouseleave;"></a-cone>
-                <a-text value="MINING PIT" align="center" position="0 1.8 0" scale="1.2 1.2 1.2" font="montserrat" color="#000000"></a-text>
+                <a-text value="MINING PIT" align="center" position="0 1.8 0" scale="1.2 1.2 1.2" font="kelson" color="#000000"></a-text>
             </a-entity>
 
             <a-entity id="node-scaling" position="6 1.75 -8" class="target-node" data-node="scaling">
                 <a-box width="1.5" height="3.5" depth="1.5" color="#0f172a" animation__scale="property: scale; to: 1.1 1.1 1.1; dur: 200; startEvents: mouseenter;" animation__scale_leave="property: scale; to: 1 1 1; dur: 200; startEvents: mouseleave;"></a-box>
-                <a-text value="SCALING LOGIC" align="center" position="0 2.4 0" scale="1.2 1.2 1.2" font="montserrat" color="#000000"></a-text>
+                <a-text value="SCALING LOGIC" align="center" position="0 2.4 0" scale="1.2 1.2 1.2" font="kelson" color="#000000"></a-text>
             </a-entity>
 
         </a-entity>
@@ -461,12 +461,27 @@
 
         <a-entity id="camera-rig" position="0 0 0">
             <a-camera id="main-cam" look-controls="enabled: true" wasd-controls="enabled: false" cursor="rayOrigin: mouse;" raycaster="objects: .target-node">
-                <a-entity id="vr-hud" position="0.55 0.35 -1.2" visible="false">
-                    <a-plane width="0.45" height="0.25" color="#ffffff" material="opacity: 0.7; transparent: true;"></a-plane>
-                    <a-text id="vr-hud-eco" value="ECOLOGY: 41%" position="-0.2 0.08 0.01" color="#000" scale="0.25 0.25 0.25" align="left" font="montserrat"></a-text>
-                    <a-text id="vr-hud-pol" value="POLICY: 41%" position="-0.2 0 0.01" color="#000" scale="0.25 0.25 0.25" align="left" font="montserrat"></a-text>
-                    <a-text id="vr-hud-goals" value="GOALS: 0%" position="-0.2 -0.08 0.01" color="#000" scale="0.25 0.25 0.25" align="left" font="montserrat"></a-text>
+                
+                <a-entity id="vr-hud" position="0 -0.6 -1" scale="0.3 0.3 0.3" visible="false">
+                    <a-plane color="#393939" opacity="0.8" width="2.2" height="0.6" position="0.1 0 -0.02" material="shader: flat; transparent: true;"></a-plane>
+
+                    <a-text value="CURRENT METRICS" align="left" position="-0.9 0.18 0.01" width="2.5" font="kelson" color="#FFFFFF"></a-text>
+                    
+                    <a-entity id="hud-metrics-container" position="0 0 0">
+                        <a-entity id="hud-eco-wrapper" position="-0.9 -0.05 0.01">
+                            <a-text id="vr-hud-eco" value="ECOLOGY: --%" align="left" font="kelson" color="#FFFFFF" width="2.8"></a-text>
+                        </a-entity>
+
+                        <a-entity id="hud-pol-wrapper" position="-0.25 -0.05 0.01">
+                            <a-text id="vr-hud-pol" value="POLICY: --%" align="left" font="kelson" color="#FFFFFF" width="2.8"></a-text>
+                        </a-entity>
+
+                        <a-entity id="hud-goals-wrapper" position="0.4 -0.05 0.01">
+                            <a-text id="vr-hud-goals" value="GOALS: --%" align="left" font="kelson" color="#FFFFFF" width="2.8"></a-text>
+                        </a-entity>
+                    </a-entity>
                 </a-entity>
+
             </a-camera>
 
             <a-entity id="left-hand-cap" 
@@ -484,70 +499,68 @@
     </a-scene>
 
     <script>
-        // --- IMMERSIVE SYSTEM DATA ARCHITECTURES (PRD SECTIONS 2.2.1 - 2.3.1) ---
+        // --- IMMERSIVE SYSTEM DATA ARCHITECTURES ---
         const environmentalStates = [
-            { max: 20, color: "#ef4444", label: "Collapse / Hyper growth [cite: 153]" },
-            { max: 40, color: "#f97316", label: "Disaster / Accelerated [cite: 153]" },
-            { max: 60, color: "#64748b", label: "Zero Point Standard [cite: 153]" },
-            { max: 80, color: "#3b82f6", label: "Preservation / Intentional [cite: 153]" },
-            { max: 100, color: "#10b981", label: "Growth / Slow & Redistributive [cite: 153]" }
+            { max: 20, color: "#ef4444", label: "Collapse / Hyper growth" },
+            { max: 40, color: "#f97316", label: "Disaster / Accelerated" },
+            { max: 60, color: "#64748b", label: "Zero Point Standard" },
+            { max: 80, color: "#3b82f6", label: "Preservation / Intentional" },
+            { max: 100, color: "#10b981", label: "Growth / Slow & Redistributive" }
         ];
 
         const fullDecisionsMatrix = {
             datacenter: {
-                title: "Data Center Matrix Deployment [cite: 165]",
-                tag: "Zone 5.1: The Ecology Simulation [cite: 165]",
-                context: "AI compute nodes require immense geographic power grids and deep landscape modifications[cite: 111, 115]. Select deployment vector:",
+                title: "Data Center Matrix Deployment",
+                tag: "Zone 5.1: The Ecology Simulation",
+                context: "AI compute nodes require immense geographic power grids and deep landscape modifications. Select deployment vector:",
                 choices: [
-                    { label: "Water-Stressed Region Deployment (MANAGE) [cite: 165, 171]", eco: -15, pol: -10, text: "Centralized infrastructure deployed to water-scarce territories, maximizing output while straining regional ecosystems[cite: 115, 171]." },
-                    { label: "Build Renewable Clean Infrastructure (INCLUDE) [cite: 165, 173]", eco: 20, pol: 5, text: "Softens external infrastructure impacts by funding localized green power inputs directly within standard operations[cite: 173]." },
-                    { label: "Deploy Distributed Compute Matrices (DIFFER) [cite: 165, 172]", eco: 10, pol: 10, text: "Diverges from standard industrial cloud server clusters to support local computing resource structures[cite: 172]." }
+                    { label: "Water-Stressed Region Deployment (MANAGE)", eco: -15, pol: -10, text: "Centralized infrastructure deployed to water-scarce territories, maximizing output while straining regional ecosystems." },
+                    { label: "Build Renewable Clean Infrastructure (INCLUDE)", eco: 20, pol: 5, text: "Softens external infrastructure impacts by funding localized green power inputs directly within standard operations." },
+                    { label: "Deploy Distributed Compute Matrices (DIFFER)", eco: 10, pol: 10, text: "Diverges from standard industrial cloud server clusters to support local computing resource structures." }
                 ]
             },
             watertower: {
-                title: "Water Tower Evaporative Loops [cite: 165]",
-                tag: "Zone 5.1: The Ecology Simulation [cite: 165]",
-                context: "Supercomputer optimization layers consume massive quantities of natural localized aquatic resources[cite: 115].",
+                title: "Water Tower Evaporative Loops",
+                tag: "Zone 5.1: The Ecology Simulation",
+                context: "Supercomputer optimization layers consume massive quantities of natural localized aquatic resources.",
                 choices: [
-                    { label: "Continue Baseline Evaporative Cooling (MANAGE) [cite: 165, 171]", eco: -20, pol: -5, text: "Prioritizes corporate optimization models while drawing heavily from communal water reserves[cite: 115, 171]." },
-                    { label: "Retrofit Advanced Air-Cooled Systems (INCLUDE) [cite: 165, 173]", eco: 15, pol: 8, text: "Implements eco-efficiency upgrades to minimize physical liquid consumption through technical iterations[cite: 173]." },
-                    { label: "Public Usage Open Disclosures (DIFFER) [cite: 166, 172]", eco: 5, pol: 15, text: "Exposes environmental metadata to public validation, ceding operational reporting parameters to local oversight[cite: 172]." }
+                    { label: "Continue Baseline Evaporative Cooling (MANAGE)", eco: -20, pol: -5, text: "Prioritizes corporate optimization models while drawing heavily from communal water reserves." },
+                    { label: "Retrofit Advanced Air-Cooled Systems (INCLUDE)", eco: 15, pol: 8, text: "Implements eco-efficiency upgrades to minimize physical liquid consumption through technical iterations." },
+                    { label: "Public Usage Open Disclosures (DIFFER)", eco: 5, pol: 15, text: "Exposes environmental metadata to public validation, ceding operational reporting parameters to local oversight." }
                 ]
             },
             mining: {
-                title: "Mining Pit Material Extractivism [cite: 167]",
-                tag: "Zone 5.1: The Ecology Simulation [cite: 167]",
-                context: "Hardware scaling depends entirely on rare-earth mineral extractions across resource-rich borders[cite: 111, 115].",
+                title: "Mining Pit Material Extractivism",
+                tag: "Zone 5.1: The Ecology Simulation",
+                context: "Hardware scaling depends entirely on rare-earth mineral extractions across resource-rich borders.",
                 choices: [
-                    { label: "Sustain Status-Quo Supply Lines (MANAGE) [cite: 167, 171]", eco: -12, pol: -20, text: "Enforces extraction pipelines to ensure cheap component distribution to core markets[cite: 115, 171]." },
-                    { label: "Establish Sovereign Local Processing (INCLUDE) [cite: 167, 173]", eco: 8, pol: 20, text: "Supports community economic frameworks while maintaining baseline material supply chains[cite: 173]." },
-                    { label: "Fund Synthetic Alternative Research (DIFFER) [cite: 167, 172]", eco: 3, pol: 10, text: "Invests in alternative material matrices to break dependencies on traditional supply paths[cite: 172]." }
+                    { label: "Sustain Status-Quo Supply Lines (MANAGE)", eco: -12, pol: -20, text: "Enforces extraction pipelines to ensure cheap component distribution to core markets." },
+                    { label: "Establish Sovereign Local Processing (INCLUDE)", eco: 8, pol: 20, text: "Supports community economic frameworks while maintaining baseline material supply chains." },
+                    { label: "Fund Synthetic Alternative Research (DIFFER)", eco: 3, pol: 10, text: "Invests in alternative material matrices to break dependencies on traditional supply paths." }
                 ]
             },
             scaling: {
-                title: "Algorithmic Scaling Horizons [cite: 167]",
-                tag: "Zone 5.1: The Ecology Simulation [cite: 167]",
-                context: "Exponential training requirements generate diminishing optimization returns at extreme ecological expenses[cite: 112, 115].",
+                title: "Algorithmic Scaling Horizons",
+                tag: "Zone 5.1: The Ecology Simulation",
+                context: "Exponential training requirements generate diminishing optimization returns at extreme ecological expenses.",
                 choices: [
-                    { label: "Scale Computational Architecture Aggressively (MANAGE) [cite: 167, 171]", eco: -25, pol: -8, text: "Pushes maximum hardware limits to build highly generalized compute capabilities[cite: 171]." },
-                    { label: "Pivot to Lean Efficiency Research Models (DIFFER) [cite: 167, 172]", eco: 18, pol: 5, text: "Rejects large-scale resource models to focus on highly targeted processing solutions[cite: 172]." },
-                    { label: "Lobby for International Compute Caps (INCLUDE) [cite: 167, 173]", eco: 12, pol: 12, text: "Advocates for formal state-enforced regulatory boundaries to govern industry scaling behavior[cite: 173]." }
+                    { label: "Scale Computational Architecture Aggressively (MANAGE)", eco: -25, pol: -8, text: "Pushes maximum hardware limits to build highly generalized compute capabilities." },
+                    { label: "Pivot to Lean Efficiency Research Models (DIFFER)", eco: 18, pol: 5, text: "Rejects large-scale resource models to focus on highly targeted processing solutions." },
+                    { label: "Lobby for International Compute Caps (INCLUDE)", eco: 12, pol: 12, text: "Advocates for formal state-enforced regulatory boundaries to govern industry scaling behavior." }
                 ]
             }
         };
 
-        // --- OPPONENT WEIGHT PARAMETERS MATRIX CONFIGURATION [cite: 182, 183, 184, 185] ---
         const opponentWeightMatrix = {
-            "Big Tech": { w1: -0.2, w2: 0.2, w3: 7.0 },       // Indifferent to Ecology, targets raw Goal growth [cite: 183]
-            "The Nation State": { w1: 0.3, w2: 0.5, w3: 0.5 }, // Prioritizes regulatory balance and policy alignment [cite: 184]
-            "The Multitude": { w1: 0.6, w2: -0.4, w3: 1.0 }   // Focuses heavily on resource preservation [cite: 185]
+            "Big Tech": { w1: -0.2, w2: 0.2, w3: 7.0 },
+            "The Nation State": { w1: 0.3, w2: 0.5, w3: 0.5 },
+            "The Multitude": { w1: 0.6, w2: -0.4, w3: 1.0 }
         };
 
-        // --- CORE RUNTIME STATE COMPASS CONFIGURATIONS [cite: 151] ---
         let runtimeState = {
             selectedPlatform: null,
             playerArchetype: null,
-            ecology: 41, // Initialize at Zero-Point scale thresholds [cite: 151, 153]
+            ecology: 41,
             policy: 41,
             goals: 0,
             wizardIndex: 0,
@@ -555,7 +568,6 @@
             visitedNodes: new Set()
         };
 
-        // --- SYSTEM REGISTRATION INTERFACE [cite: 123, 130] ---
         window.addEventListener('DOMContentLoaded', () => {
             const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             if (isMobileDevice) {
@@ -567,7 +579,6 @@
             verifyLedgerStorage();
         });
 
-        // --- ASYNCHRONOUS LOCAL STORAGE PERSISTENCE SUBSYSTEM [cite: 130] ---
         function verifyLedgerStorage() {
             if (!localStorage.getItem('scales_ledger_v2')) {
                 const legacySeed = [
@@ -587,10 +598,7 @@
             const dataPool = JSON.parse(localStorage.getItem('scales_ledger_v2')) || [];
             const container = document.getElementById('ledger-rows');
             
-            // Apply Dynamic Filter Criteria [cite: 195]
             let computedRows = dataPool.filter(item => dynamicActiveFilter === "all" || item.position === dynamicActiveFilter);
-            
-            // Apply Dynamic Sorting Matrix [cite: 195]
             computedRows.sort((x, y) => y[dynamicActiveSort] - x[dynamicActiveSort]);
 
             container.innerHTML = computedRows.map(row => `
@@ -618,7 +626,6 @@
             buildLedgerUI();
         }
 
-        // --- PROCEDURAL ARCHITECTURAL CANVAS COORDINATE MATRIX GENERATOR [cite: 203] ---
         function renderProceduralGridMesh() {
             const canvas = document.getElementById('procedural-grid-mesh');
             const context = canvas.getContext('2d');
@@ -634,7 +641,6 @@
             }
         }
 
-        // --- SYSTEM NAVIGATION HUB MATRIX MAPPINGS ---
         function navTo(targetId) {
             document.querySelectorAll('.ui-screen').forEach(screen => screen.classList.add('hidden'));
             document.getElementById(targetId).classList.remove('hidden');
@@ -648,21 +654,14 @@
         function setArchetype(archetypeChoice) {
             runtimeState.playerArchetype = archetypeChoice;
             
-            // Hide selection interface structures [cite: 197]
             document.getElementById('screen-position').classList.add('hidden');
-            
-            // Display WebXR spatial rendering components [cite: 199]
             document.querySelector('a-scene').classList.remove('hidden');
             document.getElementById('sim-hud').classList.remove('hidden');
             document.getElementById('onboarding-wizard').classList.remove('hidden');
             
-            // Enable 3D HUD specifically for VR platforms
-            if (runtimeState.selectedPlatform === 'vr') {
-                document.getElementById('vr-hud').setAttribute('visible', 'true');
-            }
+            document.getElementById('vr-hud').setAttribute('visible', 'true');
 
             refreshHUD();
-            syncEnvironmentalColors();
             initiateWizardOnboarding();
         }
 
@@ -671,23 +670,17 @@
             document.getElementById('hud-val-pol').innerText = `${runtimeState.policy}%`;
             document.getElementById('hud-val-goals').innerText = `${runtimeState.goals}%`;
 
-            // Sync values to the 3D VR HUD
             const vrEco = document.getElementById('vr-hud-eco');
             const vrPol = document.getElementById('vr-hud-pol');
             const vrGoals = document.getElementById('vr-hud-goals');
+            
             if (vrEco) vrEco.setAttribute('value', `ECOLOGY: ${runtimeState.ecology}%`);
             if (vrPol) vrPol.setAttribute('value', `POLICY: ${runtimeState.policy}%`);
             if (vrGoals) vrGoals.setAttribute('value', `GOALS: ${runtimeState.goals}%`);
         }
 
-        // --- SPATIAL ENVIRONMENT BACKGROUND MAP ADAPTERS [cite: 149, 200] ---
-        function syncEnvironmentalColors() {
-            // Background color shifting disabled for 360 image environment
-        }
-
-        // --- TUTORIAL ONBOARDING SEQUENCING DICTIONARIES [cite: 204] ---
         const onboardingWizardSteps = [
-            { title: "Systemic Spatial Matrix ", body: "Welcome to SCALES. You have interpolated into an interactive architectural mapping designed to reveal the resource extractions of artificial intelligence." },
+            { title: "Systemic Spatial Matrix", body: "Welcome to SCALES. You have interpolated into an interactive architectural mapping designed to reveal the resource extractions of artificial intelligence." },
             { title: "Hardware Interaction Bridge", body: "On desktop platforms, look around using mouse tracking and click directly to examine targets. On VR platforms, point with your hands and pinch your fingers to select targets." },
             { title: "Structural Evaluation Scales", body: "Your strategic selections modify global Ecology and Policy infrastructure metrics. Balance resource limitations to achieve your alignment goals." }
         ];
@@ -704,7 +697,6 @@
             } else {
                 document.getElementById('onboarding-wizard').classList.add('hidden');
                 if (runtimeState.selectedPlatform === 'vr') {
-                    // Disable mouse-based cursor component if in VR to avoid conflict with hand controllers
                     document.getElementById('main-cam').removeAttribute('cursor');
                 }
             }
@@ -717,17 +709,15 @@
             document.getElementById('w-btn').innerText = (runtimeState.wizardIndex === onboardingWizardSteps.length - 1) ? "Initialize" : "Continue";
         }
 
-        // --- INTERACTIVE RAYCAST LISTENER ARRAYS [cite: 128] ---
         AFRAME.registerComponent('target-node-listener', {
             init: function() {
                 const el = this.el;
                 const mesh = el.querySelector('a-box, a-cylinder, a-cone');
                 const originalColor = mesh.getAttribute('color');
 
-                // Interaction Example: Hover Highlight Indicator
                 el.addEventListener('mouseenter', () => {
                     if (!runtimeState.visitedNodes.has(el.getAttribute('data-node'))) {
-                        mesh.setAttribute('color', '#fbbf24'); // Highlight on hover
+                        mesh.setAttribute('color', '#fbbf24');
                         el.setAttribute('animation', {property: 'scale', to: '1.1 1.1 1.1', dur: 200});
                     }
                 });
@@ -749,7 +739,6 @@
             }
         });
 
-        // Map component hooks automatically to interactable targets
         document.querySelectorAll('.target-node').forEach(node => {
             node.setAttribute('target-node-listener', '');
         });
@@ -782,47 +771,38 @@
             const nodeContext = fullDecisionsMatrix[runtimeState.activeNodeKey];
             const choice = nodeContext.choices[choiceIndex];
             
-            // Apply direct modification deltas to state profiles [cite: 161]
             runtimeState.ecology = Math.max(0, Math.min(100, runtimeState.ecology + choice.eco));
             runtimeState.policy = Math.max(0, Math.min(100, runtimeState.policy + choice.pol));
-            runtimeState.goals = Math.min(100, runtimeState.goals + 25); // Set static goal iterations completed [cite: 148]
+            runtimeState.goals = Math.min(100, runtimeState.goals + 25);
             
-            // --- AUTOMATED OPPONENT EVALUATION SYSTEMS HOOK [cite: 178] ---
             triggerOpponentCalculations(runtimeState.activeNodeKey);
             
             refreshHUD();
-            syncEnvironmentalColors();
             
-            // Mark target node as resolved
             runtimeState.visitedNodes.add(runtimeState.activeNodeKey);
             const physicalSceneNode = document.getElementById(`node-${runtimeState.activeNodeKey}`);
             if (physicalSceneNode) {
-                // Dim physical components to indicate resolved vectors
                 physicalSceneNode.querySelector('a-box, a-cylinder, a-cone').setAttribute('color', '#64748b');
             }
 
-            // Advance UI panel context frame to consequence review state [cite: 168]
             document.getElementById('panel-interactive-content').classList.add('hidden');
             document.getElementById('panel-consequence-msg').innerText = choice.text;
             document.getElementById('panel-consequence-content').classList.remove('hidden');
         }
 
-        // --- OPPONENT WEIGHT UTILITY SYSTEM ENGINE [cite: 178, 179, 180, 181] ---
         function triggerOpponentCalculations(nodeKey) {
             const contextData = fullDecisionsMatrix[nodeKey];
             
-            // Parse through available forces to execute processing models [cite: 156, 178]
             Object.keys(opponentWeightMatrix).forEach(archetype => {
-                if (archetype === runtimeState.playerArchetype) return; // Skip human controller [cite: 156]
+                if (archetype === runtimeState.playerArchetype) return;
                 
                 const configuration = opponentWeightMatrix[archetype];
                 let optimalScore = -Infinity;
                 let selectedDeltaChoice = null;
                 
-                // Calculate local utility mapping profiles: U = (w1 * dEco) + (w2 * dPol) + (w3 * dGoals) [cite: 180]
                 contextData.choices.forEach(option => {
                     const standardGoalDelta = 25; 
-                    const expectedUtility = (configuration.w1 * option.eco) + (configuration.w2 * option.pol) + (configuration.w3 * standardGoalDelta); // [cite: 180]
+                    const expectedUtility = (configuration.w1 * option.eco) + (configuration.w2 * option.pol) + (configuration.w3 * standardGoalDelta);
                     
                     if (expectedUtility > optimalScore) {
                         optimalScore = expectedUtility;
@@ -830,7 +810,6 @@
                     }
                 });
                 
-                // Inject chosen opponent modification metrics into master state parameters [cite: 181]
                 if (selectedDeltaChoice) {
                     runtimeState.ecology = Math.max(0, Math.min(100, runtimeState.ecology + selectedDeltaChoice.eco));
                     runtimeState.policy = Math.max(0, Math.min(100, runtimeState.policy + selectedDeltaChoice.pol));
@@ -840,14 +819,11 @@
 
         function closeDecisionPanel() {
             document.getElementById('decision-panel').classList.remove('active');
-            
-            // Verify terminal evaluation conditions [cite: 187, 189]
             if (runtimeState.ecology < 20 || runtimeState.visitedNodes.size === Object.keys(fullDecisionsMatrix).length) {
                 terminateSimulationSession();
             }
         }
 
-        // --- CONCLUSION LEDGER REGISTRATION STAGES ---
         function terminateSimulationSession() {
             const dataPool = JSON.parse(localStorage.getItem('scales_ledger_v2')) || [];
             
@@ -864,21 +840,19 @@
             
             alert("SYSTEM SYSTEMIC MODES RESOLVED: Appending calculations to historical ledger ledger.");
             
-            // Clean spatial visibility states and drop back to historical table dashboards
             document.getElementById('sim-hud').classList.add('hidden');
             document.querySelector('a-scene').classList.add('hidden');
+            
             document.getElementById('vr-hud').setAttribute('visible', 'false');
             
             buildLedgerUI();
             navTo('screen-scoreboard');
             
-            // Reset runtime configurations to base models
             runtimeState.visitedNodes.clear();
             runtimeState.ecology = 41;
             runtimeState.policy = 41;
             runtimeState.goals = 0;
             
-            // Refresh colors on original node entities
             document.getElementById('node-datacenter').querySelector('a-box').setAttribute('color', '#1e293b');
             document.getElementById('node-watertower').querySelector('a-cylinder').setAttribute('color', '#334155');
             document.getElementById('node-mining').querySelector('a-cone').setAttribute('color', '#475569');
