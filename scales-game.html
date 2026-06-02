@@ -461,11 +461,11 @@
 
         <a-entity id="camera-rig" position="0 0 0">
             <a-camera id="main-cam" look-controls="enabled: true" wasd-controls="enabled: false" cursor="rayOrigin: mouse;" raycaster="objects: .target-node">
-                <a-entity id="vr-hud" position="0 -0.6 -1.2" visible="false">
-                    <a-plane width="1.2" height="0.2" color="#ffffff" material="opacity: 0.9; transparent: true;"></a-plane>
-                    <a-text id="vr-hud-eco" value="ECOLOGY: 41%" position="-0.55 0 0.01" color="#000" scale="0.3 0.3 0.3" align="left" font="montserrat"></a-text>
-                    <a-text id="vr-hud-pol" value="POLICY: 41%" position="-0.15 0 0.01" color="#000" scale="0.3 0.3 0.3" align="left" font="montserrat"></a-text>
-                    <a-text id="vr-hud-goals" value="GOALS: 0%" position="0.25 0 0.01" color="#000" scale="0.3 0.3 0.3" align="left" font="montserrat"></a-text>
+                <a-entity id="vr-hud" position="0.55 0.35 -1.2" visible="false">
+                    <a-plane width="0.45" height="0.25" color="#ffffff" material="opacity: 0.7; transparent: true;"></a-plane>
+                    <a-text id="vr-hud-eco" value="ECOLOGY: 41%" position="-0.2 0.08 0.01" color="#000" scale="0.25 0.25 0.25" align="left" font="montserrat"></a-text>
+                    <a-text id="vr-hud-pol" value="POLICY: 41%" position="-0.2 0 0.01" color="#000" scale="0.25 0.25 0.25" align="left" font="montserrat"></a-text>
+                    <a-text id="vr-hud-goals" value="GOALS: 0%" position="-0.2 -0.08 0.01" color="#000" scale="0.25 0.25 0.25" align="left" font="montserrat"></a-text>
                 </a-entity>
             </a-camera>
 
