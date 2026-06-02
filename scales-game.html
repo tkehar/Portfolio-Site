@@ -460,7 +460,14 @@
         <a-entity light="type: directional; color: #ffffff; intensity: 0.6;" position="2 5 3"></a-entity>
 
         <a-entity id="camera-rig" position="0 0 0">
-            <a-camera id="main-cam" look-controls="enabled: true" wasd-controls="enabled: false" cursor="rayOrigin: mouse;" raycaster="objects: .target-node"></a-camera>
+            <a-camera id="main-cam" look-controls="enabled: true" wasd-controls="enabled: false" cursor="rayOrigin: mouse;" raycaster="objects: .target-node">
+                <a-entity id="vr-hud" position="0 -0.6 -1.2" visible="false">
+                    <a-plane width="1.2" height="0.2" color="#ffffff" material="opacity: 0.9; transparent: true;"></a-plane>
+                    <a-text id="vr-hud-eco" value="ECOLOGY: 41%" position="-0.55 0 0.01" color="#000" scale="0.3 0.3 0.3" align="left" font="montserrat"></a-text>
+                    <a-text id="vr-hud-pol" value="POLICY: 41%" position="-0.15 0 0.01" color="#000" scale="0.3 0.3 0.3" align="left" font="montserrat"></a-text>
+                    <a-text id="vr-hud-goals" value="GOALS: 0%" position="0.25 0 0.01" color="#000" scale="0.3 0.3 0.3" align="left" font="montserrat"></a-text>
+                </a-entity>
+            </a-camera>
 
             <a-entity id="left-hand-cap" 
                       hand-tracking-controls="hand: left; modelStyle: mesh;" 
@@ -649,6 +656,11 @@
             document.getElementById('sim-hud').classList.remove('hidden');
             document.getElementById('onboarding-wizard').classList.remove('hidden');
             
+            // Enable 3D HUD specifically for VR platforms
+            if (runtimeState.selectedPlatform === 'vr') {
+                document.getElementById('vr-hud').setAttribute('visible', 'true');
+            }
+
             refreshHUD();
             syncEnvironmentalColors();
             initiateWizardOnboarding();
@@ -658,6 +670,14 @@
             document.getElementById('hud-val-eco').innerText = `${runtimeState.ecology}%`;
             document.getElementById('hud-val-pol').innerText = `${runtimeState.policy}%`;
             document.getElementById('hud-val-goals').innerText = `${runtimeState.goals}%`;
+
+            // Sync values to the 3D VR HUD
+            const vrEco = document.getElementById('vr-hud-eco');
+            const vrPol = document.getElementById('vr-hud-pol');
+            const vrGoals = document.getElementById('vr-hud-goals');
+            if (vrEco) vrEco.setAttribute('value', `ECOLOGY: ${runtimeState.ecology}%`);
+            if (vrPol) vrPol.setAttribute('value', `POLICY: ${runtimeState.policy}%`);
+            if (vrGoals) vrGoals.setAttribute('value', `GOALS: ${runtimeState.goals}%`);
         }
 
         // --- SPATIAL ENVIRONMENT BACKGROUND MAP ADAPTERS [cite: 149, 200] ---
@@ -847,6 +867,7 @@
             // Clean spatial visibility states and drop back to historical table dashboards
             document.getElementById('sim-hud').classList.add('hidden');
             document.querySelector('a-scene').classList.add('hidden');
+            document.getElementById('vr-hud').setAttribute('visible', 'false');
             
             buildLedgerUI();
             navTo('screen-scoreboard');
