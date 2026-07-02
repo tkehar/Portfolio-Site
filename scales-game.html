@@ -430,29 +430,10 @@
             <canvas id="procedural-grid-mesh" width="512" height="512"></canvas>
         </a-assets>
 
-        <a-sky id="sky-environment" src="Assets/Scales/SCALES_SETTING Eye.png" rotation="0 -90 0"></a-sky>
-
+        <a-sky id="sky-environment" src="Assets/Scales/SCALES_SETTING_Test.png"></a-sky>
         <a-entity id="simulation-nodes" position="0 0 0">
             
-            <a-entity id="node-datacenter" position="-6 1.5 -8" class="target-node" data-node="datacenter">
-                <a-box width="2" height="3" depth="2" color="#1e293b" material="roughness: 0.7;" animation__scale="property: scale; to: 1.1 1.1 1.1; dur: 200; startEvents: mouseenter;" animation__scale_leave="property: scale; to: 1 1 1; dur: 200; startEvents: mouseleave;"></a-box>
-                <a-text value="DATA CENTER" align="center" position="0 2.2 0" scale="1.2 1.2 1.2" font="kelson" color="#000000"></a-text>
-            </a-entity>
-
-            <a-entity id="node-watertower" position="-2 2 -10" class="target-node" data-node="watertower">
-                <a-cylinder radius="1" height="4" color="#334155" animation__scale="property: scale; to: 1.1 1.1 1.1; dur: 200; startEvents: mouseenter;" animation__scale_leave="property: scale; to: 1 1 1; dur: 200; startEvents: mouseleave;"></a-cylinder>
-                <a-text value="WATER TOWER" align="center" position="0 2.6 0" scale="1.2 1.2 1.2" font="kelson" color="#000000"></a-text>
-            </a-entity>
-
-            <a-entity id="node-mining" position="2 1 -10" class="target-node" data-node="mining">
-                <a-cone radius-bottom="1.75" radius-top="0.25" height="2.5" color="#475569" animation__scale="property: scale; to: 1.1 1.1 1.1; dur: 200; startEvents: mouseenter;" animation__scale_leave="property: scale; to: 1 1 1; dur: 200; startEvents: mouseleave;"></a-cone>
-                <a-text value="MINING PIT" align="center" position="0 1.8 0" scale="1.2 1.2 1.2" font="kelson" color="#000000"></a-text>
-            </a-entity>
-
-            <a-entity id="node-scaling" position="6 1.75 -8" class="target-node" data-node="scaling">
-                <a-box width="1.5" height="3.5" depth="1.5" color="#0f172a" animation__scale="property: scale; to: 1.1 1.1 1.1; dur: 200; startEvents: mouseenter;" animation__scale_leave="property: scale; to: 1 1 1; dur: 200; startEvents: mouseleave;"></a-box>
-                <a-text value="SCALING LOGIC" align="center" position="0 2.4 0" scale="1.2 1.2 1.2" font="kelson" color="#000000"></a-text>
-            </a-entity>
+        
 
         </a-entity>
 
