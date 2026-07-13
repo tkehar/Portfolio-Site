@@ -1,0 +1,181 @@
+/* --- Territory selection overlay (legacy HTML) --- */
+
+.territory-select {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    z-index: 10001;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.territory-select.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.territory-select__panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    max-width: 720px;
+    width: calc(100% - 48px);
+    padding: 40px 32px;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #fff;
+    text-align: center;
+}
+
+.territory-select__tag,
+.territory-select__scoreboard-label {
+    display: none;
+}
+
+.territory-select__title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.territory-select__subtitle {
+    margin: -16px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.65);
+    max-width: 480px;
+}
+
+.territory-select__scoreboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.territory-select__scoreboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+}
+
+.territory-select__scoreboard-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.territory-select__scoreboard-name {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.territory-select__scoreboard-value {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.territory-select__scoreboard-totals {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.territory-select__scoreboard-sep {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.territory-select__scoreboard-empty {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 13px;
+}
+
+.territory-select__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+}
+
+.territory-select__card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 24px 16px;
+    background: #000;
+    border: 1px solid #fff;
+    cursor: pointer;
+    text-align: center;
+    font-family: inherit;
+    color: #fff;
+    transition: background 0.15s ease;
+}
+
+.territory-select__card:hover {
+    background: #111;
+}
+
+.territory-select__card.is-selected {
+    background: #111;
+}
+
+.territory-select__card-id {
+    display: none;
+}
+
+.territory-select__card-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.territory-select__card-tagline {
+    font-size: 12px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.territory-select__confirm {
+    padding: 12px 48px;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.territory-select__confirm:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.territory-select__confirm:not(:disabled):hover {
+    background: #fff;
+    color: #000;
+}
+
+@media (max-width: 720px) {
+    .territory-select__scoreboard-grid,
+    .territory-select__grid {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+    }
+}

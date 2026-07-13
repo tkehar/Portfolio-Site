@@ -1,0 +1,165 @@
+/* --- Peak finder overlay: focus-zone frame + data markers ---
+ * Machine-vision style: monospace type, square corners, solid label
+ * chips, leader lines with crosshairs — like object-detection overlays.
+ * Elements live inside <a-scene> so they stay visible in fullscreen.
+ * JS only sets marker `transform` and toggles .is-visible / .is-updated.
+ */
+
+/* ============ Focus-zone frame ============ */
+
+.peak-finder-frame {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    pointer-events: none;
+    z-index: 9997;
+}
+
+.peak-finder-frame__corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.85);
+}
+
+.peak-finder-frame__corner--tl {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.peak-finder-frame__corner--tr {
+    top: -2px;
+    right: -2px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.peak-finder-frame__corner--bl {
+    bottom: -2px;
+    left: -2px;
+    border-right: none;
+    border-top: none;
+}
+
+.peak-finder-frame__corner--br {
+    bottom: -2px;
+    right: -2px;
+    border-left: none;
+    border-top: none;
+}
+
+.peak-finder-frame__label {
+    position: absolute;
+    top: -22px;
+    left: 0;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ============ Data markers ============ */
+
+.data-marker {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+    padding: 3px 8px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 0;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    text-transform: uppercase;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 9998; /* above canvas, below the score card */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.12s linear;
+}
+
+.data-marker.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Leader line from label down to the anchor point */
+.data-marker::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 1px;
+    height: 18px;
+}
+
+/* Crosshair at the anchor point */
+.data-marker::before {
+    content: "+";
+    position: absolute;
+    top: calc(100% + 18px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.data-marker__title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #0a0a14;
+}
+
+.data-marker__value {
+    font-size: 11px;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+    color: #0a0a14;
+    transition: transform 0.15s ease;
+}
+
+/* Per-axis colors: chip background + leader line + crosshair */
+.data-marker--co2 {
+    background: #ffffff;
+}
+.data-marker--co2::after {
+    background: #a8a3a0;
+}
+.data-marker--co2::before {
+    color: #a8a3a0;
+}
+
+.data-marker--water {
+    background: #ffffff;
+}
+.data-marker--water::after {
+    background: #a8a3a0;
+}
+.data-marker--water::before {
+    color: #a8a3a0;
+}
+
+.data-marker--minerals {
+    background: #ffffff;
+}
+.data-marker--minerals::after {
+    background: #a8a3a0;
+}
+.data-marker--minerals::before {
+    color: #a8a3a0;
+}
+
+/* Pulse when the value changes */
+.data-marker.is-updated .data-marker__value {
+    transform: scale(1.2);
+}

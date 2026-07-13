@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Decision Environment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="database.js"></script>
+    <script src="js/territory-state.js"></script>
+    <script src="js/decision-state.js"></script>
+    <script src="js/scoring-system.js"></script>
+    <script src="js/game-stage.js"></script>
+    <script src="js/scoreboard-ui.js"></script>
+    <script src="js/session-store.js"></script>
+    <script src="js/session-recorder.js"></script>
+    <script src="js/audio-manager.js"></script>
+    <script src="js/stage-ui.js"></script>
+    <script src="js/components.js"></script>
+    <link rel="stylesheet" href="css/score-card.css">
+    <link rel="stylesheet" href="css/data-marker.css">
+    <link rel="stylesheet" href="css/game-over.css">
+    <link rel="stylesheet" href="css/enter-screen.css">
+    <link rel="stylesheet" href="css/territory-select.css">
+    <link rel="stylesheet" href="css/territory-onboarding.css">
+    <style>
+        body { margin: 0; font-family: system-ui, sans-serif; }
+        a-scene { cursor: grab; }
+        a-scene.is-dragging { cursor: grabbing; }
+        #overlay-hint {
+            position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+            background: rgba(13, 13, 26, 0.85); color: #ccc; padding: 10px 20px;
+            border-radius: 8px; font-size: 13px; pointer-events: none; z-index: 10;
+            text-align: center; max-width: 90vw;
+        }
+        #overlay-hint kbd {
+            background: #333; padding: 2px 6px; border-radius: 3px; font-size: 12px;
+        }
+        #fullscreen-btn {
+            position: fixed; bottom: 16px; right: 16px; z-index: 9999;
+            background: rgba(13, 13, 26, 0.85); color: #ccc;
+            border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px;
+            padding: 8px 14px; font-size: 13px; font-family: system-ui, sans-serif;
+            cursor: pointer;
+        }
+        #fullscreen-btn:hover { background: rgba(40, 40, 70, 0.9); color: #fff; }
+    </style>
+</head>
+<body>
+    <a-scene
+        renderer="colorManagement: true"
+        xr-mode-ui="enabled: false"
+        data-stage="inclusive"
+        stage-controller
+        enter-screen
+        score-audio-watcher
+        score-hud
+        browser-input
+        peak-finder-frame
+        game-over
+        background="color: #0a0a14">
+
+        <div id="stage-fade" aria-hidden="true"></div>
+
+        <!-- HTML overlays live INSIDE a-scene so they stay visible in fullscreen.
+             Styling is managed in css/score-card.css -->
+        <div id="score-card" class="score-card" aria-label="Scores" style="display: none;">
+            <section class="score-card__group score-card__group--ecology" aria-label="Ecology">
+                <span class="score-card__group-label">Ecology</span>
+                <div class="score-card__group-items">
+                    <div class="score-card__item score-card__item--co2">
+                        <span class="score-card__label">CO2</span>
+                        <span class="score-card__value" id="score-co2">0</span>
+                    </div>
+                    <div class="score-card__item score-card__item--water">
+                        <span class="score-card__label">Water</span>
+                        <span class="score-card__value" id="score-water">0</span>
+                    </div>
+                    <div class="score-card__item score-card__item--electricity">
+                        <span class="score-card__label">Electricity</span>
+                        <span class="score-card__value" id="score-electricity">0</span>
+                    </div>
+                    <div class="score-card__item score-card__item--datacenter">
+                        <span class="score-card__label">Datacenters</span>
+                        <span class="score-card__value" id="score-datacenter">0</span>
+                    </div>
+                </div>
+            </section>
+            <section class="score-card__group score-card__group--goals" aria-label="Goals">
+                <span class="score-card__group-label">Goals</span>
+                <div class="score-card__group-items">
+                    <div class="score-card__item score-card__item--sovereignty">
+                        <span class="score-card__label">Sovereignty</span>
+                        <span class="score-card__value" id="score-sovereignty">0</span>
+                    </div>
+                    <div class="score-card__item score-card__item--power">
+                        <span class="score-card__label">Power</span>
+                        <span class="score-card__value" id="score-power">0</span>
+                    </div>
+                    <div class="score-card__item score-card__item--identity">
+                        <span class="score-card__label">Identity</span>
+                        <span class="score-card__value" id="score-identity">0</span>
+                    </div>
+                    <div class="score-card__item score-card__item--transparency" data-territory-goal="transparency">
+                        <span class="score-card__label">Transparency</span>
+                        <span class="score-card__value" id="score-transparency">0</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="territory-goal" class="territory-goal" aria-live="polite" style="display: none;">
+            <span class="territory-goal__label">Territory Goal</span>
+            <p class="territory-goal__text"></p>
+        </div>
+
+        <div id="overlay-hint" style="display: none;">
+            Drag to look around · Select territory panels · Answer Yes/No on the panel · <kbd>Y</kbd> / <kbd>N</kbd>
+        </div>
+
+        <button id="fullscreen-btn" type="button">⛶ Fullscreen</button>
+
+        <a-assets timeout="120000">
+            <img id="territory-grid-sky" src="assets/placeholders/Territory Grid.png">
+            <img id="map-sprite-1" src="assets/placeholders/Map_Visualization-1.png">
+            <img id="map-sprite-2" src="assets/placeholders/Map_Visualization-2.png">
+            <img id="map-sprite-3" src="assets/placeholders/Map_Visualization-3.png">
+            <img id="map-sprite-4" src="assets/placeholders/Map_Visualization-4-.png">
+            <img id="mirror-sprite-1" src="assets/placeholders/Mirror_1.png">
+            <img id="mirror-sprite-2" src="assets/placeholders/Mirror_2.png">
+            <img id="mirror-sprite-3" src="assets/placeholders/Mirror_3.png">
+            <img id="mirror-sprite-4" src="assets/placeholders/Mirror_4.png">
+            <img id="mirror-sprite-5" src="assets/placeholders/Mirror_5.png">
+            <img id="power-sprite-1" src="assets/placeholders/Power-1.png">
+            <img id="power-sprite-2" src="assets/placeholders/Power-2.png">
+            <img id="power-sprite-3" src="assets/placeholders/Power-3.png">
+            <img id="power-sprite-4" src="assets/placeholders/Power-4.png">
+            <img id="power-sprite-5" src="assets/placeholders/Power-5.png">
+            <img id="screen-sprite-1" src="assets/placeholders/Surveillance-1.png">
+            <img id="screen-sprite-2" src="assets/placeholders/Surveillance-2.png">
+            <img id="screen-sprite-3" src="assets/placeholders/Surveillance-3.png">
+            <img id="screen-sprite-4" src="assets/placeholders/Surveillance-4.png">
+            <img id="screen-sprite-5" src="assets/placeholders/Surveillance-5.png">
+            <img id="compute-sprite-1" src="assets/placeholders/Black_Box-1.png">
+            <img id="compute-sprite-2" src="assets/placeholders/Black_Box-2.png">
+            <img id="compute-sprite-3" src="assets/placeholders/Black_Box-3.png">
+            <img id="compute-sprite-4" src="assets/placeholders/Black_Box-4.png">
+            <img id="compute-sprite-5" src="assets/placeholders/Black_Box-5.png">
+        </a-assets>
+
+        <!-- Environment -->
+        <a-sky id="sky" src="#territory-grid-sky" radius="50" score-reactive-sky></a-sky>
+        <a-light type="ambient" color="#fff" intensity="0.8"></a-light>
+
+        <!-- Camera -->
+        <a-entity id="rig" position="0 1.6 0" mouse-drag-look territory-vr-select>
+            <a-camera id="camera"
+                      look-controls-enabled="false"
+                      wasd-controls-enabled="false"
+                      raycaster="objects: .clickable; far: 35"
+                      cursor="fuse: false; rayOrigin: mouse">
+            </a-camera>
+        </a-entity>
+
+        <a-entity decision-panel-host position="0 1.55 -4"></a-entity>
+
+        <!-- ============================================================ -->
+        <!-- DATA OBJECTS (Game Glossary — 5 types)                       -->
+        <!-- ============================================================ -->
+
+        <a-entity id="obj-map" position="16.06 2.4 -17.84"
+                  data-object="objectId: map"
+                  score-reactive-object="scoreAxis: ecology; objectId: map"
+                  data-marker
+                  look-at="[camera]">
+            <a-image class="object-mesh" src="#map-sprite-1"
+                     width="8" height="11" transparent="true"></a-image>
+        </a-entity>
+
+        <a-entity id="obj-mirror" position="-21.93 0.9 9.76"
+                  data-object="objectId: mirror"
+                  score-reactive-object="scoreAxis: identity; objectId: mirror"
+                  data-marker
+                  look-at="[camera]">
+            <a-image class="object-mesh" src="#mirror-sprite-1"
+                     width="8" height="12" transparent="true"></a-image>
+        </a-entity>
+
+        <a-entity id="obj-scale" position="19.42 1.65 14.11"
+                  data-object="objectId: scale"
+                  score-reactive-object="scoreAxis: power; objectId: scale"
+                  data-marker
+                  look-at="[camera]">
+            <a-image class="object-mesh" src="#power-sprite-1"
+                     width="8" height="11" transparent="true"></a-image>
+        </a-entity>
+
+        <a-entity id="obj-screen" position="22.83 0.9 -7.42"
+                  data-object="objectId: screen"
+                  score-reactive-object="scoreAxis: sovereignty; objectId: screen"
+                  data-marker
+                  look-at="[camera]">
+            <a-image class="object-mesh" src="#screen-sprite-1"
+                     width="8" height="11" transparent="true"></a-image>
+        </a-entity>
+
+        <a-entity id="obj-compute-box" position="-23.48 2.4 -4.99"
+                  data-object="objectId: compute_box"
+                  score-reactive-object="scoreAxis: transparency; objectId: compute_box"
+                  data-marker
+                  look-at="[camera]">
+            <a-image class="object-mesh" src="#compute-sprite-1"
+                     width="8" height="11" transparent="true"></a-image>
+        </a-entity>
+
+        <!-- Instruction panel -->
+        <a-entity position="0 2.2 -3" look-at="[camera]">
+            <a-text value=""
+                    align="center" width="3" color="#ffffff"></a-text>
+        </a-entity>
+
+    </a-scene>
+
+    <script>
+        // Fullscreen the whole page (not just the canvas) so HTML overlays
+        // like the score card stay visible.
+        const fsBtn = document.getElementById("fullscreen-btn");
+        fsBtn.addEventListener("click", () => {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                document.documentElement.requestFullscreen();
+            }
+        });
+        document.addEventListener("fullscreenchange", () => {
+            fsBtn.textContent = document.fullscreenElement ? "⛶ Exit Fullscreen" : "⛶ Fullscreen";
+        });
+    </script>
+</body>
+</html>

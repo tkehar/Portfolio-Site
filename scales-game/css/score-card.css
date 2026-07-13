@@ -1,0 +1,228 @@
+/* --- Score card ---
+ * The card element lives inside <a-scene> so it stays visible when
+ * A-Frame goes fullscreen. Customize position, colors, and sizing here.
+ */
+.score-card {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+    background: rgba(13, 13, 26, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 9999; /* above the A-Frame canvas */
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.score-card__group {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.score-card__group:last-child {
+    border-right: none;
+}
+
+.score-card__group-label {
+    padding: 6px 14px 4px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.score-card__group--ecology .score-card__group-label {
+    color: #ffffff;
+    background: rgba(40, 90, 60, 0.25);
+}
+
+.score-card__group--goals .score-card__group-label {
+    color: #ffffff;
+    background: rgba(120, 90, 30, 0.25);
+}
+
+.score-card__group-items {
+    display: flex;
+    align-items: stretch;
+}
+
+.score-card__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 10px 12px;
+    min-width: 72px;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.score-card__group-items .score-card__item:last-child {
+    border-right: none;
+}
+
+.score-card__label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.75;
+}
+
+.score-card__value {
+    font-size: 22px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.score-card__group--ecology .score-card__item--co2 .score-card__label,
+.score-card__group--ecology .score-card__item--co2 .score-card__value {
+    color: #ffffff;
+}
+
+.score-card__group--ecology .score-card__item--water .score-card__label,
+.score-card__group--ecology .score-card__item--water .score-card__value {
+    color: #ffffff;
+}
+
+.score-card__group--ecology .score-card__item--minerals .score-card__label,
+.score-card__group--ecology .score-card__item--minerals .score-card__value {
+    color: #ffffff;
+}
+
+.score-card__group--ecology .score-card__item--electricity .score-card__label,
+.score-card__group--ecology .score-card__item--electricity .score-card__value {
+    color: #ffffff;
+}
+
+.score-card__group--ecology .score-card__item--datacenter .score-card__label,
+.score-card__group--ecology .score-card__item--datacenter .score-card__value {
+    color: #ffffff;
+}
+
+.score-card__group--goals .score-card__item--sovereignty .score-card__label,
+.score-card__group--goals .score-card__item--sovereignty .score-card__value {
+    color: #ffffff;
+}
+
+.score-card__group--goals .score-card__item--power .score-card__label,
+.score-card__group--goals .score-card__item--power .score-card__value {
+    color: #ffffff;
+}
+
+.score-card__group--goals .score-card__item--identity .score-card__label,
+.score-card__group--goals .score-card__item--identity .score-card__value {
+    color: #ffffff;
+}
+
+.score-card__group--goals .score-card__item--transparency .score-card__label,
+.score-card__group--goals .score-card__item--transparency .score-card__value {
+    color: #ffffff;
+}
+
+.score-card__item--transparency.is-goal-inactive {
+    opacity: 0.35;
+}
+
+.score-card__item.is-updated .score-card__value {
+    transform: scale(1.15);
+}
+
+.score-card__item.is-threshold-met .score-card__value {
+    text-shadow: 0 0 8px currentColor;
+}
+
+/* --- Territory goal prose (bottom-left) --- */
+.territory-goal {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    max-width: min(360px, calc(100vw - 32px));
+    padding: 14px 16px;
+    background: rgba(13, 13, 26, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 3px solid var(--territory-accent, #eeeeff);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    font-family: system-ui, -apple-system, sans-serif;
+    pointer-events: none;
+    z-index: 9998;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.territory-goal__label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(238, 238, 255, 0.5);
+}
+
+.territory-goal__text {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: rgba(238, 238, 255, 0.88);
+}
+
+@media (max-width: 720px) {
+    .score-card {
+        top: 10px;
+        flex-direction: column;
+        width: calc(100% - 20px);
+        max-width: 400px;
+    }
+
+    .score-card__group {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .score-card__group:last-child {
+        border-bottom: none;
+    }
+
+    .score-card__group-items {
+        width: 100%;
+    }
+
+    .score-card__item {
+        flex: 1;
+        min-width: 0;
+        padding: 8px 8px;
+    }
+
+    .score-card__value {
+        font-size: 18px;
+    }
+
+    .territory-goal {
+        bottom: 56px;
+        left: 10px;
+        max-width: calc(100vw - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .territory-goal__text {
+        font-size: 12px;
+    }
+}
