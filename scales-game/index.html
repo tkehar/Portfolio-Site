@@ -22,13 +22,18 @@
     <link rel="stylesheet" href="css/territory-onboarding.css">
     <style>
         body { margin: 0; font-family: system-ui, sans-serif; }
+        /* Use the enter-screen button for VR; hide A-Frame's default corner UI and fullscreen fallback */
+        .a-enter-vr,
+        .a-orientation-modal {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
     <a-scene
         renderer="colorManagement: true"
         webxr="optionalFeatures: hand-tracking"
-        xr-mode-ui="enabled: true"
+        xr-mode-ui="enabled: true; enterVREnabled: true; enterAREnabled: false"
         data-stage="inclusive"
         stage-controller
         enter-screen

@@ -24,14 +24,40 @@ AFRAME.registerComponent("enter-screen", {
                      onerror="this.src='assets/placeholders/SCALES_SETTING.png'; this.onerror=null;">
                 <h1 class="enter-screen__title">SCALES</h1>
                 <p class="enter-screen__subtitle">Weighing the cost of AI development</p>
-                <button class="enter-screen__launch" type="button">Enter VR</button>
+                <button id="enter-vr-btn" class="enter-screen__launch" type="button">Enter VR</button>
                 <p class="enter-screen__hint">Requires a WebXR-compatible VR headset</p>
             </div>
         `;
 
         this.launchBtn = this.overlay.querySelector(".enter-screen__launch");
-        this.launchBtn.addEventListener("click", () => this.onLaunch());
+        this.launchBtn.addEventListener("click", () => this._prepareForVR(), { capture: true });
         this.el.sceneEl.appendChild(this.overlay);
+
+        this.el.sceneEl.setAttribute("xr-mode-ui", {
+            enabled: true,
+            enterVREnabled: true,
+            enterAREnabled: false,
+            enterVRButton: "#enter-vr-btn"
+        });
+
+        this._onEnterVR = () => this._afterVREntry();
+        this.el.sceneEl.addEventListener("enter-vr", this._onEnterVR);
+    },
+
+    _prepareForVR() {
+        if (this._launching) return;
+        this._launching = true;
+        this.launchBtn.disabled = true;
+        this.launchBtn.textContent = "Entering…";
+        this.hide();
+        GameStage.enter(GameStage.MANAGERIAL);
+
+        clearTimeout(this._vrFailTimer);
+        this._vrFailTimer = setTimeout(() => {
+            if (!this.el.sceneEl.is("vr-mode") && this._launching) {
+                this._onVRUnavailable();
+            }
+        }, 2500);
     },
 
     refresh() {},
@@ -45,23 +71,23 @@ AFRAME.registerComponent("enter-screen", {
         this.overlay?.classList.add("is-hidden");
     },
 
-    async onLaunch() {
-        if (this._launching) return;
-        this._launching = true;
-        this.launchBtn.disabled = true;
-        this.launchBtn.textContent = "Entering…";
-
-        this.hide();
-
+    async _afterVREntry() {
+        clearTimeout(this._vrFailTimer);
         try {
             await this._playIntroVideo();
-        } catch { /* proceed even if video fails */ }
+        } catch { /* proceed without intro */ }
+        this._finishLaunch();
+    },
 
-        try {
-            await this.el.sceneEl.enterVR();
-        } catch { /* headset unavailable — continue in browser preview */ }
+    _onVRUnavailable() {
+        this.launchBtn.disabled = false;
+        this.launchBtn.textContent = "Enter VR";
+        this._launching = false;
+        this.show();
+        window.alert("WebXR VR is not available. Open this page on a VR headset browser over HTTPS.");
+    },
 
-        GameStage.enter(GameStage.MANAGERIAL);
+    _finishLaunch() {
         this._launching = false;
         this.launchBtn.disabled = false;
         this.launchBtn.textContent = "Enter VR";
@@ -318,6 +344,8 @@ AFRAME.registerComponent("enter-screen", {
     },
 
     remove() {
+        clearTimeout(this._vrFailTimer);
+        this.el.sceneEl.removeEventListener("enter-vr", this._onEnterVR);
         this.overlay?.remove();
     }
 });
