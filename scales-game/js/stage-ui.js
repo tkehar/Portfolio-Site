@@ -4,14 +4,7 @@
  */
 
 function setSceneGameplayVisible(visible) {
-    const scoreCard = document.getElementById("score-card");
-    const goalPanel = document.getElementById("territory-goal");
-    const hint = document.getElementById("overlay-hint");
-    const peakFrame = document.querySelector(".peak-finder-frame");
-    if (scoreCard) scoreCard.style.display = visible ? "" : "none";
-    if (goalPanel) goalPanel.style.display = visible ? "" : "none";
-    if (hint) hint.style.display = visible ? "" : "none";
-    if (peakFrame) peakFrame.style.display = visible ? "" : "none";
+    /* VR build: no desktop HUD overlays */
 }
 
 /* --- Inclusive stage: Launch Scales enter screen --- */
@@ -30,26 +23,18 @@ AFRAME.registerComponent("enter-screen", {
                 <img class="enter-screen__logo" src="assets/placeholders/Scales Logo.gif" alt="Scales" width="96" height="96"
                      onerror="this.src='assets/placeholders/SCALES_SETTING.png'; this.onerror=null;">
                 <h1 class="enter-screen__title">SCALES</h1>
-                <p class="enter-screen__subtitle">Weighing the cost AI development</p>
-                <div class="scoreboard-boards enter-screen__boards">
-                    <div class="scoreboard-panel" data-scoreboard-results></div>
-                    <div class="scoreboard-panel" data-scoreboard-projections></div>
-                </div>
-                <button class="enter-screen__launch" type="button">Launch Scales</button>
+                <p class="enter-screen__subtitle">Weighing the cost of AI development</p>
+                <button class="enter-screen__launch" type="button">Enter VR</button>
+                <p class="enter-screen__hint">Requires a WebXR-compatible VR headset</p>
             </div>
         `;
 
         this.launchBtn = this.overlay.querySelector(".enter-screen__launch");
         this.launchBtn.addEventListener("click", () => this.onLaunch());
         this.el.sceneEl.appendChild(this.overlay);
-        this._onSessionSaved = () => this.refresh();
-        document.addEventListener("session-saved", this._onSessionSaved);
-        this.refresh();
     },
 
-    refresh() {
-        ScoreboardUI.renderDualBoards(this.overlay);
-    },
+    refresh() {},
 
     show() {
         this.refresh();
@@ -72,10 +57,14 @@ AFRAME.registerComponent("enter-screen", {
             await this._playIntroVideo();
         } catch { /* proceed even if video fails */ }
 
+        try {
+            await this.el.sceneEl.enterVR();
+        } catch { /* headset unavailable — continue in browser preview */ }
+
         GameStage.enter(GameStage.MANAGERIAL);
         this._launching = false;
         this.launchBtn.disabled = false;
-        this.launchBtn.textContent = "Launch Scales";
+        this.launchBtn.textContent = "Enter VR";
     },
 
     _ensureIntroOverlay() {
@@ -329,7 +318,6 @@ AFRAME.registerComponent("enter-screen", {
     },
 
     remove() {
-        document.removeEventListener("session-saved", this._onSessionSaved);
         this.overlay?.remove();
     }
 });
