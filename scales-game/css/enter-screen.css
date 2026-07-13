@@ -21,22 +21,26 @@
     pointer-events: none;
 }
 
-.enter-screen__panel {
+.enter-screen__content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
-    max-width: 640px;
-    width: calc(100% - 48px);
-    padding: 40px 32px;
+    gap: 20px;
+    max-width: 860px;
+    width: calc(100% - 32px);
+    padding: 32px 20px 28px;
     font-family: system-ui, -apple-system, sans-serif;
     color: #fff;
     text-align: center;
 }
 
+.enter-screen__panel {
+    display: none;
+}
+
 .enter-screen__logo {
-    width: 96px;
-    height: 96px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
 }
 
@@ -48,13 +52,19 @@
     margin: 0;
     font-size: 28px;
     font-weight: 700;
+    letter-spacing: 0.14em;
 }
 
-.enter-screen__scoreboard {
+.enter-screen__subtitle {
+    margin: -8px 0 0;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.72);
+    text-transform: uppercase;
+}
+
+.enter-screen__boards {
     width: 100%;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 20px 0;
 }
 
 .enter-screen__launch {
@@ -78,12 +88,13 @@
     cursor: wait;
 }
 
-/* --- Intro video (Launch Scales) --- */
+/* --- Intro video (Launch Scales) — YouTube 360 default --- */
 .intro-video {
     position: fixed;
     inset: 0;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
     justify-content: center;
     background: #000;
     z-index: 10004;
@@ -98,6 +109,13 @@
     pointer-events: none;
 }
 
+.intro-video__viewport {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+}
+
 .intro-video__player {
     width: 100%;
     height: 100%;
@@ -107,10 +125,55 @@
 
 .intro-video__yt,
 .intro-video__yt iframe {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     border: 0;
     background: #000;
+}
+
+.intro-video__drag-surface {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    cursor: grab;
+    touch-action: none;
+}
+
+.intro-video__drag-surface.is-dragging {
+    cursor: grabbing;
+}
+
+.intro-video__hint {
+    margin: 0;
+    padding: 10px 16px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.65);
+    text-align: center;
+    pointer-events: none;
+}
+
+.intro-video__skip {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 3;
+    padding: 8px 18px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    color: #fff;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.intro-video__skip:hover {
+    background: #fff;
+    color: #000;
 }
 
 /* --- Shared scoreboard UI blocks --- */

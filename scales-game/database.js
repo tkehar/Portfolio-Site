@@ -15,10 +15,10 @@
 
 /** Map sprite — driven by total ecology % toward 2030 (4 states). */
 const VR_MAP_STATE_IMAGES = {
-    1: "assets/placeholders/Map_Visualization-1.png",
-    2: "assets/placeholders/Map_Visualization-2.png",
-    3: "assets/placeholders/Map_Visualization-3.png",
-    4: "assets/placeholders/Map_Visualization-4-.png"
+    1: "assets/placeholders/Territory Grid - 1.png",
+    2: "assets/placeholders/Territory Grid - 2.png",
+    3: "assets/placeholders/Territory Grid - 3.png",
+    4: "assets/placeholders/Territory Grid - 4.png"
 };
 
 /** Identity sprite (Mirror) — 5 states per Game Glossary. */
@@ -57,12 +57,20 @@ const VR_TRANSPARENCY_STATE_IMAGES = {
     5: "assets/placeholders/Black_Box-5.png"
 };
 
-/** Sky background — static territory grid for all ecology levels. */
+/** Sky / territory grid — level driven by total ecology % toward 2030. */
 const VR_SKY_STATE_IMAGES = {
-    1: "assets/placeholders/Territory Grid.png",
-    2: "assets/placeholders/Territory Grid.png",
-    3: "assets/placeholders/Territory Grid.png",
-    4: "assets/placeholders/Territory Grid.png"
+    1: "assets/placeholders/Territory Grid - 1.png",
+    2: "assets/placeholders/Territory Grid - 2.png",
+    3: "assets/placeholders/Territory Grid - 3.png",
+    4: "assets/placeholders/Territory Grid - 4.png"
+};
+
+/** Ecology % band labels for territory grid (Glossary). */
+const VR_SKY_STATE_LABELS = {
+    1: "Redistributive",
+    2: "Neutral",
+    3: "Extractive",
+    4: "Accelerated Extraction"
 };
 
 const VR_OBJECT_DECISIONS = {
@@ -76,7 +84,8 @@ const VR_OBJECT_DECISIONS = {
             title: "Map",
             axis: "ecology",
             unit: "% to 2030",
-            values: [0, 25, 50, 75]
+            values: [0, 25, 50, 75],
+            peakLabels: ["Redistributive", "Neutral", "Extractive", "Accelerated Extraction"]
         }
     },
 
@@ -89,7 +98,14 @@ const VR_OBJECT_DECISIONS = {
             title: "Mirror",
             axis: "identity",
             unit: "identity index",
-            values: [-6, -3, 0, 3, 6]
+            values: [-6, -3, 0, 3, 6],
+            peakLabels: [
+                "Algorithmically determined",
+                "Infringed",
+                "Shattered",
+                "Fractured",
+                "Self determined"
+            ]
         }
     },
 
@@ -102,7 +118,14 @@ const VR_OBJECT_DECISIONS = {
             title: "Scale",
             axis: "power",
             unit: "leverage index",
-            values: [-6, -3, 0, 3, 6]
+            values: [-6, -3, 0, 3, 6],
+            peakLabels: [
+                "State-Corporate Controlled",
+                "Corporate-Led",
+                "equal",
+                "Public Interest",
+                "Community-Led"
+            ]
         }
     },
 
@@ -115,7 +138,14 @@ const VR_OBJECT_DECISIONS = {
             title: "Screen",
             axis: "sovereignty",
             unit: "autonomy index",
-            values: [-6, -3, 0, 3, 6]
+            values: [-6, -3, 0, 3, 6],
+            peakLabels: [
+                "Extractive",
+                "Managed",
+                "Balanced",
+                "Participatory",
+                "Redistributive"
+            ]
         }
     },
 
@@ -128,7 +158,14 @@ const VR_OBJECT_DECISIONS = {
             title: "Compute box",
             axis: "transparency",
             unit: "opacity index",
-            values: [-6, -3, 0, 3, 6]
+            values: [-6, -3, 0, 3, 6],
+            peakLabels: [
+                "Opaque 100%",
+                "Opaque 75%",
+                "Opaque 50%",
+                "Opaque 25%",
+                "Open-Source"
+            ]
         }
     }
 };
@@ -945,7 +982,7 @@ const VR_TERRITORIES = {
         },
         decisions: VR_TERRITORY_OBJECT_DECISIONS.big_tech,
         view: {
-            sky: "assets/placeholders/Territory Grid.png",
+            sky: "assets/placeholders/Territory Grid - 1.png",
             rigPosition: "0 1.6 0",
             rigRotation: "0 -15 0"
         },
@@ -980,7 +1017,7 @@ const VR_TERRITORIES = {
         },
         decisions: VR_TERRITORY_OBJECT_DECISIONS.the_state,
         view: {
-            sky: "assets/placeholders/Territory Grid.png",
+            sky: "assets/placeholders/Territory Grid - 1.png",
             rigPosition: "0 1.6 2",
             rigRotation: "0 0 0"
         },
@@ -1015,7 +1052,7 @@ const VR_TERRITORIES = {
         },
         decisions: VR_TERRITORY_OBJECT_DECISIONS.the_multitude,
         view: {
-            sky: "assets/placeholders/Territory Grid.png",
+            sky: "assets/placeholders/Territory Grid - 1.png",
             rigPosition: "0 1.6 -1",
             rigRotation: "0 20 0"
         },

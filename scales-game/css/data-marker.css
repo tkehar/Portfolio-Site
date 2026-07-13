@@ -1,27 +1,20 @@
-/* --- Peak finder overlay: focus-zone frame + data markers ---
- * Machine-vision style: monospace type, square corners, solid label
- * chips, leader lines with crosshairs — like object-detection overlays.
- * Elements live inside <a-scene> so they stay visible in fullscreen.
- * JS only sets marker `transform` and toggles .is-visible / .is-updated.
- */
-
-/* ============ Focus-zone frame ============ */
+/* --- Peak finder overlay: focus-zone frame + data markers --- */
 
 .peak-finder-frame {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px dashed rgba(255, 255, 255, 0.25);
+    border: none;
     pointer-events: none;
     z-index: 9997;
 }
 
 .peak-finder-frame__corner {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.85);
+    width: 22px;
+    height: 22px;
+    border: 2px solid rgba(255, 255, 255, 0.9);
 }
 
 .peak-finder-frame__corner--tl {
@@ -53,34 +46,20 @@
 }
 
 .peak-finder-frame__label {
-    position: absolute;
-    top: -22px;
-    left: 0;
-    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    color: rgba(255, 255, 255, 0.7);
+    display: none;
 }
 
-/* ============ Data markers ============ */
+/* ============ Data markers (peak finder labels) ============ */
 
 .data-marker {
     position: fixed;
     top: 0;
     left: 0;
     display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    gap: 8px;
-    padding: 3px 8px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    border-radius: 0;
-    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-    text-transform: uppercase;
-    white-space: nowrap;
+    flex-direction: column;
+    align-items: center;
     pointer-events: none;
-    z-index: 9998; /* above canvas, below the score card */
+    z-index: 9998;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.12s linear;
@@ -91,75 +70,38 @@
     visibility: visible;
 }
 
-/* Leader line from label down to the anchor point */
-.data-marker::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
+.data-marker__label {
+    display: block;
+    padding: 7px 16px;
+    background: #ffffff;
+    border: 1px solid rgba(180, 180, 190, 0.55);
+    border-radius: 2px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #111111;
+    white-space: nowrap;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+.data-marker__stem {
+    display: block;
     width: 1px;
-    height: 18px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.9);
 }
 
-/* Crosshair at the anchor point */
-.data-marker::before {
-    content: "+";
-    position: absolute;
-    top: calc(100% + 18px);
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1;
+.data-marker__dot {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.55);
+    flex-shrink: 0;
 }
 
-.data-marker__title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: #0a0a14;
-}
-
-.data-marker__value {
-    font-size: 11px;
-    font-weight: 400;
-    font-variant-numeric: tabular-nums;
-    color: #0a0a14;
+.data-marker.is-updated .data-marker__label {
+    transform: scale(1.04);
     transition: transform 0.15s ease;
-}
-
-/* Per-axis colors: chip background + leader line + crosshair */
-.data-marker--co2 {
-    background: #ffffff;
-}
-.data-marker--co2::after {
-    background: #a8a3a0;
-}
-.data-marker--co2::before {
-    color: #a8a3a0;
-}
-
-.data-marker--water {
-    background: #ffffff;
-}
-.data-marker--water::after {
-    background: #a8a3a0;
-}
-.data-marker--water::before {
-    color: #a8a3a0;
-}
-
-.data-marker--minerals {
-    background: #ffffff;
-}
-.data-marker--minerals::after {
-    background: #a8a3a0;
-}
-.data-marker--minerals::before {
-    color: #a8a3a0;
-}
-
-/* Pulse when the value changes */
-.data-marker.is-updated .data-marker__value {
-    transform: scale(1.2);
 }

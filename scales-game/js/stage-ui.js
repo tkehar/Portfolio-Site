@@ -8,12 +8,10 @@ function setSceneGameplayVisible(visible) {
     const goalPanel = document.getElementById("territory-goal");
     const hint = document.getElementById("overlay-hint");
     const peakFrame = document.querySelector(".peak-finder-frame");
-    const panel = document.querySelector("[decision-panel-host]");
     if (scoreCard) scoreCard.style.display = visible ? "" : "none";
     if (goalPanel) goalPanel.style.display = visible ? "" : "none";
     if (hint) hint.style.display = visible ? "" : "none";
     if (peakFrame) peakFrame.style.display = visible ? "" : "none";
-    if (panel) panel.setAttribute("visible", visible);
 }
 
 /* --- Inclusive stage: Launch Scales enter screen --- */
@@ -21,8 +19,6 @@ AFRAME.registerComponent("enter-screen", {
     init() {
         this.el.sceneEl.enterScreen = this;
         this._buildOverlay();
-        this._onSessionSaved = () => this.refresh();
-        document.addEventListener("session-saved", this._onSessionSaved);
     },
 
     _buildOverlay() {
@@ -30,18 +26,14 @@ AFRAME.registerComponent("enter-screen", {
         this.overlay.id = "enter-screen-overlay";
         this.overlay.className = "enter-screen";
         this.overlay.innerHTML = `
-            <div class="enter-screen__panel">
-                <img class="enter-screen__logo" src="assets/placeholders/Scales Logo.gif" alt="Scales" width="120" height="120"
+            <div class="enter-screen__content">
+                <img class="enter-screen__logo" src="assets/placeholders/Scales Logo.gif" alt="Scales" width="96" height="96"
                      onerror="this.src='assets/placeholders/SCALES_SETTING.png'; this.onerror=null;">
-                <span class="enter-screen__tag">// DATA COLONIALISM SIMULATION</span>
-                <h1 class="enter-screen__title">Scales</h1>
-                <div class="scoreboard-ui enter-screen__scoreboard" aria-label="Session record">
-                    <span class="scoreboard-ui__label">// SESSION RECORD</span>
-                    <div class="scoreboard-ui__grid" data-scoreboard-wins></div>
-                    <div class="scoreboard-ui__totals" data-scoreboard-totals></div>
-                    <span class="scoreboard-ui__label scoreboard-ui__label--secondary">// ECOLOGY EXTREMES</span>
-                    <div class="scoreboard-ui__ecology" data-scoreboard-ecology></div>
-                    <div class="scoreboard-ui__impact" data-scoreboard-impact></div>
+                <h1 class="enter-screen__title">SCALES</h1>
+                <p class="enter-screen__subtitle">Weighing the cost AI development</p>
+                <div class="scoreboard-boards enter-screen__boards">
+                    <div class="scoreboard-panel" data-scoreboard-results></div>
+                    <div class="scoreboard-panel" data-scoreboard-projections></div>
                 </div>
                 <button class="enter-screen__launch" type="button">Launch Scales</button>
             </div>
@@ -50,11 +42,13 @@ AFRAME.registerComponent("enter-screen", {
         this.launchBtn = this.overlay.querySelector(".enter-screen__launch");
         this.launchBtn.addEventListener("click", () => this.onLaunch());
         this.el.sceneEl.appendChild(this.overlay);
+        this._onSessionSaved = () => this.refresh();
+        document.addEventListener("session-saved", this._onSessionSaved);
         this.refresh();
     },
 
     refresh() {
-        ScoreboardUI.renderInto(this.overlay);
+        ScoreboardUI.renderDualBoards(this.overlay);
     },
 
     show() {
@@ -98,6 +92,10 @@ AFRAME.registerComponent("enter-screen", {
     _closeIntroOverlay(overlay) {
         overlay.classList.add("is-hidden");
         overlay.innerHTML = "";
+        if (this._intro360Cleanup) {
+            this._intro360Cleanup();
+            this._intro360Cleanup = null;
+        }
         if (this._ytPlayer?.destroy) {
             try { this._ytPlayer.destroy(); } catch { /* ok */ }
         }
@@ -105,9 +103,98 @@ AFRAME.registerComponent("enter-screen", {
     },
 
     _playIntroVideo() {
-        const localSrc = "assets/Intro 360 video/Scales 360 Trailer.mp4";
         const youtubeId = "SxM0yV_4jFI";
-        return this._playLocalIntroVideo(localSrc).catch(() => this._playYouTubeIntroVideo(youtubeId));
+        const localSrc = "assets/Intro 360 video/Scales 360 Trailer.mp4";
+        return this._playYouTube360Intro(youtubeId).catch(() => this._playLocalIntroVideo(localSrc));
+    },
+
+    _bindYouTube360Controls(overlay, player) {
+        if (typeof player.setSphericalProperties !== "function") return () => {};
+
+        const dragSurface = overlay.querySelector(".intro-video__drag-surface");
+        if (!dragSurface) return () => {};
+
+        const isTouch = window.matchMedia("(pointer: coarse)").matches;
+        if (isTouch) {
+            dragSurface.style.pointerEvents = "none";
+            player.setSphericalProperties({
+                yaw: 0,
+                pitch: 0,
+                fov: 100,
+                enableOrientationSensor: true
+            });
+            return () => {};
+        }
+
+        const spherical = { yaw: 0, pitch: 0, fov: 100 };
+
+        if (typeof player.getSphericalProperties === "function") {
+            try {
+                const props = player.getSphericalProperties();
+                spherical.yaw = props.yaw ?? 0;
+                spherical.pitch = props.pitch ?? 0;
+                spherical.fov = props.fov ?? 100;
+            } catch { /* ok */ }
+        }
+
+        const apply = () => {
+            player.setSphericalProperties({
+                yaw: spherical.yaw,
+                pitch: Math.max(-90, Math.min(90, spherical.pitch)),
+                fov: Math.max(30, Math.min(120, spherical.fov)),
+                enableOrientationSensor: false
+            });
+        };
+
+        apply();
+
+        let dragging = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        const onPointerDown = (e) => {
+            if (e.target.closest(".intro-video__skip")) return;
+            dragging = true;
+            lastX = e.clientX;
+            lastY = e.clientY;
+            dragSurface.setPointerCapture(e.pointerId);
+            dragSurface.classList.add("is-dragging");
+        };
+
+        const onPointerMove = (e) => {
+            if (!dragging) return;
+            spherical.yaw -= (e.clientX - lastX) * 0.35;
+            spherical.pitch -= (e.clientY - lastY) * 0.25;
+            lastX = e.clientX;
+            lastY = e.clientY;
+            apply();
+        };
+
+        const onPointerUp = (e) => {
+            dragging = false;
+            dragSurface.classList.remove("is-dragging");
+            try { dragSurface.releasePointerCapture(e.pointerId); } catch { /* ok */ }
+        };
+
+        const onWheel = (e) => {
+            e.preventDefault();
+            spherical.fov = Math.max(30, Math.min(120, spherical.fov + e.deltaY * 0.08));
+            apply();
+        };
+
+        dragSurface.addEventListener("pointerdown", onPointerDown);
+        dragSurface.addEventListener("pointermove", onPointerMove);
+        dragSurface.addEventListener("pointerup", onPointerUp);
+        dragSurface.addEventListener("pointercancel", onPointerUp);
+        dragSurface.addEventListener("wheel", onWheel, { passive: false });
+
+        return () => {
+            dragSurface.removeEventListener("pointerdown", onPointerDown);
+            dragSurface.removeEventListener("pointermove", onPointerMove);
+            dragSurface.removeEventListener("pointerup", onPointerUp);
+            dragSurface.removeEventListener("pointercancel", onPointerUp);
+            dragSurface.removeEventListener("wheel", onWheel);
+        };
     },
 
     _playLocalIntroVideo(src) {
@@ -173,19 +260,42 @@ AFRAME.registerComponent("enter-screen", {
         return this._ytApiPromise;
     },
 
-    _playYouTubeIntroVideo(videoId) {
-        return this._loadYouTubeApi().then(() => new Promise((resolve) => {
+    _playYouTube360Intro(videoId) {
+        return this._loadYouTubeApi().then(() => new Promise((resolve, reject) => {
             const overlay = this._ensureIntroOverlay();
-            overlay.innerHTML = `<div id="intro-yt-player" class="intro-video__yt"></div>`;
+            overlay.className = "intro-video intro-video--360";
+            overlay.innerHTML = `
+                <div class="intro-video__viewport">
+                    <div id="intro-yt-player" class="intro-video__yt"></div>
+                    <div class="intro-video__drag-surface" aria-hidden="true"></div>
+                </div>
+                <p class="intro-video__hint">Drag to look around · Scroll to zoom</p>
+                <button type="button" class="intro-video__skip">Skip</button>
+            `;
             overlay.classList.remove("is-hidden");
 
+            const skipBtn = overlay.querySelector(".intro-video__skip");
             let settled = false;
+            let loadTimeoutId = null;
+
             const finish = () => {
                 if (settled) return;
                 settled = true;
+                clearTimeout(loadTimeoutId);
                 this._closeIntroOverlay(overlay);
                 resolve();
             };
+
+            const fail = (err) => {
+                if (settled) return;
+                settled = true;
+                clearTimeout(loadTimeoutId);
+                this._closeIntroOverlay(overlay);
+                reject(err || new Error("YouTube intro failed"));
+            };
+
+            skipBtn.addEventListener("click", finish);
+            loadTimeoutId = setTimeout(() => fail(new Error("YouTube intro timeout")), 20000);
 
             this._ytPlayer = new YT.Player("intro-yt-player", {
                 videoId,
@@ -193,19 +303,26 @@ AFRAME.registerComponent("enter-screen", {
                 height: "100%",
                 playerVars: {
                     autoplay: 1,
-                    controls: 1,
+                    controls: 0,
                     rel: 0,
                     modestbranding: 1,
-                    playsinline: 1
+                    playsinline: 1,
+                    enablejsapi: 1,
+                    fs: 1,
+                    iv_load_policy: 3,
+                    origin: window.location.origin
                 },
                 events: {
                     onReady: (event) => {
-                        event.target.playVideo();
+                        clearTimeout(loadTimeoutId);
+                        const player = event.target;
+                        player.playVideo();
+                        this._intro360Cleanup = this._bindYouTube360Controls(overlay, player);
                     },
                     onStateChange: (event) => {
                         if (event.data === YT.PlayerState.ENDED) finish();
                     },
-                    onError: () => finish()
+                    onError: () => fail(new Error("YouTube player error"))
                 }
             });
         }));
@@ -216,8 +333,6 @@ AFRAME.registerComponent("enter-screen", {
         this.overlay?.remove();
     }
 });
-
-/* --- Managerial stage: in-VR territory selection --- */
 AFRAME.registerComponent("territory-vr-select", {
     schema: {
         panelSpacing: { type: "number", default: 2.2 },
@@ -309,6 +424,14 @@ AFRAME.registerComponent("territory-vr-select", {
             panel.setAttribute("position", `${offsets[index]} 1.55 -${this.data.panelDistance}`);
             panel.setAttribute("look-at", "[camera]");
             panel.dataset.territoryId = id;
+
+            const stroke = document.createElement("a-plane");
+            stroke.setAttribute("width", 1.39);
+            stroke.setAttribute("height", 1.59);
+            stroke.setAttribute("position", "0 0 -0.002");
+            stroke.setAttribute("color", "#b4b4be");
+            stroke.setAttribute("material", "shader: flat");
+            panel.appendChild(stroke);
 
             const frame = document.createElement("a-plane");
             frame.setAttribute("width", 1.39);

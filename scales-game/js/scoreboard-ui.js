@@ -1,115 +1,160 @@
 /**
- * Shared scoreboard + impact panel rendering for enter screen and differential stage.
+ * Shared scoreboard panels for enter screen and game-over (try again) screens.
  */
 const ScoreboardUI = {
-    ECOLOGY_LABELS: {
-        co2: "CO₂ emissions",
-        water: "Water usage",
-        electricity: "Electricity",
-        datacenter: "Data center land"
+    ECOLOGY_PROJECTION_LABELS: {
+        water: "Water Usage",
+        co2: "CO² Emissions",
+        electricity: "Electricity Usage",
+        datacenter: "Data Center Distribution"
     },
 
-    renderWinsGrid(container) {
-        if (!container || typeof SessionStore === "undefined") return;
-        const stats = SessionStore.getStats();
+    ECOLOGY_SIMULATION_LABELS: {
+        water: "Highest Water Usage",
+        co2: "Highest CO² Emissions",
+        electricity: "Highest Electricity Usage",
+        datacenter: "Highest Data Center Distribution"
+    },
 
-        container.innerHTML = TerritoryState.IDS.map((id) => {
-            const cfg = VR_TERRITORIES[id];
-            const wins = stats.wins[id] || 0;
-            const losses = stats.losses[id] || 0;
+    _resultsSections(stats) {
+        return [
+            {
+                label: "ALL RESULTS",
+                wins: stats.totalWins,
+                losses: stats.totalLosses
+            },
+            ...TerritoryState.IDS.map((id) => ({
+                label: (VR_TERRITORIES[id]?.displayName || id).toUpperCase(),
+                wins: stats.wins[id] || 0,
+                losses: stats.losses[id] || 0
+            }))
+        ];
+    },
+
+    renderResultsPanel(container) {
+        if (!container) return;
+        const stats = typeof SessionStore !== "undefined"
+            ? SessionStore.getStats()
+            : { totalWins: 0, totalLosses: 0, wins: {}, losses: {} };
+
+        container.innerHTML = this._resultsSections(stats).map((section) => `
+            <div class="scoreboard-panel__block">
+                <h3 class="scoreboard-panel__heading">${section.label}</h3>
+                <div class="scoreboard-panel__row">
+                    <span class="scoreboard-panel__row-label">WINS</span>
+                    <span class="scoreboard-panel__row-value">${section.wins}</span>
+                </div>
+                <div class="scoreboard-panel__row">
+                    <span class="scoreboard-panel__row-label">LOSSES</span>
+                    <span class="scoreboard-panel__row-value">${section.losses}</span>
+                </div>
+            </div>
+        `).join("");
+    },
+
+    renderProjectionsPanel(container) {
+        if (!container) return;
+        const stats = typeof SessionStore !== "undefined" ? SessionStore.getStats() : null;
+        const hasSimData = stats?.totalSessions > 0;
+
+        const projectionRows = ScoreSystem.ECOLOGY_HUD_ORDER.map((axis) => {
+            const label = this.ECOLOGY_PROJECTION_LABELS[axis] || axis;
+            const value = ScoreSystem.formatEcologyHudValue(
+                axis,
+                ScoreSystem.ECOLOGY_PROJECTION_2030[axis]
+            );
             return `
-                <div class="scoreboard-ui__territory-stat">
-                    <span class="scoreboard-ui__territory-name" style="--territory-accent: ${cfg.accent || "#eeeeff"}">
-                        ${cfg.displayName}
-                    </span>
-                    <span class="scoreboard-ui__territory-value">${wins}W · ${losses}L</span>
+                <div class="scoreboard-panel__row">
+                    <span class="scoreboard-panel__row-label">${label}</span>
+                    <span class="scoreboard-panel__row-value">${value}</span>
                 </div>
             `;
         }).join("");
-    },
 
-    renderTotals(container) {
-        if (!container || typeof SessionStore === "undefined") return;
-        const stats = SessionStore.getStats();
+        const simulationRows = hasSimData
+            ? ScoreSystem.ECOLOGY_HUD_ORDER.map((axis) => {
+                const label = this.ECOLOGY_SIMULATION_LABELS[axis] || axis;
+                const high = stats.ecologyHighs[axis];
+                const value = high != null
+                    ? ScoreSystem.formatEcologyHudValue(axis, high)
+                    : "—";
+                return `
+                    <div class="scoreboard-panel__row">
+                        <span class="scoreboard-panel__row-label">${label}</span>
+                        <span class="scoreboard-panel__row-value">${value}</span>
+                    </div>
+                `;
+            }).join("")
+            : `<p class="scoreboard-panel__empty">Simulation highs appear after your first session.</p>`;
 
-        if (stats.totalSessions === 0) {
-            container.innerHTML = `<span class="scoreboard-ui__empty">No completed sessions yet</span>`;
-            return;
-        }
-
-        const winLabel = stats.totalWins === 1 ? "win" : "wins";
-        const lossLabel = stats.totalLosses === 1 ? "loss" : "losses";
         container.innerHTML = `
-            <span class="scoreboard-ui__total scoreboard-ui__total--wins">${stats.totalWins} ${winLabel}</span>
-            <span class="scoreboard-ui__sep" aria-hidden="true">·</span>
-            <span class="scoreboard-ui__total scoreboard-ui__total--losses">${stats.totalLosses} ${lossLabel}</span>
+            <div class="scoreboard-panel__block">
+                <h3 class="scoreboard-panel__heading">2030 Projections</h3>
+                ${projectionRows}
+            </div>
+            <div class="scoreboard-panel__block">
+                <h3 class="scoreboard-panel__heading">Simulation Projections</h3>
+                ${simulationRows}
+            </div>
         `;
     },
 
-    renderEcologyExtremes(container) {
-        if (!container || typeof SessionStore === "undefined") return;
-        const stats = SessionStore.getStats();
-        const hasData = stats.totalSessions > 0;
-
-        if (!hasData) {
-            container.innerHTML = `<span class="scoreboard-ui__empty">Ecology highs/lows appear after your first session</span>`;
-            return;
-        }
-
-        container.innerHTML = ScoreSystem.ECOLOGY_AXES.map((axis) => {
-            const high = stats.ecologyHighs[axis];
-            const low = stats.ecologyLows[axis];
-            const label = this.ECOLOGY_LABELS[axis] || axis;
-            return `
-                <div class="scoreboard-ui__ecology-row">
-                    <span class="scoreboard-ui__ecology-label">${label}</span>
-                    <span class="scoreboard-ui__ecology-values">
-                        <span class="scoreboard-ui__ecology-low">↓ ${ScoreSystem.formatEcologyValue(axis, low)}</span>
-                        <span class="scoreboard-ui__ecology-high">↑ ${ScoreSystem.formatEcologyValue(axis, high)}</span>
-                    </span>
-                </div>
-            `;
-        }).join("");
-    },
-
-    renderImpactPanel(container, { showBaselines = false } = {}) {
+    renderSimulationResultsPanel(container, scores = ScoreSystem.scores) {
         if (!container) return;
 
-        const rows = ScoreSystem.ECOLOGY_AXES.map((axis) => {
-            const label = this.ECOLOGY_LABELS[axis] || axis;
-            const present = ScoreSystem.formatEcologyValue(axis, ScoreSystem.ECOLOGY_PRESENT[axis]);
-            const projection = ScoreSystem.formatEcologyValue(axis, ScoreSystem.ECOLOGY_PROJECTION_2030[axis]);
+        const ecologyRows = ScoreSystem.ECOLOGY_HUD_ORDER.map((axis) => {
+            const label = ScoreSystem.ECOLOGY_HUD_LABELS[axis] || axis;
+            const value = ScoreSystem.formatEcologyHudValue(axis, scores[axis]);
             return `
-                <div class="scoreboard-ui__impact-row">
-                    <span class="scoreboard-ui__impact-label">${label}</span>
-                    <span class="scoreboard-ui__impact-present">${present}</span>
-                    <span class="scoreboard-ui__impact-projection">${projection}</span>
+                <div class="scoreboard-panel__row">
+                    <span class="scoreboard-panel__row-label">${label}</span>
+                    <span class="scoreboard-panel__row-value">${value}</span>
                 </div>
             `;
         }).join("");
 
+        const thresholds = TerritoryState.getWinThresholds() || {};
+        const goalRows = ScoreSystem.GOAL_HUD_ORDER
+            .filter((axis) => axis !== "transparency" || thresholds.transparency != null)
+            .map((axis) => {
+                const label = ScoreSystem.GOAL_HUD_LABELS[axis] || axis;
+                const badge = ScoreSystem.formatGoalStatus(axis, scores[axis]);
+                return `
+                    <div class="scoreboard-panel__row">
+                        <span class="scoreboard-panel__row-label">${label}</span>
+                        <span class="scoreboard-panel__badge">${badge}</span>
+                    </div>
+                `;
+            }).join("");
+
         container.innerHTML = `
-            <span class="scoreboard-ui__impact-title">${showBaselines ? "// PRESENT & 2030 BASELINES" : "// ECOLOGY BASELINES"}</span>
-            <div class="scoreboard-ui__impact-header">
-                <span></span><span>Present</span><span>2030</span>
+            <div class="scoreboard-panel__block">
+                <h3 class="scoreboard-panel__heading">Simulation Results</h3>
+                ${ecologyRows}
+                ${goalRows}
             </div>
-            ${rows}
         `;
     },
 
-    renderInto(root) {
+    renderDualBoards(root, { includeSimulation = false, scores = null } = {}) {
         if (!root) return;
-        const grid = root.querySelector("[data-scoreboard-wins]");
-        const totals = root.querySelector("[data-scoreboard-totals]");
-        const ecology = root.querySelector("[data-scoreboard-ecology]");
-        const impact = root.querySelector("[data-scoreboard-impact]");
+        const results = root.querySelector("[data-scoreboard-results]");
+        const projections = root.querySelector("[data-scoreboard-projections]");
+        const simulation = root.querySelector("[data-scoreboard-simulation]");
 
-        this.renderWinsGrid(grid);
-        this.renderTotals(totals);
-        this.renderEcologyExtremes(ecology);
-        if (impact) {
-            const showBaselines = typeof SessionStore !== "undefined" && !SessionStore.hasVisited();
-            this.renderImpactPanel(impact, { showBaselines });
+        if (simulation) {
+            this.renderSimulationResultsPanel(simulation, scores || ScoreSystem.scores);
+            if (projections) projections.innerHTML = "";
+            if (results) this.renderResultsPanel(results);
+            return;
         }
+
+        this.renderResultsPanel(results);
+        this.renderProjectionsPanel(projections);
+    },
+
+    /** @deprecated use renderDualBoards */
+    renderInto(root) {
+        this.renderDualBoards(root);
     }
 };

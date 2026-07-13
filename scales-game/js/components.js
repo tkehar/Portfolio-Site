@@ -60,9 +60,9 @@ function scoreToSpriteLevel(axis, score, scores = ScoreSystem.scores) {
 /** Total ecology % toward 2030 → sky visual level 1–4. */
 function ecologyToSkyLevel(scores) {
     const pct = ScoreSystem.getTotalEcologyPercent(scores);
-    if (pct <= 25) return 1;
-    if (pct <= 50) return 2;
-    if (pct <= 75) return 3;
+    if (pct < 25) return 1;
+    if (pct < 50) return 2;
+    if (pct < 75) return 3;
     return 4;
 }
 
@@ -118,6 +118,8 @@ const GameOutcome = {
         const scores = ScoreSystem.scores;
 
         if (ScoreSystem.hasEcologyFailure(scores)) {
+            const sky = scene?.querySelector("a-sky");
+            sky?.components["score-reactive-sky"]?.forceLevel(4);
             gameOver.trigger("lose", "ecology");
             return;
         }
@@ -152,7 +154,7 @@ AFRAME.registerComponent("score-hud", {
 
         ScoreSystem.ALL_AXES.forEach((axis) => {
             this.values[axis] = document.getElementById(`score-${axis}`);
-            this.items[axis] = this.values[axis]?.closest(".score-card__item");
+            this.items[axis] = this.values[axis]?.closest(".impact-panel__row");
         });
 
         this.goalPanel = document.getElementById("territory-goal");
@@ -172,39 +174,38 @@ AFRAME.registerComponent("score-hud", {
     },
 
     refreshGoalPanel() {
-        if (!this.goalPanel || !this.goalTextEl) return;
-        const cfg = TerritoryState.getConfig();
-        if (!cfg || !TerritoryState.onboardingComplete) {
-            this.goalTextEl.textContent = "";
-            return;
-        }
-        this.goalPanel.style.setProperty("--territory-accent", cfg.accent || "#eeeeff");
-        this.goalTextEl.textContent = TerritoryState.getGoalText();
-
         const thresholds = TerritoryState.getWinThresholds() || {};
-        const transparencyItem = this.items.transparency;
-        if (transparencyItem) {
-            const active = thresholds?.transparency != null;
-            transparencyItem.classList.toggle("is-goal-inactive", !active);
+        const transparencyRow = this.items.transparency;
+        if (transparencyRow) {
+            transparencyRow.classList.toggle("is-goal-inactive", thresholds?.transparency == null);
         }
     },
 
     update(scores, changes = {}) {
         const thresholds = TerritoryState.getWinThresholds();
 
-        for (const axis of ScoreSystem.ALL_AXES) {
-            const value = scores[axis];
+        for (const axis of ScoreSystem.ECOLOGY_HUD_ORDER) {
             const el = this.values[axis];
             const item = this.items[axis];
             if (!el) continue;
+            el.textContent = ScoreSystem.formatEcologyHudValue(axis, scores[axis]);
+            if (item && changes[axis]) {
+                item.classList.add("is-updated");
+                clearTimeout(item._scoreFlashTimer);
+                item._scoreFlashTimer = setTimeout(() => item.classList.remove("is-updated"), 300);
+            }
+        }
 
-            el.textContent = ScoreSystem.isEcologyAxis(axis)
-                ? ScoreSystem.formatEcologyValue(axis, value)
-                : value;
+        for (const axis of ScoreSystem.GOAL_HUD_ORDER) {
+            const el = this.values[axis];
+            const item = this.items[axis];
+            if (!el) continue;
+            el.textContent = ScoreSystem.formatGoalStatus(axis, scores[axis]);
 
             if (item) {
                 const rule = thresholds?.[axis];
                 let met = false;
+                const value = scores[axis];
                 if (rule != null) {
                     if (typeof rule === "number") met = value >= rule;
                     else if (rule.min != null) met = value >= rule.min;
@@ -215,9 +216,7 @@ AFRAME.registerComponent("score-hud", {
                 if (changes[axis]) {
                     item.classList.add("is-updated");
                     clearTimeout(item._scoreFlashTimer);
-                    item._scoreFlashTimer = setTimeout(() => {
-                        item.classList.remove("is-updated");
-                    }, 300);
+                    item._scoreFlashTimer = setTimeout(() => item.classList.remove("is-updated"), 300);
                 }
             }
         }
@@ -417,6 +416,7 @@ AFRAME.registerComponent("score-reactive-sky", {
 
     init() {
         this.currentLevel = null;
+        this.forcedLevel = null;
         this.transitioning = false;
         this._fadeRaf = null;
         this.stateImages = (typeof VR_SKY_STATE_IMAGES !== "undefined" && VR_SKY_STATE_IMAGES) || {};
@@ -476,7 +476,25 @@ AFRAME.registerComponent("score-reactive-sky", {
     },
 
     applyState(scores) {
+        if (this.forcedLevel != null) {
+            this._applyLevel(this.forcedLevel);
+            return;
+        }
         const level = ecologyToSkyLevel(scores);
+        this._applyLevel(level);
+    },
+
+    forceLevel(level) {
+        this.forcedLevel = level;
+        this._applyLevel(level);
+    },
+
+    clearForcedLevel() {
+        this.forcedLevel = null;
+        this.applyState(ScoreSystem.scores);
+    },
+
+    _applyLevel(level) {
         const stateSrc = this.stateImages[level];
         if (!stateSrc) return;
 
@@ -528,6 +546,20 @@ AFRAME.registerComponent("sky-video", {
         this.el.addEventListener("loaded", play);
         document.addEventListener("click", play);
         document.addEventListener("mousedown", play);
+    }
+});
+
+/* --- Keep entity facing the camera every frame --- */
+AFRAME.registerComponent("billboard", {
+    init() {
+        this._target = new THREE.Vector3();
+    },
+
+    tick() {
+        const camera = this.el.sceneEl.camera?.el;
+        if (!camera) return;
+        camera.object3D.getWorldPosition(this._target);
+        this.el.object3D.lookAt(this._target);
     }
 });
 
@@ -606,12 +638,11 @@ AFRAME.registerComponent("mouse-drag-look", {
     }
 });
 
-/* --- Decision panel at a fixed world position; drives shuffled territory queue. --- */
+/* --- Decision panel: appears in front of the clicked data object --- */
 AFRAME.registerComponent("decision-panel-host", {
     schema: {
-        panelX: { type: "number", default: 0 },
-        panelY: { type: "number", default: 1.55 },
-        panelZ: { type: "number", default: -4 }
+        panelDistance: { type: "number", default: 2.8 },
+        panelHeight: { type: "number", default: 0.3 }
     },
 
     init() {
@@ -620,20 +651,33 @@ AFRAME.registerComponent("decision-panel-host", {
         this.buttonsReady = false;
         this.resolving = false;
         this.sessionActive = false;
+        this.activeObjectEl = null;
+        this.activeObjectId = null;
+        this.activeDecisionId = null;
+        this._worldPos = new THREE.Vector3();
+        this._camPos = new THREE.Vector3();
+        this._offset = new THREE.Vector3();
 
         this.root = this.el;
         this.root.setAttribute("visible", false);
-        this.root.setAttribute("position", `${this.data.panelX} ${this.data.panelY} ${this.data.panelZ}`);
         this.root.setAttribute("look-at", "[camera]");
 
         const bg = document.createElement("a-plane");
-        bg.setAttribute("width", 2.6);
-        bg.setAttribute("height", 1.5);
-        bg.setAttribute("color", "#000000");
+        bg.setAttribute("width", 2.64);
+        bg.setAttribute("height", 1.54);
+        bg.setAttribute("color", "#b4b4be");
         bg.setAttribute("material", "shader: flat");
-        bg.classList.add("panel-blocker");
-        bg.addEventListener("click", (e) => e.stopPropagation());
+        bg.setAttribute("position", "0 0 -0.002");
         this.root.appendChild(bg);
+
+        const panel = document.createElement("a-plane");
+        panel.setAttribute("width", 2.6);
+        panel.setAttribute("height", 1.5);
+        panel.setAttribute("color", "#000000");
+        panel.setAttribute("material", "shader: flat");
+        panel.classList.add("panel-blocker");
+        panel.addEventListener("click", (e) => e.stopPropagation());
+        this.root.appendChild(panel);
 
         this.progressEl = document.createElement("a-text");
         this.progressEl.setAttribute("align", "center");
@@ -673,21 +717,222 @@ AFRAME.registerComponent("decision-panel-host", {
         const onNo = (e) => { e.stopPropagation(); this.onChoice(false); };
         this.yesFill.addEventListener("click", onYes);
         this.noFill.addEventListener("click", onNo);
+
+        this._onTerritoryReady = () => this.hide();
+        document.addEventListener("territory-reset", this._onTerritoryReady);
+    },
+
+    tick() {
+        if (!this.isPanelOpen()) return;
+        if (this.activeObjectEl) {
+            this._positionInFrontOf(this.activeObjectEl);
+        } else {
+            this._positionInFrontOfCamera();
+        }
+    },
+
+    remove() {
+        document.removeEventListener("territory-reset", this._onTerritoryReady);
+    },
+
+    isPanelOpen() {
+        return !!(this.root?.object3D?.visible);
+    },
+
+    isOpenFor(objectEl) {
+        return this.isPanelOpen() && this.activeObjectEl === objectEl;
+    },
+
+    _positionInFrontOf(objectEl) {
+        const camera = this.el.sceneEl.camera?.el;
+        if (!camera) return;
+
+        objectEl.object3D.getWorldPosition(this._worldPos);
+        camera.object3D.getWorldPosition(this._camPos);
+        // Place panel between the object and the camera (toward the viewer).
+        this._offset.copy(this._camPos).sub(this._worldPos);
+        const dist = this._offset.length();
+        if (dist < 0.001) return;
+
+        this._offset.normalize().multiplyScalar(Math.min(this.data.panelDistance, dist * 0.45));
+        const panelPos = this._worldPos.clone().add(this._offset);
+        panelPos.y += this.data.panelHeight;
+
+        const parent = this.root.object3D.parent;
+        if (parent) {
+            parent.updateMatrixWorld(true);
+            parent.worldToLocal(panelPos);
+        }
+        this.root.setAttribute(
+            "position",
+            `${panelPos.x.toFixed(3)} ${panelPos.y.toFixed(3)} ${panelPos.z.toFixed(3)}`
+        );
+    },
+
+    _positionInFrontOfCamera() {
+        const camera = this.el.sceneEl.camera?.el;
+        if (!camera) return;
+
+        camera.object3D.getWorldPosition(this._camPos);
+        const dir = new THREE.Vector3(0, 0, -1);
+        dir.applyQuaternion(camera.object3D.quaternion);
+        const panelPos = this._camPos.clone().add(dir.multiplyScalar(2.6));
+        panelPos.y += 0.05;
+
+        const parent = this.root.object3D.parent;
+        if (parent) {
+            parent.updateMatrixWorld(true);
+            parent.worldToLocal(panelPos);
+        }
+        this.root.setAttribute(
+            "position",
+            `${panelPos.x.toFixed(3)} ${panelPos.y.toFixed(3)} ${panelPos.z.toFixed(3)}`
+        );
+    },
+
+    async openForObject(objectEl, objectId) {
+        if (!GameState.interactionsEnabled()) return;
+        this.sessionActive = false;
+        this.activeObjectEl = objectEl;
+        this.activeObjectId = objectId;
+        this._positionInFrontOf(objectEl);
+        this.root.setAttribute("visible", true);
+        await this.presentForObject(objectId);
+    },
+
+    async openForDecision(objectId, decisionId) {
+        if (!GameState.interactionsEnabled()) return;
+        if (DecisionState.isDecided(objectId, decisionId)) return;
+
+        this.activeObjectEl = null;
+        this.activeObjectId = objectId;
+        this.activeDecisionId = decisionId;
+        this._positionInFrontOfCamera();
+        this.root.setAttribute("visible", true);
+        await this.presentDecision(objectId, decisionId);
+    },
+
+    hide() {
+        this.activeObjectEl = null;
+        this.activeObjectId = null;
+        this.activeDecisionId = null;
+        this.currentItem = null;
+        this.buttonsReady = false;
+        this.resolving = false;
+        this.root.setAttribute("visible", false);
     },
 
     startSession() {
         if (!GameState.interactionsEnabled()) return;
         this.sessionActive = true;
+        this.activeObjectEl = null;
+        this._positionInFrontOfCamera();
         this.root.setAttribute("visible", true);
         this.presentCurrent();
     },
 
     stopSession() {
         this.sessionActive = false;
+        this.hide();
+    },
+
+    async presentCurrent() {
+        if (!this.sessionActive || GameState.over) {
+            this.stopSession();
+            return;
+        }
+
+        const item = DecisionState.getCurrentQueued();
+        if (!item) {
+            this.showCompleteMessage();
+            GameOutcome.evaluate();
+            return;
+        }
+
+        this.activeObjectId = item.objectId;
+        this.activeDecisionId = item.id;
+        await this.presentDecision(item.objectId, item.id);
+    },
+
+    showCompleteMessage() {
         this.currentItem = null;
         this.buttonsReady = false;
-        this.resolving = false;
-        this.root.setAttribute("visible", false);
+        this.progressEl.setAttribute("value", "All decisions complete");
+        this.progressEl.setAttribute("visible", true);
+        this.questionEl.setAttribute("value", DecisionState.allResolved()
+            ? "No more decisions for this territory."
+            : "Waiting…");
+        this.waitingEl.setAttribute("visible", false);
+        this.setButtonsEnabled(false);
+    },
+
+    async presentForObject(objectId) {
+        if (GameState.over) {
+            this.hide();
+            return;
+        }
+
+        const item = DecisionState.getNextUndecided(objectId);
+        if (!item) {
+            this.hide();
+            return;
+        }
+
+        this.activeDecisionId = item.id;
+        await this.presentDecision(objectId, item.id);
+    },
+
+    async presentDecision(objectId, decisionId) {
+        if (GameState.over) {
+            this.hide();
+            return;
+        }
+
+        const item = DecisionState.getDecision(objectId, decisionId);
+        if (!item || DecisionState.isDecided(objectId, decisionId)) {
+            this.hide();
+            return;
+        }
+
+        this.currentItem = item;
+        this.buttonsReady = false;
+        if (this.activeObjectEl) {
+            this._positionInFrontOf(this.activeObjectEl);
+        } else {
+            this._positionInFrontOfCamera();
+        }
+        this.root.setAttribute("visible", true);
+
+        const decided = DecisionState.countDecidedTotal();
+        const total = DecisionState.countTotalAll();
+        const objectLabel = VR_OBJECT_DECISIONS[objectId]?.marker?.title || objectId;
+        this.progressEl.setAttribute(
+            "value",
+            `Decision ${decided + 1} / ${total} · ${objectLabel}`
+        );
+        this.progressEl.setAttribute("visible", true);
+        this.questionEl.setAttribute("value", item.question);
+        this.setButtonsEnabled(false);
+
+        const objectData = VR_OBJECT_DECISIONS[objectId];
+        const audioId = item.audioId || objectData?.audioOnResolve;
+        if (audioId) {
+            this.waitingEl.setAttribute("visible", true);
+            await AudioManager.playAndWait(audioId);
+        } else {
+            this.waitingEl.setAttribute("visible", false);
+        }
+
+        if (
+            this.currentItem !== item ||
+            GameState.over ||
+            this.activeObjectId !== objectId ||
+            this.activeDecisionId !== decisionId
+        ) return;
+
+        this.waitingEl.setAttribute("visible", false);
+        this.setButtonsEnabled(true);
+        this.buttonsReady = true;
     },
 
     _createButton(label, x) {
@@ -725,43 +970,6 @@ AFRAME.registerComponent("decision-panel-host", {
         return btn;
     },
 
-    async presentCurrent() {
-        if (!this.sessionActive || GameState.over) {
-            this.stopSession();
-            return;
-        }
-
-        const item = DecisionState.getCurrentQueued();
-        if (!item) {
-            this.showCompleteMessage();
-            return;
-        }
-
-        this.currentItem = item;
-        this.buttonsReady = false;
-        this.root.setAttribute("visible", true);
-
-        const decided = DecisionState.countDecidedTotal();
-        const total = DecisionState.countTotalAll();
-        const objectLabel = VR_OBJECT_DECISIONS[item.objectId]?.marker?.title || item.objectId;
-        this.progressEl.setAttribute("value", `Decision ${decided + 1} / ${total} · ${objectLabel}`);
-        this.questionEl.setAttribute("value", item.question);
-        this.setButtonsEnabled(false);
-
-        if (item.audioId) {
-            this.waitingEl.setAttribute("visible", true);
-            await AudioManager.playAndWait(item.audioId);
-        } else {
-            this.waitingEl.setAttribute("visible", false);
-        }
-
-        if (!this.sessionActive || this.currentItem !== item || GameState.over) return;
-
-        this.waitingEl.setAttribute("visible", false);
-        this.setButtonsEnabled(true);
-        this.buttonsReady = true;
-    },
-
     setButtonsEnabled(enabled) {
         for (const btn of [this.btnYes, this.btnNo]) {
             const borderColor = enabled ? "#ffffff" : "#444444";
@@ -772,12 +980,13 @@ AFRAME.registerComponent("decision-panel-host", {
         }
     },
 
-    onChoice(yes) {
+    async onChoice(yes) {
         if (!this.buttonsReady || !this.currentItem || this.resolving) return;
         if (!GameState.interactionsEnabled()) return;
 
         const item = this.currentItem;
-        const { objectId, id, yesEffect, noEffect } = item;
+        const objectId = this.activeObjectId;
+        const { id, yesEffect, noEffect } = item;
 
         this.resolving = true;
         this.buttonsReady = false;
@@ -788,6 +997,7 @@ AFRAME.registerComponent("decision-panel-host", {
         }
 
         DecisionState.advanceQueue();
+
         const effects = yes ? yesEffect : noEffect;
         ScoreSystem.applyEffects(effects);
         GameOutcome.evaluate();
@@ -806,18 +1016,13 @@ AFRAME.registerComponent("decision-panel-host", {
             return;
         }
 
-        this.presentCurrent();
-    },
-
-    showCompleteMessage() {
-        this.currentItem = null;
-        this.buttonsReady = false;
-        this.progressEl.setAttribute("value", "All decisions complete");
-        this.questionEl.setAttribute("value", DecisionState.allResolved()
-            ? "No more decisions for this territory."
-            : "Waiting…");
-        this.waitingEl.setAttribute("visible", false);
-        this.setButtonsEnabled(false);
+        if (this.activeObjectEl) {
+            await this.presentForObject(objectId);
+        } else if (this.sessionActive) {
+            await this.presentCurrent();
+        } else {
+            this.hide();
+        }
     }
 });
 
@@ -874,32 +1079,24 @@ AFRAME.registerComponent("decision-object", {
         const panel = this.getPanelHost();
         if (!panel || this.resolving) return;
 
-        if (panel.visible) {
-            if (panel.isOpenFor(this)) return;
-            return;
-        }
+        if (panel.isPanelOpen() && !panel.isOpenFor(this.el)) return;
+        if (panel.isOpenFor(this.el)) return;
 
         if (this.hasPendingDecisions()) {
             this.openPanel();
         } else {
             AudioManager.playNoMoreDecisions();
-            panel.showExhaustedMessage();
         }
     },
 
     async openPanel() {
-        const decision = this.getPendingDecision();
-        if (!decision || DecisionState.isDecided(this.data.objectId, decision.id)) return;
+        if (!this.hasPendingDecisions()) return;
 
         const panel = this.getPanelHost();
-        if (!panel || panel.visible) return;
+        if (!panel) return;
 
-        this.isOpen = true;
-        const decided = DecisionState.countDecided(this.data.objectId);
-        const total = DecisionState.countTotal(this.data.objectId);
-        const progress = `Decision ${decided + 1} / ${total}`;
-        await panel.show(this, decision, progress);
-        this.isOpen = panel.isOpenFor(this);
+        await panel.openForObject(this.el, this.data.objectId);
+        this.isOpen = panel.isOpenFor(this.el);
     },
 
     resolve(yes) {
@@ -1133,6 +1330,7 @@ AFRAME.registerComponent("score-audio-watcher", {
 AFRAME.registerComponent("mouse-interactable", {
     init() {
         this.mesh = this.el.querySelector(".object-mesh");
+        this.el.classList.add("clickable");
         if (this.mesh) this.mesh.classList.add("clickable");
 
         const interact = (evt) => {
@@ -1141,20 +1339,17 @@ AFRAME.registerComponent("mouse-interactable", {
             if (dragLook?.shouldSuppressClick?.()) return;
 
             const panel = this.el.sceneEl.decisionPanel;
-            if (panel?.visible) return;
+            if (panel?.isPanelOpen?.() && !panel.isOpenFor(this.el)) return;
 
             evt.stopPropagation();
             this.el.emit("decision-interact");
         };
 
         this.el.addEventListener("click", interact);
-        if (this.mesh) this.mesh.addEventListener("click", interact);
-
-        const hoverStart = () => this.el.emit("hover-start");
-        const hoverEnd = () => this.el.emit("hover-end");
         if (this.mesh) {
-            this.mesh.addEventListener("mouseenter", hoverStart);
-            this.mesh.addEventListener("mouseleave", hoverEnd);
+            this.mesh.addEventListener("click", interact);
+            this.mesh.addEventListener("mouseenter", () => this.el.emit("hover-start"));
+            this.mesh.addEventListener("mouseleave", () => this.el.emit("hover-end"));
         }
     }
 });
@@ -1222,12 +1417,18 @@ AFRAME.registerComponent("data-marker", {
         this.marker.className = "data-marker";
 
         this.titleEl = document.createElement("span");
-        this.titleEl.className = "data-marker__title";
+        this.titleEl.className = "data-marker__label";
         this.marker.appendChild(this.titleEl);
 
-        this.valueEl = document.createElement("span");
-        this.valueEl.className = "data-marker__value";
-        this.marker.appendChild(this.valueEl);
+        this.stemEl = document.createElement("span");
+        this.stemEl.className = "data-marker__stem";
+        this.stemEl.setAttribute("aria-hidden", "true");
+        this.marker.appendChild(this.stemEl);
+
+        this.dotEl = document.createElement("span");
+        this.dotEl.className = "data-marker__dot";
+        this.dotEl.setAttribute("aria-hidden", "true");
+        this.marker.appendChild(this.dotEl);
 
         this.el.sceneEl.appendChild(this.marker);
 
@@ -1256,18 +1457,13 @@ AFRAME.registerComponent("data-marker", {
     },
 
     updateValue(initial = false) {
-        if (!this.config) return;
+        if (!this.config || !this.objectId) return;
         const axis = this.config.axis;
         const raw = axis === "ecology"
             ? ScoreSystem.getTotalEcologyPercent()
             : ScoreSystem.get(axis);
-        const level = scoreToSpriteLevel(axis, raw);
-        const value = axis === "ecology"
-            ? Math.round(raw)
-            : this.config.values[level - 1];
-        this.valueEl.textContent = axis === "ecology"
-            ? `${value} ${this.config.unit}`
-            : `${value} ${this.config.unit}`;
+
+        this.titleEl.textContent = ScoreSystem.formatPeakFinderLabel(this.objectId, raw);
 
         if (!initial) {
             this.marker.classList.add("is-updated");
@@ -1279,7 +1475,7 @@ AFRAME.registerComponent("data-marker", {
     },
 
     tick() {
-        if (!this.config || !TerritoryState.isGameplayReady()) {
+        if (!this.config || !TerritoryState.isGameplayReady() || !this.el.getAttribute("visible")) {
             this.marker?.classList.remove("is-visible");
             return;
         }
@@ -1313,8 +1509,7 @@ AFRAME.registerComponent("data-marker", {
 
         const x = (this._ndc.x + 1) / 2 * canvas.clientWidth;
         const y = (1 - this._ndc.y) / 2 * canvas.clientHeight;
-        // Lifted 18px so the leader line + crosshair reach down to the anchor point.
-        this.marker.style.transform = `translate(${x}px, ${y}px) translate(-50%, calc(-100% - 18px))`;
+        this.marker.style.transform = `translate(${x}px, ${y}px) translate(-50%, -100%)`;
         this.marker.classList.add("is-visible");
     },
 
@@ -1585,18 +1780,15 @@ AFRAME.registerComponent("game-over", {
         this.overlay.id = "game-over-overlay";
         this.overlay.className = "game-over";
         this.overlay.innerHTML = `
-            <div class="game-over__panel">
+            <div class="game-over__content">
+                <img class="game-over__logo" src="assets/placeholders/Scales Logo.gif" alt="Scales" width="72" height="72"
+                     onerror="this.src='assets/placeholders/SCALES_SETTING.png'; this.onerror=null;">
                 <span class="game-over__tag"></span>
                 <h1 class="game-over__title"></h1>
                 <p class="game-over__subtitle"></p>
-                <div class="game-over__scores"></div>
-                <div class="game-over__report" aria-label="Session report"></div>
-                <div class="scoreboard-ui game-over__scoreboard" aria-label="Session record">
-                    <span class="scoreboard-ui__label">// SESSION RECORD</span>
-                    <div class="scoreboard-ui__grid" data-scoreboard-wins></div>
-                    <div class="scoreboard-ui__totals" data-scoreboard-totals></div>
-                    <span class="scoreboard-ui__label scoreboard-ui__label--secondary">// ECOLOGY EXTREMES</span>
-                    <div class="scoreboard-ui__ecology" data-scoreboard-ecology></div>
+                <div class="scoreboard-boards game-over__boards">
+                    <div class="scoreboard-panel" data-scoreboard-simulation></div>
+                    <div class="scoreboard-panel" data-scoreboard-results></div>
                 </div>
                 <button class="game-over__btn" type="button">Try Again</button>
             </div>
@@ -1604,8 +1796,6 @@ AFRAME.registerComponent("game-over", {
         this.tagEl = this.overlay.querySelector(".game-over__tag");
         this.titleEl = this.overlay.querySelector(".game-over__title");
         this.subtitleEl = this.overlay.querySelector(".game-over__subtitle");
-        this.scoresEl = this.overlay.querySelector(".game-over__scores");
-        this.reportEl = this.overlay.querySelector(".game-over__report");
         this.overlay.querySelector(".game-over__btn")
             .addEventListener("click", () => this.reset());
         this.el.sceneEl.appendChild(this.overlay);
@@ -1631,100 +1821,16 @@ AFRAME.registerComponent("game-over", {
         const lose = loseCopy[GameState.loseReason] || loseCopy.ecology;
 
         this.titleEl.textContent = isWin
-            ? `${territory?.displayName || "Territory"} Secured`
+            ? "Victory, All Goals Achieved"
             : lose.title;
         this.subtitleEl.textContent = isWin
-            ? "All territory goal thresholds have been met. Your lens shaped the outcome."
+            ? "You achieved all goals before 2030 Projections were reached."
             : lose.subtitle;
 
-        this.scoresEl.innerHTML = "";
-
-        const ecologyHeading = document.createElement("div");
-        ecologyHeading.className = "game-over__section-label";
-        ecologyHeading.textContent = "Ecology";
-        this.scoresEl.appendChild(ecologyHeading);
-        for (const axis of ScoreSystem.ECOLOGY_AXES) {
-            this.scoresEl.appendChild(this._createScoreRow(axis, isWin));
-        }
-
-        const goalsHeading = document.createElement("div");
-        goalsHeading.className = "game-over__section-label";
-        goalsHeading.textContent = "Goals";
-        this.scoresEl.appendChild(goalsHeading);
-        const thresholds = TerritoryState.getWinThresholds() || {};
-        const goalAxes = [
-            ...ScoreSystem.GOAL_AXES,
-            ...ScoreSystem.INTEGRITY_AXES.filter((axis) => thresholds[axis] != null)
-        ];
-        for (const axis of goalAxes) {
-            this.scoresEl.appendChild(this._createScoreRow(axis, isWin, thresholds[axis]));
-        }
-
-        this._renderReport(reportSession);
-        ScoreboardUI.renderInto(this.overlay);
+        const scores = reportSession?.finalScores || ScoreSystem.scores;
+        ScoreboardUI.renderDualBoards(this.overlay, { includeSimulation: true, scores });
 
         this.overlay.classList.add("is-visible");
-    },
-
-    _renderReport(session) {
-        if (!this.reportEl) return;
-        if (!session?.decisions?.length) {
-            this.reportEl.innerHTML = "";
-            return;
-        }
-
-        const rows = session.decisions.slice(0, 12).map((d) => {
-            const objectLabel = VR_OBJECT_DECISIONS[d.objectId]?.marker?.title || d.objectId;
-            const choice = d.choice ? "Yes" : "No";
-            return `<li><span class="game-over__report-choice">${choice}</span> ${objectLabel}</li>`;
-        }).join("");
-
-        const more = session.decisions.length > 12
-            ? `<li class="game-over__report-more">+ ${session.decisions.length - 12} more decisions</li>`
-            : "";
-
-        this.reportEl.innerHTML = `
-            <span class="game-over__section-label">Report Card</span>
-            <ul class="game-over__report-list">${rows}${more}</ul>
-        `;
-    },
-
-    _createScoreRow(axis, isWin, threshold) {
-        const value = ScoreSystem.get(axis);
-        const row = document.createElement("div");
-        row.className = "game-over__score-row";
-        row.style.setProperty("--axis-color", SCORE_COLORS[axis]);
-
-        let thresholdNote = "";
-        if (threshold != null) {
-            if (typeof threshold === "number") {
-                thresholdNote = value >= threshold ? " · MET" : ` · need ≥${threshold}`;
-            } else if (threshold.min != null) {
-                thresholdNote = value >= threshold.min ? " · MET" : ` · need ≥${threshold.min}`;
-            } else if (threshold.max != null) {
-                thresholdNote = value <= threshold.max ? " · MET" : ` · need ≤${threshold.max}`;
-            }
-        }
-        const maxNote = !isWin && ScoreSystem.isEcologyAxis(axis) &&
-            value >= ScoreSystem.ECOLOGY_PROJECTION_2030[axis]
-            ? " · 2030"
-            : "";
-
-        row.innerHTML = `
-            <span class="game-over__score-label">${SCORE_LABELS[axis]}</span>
-            <span class="game-over__score-value">${
-                ScoreSystem.isEcologyAxis(axis)
-                    ? ScoreSystem.formatEcologyValue(axis, value)
-                    : value
-            }${maxNote}${thresholdNote}</span>
-        `;
-
-        if ((!isWin && ScoreSystem.isEcologyAxis(axis) &&
-            value >= ScoreSystem.ECOLOGY_PROJECTION_2030[axis]) ||
-            (isWin && thresholdNote.includes("MET"))) {
-            row.classList.add("is-maxed");
-        }
-        return row;
     },
 
     reset() {

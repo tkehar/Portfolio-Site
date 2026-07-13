@@ -18,6 +18,7 @@
     <script src="js/stage-ui.js"></script>
     <script src="js/components.js"></script>
     <link rel="stylesheet" href="css/score-card.css">
+    <link rel="stylesheet" href="css/scoreboard-panel.css">
     <link rel="stylesheet" href="css/data-marker.css">
     <link rel="stylesheet" href="css/game-over.css">
     <link rel="stylesheet" href="css/enter-screen.css">
@@ -64,68 +65,62 @@
 
         <!-- HTML overlays live INSIDE a-scene so they stay visible in fullscreen.
              Styling is managed in css/score-card.css -->
-        <div id="score-card" class="score-card" aria-label="Scores" style="display: none;">
-            <section class="score-card__group score-card__group--ecology" aria-label="Ecology">
-                <span class="score-card__group-label">Ecology</span>
-                <div class="score-card__group-items">
-                    <div class="score-card__item score-card__item--co2">
-                        <span class="score-card__label">CO2</span>
-                        <span class="score-card__value" id="score-co2">0</span>
-                    </div>
-                    <div class="score-card__item score-card__item--water">
-                        <span class="score-card__label">Water</span>
-                        <span class="score-card__value" id="score-water">0</span>
-                    </div>
-                    <div class="score-card__item score-card__item--electricity">
-                        <span class="score-card__label">Electricity</span>
-                        <span class="score-card__value" id="score-electricity">0</span>
-                    </div>
-                    <div class="score-card__item score-card__item--datacenter">
-                        <span class="score-card__label">Datacenters</span>
-                        <span class="score-card__value" id="score-datacenter">0</span>
-                    </div>
+        <div id="score-card" class="impact-panel" aria-label="Scores and goals" style="display: none;">
+            <section class="impact-panel__section impact-panel__section--ecology" aria-label="Ecology">
+                <div class="impact-panel__row">
+                    <span class="impact-panel__label">Water Usage</span>
+                    <span class="impact-panel__value" id="score-water">0</span>
+                </div>
+                <div class="impact-panel__row">
+                    <span class="impact-panel__label">CO2 Emissions</span>
+                    <span class="impact-panel__value" id="score-co2">0</span>
+                </div>
+                <div class="impact-panel__row">
+                    <span class="impact-panel__label">Electricity Usage</span>
+                    <span class="impact-panel__value" id="score-electricity">0</span>
+                </div>
+                <div class="impact-panel__row">
+                    <span class="impact-panel__label">Data Center Distribution</span>
+                    <span class="impact-panel__value" id="score-datacenter">0</span>
                 </div>
             </section>
-            <section class="score-card__group score-card__group--goals" aria-label="Goals">
-                <span class="score-card__group-label">Goals</span>
-                <div class="score-card__group-items">
-                    <div class="score-card__item score-card__item--sovereignty">
-                        <span class="score-card__label">Sovereignty</span>
-                        <span class="score-card__value" id="score-sovereignty">0</span>
-                    </div>
-                    <div class="score-card__item score-card__item--power">
-                        <span class="score-card__label">Power</span>
-                        <span class="score-card__value" id="score-power">0</span>
-                    </div>
-                    <div class="score-card__item score-card__item--identity">
-                        <span class="score-card__label">Identity</span>
-                        <span class="score-card__value" id="score-identity">0</span>
-                    </div>
-                    <div class="score-card__item score-card__item--transparency" data-territory-goal="transparency">
-                        <span class="score-card__label">Transparency</span>
-                        <span class="score-card__value" id="score-transparency">0</span>
-                    </div>
+            <section class="impact-panel__section impact-panel__section--goals" aria-label="Goals">
+                <div class="impact-panel__row">
+                    <span class="impact-panel__label">Sovereignty</span>
+                    <span class="impact-panel__badge" id="score-sovereignty">—</span>
+                </div>
+                <div class="impact-panel__row">
+                    <span class="impact-panel__label">Identity</span>
+                    <span class="impact-panel__badge" id="score-identity">—</span>
+                </div>
+                <div class="impact-panel__row">
+                    <span class="impact-panel__label">Power</span>
+                    <span class="impact-panel__badge" id="score-power">—</span>
+                </div>
+                <div class="impact-panel__row impact-panel__row--transparency" data-territory-goal="transparency">
+                    <span class="impact-panel__label">Transparency</span>
+                    <span class="impact-panel__badge" id="score-transparency">—</span>
                 </div>
             </section>
         </div>
 
-        <div id="territory-goal" class="territory-goal" aria-live="polite" style="display: none;">
-            <span class="territory-goal__label">Territory Goal</span>
-            <p class="territory-goal__text"></p>
-        </div>
+        <div id="territory-goal" class="territory-goal" aria-live="polite" style="display: none;" hidden></div>
 
         <div id="overlay-hint" style="display: none;">
-            Drag to look around · Select territory panels · Answer Yes/No on the panel · <kbd>Y</kbd> / <kbd>N</kbd>
+            Drag to look around · Center objects in the peak finder · Click to decide · <kbd>Y</kbd> / <kbd>N</kbd>
         </div>
 
         <button id="fullscreen-btn" type="button">⛶ Fullscreen</button>
 
         <a-assets timeout="120000">
-            <img id="territory-grid-sky" src="assets/placeholders/Territory Grid.png">
-            <img id="map-sprite-1" src="assets/placeholders/Map_Visualization-1.png">
-            <img id="map-sprite-2" src="assets/placeholders/Map_Visualization-2.png">
-            <img id="map-sprite-3" src="assets/placeholders/Map_Visualization-3.png">
-            <img id="map-sprite-4" src="assets/placeholders/Map_Visualization-4-.png">
+            <img id="territory-grid-1" src="assets/placeholders/Territory Grid - 1.png">
+            <img id="territory-grid-2" src="assets/placeholders/Territory Grid - 2.png">
+            <img id="territory-grid-3" src="assets/placeholders/Territory Grid - 3.png">
+            <img id="territory-grid-4" src="assets/placeholders/Territory Grid - 4.png">
+            <img id="map-sprite-1" src="assets/placeholders/Territory Grid - 1.png">
+            <img id="map-sprite-2" src="assets/placeholders/Territory Grid - 2.png">
+            <img id="map-sprite-3" src="assets/placeholders/Territory Grid - 3.png">
+            <img id="map-sprite-4" src="assets/placeholders/Territory Grid - 4.png">
             <img id="mirror-sprite-1" src="assets/placeholders/Mirror_1.png">
             <img id="mirror-sprite-2" src="assets/placeholders/Mirror_2.png">
             <img id="mirror-sprite-3" src="assets/placeholders/Mirror_3.png">
@@ -149,7 +144,7 @@
         </a-assets>
 
         <!-- Environment -->
-        <a-sky id="sky" src="#territory-grid-sky" radius="50" score-reactive-sky></a-sky>
+        <a-sky id="sky" src="#territory-grid-1" radius="50" score-reactive-sky></a-sky>
         <a-light type="ambient" color="#fff" intensity="0.8"></a-light>
 
         <!-- Camera -->
@@ -162,7 +157,7 @@
             </a-camera>
         </a-entity>
 
-        <a-entity decision-panel-host position="0 1.55 -4"></a-entity>
+        <a-entity decision-panel-host></a-entity>
 
         <!-- ============================================================ -->
         <!-- DATA OBJECTS (Game Glossary — 5 types)                       -->
@@ -170,45 +165,55 @@
 
         <a-entity id="obj-map" position="16.06 2.4 -17.84"
                   data-object="objectId: map"
+                  decision-object="objectId: map"
+                  mouse-interactable
+                  billboard
                   score-reactive-object="scoreAxis: ecology; objectId: map"
-                  data-marker
-                  look-at="[camera]">
+                  data-marker>
             <a-image class="object-mesh" src="#map-sprite-1"
                      width="8" height="11" transparent="true"></a-image>
         </a-entity>
 
         <a-entity id="obj-mirror" position="-21.93 0.9 9.76"
                   data-object="objectId: mirror"
+                  decision-object="objectId: mirror"
+                  mouse-interactable
+                  billboard
                   score-reactive-object="scoreAxis: identity; objectId: mirror"
-                  data-marker
-                  look-at="[camera]">
+                  data-marker>
             <a-image class="object-mesh" src="#mirror-sprite-1"
                      width="8" height="12" transparent="true"></a-image>
         </a-entity>
 
         <a-entity id="obj-scale" position="19.42 1.65 14.11"
                   data-object="objectId: scale"
+                  decision-object="objectId: scale"
+                  mouse-interactable
+                  billboard
                   score-reactive-object="scoreAxis: power; objectId: scale"
-                  data-marker
-                  look-at="[camera]">
+                  data-marker>
             <a-image class="object-mesh" src="#power-sprite-1"
                      width="8" height="11" transparent="true"></a-image>
         </a-entity>
 
         <a-entity id="obj-screen" position="22.83 0.9 -7.42"
                   data-object="objectId: screen"
+                  decision-object="objectId: screen"
+                  mouse-interactable
+                  billboard
                   score-reactive-object="scoreAxis: sovereignty; objectId: screen"
-                  data-marker
-                  look-at="[camera]">
+                  data-marker>
             <a-image class="object-mesh" src="#screen-sprite-1"
                      width="8" height="11" transparent="true"></a-image>
         </a-entity>
 
         <a-entity id="obj-compute-box" position="-23.48 2.4 -4.99"
                   data-object="objectId: compute_box"
+                  decision-object="objectId: compute_box"
+                  mouse-interactable
+                  billboard
                   score-reactive-object="scoreAxis: transparency; objectId: compute_box"
-                  data-marker
-                  look-at="[camera]">
+                  data-marker>
             <a-image class="object-mesh" src="#compute-sprite-1"
                      width="8" height="11" transparent="true"></a-image>
         </a-entity>

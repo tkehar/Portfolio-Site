@@ -42,6 +42,30 @@ const ScoreSystem = {
         "Mineral Usage": "co2"
     },
 
+    GOAL_STATUS_LABELS: {
+        sovereignty: ["Extractive", "Managed", "Balanced", "Participatory", "Self-Governed"],
+        identity: ["Erased", "Assimilated", "Hybrid", "Self Determined", "Sovereign"],
+        power: ["State-Corporate", "Corporate-Led", "Balanced", "Public Interest", "Community-Led"],
+        transparency: ["Opaque 100%", "Mostly Opaque", "Mixed", "Mostly Open", "Fully Open"]
+    },
+
+    ECOLOGY_HUD_LABELS: {
+        water: "Water Usage",
+        co2: "CO2 Emissions",
+        electricity: "Electricity Usage",
+        datacenter: "Data Center Distribution"
+    },
+
+    GOAL_HUD_LABELS: {
+        sovereignty: "Sovereignty",
+        identity: "Identity",
+        power: "Power",
+        transparency: "Transparency"
+    },
+
+    ECOLOGY_HUD_ORDER: ["water", "co2", "electricity", "datacenter"],
+    GOAL_HUD_ORDER: ["sovereignty", "identity", "power", "transparency"],
+
     GOAL_MIN: -6,
     GOAL_MAX: 6,
 
@@ -112,6 +136,49 @@ const ScoreSystem = {
         if (axis === "electricity") return `${Math.round(value)} TWh`;
         if (axis === "datacenter") return `${Math.round(value).toLocaleString()} km²`;
         return String(value);
+    },
+
+    formatEcologyHudValue(axis, value = this.get(axis)) {
+        if (axis === "water") return `${(value / 1e12).toFixed(1)} trillion liters`;
+        if (axis === "co2") return `${Math.round(value / 1e6)} million tonnes`;
+        if (axis === "electricity") return `${Math.round(value)} Terawatt hrs`;
+        if (axis === "datacenter") return `${Math.round(value).toLocaleString()} km²`;
+        return this.formatEcologyValue(axis, value);
+    },
+
+    goalLevel(score) {
+        return Math.max(1, Math.min(5,
+            Math.round(((score - this.GOAL_MIN) / (this.GOAL_MAX - this.GOAL_MIN)) * 4) + 1
+        ));
+    },
+
+    formatGoalStatus(axis, score = this.get(axis)) {
+        const level = this.goalLevel(score);
+        return this.GOAL_STATUS_LABELS[axis]?.[level - 1] ?? String(score);
+    },
+
+    /** Peak-finder data label: "{Axis} is {glossary sprite state}" */
+    formatPeakFinderLabel(objectId, score = null) {
+        const config = VR_OBJECT_DECISIONS[objectId]?.marker;
+        if (!config) return "";
+
+        const axis = config.axis;
+        const axisLabel = this.GOAL_HUD_LABELS[axis] || config.title;
+
+        if (axis === "ecology" || objectId === "map") {
+            const pct = this.getTotalEcologyPercent();
+            let level = 1;
+            if (pct >= 75) level = 4;
+            else if (pct >= 50) level = 3;
+            else if (pct >= 25) level = 2;
+            const band = config.peakLabels?.[level - 1] || VR_SKY_STATE_LABELS[level] || "neutral";
+            return `Ecology is ${band.toLowerCase()}`;
+        }
+
+        const value = score ?? this.get(axis);
+        const level = this.goalLevel(value);
+        const stateLabel = config.peakLabels?.[level - 1] || this.formatGoalStatus(axis, value);
+        return `${axisLabel} is ${stateLabel.toLowerCase()}`;
     },
 
     formatEffectDelta(axis, delta) {

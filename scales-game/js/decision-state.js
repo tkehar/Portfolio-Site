@@ -1,6 +1,5 @@
 /**
  * Tracks decided / undecided status for every decision on every object.
- * Presents territory decisions in a shuffled queue (panel-driven flow).
  */
 const DecisionState = {
     /** @type {Record<string, Record<string, { decided: boolean, choice: boolean|null }>>} */
@@ -39,6 +38,12 @@ const DecisionState = {
         }
     },
 
+    getDecision(objectId, decisionId) {
+        const decisions = TerritoryState.getObjectDecisions(objectId);
+        return decisions?.find((d) => d.id === decisionId) || null;
+    },
+
+    /** Next undecided item in the shuffled session queue (panel-driven flow). */
     getCurrentQueued() {
         while (this.queueIndex < this.queue.length) {
             const item = this.queue[this.queueIndex];
@@ -117,11 +122,14 @@ const DecisionState = {
 
 document.addEventListener("territory-gameplay-ready", () => {
     GameState.resetSession();
-    ScoreSystem.reset(TerritoryState.active);
     DecisionState.init();
+    ScoreSystem.reset(TerritoryState.active);
+    const sky = document.querySelector("a-scene a-sky");
+    sky?.components["score-reactive-sky"]?.clearForcedLevel?.();
     if (typeof syncTerritoryObjectVisibility === "function") {
         syncTerritoryObjectVisibility();
     }
+
     const panel = document.querySelector("a-scene")?.decisionPanel;
     if (panel?.startSession) panel.startSession();
 });
