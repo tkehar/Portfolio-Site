@@ -118,21 +118,20 @@ body.dark-mode .themed-icon .dark-mode-icon {
     padding-top: 40px;
 }
 
-.about-info h2 {
+.about-info h1 {
     font-size: 26px;
     font-weight: 700;
-    line-height: 2;
-    margin-bottom: 24px;
+    line-height: 1.5;
+    margin-bottom: 32px;
     letter-spacing: -0.5px;
 }
 
-.about-info h3 {
-    font-size: 20px;
+.about-info h2 {
+    font-size: 22px;
     font-weight: 700;
     line-height: 1.4;
-    color: #000000;
-    margin-bottom: 40px;
-    letter-spacing: -0.3px;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
 }
 
 .skills-section {
@@ -177,22 +176,28 @@ body.dark-mode .themed-icon .dark-mode-icon {
     transition: filter 0.3s ease;
 }
 
-.typing-pill {
-    display: inline-block;
-    background-color: #A1FF5F; 
-    color: #000000; 
-    font-style: oblique; 
-    font-weight: bold;
-    padding: 4px 12px;
-    border-radius: 4px;
-}
-
-/* --- 3D AUTOMATED DISPLAY CUBE ENGINES --- */
 .about-visual {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 450px;
+}
+
+.about-visual img {
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+}
+
+.about-contact {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid #eaeaea;
+    scroll-margin-top: 24px;
+}
+
+.about-contact .software-icons {
+    margin-top: 24px;
 }
 
 
@@ -216,6 +221,7 @@ body.dark-mode .themed-icon .dark-mode-icon {
 .filter-buttons {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 12px;
 }
 
@@ -251,11 +257,7 @@ body.dark-mode .themed-icon .dark-mode-icon {
     display: block;
 }
 
-.project-card img, 
-.project-card .placeholder-blue,
-.project-card .placeholder-ticketwala,
-.project-card .placeholder-dastaan,
-.project-card .placeholder-grid-art {
+.project-card img {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
@@ -265,28 +267,7 @@ body.dark-mode .themed-icon .dark-mode-icon {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Custom Component Accents from Visual Wireframes */
-.placeholder-blue { background-color: #1a40ce; }
-.placeholder-ticketwala {
-    background: #ffffff; border: 1px solid #e0e0e0;
-    display: flex !important; align-items: center; justify-content: center;
-    font-weight: 900; font-size: 20px; letter-spacing: -1px;
-}
-.placeholder-dastaan {
-    background: #1c262b; color: #dbab67;
-    display: flex !important; align-items: center; justify-content: center;
-    font-size: 24px;
-}
-.placeholder-grid-art {
-    background: #f7f7f7; border: 1px solid #e3e3e3;
-    position: relative;
-}
-
-.project-card:hover img, 
-.project-card:hover .placeholder-blue,
-.project-card:hover .placeholder-ticketwala,
-.project-card:hover .placeholder-dastaan,
-.project-card:hover .placeholder-grid-art {
+.project-card:hover img {
     transform: translateY(-6px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
 }
@@ -898,6 +879,8 @@ body.dark-mode .container {
 
 body.dark-mode .nav-tab,
 body.dark-mode .logo a,
+body.dark-mode .about-info h1,
+body.dark-mode .about-info h2,
 body.dark-mode .project-content h1,
 body.dark-mode .project-content h1,
 body.dark-mode .project-content h2,
@@ -941,10 +924,17 @@ body.dark-mode .filter-btn {
 
 body.dark-mode .filter-btn.active,
 body.dark-mode .filter-btn:hover {
-    background: #555 !important; /* Slightly lighter dark for active/hover */
-    color: #ffffff !important;   /* White text */
+    background: #555 !important;
+    color: #ffffff !important;
     border-color: #555 !important;
-    color: #b0b0b0 !important;
+}
+
+body.dark-mode .about-contact {
+    border-top-color: #333;
+}
+
+body.dark-mode .about-contact .software-icon img {
+    filter: invert(1) brightness(0.8);
 }
 
 body.dark-mode .grid-item,
