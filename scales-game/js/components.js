@@ -136,14 +136,7 @@ const GameOutcome = {
 };
 
 function setGameUIVisible(visible) {
-    const scoreCard = document.getElementById("score-card");
-    const goalPanel = document.getElementById("territory-goal");
-    const hint = document.getElementById("overlay-hint");
-    const peakFrame = document.querySelector(".peak-finder-frame");
-    if (scoreCard) scoreCard.style.display = visible ? "" : "none";
-    if (goalPanel) goalPanel.style.display = visible ? "" : "none";
-    if (hint) hint.style.display = visible ? "" : "none";
-    if (peakFrame) peakFrame.style.display = visible ? "" : "none";
+    /* VR build: no desktop HUD overlays */
 }
 
 /* --- Score HUD: HTML score card (styled via css/score-card.css) --- */
@@ -1148,7 +1141,7 @@ AFRAME.registerComponent("decision-object", {
     }
 });
 
-/* --- Hand pinch proximity interaction (optional VR — not used in browser mode) --- */
+/* --- Hand pinch proximity interaction for VR --- */
 AFRAME.registerComponent("hand-interaction", {
     schema: {
         pinchDistance: { type: "number", default: 0.15 },
@@ -1158,6 +1151,7 @@ AFRAME.registerComponent("hand-interaction", {
     init() {
         this.hands = [];
         this.interactables = [];
+        this.clickables = [];
         this.hovered = null;
         this.pinchCooldown = false;
 
@@ -1172,40 +1166,22 @@ AFRAME.registerComponent("hand-interaction", {
             });
 
             this.interactables = this.el.sceneEl.querySelectorAll(".interactable");
-        });
-
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" && this.hovered) {
-                this.hovered.emit("decision-interact");
-            }
-            const comp = this.hovered?.components["decision-object"];
-            if (comp && (e.key === "y" || e.key === "n")) {
-                if (!comp.panel && comp.hasPendingDecisions()) {
-                    comp.showPanel();
-                }
-                if (comp.panel) {
-                    comp.resolve(e.key === "y");
-                }
-            }
+            this.clickables = this.el.sceneEl.querySelectorAll(".clickable");
         });
     },
 
     tick() {
-        if (!this.interactables.length) return;
-
         const handPositions = this.hands
             .map((h) => h?.object3D?.getWorldPosition(new THREE.Vector3()))
             .filter(Boolean);
 
-        if (!handPositions.length) {
-            const cam = this.el.sceneEl.camera?.el?.object3D;
-            if (cam) handPositions.push(cam.getWorldPosition(new THREE.Vector3()));
-        }
+        if (!handPositions.length) return;
 
         let closest = null;
         let closestDist = Infinity;
 
-        this.interactables.forEach((obj) => {
+        const targets = [...this.interactables, ...this.clickables];
+        targets.forEach((obj) => {
             const pos = obj.object3D.getWorldPosition(new THREE.Vector3());
             handPositions.forEach((hp) => {
                 const dist = hp.distanceTo(pos);
@@ -1232,6 +1208,16 @@ AFRAME.registerComponent("hand-interaction", {
             event.detail.position.z
         );
 
+        const btns = this.el.sceneEl.querySelectorAll(".decision-btn");
+        for (const btn of btns) {
+            const pos = btn.object3D.getWorldPosition(new THREE.Vector3());
+            if (pinchPos.distanceTo(pos) < 0.12) {
+                btn.emit("click");
+                this._cooldown();
+                return;
+            }
+        }
+
         let hit = null;
         let hitDist = Infinity;
 
@@ -1244,22 +1230,25 @@ AFRAME.registerComponent("hand-interaction", {
             }
         });
 
-        const btns = this.el.sceneEl.querySelectorAll(".decision-btn");
-        btns.forEach((btn) => {
-            const pos = btn.object3D.getWorldPosition(new THREE.Vector3());
-            if (pinchPos.distanceTo(pos) < 0.12) {
-                btn.emit("click");
-                this.pinchCooldown = true;
-                setTimeout(() => { this.pinchCooldown = false; }, 600);
-                return;
-            }
-        });
-
         if (hit) {
             hit.emit("decision-interact");
-            this.pinchCooldown = true;
-            setTimeout(() => { this.pinchCooldown = false; }, 600);
+            this._cooldown();
+            return;
         }
+
+        for (const obj of this.clickables) {
+            const pos = obj.object3D.getWorldPosition(new THREE.Vector3());
+            if (pinchPos.distanceTo(pos) < this.data.pinchDistance) {
+                obj.emit("click");
+                this._cooldown();
+                return;
+            }
+        }
+    },
+
+    _cooldown() {
+        this.pinchCooldown = true;
+        setTimeout(() => { this.pinchCooldown = false; }, 600);
     }
 });
 
@@ -1786,10 +1775,6 @@ AFRAME.registerComponent("game-over", {
                 <span class="game-over__tag"></span>
                 <h1 class="game-over__title"></h1>
                 <p class="game-over__subtitle"></p>
-                <div class="scoreboard-boards game-over__boards">
-                    <div class="scoreboard-panel" data-scoreboard-simulation></div>
-                    <div class="scoreboard-panel" data-scoreboard-results></div>
-                </div>
                 <button class="game-over__btn" type="button">Try Again</button>
             </div>
         `;
@@ -1826,9 +1811,6 @@ AFRAME.registerComponent("game-over", {
         this.subtitleEl.textContent = isWin
             ? "You achieved all goals before 2030 Projections were reached."
             : lose.subtitle;
-
-        const scores = reportSession?.finalScores || ScoreSystem.scores;
-        ScoreboardUI.renderDualBoards(this.overlay, { includeSimulation: true, scores });
 
         this.overlay.classList.add("is-visible");
     },

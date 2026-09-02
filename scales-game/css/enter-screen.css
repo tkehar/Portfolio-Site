@@ -88,6 +88,12 @@
     cursor: wait;
 }
 
+.enter-screen__hint {
+    font-size: 13px;
+    color: #888;
+    margin: 0;
+}
+
 /* --- Intro video (Launch Scales) — YouTube 360 default --- */
 .intro-video {
     position: fixed;

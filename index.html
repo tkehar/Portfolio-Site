@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talha Ahmed Kehar | Portfolio</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="config.js" defer></script>
 </head>
-<body>
+<body class="board-page">
     <script>
         if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
     </script>
@@ -14,10 +15,9 @@
         <header class="navbar">
             <div class="logo"><a href="index">TALHA AHMED KEHAR</a></div>
             <nav class="nav-links">
-                <a href="index" class="nav-tab active">About</a>
-                <a href="projects" class="nav-tab">Projects</a>
+                <a href="index" class="nav-tab active">Work</a>
+                <a href="about" class="nav-tab">About</a>
                 <a href="resume" class="nav-tab">Resume</a>
-                <a href="contact" class="nav-tab">Contact</a>
                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
                     <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41zm-12.37 12.37c-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41z"/></svg>
                     <svg class="moon-icon" viewBox="0 0 24 24"><path d="M12.1 20.9c-.3-.5-.7-1-1.2-1.4-1.1-.8-2.4-1.2-3.7-1.2H4c-.3 0-.5.2-.5.5v1.3c0 .3.2.5.5.5h3.2c1.1 0 2.2.4 3.1 1.1.2.1.4.1.6 0 .2-.1.3-.3.2-.5zM20 12c0-4.4-3.6-8-8-8s-8 3.6-8 8 3.6 8 8 8 8-3.6 8-8zm-2 0c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6 6 2.7 6 6z"/></svg>
@@ -26,112 +26,260 @@
         </header>
 
         <main class="content-wrapper">
-
-            <section id="about" class="page-view active">
-                <div class="about-grid">
-                    <div class="about-visual">
-                        <img src="Assets/Color-test.gif" alt="Portfolio Visual" style="width: 650px; height: 650px;">
+            <section id="projects" class="page-view active">
+                <div class="board-toolbar">
+                    <div class="board-filter" id="boardFilter">
+                        <button class="filter-dropdown-btn" id="filterBtn" aria-haspopup="true" aria-expanded="false">
+                            Selected Works: <span id="filterLabel">All</span>
+                            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                        </button>
+                        <ul class="filter-menu" id="filterMenu" role="menu" hidden>
+                            <li data-filter="all" class="active">All</li>
+                            <li data-filter="UI-UX">Product</li>
+                            <li data-filter="Installation">Installation</li>
+                            <li data-filter="NMD">New Media</li>
+                            <li data-filter="Illustration">Illustration</li>
+                            <li data-filter="Motion">Motion</li>
+                            <li data-filter="Brand">Brand</li>
+                            <li data-filter="Curation">Curation</li>
+                            <li data-filter="Layout">Editorial</li>
+                            <li data-filter="Data">Data</li>
+                        </ul>
                     </div>
-                    
-                    <div class="about-info">
-                        <h1>DESIGNING INTENTIONAL, DATA DRIVEN, DIGITAL EXPERIENCES.</h1>
-                        <br></br>
-                        <div class="skills-section">
-                            <div class="skill-row">
-                                <span class="skill-label">Design:</span>
-                                <div class="skill-icons">
-                                    <div class="software-icon" data-tooltip="Figma"><img src="Assets/Icons/Figma.svg" alt="Figma"></div>
-                                    <div class="software-icon" data-tooltip="Adobe Suite"><img src="Assets/Icons/Adobe.svg" alt="Adobe Suite"></div>
-                                    <div class="software-icon" data-tooltip="Blender"><img src="Assets/Icons/Blender.svg" alt="Blender"></div>
-                                    <div class="software-icon" data-tooltip="Procreate"><img src="Assets/Icons/Procreate.svg" alt="Procreate"></div>
-                                </div>
-                            </div>
-                            <div class="skill-row">
-                                <span class="skill-label">Creative:</span>
-                                <div class="skill-icons">
-                                    <div class="software-icon" data-tooltip="Unity 3D"><img src="Assets/Icons/Unity.svg" alt="Unity 3D"></div>
-                                    <div class="software-icon" data-tooltip="Touchdesigner"><img src="Assets/Icons/Touchdesigner.svg" alt="Touchdesigner"></div>
-                                </div>
-                            </div>
-                            <div class="skill-row">
-                                <span class="skill-label">Codebase:</span>
-                                <div class="skill-icons">
-                                    <div class="software-icon" data-tooltip="VS Code"><img src="Assets/Icons/VS Code.svg" alt="VS Code"></div>
-                                    <div class="software-icon" data-tooltip="HTML 5"><img src="Assets/Icons/HTML.svg" alt="HTML"></div>
-                                    <div class="software-icon" data-tooltip="Javascript"><img src="Assets/Icons/JS.svg" alt="Javascript"></div>
-                                    <div class="software-icon" data-tooltip="CSS 3"><img src="Assets/Icons/CSS.svg" alt="CSS"></div>
-                                </div>
-                            </div>
-                            <div class="skill-row">
-                                <span class="skill-label">Planning:</span>
-                                <div class="skill-icons">
-                                    <div class="software-icon" data-tooltip="Notion"><img src="Assets/Icons/Notion.svg" alt="Notion"></div>
-                                    <div class="software-icon" data-tooltip="Miro"><img src="Assets/Icons/Miro.svg" alt="Miro"></div>
-                                </div>
-                            </div>
-                        </div>
+                    <p class="board-hint">Tap to open &middot; drag (or long-press) to rearrange</p>
+                </div>
+
+                <div class="pinboard" id="pinboard">
+                    <div class="pin" data-href="SMA" data-category="NMD, Curation, UI-UX, Data">
+                        <img src="Assets/SMA/SMA_Banner.png" alt="The Sabeen Mahmud Archive" draggable="false">
+                        <h5>Sabeen Mahmud Archive</h5>
+                    </div>
+                    <div class="pin" data-href="MAN" data-category="UI-UX">
+                        <img src="Assets/MAN/MAN_Banner.png" alt="Makula AI Notetaker" draggable="false">
+                        <h5>Makula - AI Notetaker</h5>
+                    </div>
+                    <div class="pin" data-href="EH" data-category="Motion, Installation, NMD, Data">
+                        <img src="Assets/EH/EH_Banner.png" alt="The Earth's Heartbeat" draggable="false">
+                        <h5>The Earth's Heartbeat</h5>
+                    </div>
+                    <div class="pin" data-href="OMS" data-category="UI-UX, Data">
+                        <img src="Assets/OMS/OMS_Banner.png" alt="Sastaticket OMS" draggable="false">
+                        <h5>Sastaticket OMS</h5>
+                    </div>
+                    <div class="pin" data-href="SS" data-category="UI-UX">
+                        <img src="Assets/SS/SS_Banner.png" alt="Sellorate B2B" draggable="false">
+                        <h5>Sellorate B2B Retailer App</h5>
+                    </div>
+                    <div class="pin" data-href="TSW" data-category="Curation,Installation,Layout">
+                        <img src="Assets/TSW/TSW_Banner.png" alt="Look at the City from here" draggable="false">
+                        <h5>Look at the City from here</h5>
+                    </div>
+                    <div class="pin" data-href="TW" data-category="Brand">
+                        <img src="Assets/TW/TW_Banner.png" alt="TICKET WALA" draggable="false">
+                        <h5>Ticket Wala Identity Design</h5>
+                    </div>
+                    <div class="pin" data-href="ADA" data-category="Brand,Layout">
+                        <img src="Assets/ADA/ADA_Banner.png" alt="ADA Magazine" draggable="false">
+                        <h5>ADA Magazine</h5>
+                    </div>
+                    <div class="pin" data-href="SU" data-category="Motion,Brand">
+                        <img src="Assets/SU/SU_Banner.png" alt="Speak Up" draggable="false">
+                        <h5>Speak Up</h5>
+                    </div>
+                    <div class="pin" data-href="STG" data-category="Layout,Illustration">
+                        <img src="Assets/STG/STG_Banner.png" alt="The Stained Glass Window" draggable="false">
+                        <h5>The Stained Glass Window</h5>
+                    </div>
+                    <div class="pin" data-href="NFN" data-category="Illustration,Layout">
+                        <img src="Assets/NFN/NFFN_Banner.png" alt="No Funeral For Nazia" draggable="false">
+                        <h5>No Funeral For Nazia</h5>
+                    </div>
+                    <div class="pin" data-href="WGTW" data-category="Curation,UI-UX,Layout">
+                        <img src="Assets/WGTW/WGTW_Banner.png" alt="Who Gets To Talk About Whom" draggable="false">
+                        <h5>Who Gets To Talk About Whom</h5>
+                    </div>
+                    <div class="pin" data-href="DK" data-category="Brand, Layout, UI-UX, NMD, Motion">
+                        <img src="Assets/DK/DK_Banner.png" alt="Dastaan-e-Karachi" draggable="false">
+                        <h5>Dastaan-e-Karachi</h5>
+                    </div>
+                    <div class="pin" data-href="SG" data-category="NMD, Data, Installation">
+                        <img src="Assets/Scales/Scales_Banner.png" alt="Scales" draggable="false">
+                        <h5>Scales</h5>
                     </div>
                 </div>
             </section>
-
         </main>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- AUTONOMOUS UNTETHERED 3D ROTATION LOOP ---
-            const autoCube = document.getElementById('autoCube');
-            let rotateX = -15;
-            let rotateY = 45;
+            const board = document.getElementById('pinboard');
+            const pins = Array.from(board.querySelectorAll('.pin'));
+            let zCounter = 1;
 
-            function renderLoop() {
-                rotateY += 0.25; 
-                rotateX = -15 + Math.sin(rotateY * 0.02) * 8; // Soft programmatic rhythmic breathing wave
-                
-                if (autoCube) {
-                    autoCube.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                }
-                requestAnimationFrame(renderLoop);
-            }
-            renderLoop();
-
-            // --- TYPING SUB-ROUTINE MODULE ---
-            function createTypingEffect(elementId, words) {
-                const element = document.getElementById(elementId);
-                if (!element) return;
-
-                let wordIdx = 0;
-                let charIdx = 0;
-                let isDeleting = false;
-
-                function type() {
-                    const currentWord = words[wordIdx];
-                    let typeSpeed = 100;
-
-                    if (isDeleting) {
-                        charIdx--;
-                        element.textContent = currentWord.substring(0, charIdx);
-                        typeSpeed = 50;
-                    } else {
-                        charIdx++;
-                        element.textContent = currentWord.substring(0, charIdx);
-                    }
-
-                    if (!isDeleting && charIdx === currentWord.length) {
-                        isDeleting = true;
-                        typeSpeed = 2000;
-                    } else if (isDeleting && charIdx === 0) {
-                        isDeleting = false;
-                        wordIdx = (wordIdx + 1) % words.length;
-                        typeSpeed = 500;
-                    }
-
-                    setTimeout(type, typeSpeed);
-                }
-                type();
+            function paint(pin) {
+                pin.style.transform = pin._dragging ? 'scale(1.08)' : 'none';
             }
 
-            createTypingEffect('typing-animation', ["Design", "Technology", "Product", "Strategy", "Storytelling","Prototyping","Civic Tech","Data Visualization"]);
+            function shuffle(arr) {
+                for (let i = arr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+                return arr;
+            }
+
+            // Place the visible pins on a loose, shuffled grid: evenly distributed
+            // cells with a moderate random offset so it feels scattered but not
+            // fully chaotic.
+            function layout() {
+                const visible = pins.filter(p => p.style.display !== 'none');
+                if (!visible.length) return;
+                const bw = board.clientWidth;
+                const bh = board.clientHeight;
+                const pinW = visible[0].offsetWidth || 96;
+                const pinH = visible[0].offsetHeight || 110;
+
+                const n = visible.length;
+                const cols = Math.max(1, Math.round(Math.sqrt(n * (bw / Math.max(bh, 1)))));
+                const rows = Math.ceil(n / cols);
+                const colW = bw / cols;
+                const rowH = bh / rows;
+                const freeX = Math.max(0, colW - pinW);
+                const freeY = Math.max(0, rowH - pinH);
+
+                shuffle(visible).forEach((pin, i) => {
+                    const c = i % cols;
+                    const r = Math.floor(i / cols);
+                    // Offset up to ~55% of the leftover room in each cell.
+                    const jitterX = (Math.random() - 0.5) * (freeX * 0.9 + 30);
+                    const jitterY = (Math.random() - 0.5) * (freeY * 0.9 + 24);
+                    let x = c * colW + (colW - pinW) / 2 + jitterX;
+                    let y = r * rowH + (rowH - pinH) / 2 + jitterY;
+                    x = Math.max(0, Math.min(x, Math.max(0, bw - pinW)));
+                    y = Math.max(0, Math.min(y, Math.max(0, bh - pinH)));
+                    pin.style.left = x + 'px';
+                    pin.style.top = y + 'px';
+                    pin.style.zIndex = ++zCounter;
+                    pin._dragging = false;
+                    paint(pin);
+                });
+            }
+
+            // --- POINTER DRAG / TAP ---
+            let active = null, startX = 0, startY = 0, originX = 0, originY = 0;
+            let moved = false, canDrag = false, longPressTimer = null;
+            const MOVE_THRESHOLD = 6;
+            const LONG_PRESS_MS = 300;
+
+            function lift(pin) {
+                pin._dragging = true;
+                pin.classList.add('dragging');
+                pin.style.zIndex = ++zCounter;
+                paint(pin);
+            }
+
+            function onDown(e, pin) {
+                if (active) return;
+                active = pin;
+                moved = false;
+                startX = e.clientX;
+                startY = e.clientY;
+                originX = parseFloat(pin.style.left) || 0;
+                originY = parseFloat(pin.style.top) || 0;
+                canDrag = (e.pointerType === 'mouse'); // mouse: drag begins as soon as it moves
+                try { pin.setPointerCapture(e.pointerId); } catch (_) {}
+                if (e.pointerType !== 'mouse') {
+                    longPressTimer = setTimeout(() => { canDrag = true; lift(pin); }, LONG_PRESS_MS);
+                }
+            }
+
+            function onMove(e) {
+                if (!active) return;
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                if (!moved && Math.hypot(dx, dy) > MOVE_THRESHOLD) {
+                    moved = true;
+                    if (!canDrag) clearTimeout(longPressTimer); // moved before long-press: not a drag yet
+                    else if (!active._dragging) lift(active);
+                }
+                if (canDrag && active._dragging) {
+                    const bw = board.clientWidth, bh = board.clientHeight;
+                    const pinW = active.offsetWidth;
+                    let nx = Math.max(-30, Math.min(originX + dx, bw - pinW + 30));
+                    let ny = Math.max(-20, Math.min(originY + dy, bh - 60));
+                    active.style.left = nx + 'px';
+                    active.style.top = ny + 'px';
+                }
+            }
+
+            function onUp(e) {
+                if (!active) return;
+                clearTimeout(longPressTimer);
+                const pin = active;
+                if (pin._dragging) {
+                    pin._dragging = false;
+                    pin.classList.remove('dragging');
+                    paint(pin);
+                } else if (!moved) {
+                    const href = pin.getAttribute('data-href');
+                    if (href) { window.location.href = href; }
+                }
+                try { pin.releasePointerCapture(e.pointerId); } catch (_) {}
+                active = null;
+                canDrag = false;
+                moved = false;
+            }
+
+            pins.forEach(pin => {
+                pin.addEventListener('pointerdown', e => onDown(e, pin));
+                pin.addEventListener('pointermove', onMove);
+                pin.addEventListener('pointerup', onUp);
+                pin.addEventListener('pointercancel', onUp);
+            });
+
+            // --- FILTER DROPDOWN ---
+            const boardFilter = document.getElementById('boardFilter');
+            const filterBtn = document.getElementById('filterBtn');
+            const filterMenu = document.getElementById('filterMenu');
+            const filterLabel = document.getElementById('filterLabel');
+
+            function toggleMenu(open) {
+                const willOpen = open !== undefined ? open : filterMenu.hidden;
+                filterMenu.hidden = !willOpen;
+                boardFilter.classList.toggle('open', willOpen);
+                filterBtn.setAttribute('aria-expanded', String(willOpen));
+            }
+
+            filterBtn.addEventListener('click', () => toggleMenu());
+            document.addEventListener('click', e => {
+                if (!e.target.closest('.board-filter')) toggleMenu(false);
+            });
+
+            filterMenu.querySelectorAll('li').forEach(li => {
+                li.addEventListener('click', () => {
+                    filterMenu.querySelectorAll('li').forEach(x => x.classList.remove('active'));
+                    li.classList.add('active');
+                    filterLabel.textContent = li.textContent;
+                    const filter = li.getAttribute('data-filter');
+                    const filterLower = filter.toLowerCase();
+                    pins.forEach(pin => {
+                        const cats = (pin.getAttribute('data-category') || '')
+                            .toLowerCase().split(',').map(s => s.trim());
+                        pin.style.display = (filter === 'all' || cats.includes(filterLower)) ? '' : 'none';
+                    });
+                    toggleMenu(false);
+                    layout();
+                });
+            });
+
+            // Initial scatter (and re-scatter on resize).
+            layout();
+            let resizeTimer = null;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(layout, 200);
+            });
 
             // --- THEME TOGGLE LOGIC ---
             const themeToggle = document.getElementById('theme-toggle');

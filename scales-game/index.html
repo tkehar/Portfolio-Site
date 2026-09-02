@@ -11,106 +11,38 @@
     <script src="js/decision-state.js"></script>
     <script src="js/scoring-system.js"></script>
     <script src="js/game-stage.js"></script>
-    <script src="js/scoreboard-ui.js"></script>
     <script src="js/session-store.js"></script>
     <script src="js/session-recorder.js"></script>
     <script src="js/audio-manager.js"></script>
     <script src="js/stage-ui.js"></script>
     <script src="js/components.js"></script>
-    <link rel="stylesheet" href="css/score-card.css">
-    <link rel="stylesheet" href="css/scoreboard-panel.css">
-    <link rel="stylesheet" href="css/data-marker.css">
     <link rel="stylesheet" href="css/game-over.css">
     <link rel="stylesheet" href="css/enter-screen.css">
     <link rel="stylesheet" href="css/territory-select.css">
     <link rel="stylesheet" href="css/territory-onboarding.css">
     <style>
         body { margin: 0; font-family: system-ui, sans-serif; }
-        a-scene { cursor: grab; }
-        a-scene.is-dragging { cursor: grabbing; }
-        #overlay-hint {
-            position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
-            background: rgba(13, 13, 26, 0.85); color: #ccc; padding: 10px 20px;
-            border-radius: 8px; font-size: 13px; pointer-events: none; z-index: 10;
-            text-align: center; max-width: 90vw;
+        /* Use the enter-screen button for VR; hide A-Frame's default corner UI and fullscreen fallback */
+        .a-enter-vr,
+        .a-orientation-modal {
+            display: none !important;
         }
-        #overlay-hint kbd {
-            background: #333; padding: 2px 6px; border-radius: 3px; font-size: 12px;
-        }
-        #fullscreen-btn {
-            position: fixed; bottom: 16px; right: 16px; z-index: 9999;
-            background: rgba(13, 13, 26, 0.85); color: #ccc;
-            border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px;
-            padding: 8px 14px; font-size: 13px; font-family: system-ui, sans-serif;
-            cursor: pointer;
-        }
-        #fullscreen-btn:hover { background: rgba(40, 40, 70, 0.9); color: #fff; }
     </style>
 </head>
 <body>
     <a-scene
         renderer="colorManagement: true"
-        xr-mode-ui="enabled: false"
+        webxr="optionalFeatures: hand-tracking"
+        xr-mode-ui="enabled: true; enterVREnabled: true; enterAREnabled: false"
         data-stage="inclusive"
         stage-controller
         enter-screen
         score-audio-watcher
-        score-hud
-        browser-input
-        peak-finder-frame
+        hand-interaction
         game-over
         background="color: #0a0a14">
 
         <div id="stage-fade" aria-hidden="true"></div>
-
-        <!-- HTML overlays live INSIDE a-scene so they stay visible in fullscreen.
-             Styling is managed in css/score-card.css -->
-        <div id="score-card" class="impact-panel" aria-label="Scores and goals" style="display: none;">
-            <section class="impact-panel__section impact-panel__section--ecology" aria-label="Ecology">
-                <div class="impact-panel__row">
-                    <span class="impact-panel__label">Water Usage</span>
-                    <span class="impact-panel__value" id="score-water">0</span>
-                </div>
-                <div class="impact-panel__row">
-                    <span class="impact-panel__label">CO2 Emissions</span>
-                    <span class="impact-panel__value" id="score-co2">0</span>
-                </div>
-                <div class="impact-panel__row">
-                    <span class="impact-panel__label">Electricity Usage</span>
-                    <span class="impact-panel__value" id="score-electricity">0</span>
-                </div>
-                <div class="impact-panel__row">
-                    <span class="impact-panel__label">Data Center Distribution</span>
-                    <span class="impact-panel__value" id="score-datacenter">0</span>
-                </div>
-            </section>
-            <section class="impact-panel__section impact-panel__section--goals" aria-label="Goals">
-                <div class="impact-panel__row">
-                    <span class="impact-panel__label">Sovereignty</span>
-                    <span class="impact-panel__badge" id="score-sovereignty">—</span>
-                </div>
-                <div class="impact-panel__row">
-                    <span class="impact-panel__label">Identity</span>
-                    <span class="impact-panel__badge" id="score-identity">—</span>
-                </div>
-                <div class="impact-panel__row">
-                    <span class="impact-panel__label">Power</span>
-                    <span class="impact-panel__badge" id="score-power">—</span>
-                </div>
-                <div class="impact-panel__row impact-panel__row--transparency" data-territory-goal="transparency">
-                    <span class="impact-panel__label">Transparency</span>
-                    <span class="impact-panel__badge" id="score-transparency">—</span>
-                </div>
-            </section>
-        </div>
-
-        <div id="territory-goal" class="territory-goal" aria-live="polite" style="display: none;" hidden></div>
-
-        <div id="overlay-hint" style="display: none;">
-            Drag to look around · Center objects in the peak finder · Click to decide · <kbd>Y</kbd> / <kbd>N</kbd>
-        </div>
-
-        <button id="fullscreen-btn" type="button">⛶ Fullscreen</button>
 
         <a-assets timeout="120000">
             <img id="territory-grid-1" src="assets/placeholders/Territory Grid - 1.png">
@@ -147,14 +79,22 @@
         <a-sky id="sky" src="#territory-grid-1" radius="50" score-reactive-sky></a-sky>
         <a-light type="ambient" color="#fff" intensity="0.8"></a-light>
 
-        <!-- Camera -->
-        <a-entity id="rig" position="0 1.6 0" mouse-drag-look territory-vr-select>
+        <!-- Camera + hand tracking -->
+        <a-entity id="rig" position="0 1.6 0" territory-vr-select>
             <a-camera id="camera"
-                      look-controls-enabled="false"
-                      wasd-controls-enabled="false"
-                      raycaster="objects: .clickable; far: 35"
-                      cursor="fuse: false; rayOrigin: mouse">
+                      look-controls
+                      wasd-controls-enabled="false">
             </a-camera>
+            <a-entity id="leftHand"
+                      hand-tracking-controls="hand: left"
+                      raycaster="objects: .clickable, .interactable; far: 20; showLine: false"
+                      line="color: #ffffff; opacity: 0.5">
+            </a-entity>
+            <a-entity id="rightHand"
+                      hand-tracking-controls="hand: right"
+                      raycaster="objects: .clickable, .interactable; far: 20; showLine: false"
+                      line="color: #ffffff; opacity: 0.5">
+            </a-entity>
         </a-entity>
 
         <a-entity decision-panel-host></a-entity>
@@ -166,10 +106,8 @@
         <a-entity id="obj-map" position="16.06 2.4 -17.84"
                   data-object="objectId: map"
                   decision-object="objectId: map"
-                  mouse-interactable
                   billboard
-                  score-reactive-object="scoreAxis: ecology; objectId: map"
-                  data-marker>
+                  score-reactive-object="scoreAxis: ecology; objectId: map">
             <a-image class="object-mesh" src="#map-sprite-1"
                      width="8" height="11" transparent="true"></a-image>
         </a-entity>
@@ -177,10 +115,8 @@
         <a-entity id="obj-mirror" position="-21.93 0.9 9.76"
                   data-object="objectId: mirror"
                   decision-object="objectId: mirror"
-                  mouse-interactable
                   billboard
-                  score-reactive-object="scoreAxis: identity; objectId: mirror"
-                  data-marker>
+                  score-reactive-object="scoreAxis: identity; objectId: mirror">
             <a-image class="object-mesh" src="#mirror-sprite-1"
                      width="8" height="12" transparent="true"></a-image>
         </a-entity>
@@ -188,10 +124,8 @@
         <a-entity id="obj-scale" position="19.42 1.65 14.11"
                   data-object="objectId: scale"
                   decision-object="objectId: scale"
-                  mouse-interactable
                   billboard
-                  score-reactive-object="scoreAxis: power; objectId: scale"
-                  data-marker>
+                  score-reactive-object="scoreAxis: power; objectId: scale">
             <a-image class="object-mesh" src="#power-sprite-1"
                      width="8" height="11" transparent="true"></a-image>
         </a-entity>
@@ -199,10 +133,8 @@
         <a-entity id="obj-screen" position="22.83 0.9 -7.42"
                   data-object="objectId: screen"
                   decision-object="objectId: screen"
-                  mouse-interactable
                   billboard
-                  score-reactive-object="scoreAxis: sovereignty; objectId: screen"
-                  data-marker>
+                  score-reactive-object="scoreAxis: sovereignty; objectId: screen">
             <a-image class="object-mesh" src="#screen-sprite-1"
                      width="8" height="11" transparent="true"></a-image>
         </a-entity>
@@ -210,10 +142,8 @@
         <a-entity id="obj-compute-box" position="-23.48 2.4 -4.99"
                   data-object="objectId: compute_box"
                   decision-object="objectId: compute_box"
-                  mouse-interactable
                   billboard
-                  score-reactive-object="scoreAxis: transparency; objectId: compute_box"
-                  data-marker>
+                  score-reactive-object="scoreAxis: transparency; objectId: compute_box">
             <a-image class="object-mesh" src="#compute-sprite-1"
                      width="8" height="11" transparent="true"></a-image>
         </a-entity>
@@ -225,21 +155,5 @@
         </a-entity>
 
     </a-scene>
-
-    <script>
-        // Fullscreen the whole page (not just the canvas) so HTML overlays
-        // like the score card stay visible.
-        const fsBtn = document.getElementById("fullscreen-btn");
-        fsBtn.addEventListener("click", () => {
-            if (document.fullscreenElement) {
-                document.exitFullscreen();
-            } else {
-                document.documentElement.requestFullscreen();
-            }
-        });
-        document.addEventListener("fullscreenchange", () => {
-            fsBtn.textContent = document.fullscreenElement ? "⛶ Exit Fullscreen" : "⛶ Fullscreen";
-        });
-    </script>
 </body>
 </html>
