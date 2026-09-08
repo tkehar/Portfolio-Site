@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap');
+
 /* --- RESET & BASIC FOUNDATIONS --- */
 * {
     box-sizing: border-box;
@@ -7,14 +9,17 @@
 
 /* Global smooth transition for theme switching */
 *, *::before, *::after {
-    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                color 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                fill 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                fill 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                stroke 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                outline-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
-    font-family: Verdana;
+    font-family: 'Montserrat', sans-serif;
     background-color: #ffffff;
     color: #000000;
     line-height: 2;
@@ -50,6 +55,9 @@ a:link {
 .nav-links {
     display: flex;
     gap: 32px;
+    /* Keep items centered so a tall toggle icon can't stretch the tabs
+       and push their underline out of place. */
+    align-items: center;
 }
 
 .nav-links a {
@@ -264,7 +272,17 @@ body.dark-mode .themed-icon .dark-mode-icon {
     align-items: center;
     gap: 56px;
     width: max-content;
-    animation: ticker-scroll 45s linear infinite;
+}
+
+/* When all logos fit, centre the row instead of animating it. */
+.ticker-track.ticker-centered {
+    margin: 0 auto;
+}
+
+.ticker-item {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
 }
 
 .ticker-track img {
@@ -274,28 +292,63 @@ body.dark-mode .themed-icon .dark-mode-icon {
     flex: 0 0 auto;
 }
 
-@keyframes ticker-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+/* Hover label for each tool logo (fixed so the ticker's overflow can't clip it). */
+.ticker-tooltip {
+    position: fixed;
+    transform: translate(-50%, -100%);
+    background: #111111;
+    color: #ffffff;
+    padding: 4px 9px;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    z-index: 1000;
 }
 
-/* Keep the About page within a single viewport (no scroll), desktop + mobile */
+.ticker-tooltip.show {
+    opacity: 1;
+}
+
+body.dark-mode .ticker-tooltip {
+    background: #e0e0e0;
+    color: #111111;
+}
+
+/* Keep the About page within a single viewport (no scroll), desktop + mobile.
+   Use a flex column that fills the real viewport so the footer/ticker always
+   sit at the bottom regardless of the navbar's height. */
 body.about-page {
     height: 100vh;
     overflow: hidden;
 }
 
+body.about-page .container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
 .about-page .navbar {
     padding: 28px 0 18px 0;
+    flex: 0 0 auto;
 }
 
 .about-page .content-wrapper {
     margin-top: 0;
     min-height: 0;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .about-page #about {
-    min-height: calc(100vh - 110px);
+    min-height: 0;
+    flex: 1 1 auto;
     justify-content: space-between;
     padding-top: 0;
 }
@@ -322,7 +375,16 @@ body.about-page {
 }
 
 .about-page .tools-ticker {
-    padding: 16px 0;
+    padding: 12px 0;
+    flex: 0 0 auto;
+}
+
+.about-page .ticker-track {
+    gap: 44px;
+}
+
+.about-page .ticker-track img {
+    height: 30px;
 }
 
 @media (max-width: 1024px) {
@@ -1025,7 +1087,10 @@ body.dark-mode .text-column .hotspot-popup {
     padding: 0;
     margin-left: 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 2px;
+    line-height: 1;
     color: inherit;
     transition: transform 0.2s ease;
 }
@@ -1034,17 +1099,28 @@ body.dark-mode .text-column .hotspot-popup {
     transform: scale(1.1);
 }
 
-.theme-toggle svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
+.theme-toggle img {
+    width: 100px;
+    height: 120px;
+    object-fit: contain;
 }
 
 .sun-icon { display: none; }
 .moon-icon { display: block; }
 
+.toggle-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.toggle-label-dark { display: none; }
+
 body.dark-mode .sun-icon { display: block; }
 body.dark-mode .moon-icon { display: none; }
+body.dark-mode .toggle-label-light { display: none; }
+body.dark-mode .toggle-label-dark { display: block; }
 
 /* Dark Mode Overrides */
 body.dark-mode {
@@ -1350,12 +1426,93 @@ body.dark-mode .leaflet-tile-pane { filter: grayscale(0.8) invert(1) opacity(0.8
     margin: 0;
 }
 
+body.dark-mode .board-hint {
+    color: #e0e0e0;
+}
+
 .pinboard {
     position: relative;
+    /* Contain the pins' ever-increasing z-index in their own stacking context
+       so they can't climb above the filter dropdown. */
+    isolation: isolate;
+    z-index: 0;
     width: 100%;
     height: calc(100vh - 240px);
     min-height: 460px;
     overflow: hidden;
+}
+
+.board-clusters {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+}
+
+/* Pixelated cluster boundary: a thin black (white in dark mode) outline that
+   hugs the blocky grid region. Inactive (filtered-out) clusters go gray. */
+.cluster-outline {
+    fill: none;
+    stroke: #111111;
+    stroke-width: 1.5;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+    shape-rendering: crispEdges;
+    transition: stroke 0.4s ease;
+}
+
+body.dark-mode .cluster-outline {
+    stroke: #ffffff;
+}
+
+.cluster-outline.inactive {
+    stroke: #c9c9c9;
+}
+
+body.dark-mode .cluster-outline.inactive {
+    stroke: #4a4a4a;
+}
+
+/* Cluster labels match the project titles (.pin h5): small pill on a bg fill. */
+.cluster-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    fill: #111111;
+    transition: fill 0.4s ease;
+}
+
+body.dark-mode .cluster-label {
+    fill: #e0e0e0;
+}
+
+.cluster-label.inactive {
+    fill: #b0b0b0;
+}
+
+body.dark-mode .cluster-label.inactive {
+    fill: #5a5a5a;
+}
+
+.cluster-label-bg {
+    fill: #ffffff;
+    transition: fill 0.4s ease;
+}
+
+body.dark-mode .cluster-label-bg {
+    fill: #1E1E1E;
+}
+
+.cluster-label-bg.inactive {
+    fill: #f2f2f2;
+}
+
+body.dark-mode .cluster-label-bg.inactive {
+    fill: #2a2a2a;
 }
 
 .pin {
@@ -1397,6 +1554,10 @@ body.dark-mode .leaflet-tile-pane { filter: grayscale(0.8) invert(1) opacity(0.8
     line-height: 1.25;
     text-align: center;
     pointer-events: none;
+    color: #111111;
+    background: #ffffff;
+    padding: 2px 7px;
+    border-radius: 6px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
@@ -1435,6 +1596,7 @@ body.dark-mode .pin.dragging {
 
 body.dark-mode .pin h5 {
     color: #e0e0e0;
+    background: #1E1E1E;
 }
 
 @media (max-width: 600px) {
