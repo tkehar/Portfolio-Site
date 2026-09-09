@@ -1605,3 +1605,214 @@ body.dark-mode .pin h5 {
     .pin h5 { font-size: 10px; }
     .pinboard { height: calc(100vh - 260px); }
 }
+
+/* ==========================================================================
+   LIGHTBOX (project quick-view overlay)
+   ========================================================================== */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.lightbox.open {
+    display: flex;
+}
+
+.lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    animation: lightbox-fade 0.25s ease;
+}
+
+.lightbox-panel {
+    position: relative;
+    z-index: 1;
+    width: min(560px, 92vw);
+    max-height: 90vh;
+    overflow: auto;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #111111;
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    animation: lightbox-pop 0.25s ease;
+}
+
+.lightbox-img {
+    display: block;
+    width: 100%;
+    max-height: 60vh;
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+    background: #f2f2f2;
+}
+
+.lightbox-meta {
+    padding: 20px 24px 24px 24px;
+}
+
+.lightbox-title {
+    margin: 0 0 6px 0;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.lightbox-sub {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+}
+
+.lightbox-dot {
+    margin: 0 6px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.lightbox-close:hover {
+    background: rgba(0, 0, 0, 0.75);
+    transform: scale(1.05);
+}
+
+body.dark-mode .lightbox-panel {
+    background: rgba(30, 30, 30, 0.72);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #e0e0e0;
+}
+
+body.dark-mode .lightbox-sub {
+    color: #9a9a9a;
+}
+
+body.dark-mode .lightbox-img {
+    background: #2a2a2a;
+}
+
+@keyframes lightbox-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes lightbox-pop {
+    from { opacity: 0; transform: translateY(12px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ==========================================================================
+   UNDER CONSTRUCTION PAGE (reuses the About page's full-height layout)
+   ========================================================================== */
+body.about-page .construction-view {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+}
+
+.construction-gif {
+    display: block;
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    margin: 0 auto 28px auto;
+    border-radius: 16px;
+}
+
+.construction-msg h1 {
+    max-width: 640px;
+    margin: 0;
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 800;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+}
+
+.construction-msg a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 800;
+}
+
+/* ==========================================================================
+   BOARD PAGE: full-width pinboard with the filter + hint as floating overlays
+   ========================================================================== */
+body.board-page .container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body.board-page .navbar {
+    flex: 0 0 auto;
+}
+
+body.board-page .content-wrapper {
+    margin-top: 0;
+    min-height: 0;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+body.board-page #projects {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Filter + hint float over the board instead of taking vertical space. */
+body.board-page .board-toolbar {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    margin-bottom: 0;
+    pointer-events: none; /* let drags fall through to the board... */
+}
+
+body.board-page .board-toolbar > * {
+    pointer-events: auto; /* ...but keep the controls interactive */
+}
+
+/* Full-bleed board that fills the space under the navbar. */
+body.board-page .pinboard {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+}
