@@ -108,7 +108,7 @@
                         <img src="Assets/Scales/Scales_Banner.png" alt="Scales" draggable="false">
                         <h5>Scales</h5>
                     </div>
-                    <div class="pin" data-href="construction" data-category="Brand, UI-UX, Layout">
+                    <div class="pin" data-href="construction" data-category="Brand, Layout">
                         <img src="Assets/GHAR/Ghar Logo.png" alt="Scales" draggable="false">
                         <h5>Ghar Logo</h5>
                     </div>
@@ -116,7 +116,7 @@
                         <img src="Assets/SE/SE_Banner.png" alt="Snake Eyes" draggable="false">
                         <h5>Snake Eyes</h5>
                     </div>
-                    <div class="pin" data-lightbox data-title="Calligraphy of the word Karachi in the shape of a swords" data-company="Karachi Calligraphy" data-year="2019" data-category="Illustration">
+                    <div class="pin" data-lightbox data-title="Calligraphy of 'Karachi' in the shape of a sword" data-company="Karachi Calligraphy" data-year="2019" data-category="Illustration">
                         <img src="Assets/Karachi Sword-01.png" alt="Karachi Sword" draggable="false">
                         <h5>Karachi Calligraphy</h5>
                     </div>
@@ -312,7 +312,7 @@
             }
 
             function paint(pin) {
-                pin.style.transform = pin._dragging ? 'scale(1.08)' : 'none';
+                // Scale is handled via CSS classes (.dragging / .is-hovered); no-op.
             }
 
             // Parse a pin's categories into a clean, lower-cased list.
@@ -517,6 +517,16 @@
                 pin.addEventListener('pointermove', onMove);
                 pin.addEventListener('pointerup', onUp);
                 pin.addEventListener('pointercancel', onUp);
+                // Hover focus: grow this card and shrink the others.
+                pin.addEventListener('mouseenter', () => {
+                    board.classList.add('focusing');
+                    pin.classList.add('is-hovered');
+                    pin.style.zIndex = ++zCounter; // keep the focused card on top
+                });
+                pin.addEventListener('mouseleave', () => {
+                    board.classList.remove('focusing');
+                    pin.classList.remove('is-hovered');
+                });
             });
 
             // --- FILTER DROPDOWN ---
