@@ -8,9 +8,7 @@
     <script src="config.js" defer></script>
 </head>
 <body class="project-page sg-project">
-    <script>
-        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
-    </script>
+    <script src="theme.js"></script>
     <div class="container">
         <header class="navbar">
             <div class="logo"><a href="index" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
@@ -18,12 +16,10 @@
                 <a href="index" class="nav-tab">Work</a>
                 <a href="about" class="nav-tab">About</a>
                 <a href="resume" class="nav-tab">Resume</a>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
-                    <img class="sun-icon" src="Assets/Dark Mode.png" alt="Dark mode">
-                    <img class="moon-icon" src="Assets/Light Mode.png" alt="Light mode">
-                    <span class="toggle-label toggle-label-light">lights on</span>
-                    <span class="toggle-label toggle-label-dark">lights off</span>
-                </button>
+                <div class="theme-slider">
+                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
+                    <span class="toggle-label" id="theme-slider-value">100%</span>
+                </div>
             </nav>
         </header>
         <div class="main-content project-content">
@@ -31,7 +27,7 @@
                 <img src="Assets/Scales/Header.png" alt="Scales process" style="width: 100%; height: auto; border-radius: 10px;">
             </div>
             <h1 style="text-align: center;">Resisting Big Tech Imperialism</h1>
-            <p><I>*Awarded best thesis at University of Europe for Applied Sciences in July 2026.</I></p>
+            <p style="text-align: center;"><I>* Awarded best thesis at University of Europe for Applied Sciences in July 2026.</I></p>
             <div class="grid-4-col">
                 <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
                     <p><b>Client:</b></p>
@@ -52,7 +48,7 @@
             </div>
 
             <div class="content-row" style="justify-content: center;">
-                <a href="https://docs.google.com/document/d/1-bJiEwlFkm-JJOiliip14RaA-5oijF_NW5dgo1Vuv9s/edit?usp=sharing" class="visit-button" target="_blank" rel="noopener">Read the Research Paper</a>
+                <a href="https://docs.google.com/document/d/1-bJiEwlFkm-JJOiliip14RaA-5oijF_NW5dgo1Vuv9s/edit?usp=sharing" class="visit-button" target="_blank" rel="noopener">View Research</a>
                 <a href="scales-game.html" class="visit-button" target="_blank" rel="noopener">Launch Game</a>
             </div>
 
@@ -140,11 +136,8 @@
                 </div>
             </div>
 
-            <div class="content-row">
-                <div class="text-column">
-                    <h2>Thesis Display</h2>
-                </div>
-                <div class="image-column">
+            <div class="content-row" style="flex-direction: column;">
+                <div class="image-column" style="width: 100%;">
                     <div class="slider-container" id="exhibition-slider">
                         <img src="Assets/Scales/IMG_4803.HEIC" alt="Exhibition Image 1" class="slider-image active">
                         <img src="Assets/Scales/IMG_4805.HEIC" alt="Exhibition Image 2" class="slider-image">
@@ -157,13 +150,5 @@
         </div>
     </div>
 
-    <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
-    </script>
 </body>
 </html>

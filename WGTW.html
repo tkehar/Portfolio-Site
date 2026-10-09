@@ -8,6 +8,7 @@
     <script src="config.js" defer></script>
 </head>
 <body class="project-page tdtd-project">
+    <script src="theme.js"></script>
     <div class="container">
        <header class="navbar">
             <div class="logo"><a href="index" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
@@ -15,12 +16,10 @@
                 <a href="index" class="nav-tab">Work</a>
                 <a href="about" class="nav-tab">About</a>
                 <a href="resume" class="nav-tab">Resume</a>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
-                    <img class="sun-icon" src="Assets/Dark Mode.png" alt="Dark mode">
-                    <img class="moon-icon" src="Assets/Light Mode.png" alt="Light mode">
-                    <span class="toggle-label toggle-label-light">lights on</span>
-                    <span class="toggle-label toggle-label-dark">lights off</span>
-                </button>
+                <div class="theme-slider">
+                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
+                    <span class="toggle-label" id="theme-slider-value">100%</span>
+                </div>
             </nav>
         </header>
         <div class="main-content project-content">
@@ -67,10 +66,10 @@
                 <div class="content-row">
                     <div class="image-column">
                         <h2>Collateral Design</h2>
-                        <img src="Assets/WGTW/brochure.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 10px;">
+                        <img src="Assets/WGTW/brochure.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0;">
                     </div>
                      <div class="image-column">
-                        <img src="Assets/WGTW/Floorplan.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 10px;">
+                        <img src="Assets/WGTW/Floorplan.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0;">
                     </div>
                 </div>
 
@@ -81,7 +80,7 @@
                     </div>
 
                     <div class="image-column">
-                        <img src="Assets/WGTW/Website.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 10px;">
+                        <img src="Assets/WGTW/Website.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0;">
                         <div style="display: flex; justify-content: center; margin-top: 12px;">
                         <a href="https://whogetstotalkaboutwhom.com/" class="visit-button" target="_blank">Visit Website</a>
                         </div>
@@ -94,12 +93,6 @@
 
      <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const themeToggle = document.getElementById('theme-toggle');
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                const isDark = document.body.classList.contains('dark-mode');
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            });
 
             // --- EXHIBITION SLIDER ---
             const sliderContainer = document.getElementById('exhibition-slider');

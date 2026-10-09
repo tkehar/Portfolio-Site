@@ -7,10 +7,8 @@
     <link rel="stylesheet" href="styles.css">
     <script src="config.js" defer></script>
 </head>
-<body class="board-page">
-    <script>
-        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
-    </script>
+<body>
+    <script src="theme.js"></script>
     <div class="container">
         <header class="navbar">
             <div class="logo"><a href="index">TALHA AHMED KEHAR</a></div>
@@ -18,12 +16,10 @@
                 <a href="index" class="nav-tab active">Work</a>
                 <a href="about" class="nav-tab">About</a>
                 <a href="resume" class="nav-tab">Resume</a>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
-                    <img class="sun-icon" src="Assets/Dark Mode.png" alt="Dark mode">
-                    <img class="moon-icon" src="Assets/Light Mode.png" alt="Light mode">
-                    <span class="toggle-label toggle-label-light">lights on</span>
-                    <span class="toggle-label toggle-label-dark">lights off</span>
-                </button>
+                <div class="theme-slider">
+                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
+                    <span class="toggle-label" id="theme-slider-value">100%</span>
+                </div>
             </nav>
         </header>
 
@@ -48,84 +44,83 @@
                             <li data-filter="Data">Data</li>
                         </ul>
                     </div>
-                    <p class="board-hint">Tap to open &middot; drag (or long-press) to rearrange</p>
                 </div>
 
-                <div class="pinboard" id="pinboard">
-                    <div class="pin" data-href="SMA" data-category="NMD, Curation, UI-UX, Data">
-                        <img src="Assets/SMA/SMA_Banner.png" alt="The Sabeen Mahmud Archive" draggable="false">
+                <div class="project-grid" id="projectGrid">
+                    <div class="project-card" data-href="SMA" data-category="NMD, Curation, UI-UX, Data">
+                        <img src="Assets/SMA/SMA_Banner.png" alt="The Sabeen Mahmud Archive">
                         <h5>Sabeen Mahmud Archive</h5>
                     </div>
-                    <div class="pin" data-href="MAN" data-category="UI-UX">
-                        <img src="Assets/MAN/MAN_Banner.png" alt="Makula AI Notetaker" draggable="false">
+                    <div class="project-card" data-href="MAN" data-category="UI-UX">
+                        <img src="Assets/MAN/MAN_Banner.png" alt="Makula AI Notetaker">
                         <h5>Makula - AI Notetaker</h5>
                     </div>
-                    <div class="pin" data-href="EH" data-category="Motion, Installation, NMD, Data">
-                        <img src="Assets/EH/EH_Banner.png" alt="The Earth's Heartbeat" draggable="false">
+                    <div class="project-card" data-href="EH" data-category="Motion, Installation, NMD, Data">
+                        <img src="Assets/EH/EH_Banner.png" alt="The Earth's Heartbeat">
                         <h5>The Earth's Heartbeat</h5>
                     </div>
-                    <div class="pin" data-href="OMS" data-category="UI-UX, Data">
-                        <img src="Assets/OMS/OMS_Banner.png" alt="Sastaticket OMS" draggable="false">
+                    <div class="project-card" data-href="OMS" data-category="UI-UX, Data">
+                        <img src="Assets/OMS/OMS_Banner.png" alt="Sastaticket OMS">
                         <h5>Sastaticket OMS</h5>
                     </div>
-                    <div class="pin" data-href="SS" data-category="UI-UX">
-                        <img src="Assets/SS/SS_Banner.png" alt="Sellorate B2B" draggable="false">
+                    <div class="project-card" data-href="SS" data-category="UI-UX">
+                        <img src="Assets/SS/SS_Banner.png" alt="Sellorate B2B">
                         <h5>Sellorate B2B Retailer App</h5>
                     </div>
-                    <div class="pin" data-href="TSW" data-category="Curation,Installation,Layout">
-                        <img src="Assets/TSW/TSW_Banner.png" alt="Look at the City from here" draggable="false">
+                    <div class="project-card" data-href="TSW" data-category="Curation,Installation,Layout">
+                        <img src="Assets/TSW/TSW_Banner.png" alt="Look at the City from here">
                         <h5>Look at the City from here</h5>
                     </div>
-                    <div class="pin" data-href="TW" data-category="Brand">
-                        <img src="Assets/TW/TW_Banner.png" alt="TICKET WALA" draggable="false">
+                    <div class="project-card" data-href="TW" data-category="Brand">
+                        <img src="Assets/TW/TW_Banner.png" alt="TICKET WALA">
                         <h5>Ticket Wala Identity Design</h5>
                     </div>
-                    <div class="pin" data-href="ADA" data-category="Brand,Layout">
-                        <img src="Assets/ADA/ADA_Banner.png" alt="ADA Magazine" draggable="false">
+                    <div class="project-card" data-href="ADA" data-category="Brand,Layout">
+                        <img src="Assets/ADA/ADA_Banner.png" alt="ADA Magazine">
                         <h5>ADA Magazine</h5>
                     </div>
-                    <div class="pin" data-href="SU" data-category="Motion,Brand">
-                        <img src="Assets/SU/SU_Banner.png" alt="Speak Up" draggable="false">
+                    <div class="project-card" data-href="SU" data-category="Motion,Brand">
+                        <img src="Assets/SU/SU_Banner.png" alt="Speak Up">
                         <h5>Speak Up</h5>
                     </div>
-                    <div class="pin" data-href="STG" data-category="Layout,Illustration">
-                        <img src="Assets/STG/STG_Banner.png" alt="The Stained Glass Window" draggable="false">
+                    <div class="project-card" data-href="STG" data-category="Layout,Illustration">
+                        <img src="Assets/STG/STG_Banner.png" alt="The Stained Glass Window">
                         <h5>The Stained Glass Window</h5>
                     </div>
-                    <div class="pin" data-href="NFN" data-category="Illustration,Layout">
-                        <img src="Assets/NFN/NFFN_Banner.png" alt="No Funeral For Nazia" draggable="false">
+                    <div class="project-card" data-href="NFN" data-category="Illustration,Layout">
+                        <img src="Assets/NFN/NFFN_Banner.png" alt="No Funeral For Nazia">
                         <h5>No Funeral For Nazia</h5>
                     </div>
-                    <div class="pin" data-href="WGTW" data-category="Curation,UI-UX,Layout">
-                        <img src="Assets/WGTW/WGTW_Banner.png" alt="Who Gets To Talk About Whom" draggable="false">
+                    <div class="project-card" data-href="WGTW" data-category="Curation,UI-UX,Layout">
+                        <img src="Assets/WGTW/WGTW_Banner.png" alt="Who Gets To Talk About Whom">
                         <h5>Who Gets To Talk About Whom</h5>
                     </div>
-                    <div class="pin" data-href="DK" data-category="Brand, Layout, UI-UX, NMD, Motion">
-                        <img src="Assets/DK/DK_Banner.png" alt="Dastaan-e-Karachi" draggable="false">
+                    <div class="project-card" data-href="DK" data-category="Brand, Layout, UI-UX, NMD, Motion">
+                        <img src="Assets/DK/DK_Banner.png" alt="Dastaan-e-Karachi">
                         <h5>Dastaan-e-Karachi</h5>
                     </div>
-                    <div class="pin" data-href="SG" data-category="NMD, Data">
-                        <img src="Assets/Scales/Scales_Banner.png" alt="Scales" draggable="false">
+                    <div class="project-card" data-href="SG" data-category="NMD, Data">
+                        <img src="Assets/Scales/Scales_Banner.png" alt="Scales">
                         <h5>Scales</h5>
                     </div>
-                    <div class="pin" data-href="construction" data-category="Brand, Layout">
-                        <img src="Assets/GHAR/Ghar Logo.png" alt="Scales" draggable="false">
+                    <div class="project-card" data-href="construction" data-category="Brand, Layout">
+                        <img src="Assets/GHAR/Ghar Logo.png" alt="Ghar Logo">
                         <h5>Ghar Logo</h5>
                     </div>
-                    <div class="pin" data-lightbox data-title="Snake Eyes" data-company="Inspired by the 2018 Pakistan election rigging scandal" data-year="2018" data-category="Illustration">
-                        <img src="Assets/SE/SE_Banner.png" alt="Snake Eyes" draggable="false">
+                    <div class="project-card" data-lightbox data-title="Snake Eyes" data-company="Inspired by the 2018 Pakistan election rigging scandal" data-year="2018" data-category="Illustration">
+                        <img src="Assets/SE/SE_Banner.png" alt="Snake Eyes">
                         <h5>Snake Eyes</h5>
                     </div>
-                    <div class="pin" data-lightbox data-title="Calligraphy of 'Karachi' in the shape of a sword" data-company="Karachi Calligraphy" data-year="2019" data-category="Illustration">
-                        <img src="Assets/Karachi Sword-01.png" alt="Karachi Sword" draggable="false">
+                    <div class="project-card" data-lightbox data-title="Calligraphy of 'Karachi' in the shape of a sword" data-company="Karachi Calligraphy" data-year="2019" data-category="Illustration">
+                        <img src="Assets/Karachi Sword-01.png" alt="Karachi Sword">
                         <h5>Karachi Calligraphy</h5>
                     </div>
-                    <div class="pin" data-lightbox data-title="The Mandalorian" data-company="Personal Project" data-year="2021" data-category="Illustration">
-                        <img src="Assets/The Mandalorian.png" alt="The Mandalorian" draggable="false">
+                    <div class="project-card" data-lightbox data-title="The Mandalorian" data-company="Personal Project" data-year="2021" data-category="Illustration">
+                        <img src="Assets/The Mandalorian.png" alt="The Mandalorian">
                         <h5>The Mandalorian</h5>
                     </div>
-                    <div class="pin" data-lightbox data-title="Queen Of Roses" data-company="Personal Project" data-year="2017" data-category="Illustration, Motion">
-                        <img src="Assets/Queen_of_Roses.gif" alt="Sasha Velour" draggable="false">
+                    <div class="project-card" data-lightbox data-title="Queen Of Roses" data-company="Personal Project" data-year="2017" data-category="Illustration, Motion">
+                        <img src="Assets/Queen_of_Roses.gif" alt="Sasha Velour">
                         <h5>Queen Of Roses</h5>
                     </div>
                 </div>
@@ -152,380 +147,18 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const board = document.getElementById('pinboard');
-            const pins = Array.from(board.querySelectorAll('.pin'));
-            let zCounter = 1;
+            const grid = document.getElementById('projectGrid');
+            const cards = Array.from(grid.querySelectorAll('.project-card'));
 
-            // SVG layer that holds the category cluster circles (sits behind icons).
-            const SVG_NS = 'http://www.w3.org/2000/svg';
-            const clustersSvg = document.createElementNS(SVG_NS, 'svg');
-            clustersSvg.setAttribute('class', 'board-clusters');
-            board.insertBefore(clustersSvg, board.firstChild);
-
-            // Human-readable labels come from the filter menu (data-filter -> text).
-            const CATEGORY_LABELS = {};
-            document.querySelectorAll('#filterMenu li[data-filter]').forEach(li => {
-                const key = li.getAttribute('data-filter').toLowerCase();
-                if (key !== 'all') CATEGORY_LABELS[key] = li.textContent.trim();
-            });
-
-            // Currently selected filter ('all' shows every cluster as active).
-            let activeFilter = 'all';
-
-            // Pins the user has picked up and dropped: each gets its own boundary
-            // and a '?' label. Cleared whenever the board is re-laid out.
-            const movedPins = new Set();
-
-            // Cached layout inputs so we can redraw the cluster layer (e.g. after a
-            // drag) without re-scattering every pin.
-            let lastAnchors = null, lastPinW = 106;
-
-            // Size of one "pixel" cell in the cluster boundary grid.
-            const CELL = 28;
-
-            // Rasterise: mark grid cells within brushR of any member point.
-            function rasterize(members, brushR, cols, rows) {
-                const inside = new Uint8Array(cols * rows);
-                const brushSq = brushR * brushR;
-                for (let r = 0; r < rows; r++) {
-                    const y = r * CELL + CELL / 2;
-                    for (let c = 0; c < cols; c++) {
-                        const x = c * CELL + CELL / 2;
-                        for (let m = 0; m < members.length; m++) {
-                            const ddx = x - members[m].x, ddy = y - members[m].y;
-                            if (ddx * ddx + ddy * ddy < brushSq) { inside[r * cols + c] = 1; break; }
-                        }
-                    }
-                }
-                return inside;
-            }
-
-            // Build an SVG path that traces only the outer edges of the filled cells
-            // (sides facing an empty cell), giving a crisp pixelated outline.
-            function boundaryPath(inside, cols, rows) {
-                let d = '';
-                for (let r = 0; r < rows; r++) {
-                    for (let c = 0; c < cols; c++) {
-                        if (!inside[r * cols + c]) continue;
-                        const x = c * CELL, y = r * CELL;
-                        if (r === 0 || !inside[(r - 1) * cols + c]) d += 'M' + x + ' ' + y + 'h' + CELL;
-                        if (r === rows - 1 || !inside[(r + 1) * cols + c]) d += 'M' + x + ' ' + (y + CELL) + 'h' + CELL;
-                        if (c === 0 || !inside[r * cols + c - 1]) d += 'M' + x + ' ' + y + 'v' + CELL;
-                        if (c === cols - 1 || !inside[r * cols + c + 1]) d += 'M' + (x + CELL) + ' ' + y + 'v' + CELL;
-                    }
-                }
-                return d;
-            }
-
-            // A label styled like the project titles: text sitting on a rounded pill.
-            function drawClusterLabel(x, y, text, isActive) {
-                const bw = board.clientWidth, bh = board.clientHeight;
-                x = Math.max(50, Math.min(x, bw - 50));
-                y = Math.max(16, Math.min(y, bh - 12));
-                const label = document.createElementNS(SVG_NS, 'text');
-                label.setAttribute('x', x);
-                label.setAttribute('y', y);
-                label.setAttribute('text-anchor', 'middle');
-                label.setAttribute('dominant-baseline', 'middle');
-                label.setAttribute('class', 'cluster-label' + (isActive ? '' : ' inactive'));
-                label.textContent = text;
-                clustersSvg.appendChild(label);
-                // Measure, then insert a rounded background pill behind the text.
-                const b = label.getBBox();
-                const padX = 7, padY = 3;
-                const bg = document.createElementNS(SVG_NS, 'rect');
-                bg.setAttribute('x', b.x - padX);
-                bg.setAttribute('y', b.y - padY);
-                bg.setAttribute('width', b.width + padX * 2);
-                bg.setAttribute('height', b.height + padY * 2);
-                bg.setAttribute('rx', 6);
-                bg.setAttribute('class', 'cluster-label-bg' + (isActive ? '' : ' inactive'));
-                clustersSvg.insertBefore(bg, label);
-            }
-
-            // Draw a thin pixelated boundary + label for a region defined by member
-            // points. Size responds to the number of members.
-            function drawRegion(members, isActive, labelText, labelX, labelY, cols, rows, pinW) {
-                if (!members.length) return;
-                const brushR = Math.max(CELL * 1.8, pinW * (0.75 + 0.12 * members.length));
-                const inside = rasterize(members, brushR, cols, rows);
-                const d = boundaryPath(inside, cols, rows);
-                if (d) {
-                    const path = document.createElementNS(SVG_NS, 'path');
-                    path.setAttribute('d', d);
-                    path.setAttribute('class', 'cluster-outline' + (isActive ? '' : ' inactive'));
-                    clustersSvg.appendChild(path);
-                }
-                if (labelText) drawClusterLabel(labelX, labelY, labelText, isActive);
-            }
-
-            // Draw a pixelated boundary around each category cluster, plus a private
-            // boundary (labelled '?') around any project the user has moved.
-            function drawClusters(anchors, pinW) {
-                while (clustersSvg.firstChild) clustersSvg.removeChild(clustersSvg.firstChild);
-                const bw = board.clientWidth, bh = board.clientHeight;
-                const cols = Math.ceil(bw / CELL), rows = Math.ceil(bh / CELL);
-
-                // Draw the selected cluster LAST so it sits in front of the gray ones.
-                let catOrder = Object.keys(anchors);
-                if (activeFilter !== 'all') {
-                    catOrder = catOrder.filter(c => c !== activeFilter)
-                        .concat(catOrder.filter(c => c === activeFilter));
-                }
-
-                catOrder.forEach(cat => {
-                    // Member target positions = centroid of each member's categories
-                    // (computed for ALL pins so gray/hidden clusters still render).
-                    const members = [];
-                    pins.forEach(p => {
-                        if (movedPins.has(p)) return; // moved pins get their own region
-                        const cats = catsOf(p);
-                        if (!cats.includes(cat)) return;
-                        let tx = 0, ty = 0;
-                        cats.forEach(c => { tx += anchors[c].x; ty += anchors[c].y; });
-                        members.push({ x: tx / cats.length, y: ty / cats.length });
-                    });
-                    if (!members.length) return;
-
-                    // With "All" selected, every cluster is inactive (gray); a
-                    // specific filter activates only its own cluster.
-                    const isActive = activeFilter !== 'all' && cat === activeFilter;
-                    // Category labels are hidden (empty text); only the '?' labels
-                    // on moved projects are shown.
-                    drawRegion(members, isActive, '',
-                        anchors[cat].x, anchors[cat].y, cols, rows, pinW);
-                });
-
-                // Moved projects: their own boundary + '?' label at the drop spot.
-                movedPins.forEach(pin => {
-                    if (pin.style.display === 'none') return;
-                    const cx = pin.offsetLeft + pin.offsetWidth / 2;
-                    const cy = pin.offsetTop + pin.offsetHeight / 2;
-                    drawRegion([{ x: cx, y: cy }], true, '?',
-                        cx, cy - pin.offsetHeight / 2 - 12, cols, rows, pinW);
-                });
-            }
-
-            // Redraw only the cluster layer (used after a drag, no re-scatter).
-            function redrawClusters() {
-                if (lastAnchors) drawClusters(lastAnchors, lastPinW);
-            }
-
-            function paint(pin) {
-                // Scale is handled via CSS classes (.dragging / .is-hovered); no-op.
-            }
-
-            // Parse a pin's categories into a clean, lower-cased list.
-            function catsOf(pin) {
-                return (pin.getAttribute('data-category') || '')
-                    .toLowerCase().split(',').map(s => s.trim()).filter(Boolean);
-            }
-
-            // Venn-style clustering: each category gets an anchor point spread
-            // evenly around the board (the "circles"). A project is placed at the
-            // centroid of the anchors of the categories it belongs to, so single-
-            // category work sits inside one circle and multi-category work lands in
-            // the overlap between the relevant circles. A short relaxation pass then
-            // nudges apart any pins that stack on top of each other.
-            function layout() {
-                const visible = pins.filter(p => p.style.display !== 'none');
-                if (!visible.length) return;
-                movedPins.clear(); // a fresh scatter dissolves any "picked up" regions
-                const bw = board.clientWidth;
-                const bh = board.clientHeight;
-                const pinW = visible[0].offsetWidth || 96;
-                const pinH = visible[0].offsetHeight || 110;
-
-                // Stable anchors from the FULL category set (not just visible pins)
-                // so positions stay consistent as filters change.
-                const catList = [];
-                pins.forEach(p => catsOf(p).forEach(c => {
-                    if (!catList.includes(c)) catList.push(c);
-                }));
-
-                const cx = bw / 2, cy = bh / 2;
-                const rx = bw * 0.40, ry = bh * 0.42;
-                const anchors = {};
-                const count = Math.max(1, catList.length);
-                catList.forEach((cat, i) => {
-                    const ang = (i / count) * Math.PI * 2 - Math.PI / 2;
-                    anchors[cat] = { x: cx + Math.cos(ang) * rx, y: cy + Math.sin(ang) * ry };
-                });
-
-                // Each node's target = centroid of its categories' anchors.
-                const nodes = visible.map(pin => {
-                    const cats = catsOf(pin);
-                    let tx = cx, ty = cy;
-                    if (cats.length) {
-                        tx = 0; ty = 0;
-                        cats.forEach(c => { tx += anchors[c].x; ty += anchors[c].y; });
-                        tx /= cats.length; ty /= cats.length;
-                    }
-                    // Tiny seed jitter so pins with identical centroids don't fully stack.
-                    const x = tx + (Math.random() - 0.5) * pinW * 0.6;
-                    const y = ty + (Math.random() - 0.5) * pinH * 0.6;
-                    return { pin, tx, ty, x, y };
-                });
-
-                // Relaxation: separate overlapping pins while gently pulling each
-                // back toward its cluster centroid so clusters stay coherent.
-                const minDist = Math.max(pinW, pinH) * 0.82;
-                for (let iter = 0; iter < 80; iter++) {
-                    for (let i = 0; i < nodes.length; i++) {
-                        const a = nodes[i];
-                        a.x += (a.tx - a.x) * 0.04; // spring toward centroid
-                        a.y += (a.ty - a.y) * 0.04;
-                        for (let j = i + 1; j < nodes.length; j++) {
-                            const b = nodes[j];
-                            let dx = b.x - a.x, dy = b.y - a.y;
-                            let dist = Math.hypot(dx, dy);
-                            if (dist < minDist) {
-                                if (dist === 0) { dx = Math.random() - 0.5; dy = Math.random() - 0.5; dist = 0.001; }
-                                const push = (minDist - dist) / 2;
-                                const ux = dx / dist, uy = dy / dist;
-                                a.x -= ux * push; a.y -= uy * push;
-                                b.x += ux * push; b.y += uy * push;
-                            }
-                        }
-                    }
-                }
-
-                // Final pass: guarantee the icons AND their captions don't overlap on
-                // load (rectangular AABB separation over the full pin box + a small
-                // margin, no spring). Dragging is unaffected, so viewers can still
-                // overlap pins themselves afterwards.
-                const gapX = pinW + 4, gapY = pinH + 4;
-                for (let iter = 0; iter < 200; iter++) {
-                    let overlapping = false;
-                    for (let i = 0; i < nodes.length; i++) {
-                        for (let j = i + 1; j < nodes.length; j++) {
-                            const a = nodes[i], b = nodes[j];
-                            let dx = b.x - a.x, dy = b.y - a.y;
-                            const ox = gapX - Math.abs(dx);
-                            const oy = gapY - Math.abs(dy);
-                            if (ox > 0 && oy > 0) {
-                                overlapping = true;
-                                if (dx === 0 && dy === 0) { dx = Math.random() - 0.5; dy = Math.random() - 0.5; }
-                                if (ox < oy) {
-                                    const push = ox / 2 * (dx < 0 ? -1 : 1);
-                                    a.x -= push; b.x += push;
-                                } else {
-                                    const push = oy / 2 * (dy < 0 ? -1 : 1);
-                                    a.y -= push; b.y += push;
-                                }
-                            }
-                        }
-                    }
-                    nodes.forEach(n => {
-                        n.x = Math.max(pinW / 2, Math.min(n.x, bw - pinW / 2));
-                        n.y = Math.max(pinH / 2, Math.min(n.y, bh - pinH / 2));
-                    });
-                    if (!overlapping) break;
-                }
-
-                // Commit: convert centre positions to top-left and clamp to board.
-                nodes.forEach(node => {
-                    let left = node.x - pinW / 2;
-                    let top = node.y - pinH / 2;
-                    left = Math.max(0, Math.min(left, Math.max(0, bw - pinW)));
-                    top = Math.max(0, Math.min(top, Math.max(0, bh - pinH)));
-                    node.pin.style.left = left + 'px';
-                    node.pin.style.top = top + 'px';
-                    node.pin.style.zIndex = ++zCounter;
-                    node.pin._dragging = false;
-                    paint(node.pin);
-                });
-                lastAnchors = anchors;
-                lastPinW = pinW;
-                drawClusters(anchors, pinW);
-            }
-
-            // --- POINTER DRAG / TAP ---
-            let active = null, startX = 0, startY = 0, originX = 0, originY = 0;
-            let moved = false, canDrag = false, longPressTimer = null;
-            const MOVE_THRESHOLD = 6;
-            const LONG_PRESS_MS = 300;
-
-            function lift(pin) {
-                pin._dragging = true;
-                pin.classList.add('dragging');
-                pin.style.zIndex = ++zCounter;
-                paint(pin);
-            }
-
-            function onDown(e, pin) {
-                if (active) return;
-                active = pin;
-                moved = false;
-                startX = e.clientX;
-                startY = e.clientY;
-                originX = parseFloat(pin.style.left) || 0;
-                originY = parseFloat(pin.style.top) || 0;
-                canDrag = (e.pointerType === 'mouse'); // mouse: drag begins as soon as it moves
-                try { pin.setPointerCapture(e.pointerId); } catch (_) {}
-                if (e.pointerType !== 'mouse') {
-                    longPressTimer = setTimeout(() => { canDrag = true; lift(pin); }, LONG_PRESS_MS);
-                }
-            }
-
-            function onMove(e) {
-                if (!active) return;
-                const dx = e.clientX - startX;
-                const dy = e.clientY - startY;
-                if (!moved && Math.hypot(dx, dy) > MOVE_THRESHOLD) {
-                    moved = true;
-                    if (!canDrag) clearTimeout(longPressTimer); // moved before long-press: not a drag yet
-                    else if (!active._dragging) lift(active);
-                }
-                if (canDrag && active._dragging) {
-                    const bw = board.clientWidth, bh = board.clientHeight;
-                    const pinW = active.offsetWidth;
-                    let nx = Math.max(-30, Math.min(originX + dx, bw - pinW + 30));
-                    let ny = Math.max(-20, Math.min(originY + dy, bh - 60));
-                    active.style.left = nx + 'px';
-                    active.style.top = ny + 'px';
-                }
-            }
-
-            function onUp(e) {
-                if (!active) return;
-                clearTimeout(longPressTimer);
-                const pin = active;
-                if (pin._dragging) {
-                    pin._dragging = false;
-                    pin.classList.remove('dragging');
-                    paint(pin);
-                    // Picked up and placed: give it its own boundary + '?' label.
-                    movedPins.add(pin);
-                    redrawClusters();
-                } else if (!moved) {
-                    if (pin.hasAttribute('data-lightbox')) {
-                        openLightbox(pin);
+            // --- CLICK TO OPEN (project page or lightbox) ---
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    if (card.hasAttribute('data-lightbox')) {
+                        openLightbox(card);
                     } else {
-                        const href = pin.getAttribute('data-href');
-                        if (href) { window.location.href = href; }
+                        const href = card.getAttribute('data-href');
+                        if (href) window.location.href = href;
                     }
-                }
-                try { pin.releasePointerCapture(e.pointerId); } catch (_) {}
-                active = null;
-                canDrag = false;
-                moved = false;
-            }
-
-            pins.forEach(pin => {
-                pin.addEventListener('pointerdown', e => onDown(e, pin));
-                pin.addEventListener('pointermove', onMove);
-                pin.addEventListener('pointerup', onUp);
-                pin.addEventListener('pointercancel', onUp);
-                // Hover focus: grow this card and shrink the others.
-                pin.addEventListener('mouseenter', () => {
-                    board.classList.add('focusing');
-                    pin.classList.add('is-hovered');
-                    pin.style.zIndex = ++zCounter; // keep the focused card on top
-                });
-                pin.addEventListener('mouseleave', () => {
-                    board.classList.remove('focusing');
-                    pin.classList.remove('is-hovered');
                 });
             });
 
@@ -554,14 +187,12 @@
                     filterLabel.textContent = li.textContent;
                     const filter = li.getAttribute('data-filter');
                     const filterLower = filter.toLowerCase();
-                    activeFilter = filterLower;
-                    pins.forEach(pin => {
-                        const cats = (pin.getAttribute('data-category') || '')
+                    cards.forEach(card => {
+                        const cats = (card.getAttribute('data-category') || '')
                             .toLowerCase().split(',').map(s => s.trim());
-                        pin.style.display = (filter === 'all' || cats.includes(filterLower)) ? '' : 'none';
+                        card.style.display = (filter === 'all' || cats.includes(filterLower)) ? '' : 'none';
                     });
                     toggleMenu(false);
-                    layout();
                 });
             });
 
@@ -572,15 +203,15 @@
             const lightboxCompany = document.getElementById('lightboxCompany');
             const lightboxYear = document.getElementById('lightboxYear');
 
-            function openLightbox(pin) {
-                const img = pin.querySelector('img');
-                const title = pin.getAttribute('data-title') ||
-                    (pin.querySelector('h5') ? pin.querySelector('h5').textContent : '');
-                lightboxImg.src = pin.getAttribute('data-image') || (img ? img.src : '');
+            function openLightbox(card) {
+                const img = card.querySelector('img');
+                const title = card.getAttribute('data-title') ||
+                    (card.querySelector('h5') ? card.querySelector('h5').textContent : '');
+                lightboxImg.src = card.getAttribute('data-image') || (img ? img.src : '');
                 lightboxImg.alt = title;
                 lightboxTitle.textContent = title;
-                lightboxCompany.textContent = pin.getAttribute('data-company') || '';
-                lightboxYear.textContent = pin.getAttribute('data-year') || '';
+                lightboxCompany.textContent = card.getAttribute('data-company') || '';
+                lightboxYear.textContent = card.getAttribute('data-year') || '';
                 lightbox.classList.add('open');
                 lightbox.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
@@ -598,21 +229,6 @@
                 if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
             });
 
-            // Initial scatter (and re-scatter on resize).
-            layout();
-            let resizeTimer = null;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(layout, 200);
-            });
-
-            // --- THEME TOGGLE LOGIC ---
-            const themeToggle = document.getElementById('theme-toggle');
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                const isDark = document.body.classList.contains('dark-mode');
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            });
         });
     </script>
 </body>

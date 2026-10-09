@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Makula - AI Notetaker</title>
     <link rel="stylesheet" href="styles.css">
+    <style>html.gate-wait .container { visibility: hidden; }</style>
+    <script>
+        (function () {
+            var f = (location.pathname || '').toLowerCase().replace(/.*\//, '').replace(/\.html?$/, '') || 'index';
+            try { if (sessionStorage.getItem('unlocked:' + f) === '1') return; } catch (e) {}
+            document.documentElement.className += ' gate-wait';
+        })();
+    </script>
     <script src="config.js" defer></script>
 </head>
 <body class="project-page oms-project">
-    <script>
-        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
-    </script>
+    <script src="theme.js"></script>
     <div class="container">
         <header class="navbar">
             <div class="logo"><a href="index" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
@@ -18,12 +24,10 @@
                 <a href="index" class="nav-tab">Work</a>
                 <a href="about" class="nav-tab">About</a>
                 <a href="resume" class="nav-tab">Resume</a>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
-                    <img class="sun-icon" src="Assets/Dark Mode.png" alt="Dark mode">
-                    <img class="moon-icon" src="Assets/Light Mode.png" alt="Light mode">
-                    <span class="toggle-label toggle-label-light">lights on</span>
-                    <span class="toggle-label toggle-label-dark">lights off</span>
-                </button>
+                <div class="theme-slider">
+                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
+                    <span class="toggle-label" id="theme-slider-value">100%</span>
+                </div>
             </nav>
         </header>
         <div class="main-content project-content">
@@ -169,15 +173,5 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const themeToggle = document.getElementById('theme-toggle');
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                const isDark = document.body.classList.contains('dark-mode');
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            });
-        });
-    </script>
 </body>
 </html>

@@ -20,7 +20,7 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #ffffff;
+    background-color: var(--page-bg, #ffffff);
     color: #000000;
     line-height: 2;
     overflow-x: hidden;
@@ -40,7 +40,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 50px 0 30px 0;
-    background: #ffffff;
+    background: var(--page-bg, #ffffff);
 }
 
 .logo {
@@ -699,7 +699,7 @@ body.about-page .container {
 
 .main-content.project-content {
     padding: 60px 0;
-    background: #ffffff;
+    background: var(--page-bg, #ffffff);
     overflow-x: hidden;
 }
 
@@ -893,7 +893,7 @@ body.about-page .container {
 .grid-4-col { grid-template-columns: repeat(4, 1fr); }
 
 .grid-item {
-    background: #ffffff;
+    background: var(--page-bg, #ffffff);
     padding: 12px;
     border-radius: 16px;
     text-align: left;
@@ -1079,59 +1079,81 @@ body.dark-mode .text-column .hotspot-popup {
 }
 
 
-/* --- DARK MODE TOGGLE --- */
-.theme-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
+/* --- LIGHTS SLIDER (see theme.js) ---
+   theme.js sets --page-bg (blended background) on <html> and adds
+   body.dark-mode below the text switch point. */
+.theme-slider {
     margin-left: 20px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 2px;
+    gap: 10px;
     line-height: 1;
     color: inherit;
-    transition: transform 0.2s ease;
 }
 
-.theme-toggle:hover {
-    transform: scale(1.1);
+.theme-slider input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 80px;
+    height: 12px;
+    margin: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
 }
 
-.theme-toggle img {
-    width: 100px;
-    height: 120px;
-    object-fit: contain;
+.theme-slider input[type="range"]::-webkit-slider-runnable-track {
+    height: 1px;
+    background: currentColor;
 }
 
-.sun-icon { display: none; }
-.moon-icon { display: block; }
+.theme-slider input[type="range"]::-moz-range-track {
+    height: 1px;
+    background: currentColor;
+}
+
+.theme-slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 9px;
+    height: 9px;
+    margin-top: -4px;
+    border: none;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.theme-slider input[type="range"]::-moz-range-thumb {
+    width: 9px;
+    height: 9px;
+    border: none;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.theme-slider input[type="range"]:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 4px;
+}
 
 .toggle-label {
+    min-width: 4ch;
     font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
     white-space: nowrap;
+    font-variant-numeric: tabular-nums;
 }
-.toggle-label-dark { display: none; }
-
-body.dark-mode .sun-icon { display: block; }
-body.dark-mode .moon-icon { display: none; }
-body.dark-mode .toggle-label-light { display: none; }
-body.dark-mode .toggle-label-dark { display: block; }
 
 /* Dark Mode Overrides */
 body.dark-mode {
-    background-color: #1E1E1E !important;
+    background-color: var(--page-bg, #1E1E1E) !important;
     color: #e0e0e0 !important;
 }
 
 body.dark-mode .navbar,
 body.dark-mode .main-content.project-content,
 body.dark-mode .container {
-    background-color: #1E1E1E !important;
+    background-color: var(--page-bg, #1E1E1E) !important;
 }
 
 body.dark-mode .nav-tab,
@@ -1187,8 +1209,12 @@ body.dark-mode .filter-btn:hover {
 
 body.dark-mode .grid-item,
 body.dark-mode .sidebar,
-body.dark-mode .hotspot-popup,
 body.dark-mode .resume-left {
+    background-color: var(--page-bg, #1e1e1e) !important;
+    border-color: #333 !important;
+}
+
+body.dark-mode .hotspot-popup {
     background-color: #1e1e1e !important;
     border-color: #333 !important;
 }
@@ -1825,4 +1851,132 @@ body.board-page .pinboard {
     height: auto;
     width: 100vw;
     margin-left: calc(50% - 50vw);
+}
+
+/* ==========================================================================
+   PASSWORD GATE (for protected project pages)
+   ========================================================================== */
+.pw-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: #ffffff;
+}
+
+body.dark-mode .pw-gate {
+    background: #121212;
+}
+
+.pw-card {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.pw-helper {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #111111;
+}
+
+body.dark-mode .pw-helper {
+    color: #e8e8e8;
+}
+
+.pw-form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.pw-input {
+    flex: 1 1 auto;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #111111;
+    background: #ffffff;
+    border: 1.5px solid #d9d9d9;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pw-input:focus {
+    border-color: #111111;
+}
+
+.pw-input.error {
+    border-color: #e02424;
+    box-shadow: 0 0 0 3px rgba(224, 36, 36, 0.15);
+}
+
+body.dark-mode .pw-input {
+    color: #f0f0f0;
+    background: #1e1e1e;
+    border-color: #3a3a3a;
+}
+
+body.dark-mode .pw-input:focus {
+    border-color: #f0f0f0;
+}
+
+.pw-submit {
+    padding: 12px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    color: #ffffff;
+    background: #111111;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.pw-submit:hover {
+    opacity: 0.85;
+}
+
+body.dark-mode .pw-submit {
+    color: #111111;
+    background: #f0f0f0;
+}
+
+.pw-error {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #e02424;
+}
+
+.pw-home {
+    font-size: 14px;
+    color: #666666;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.pw-home:hover {
+    color: #111111;
+    border-bottom-color: #111111;
+}
+
+body.dark-mode .pw-home {
+    color: #aaaaaa;
+}
+
+body.dark-mode .pw-home:hover {
+    color: #ffffff;
+    border-bottom-color: #ffffff;
 }

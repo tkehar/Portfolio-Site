@@ -8,9 +8,7 @@
     <script src="config.js" defer></script>
 </head>
 <body class="project-page eh-project">
-    <script>
-        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
-    </script>
+    <script src="theme.js"></script>
     <div class="container">
         <header class="navbar">
             <div class="logo"><a href="index" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
@@ -18,12 +16,10 @@
                 <a href="index" class="nav-tab">Work</a>
                 <a href="about" class="nav-tab">About</a>
                 <a href="resume" class="nav-tab">Resume</a>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
-                    <img class="sun-icon" src="Assets/Dark Mode.png" alt="Dark mode">
-                    <img class="moon-icon" src="Assets/Light Mode.png" alt="Light mode">
-                    <span class="toggle-label toggle-label-light">lights on</span>
-                    <span class="toggle-label toggle-label-dark">lights off</span>
-                </button>
+                <div class="theme-slider">
+                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
+                    <span class="toggle-label" id="theme-slider-value">100%</span>
+                </div>
             </nav>
         </header>
         <div class="main-content project-content">
@@ -48,7 +44,7 @@
                 </div>
                 
                 <div class="image-column">
-                    <img src="Assets/EH/DSC_0140 1.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 10px;">
+                    <img src="Assets/EH/DSC_0140 1.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0;">
                 </div>
 
             <div class="content-row">
@@ -58,7 +54,7 @@
                 </div>
                 <div class="image-column" style="padding-top:20px;">
                     <!-- Add image here -->
-                    <img src="Assets/EH/Schumann.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 10px;">
+                    <img src="Assets/EH/Schumann.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0;">
             
                 </div>
             </div>
@@ -85,18 +81,18 @@
                 </div>
 
                 <div class="image-column" style="text-align: center;">
-                    <img src="Assets/EH/IMG_1336.png" alt="Project Image" style="width: 100; height: auto; border-radius: 10px; margin-bottom: 20px;">
+                    <img src="Assets/EH/IMG_1336.png" alt="Project Image" style="width: 100; height: auto; border-radius: 0; margin-bottom: 20px;">
                 </div>
                 
                 <div class="image-column">
-                    <img src="Assets/EH/DSC_0087.gif" alt="Project Image" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px;"> 
-                    <img src="Assets/EH/DSC_0110.gif" alt="Project Image" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px;"> 
+                    <img src="Assets/EH/DSC_0087.gif" alt="Project Image" style="width: 100%; height: auto; border-radius: 0; margin-bottom: 20px;"> 
+                    <img src="Assets/EH/DSC_0110.gif" alt="Project Image" style="width: 100%; height: auto; border-radius: 0; margin-bottom: 20px;"> 
                 </div>
     
             </div>
             <div class="content-row">
                 <div class="image-column">
-                    <img src="Assets/EH/IMG_1358087.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px;">
+                    <img src="Assets/EH/IMG_1358087.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0; margin-bottom: 20px;">
                 </div>
                 <div class="text-column" style=" padding-top:10%; padding-left: 5%;">
                     <h3> Viewers are asked to walk through the space and experience the interplay of light and reflection.</h3>
@@ -104,10 +100,10 @@
             </div>
             <div class="content-row">
                 <div class="image-column">
-                    <img src="Assets/EH/IMG_1325 1.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px;">
+                    <img src="Assets/EH/IMG_1325 1.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0; margin-bottom: 20px;">
                 </div>
                 <div class="image-column">
-                    <img src="Assets/EH/DSC_0130-1.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px;">
+                    <img src="Assets/EH/DSC_0130-1.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0; margin-bottom: 20px;">
                 </div>
             
             </div>
@@ -129,13 +125,5 @@
             </div>
     </div>
 
-    <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
-    </script>
 </body>
 </html>

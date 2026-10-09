@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sastaticket - Order Management System</title>
     <link rel="stylesheet" href="styles.css">
+    <style>html.gate-wait .container { visibility: hidden; }</style>
+    <script>
+        (function () {
+            var f = (location.pathname || '').toLowerCase().replace(/.*\//, '').replace(/\.html?$/, '') || 'index';
+            try { if (sessionStorage.getItem('unlocked:' + f) === '1') return; } catch (e) {}
+            document.documentElement.className += ' gate-wait';
+        })();
+    </script>
     <script src="config.js" defer></script>
 </head>
 <body class="project-page oms-project">
+    <script src="theme.js"></script>
     <div class="container">
         <header class="navbar">
             <div class="logo"><a href="index" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
@@ -15,12 +24,10 @@
                 <a href="index" class="nav-tab">Work</a>
                 <a href="about" class="nav-tab">About</a>
                 <a href="resume" class="nav-tab">Resume</a>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
-                    <img class="sun-icon" src="Assets/Dark Mode.png" alt="Dark mode">
-                    <img class="moon-icon" src="Assets/Light Mode.png" alt="Light mode">
-                    <span class="toggle-label toggle-label-light">lights on</span>
-                    <span class="toggle-label toggle-label-dark">lights off</span>
-                </button>
+                <div class="theme-slider">
+                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
+                    <span class="toggle-label" id="theme-slider-value">100%</span>
+                </div>
             </nav>
         </header>
         <div class="main-content project-content">
@@ -106,7 +113,7 @@
                 </div>
                 <div class="image-column">
                     <div class="image-overlay-wrapper">
-                        <img src="Assets/OMS/Workshops.png" alt="workshops" style="width: 100%; height: auto; border-radius: 10px;">
+                        <img src="Assets/OMS/Workshops.png" alt="workshops" style="width: 100%; height: auto; border-radius: 0;">
                         <a href="https://miro.com/app/board/o9J_ln787Oc=/" class="overlay-btn" target="_blank">
                             <img src="Assets/Icons/Miro.svg" alt="Miro">
                             View Documentation
@@ -117,7 +124,7 @@
 
         <div class="content-row">
         <div class="image-column">
-                    <img src="Assets/OMS/Components.png" alt="Environments" style="width: 100%; height: auto; border-radius: 10px;">
+                    <img src="Assets/OMS/Components.png" alt="Environments" style="width: 100%; height: auto; border-radius: 0;">
                 </div>        
         <div class="text-column">
                     <h2>Re-designing component hierarchy</h2>
@@ -133,7 +140,7 @@
                 </div>
 
             <div class="image-column">
-                    <img src="Assets/OMS/Order Status.png" alt="status" style="width: 100%; height: auto; border-radius: 10px; padding-top: 5%;">
+                    <img src="Assets/OMS/Order Status.png" alt="status" style="width: 100%; height: auto; border-radius: 0; padding-top: 5%;">
                 </div>        
 
             </div>   
@@ -142,7 +149,7 @@
         <div class="content-row">
             <div class="image-column" >
                     <div class="image-overlay-wrapper">
-                        <img src="Assets/OMS/Design System.png" alt="workshops" style="width: 100%; height: auto; border-radius: 10px;">
+                        <img src="Assets/OMS/Design System.png" alt="workshops" style="width: 100%; height: auto; border-radius: 0;">
                         <a href="https://www.figma.com/design/PNfPO9jXZmPFcY6vcPzV4a/OMS?node-id=965-166350" class="overlay-btn" target="_blank">
                             <img src="Assets/Icons/Figma.svg" alt="Figma">
                             View Design System
@@ -230,13 +237,5 @@
         </div>      
     
 
-    <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        });
-    </script>
 </body>
 </html>
