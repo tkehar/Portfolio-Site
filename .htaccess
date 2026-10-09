@@ -5,6 +5,10 @@ RewriteEngine On
 RewriteCond %{THE_REQUEST} \s/(.*)\.html [NC]
 RewriteRule ^ %1 [R=301,L]
 
+# Legacy IA: projects now live on the homepage; contact merged into about
+RewriteRule ^projects/?$ / [R=301,L]
+RewriteRule ^contact/?$ /about#contact [R=301,NE,L]
+
 # Remove .html extension (Internal Rewrite)
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
