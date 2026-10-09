@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scales</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="config.js" defer></script>
+</head>
+<body class="project-page sg-project">
+    <script>
+        (function () {
+            var b = parseFloat(localStorage.getItem('brightness'));
+            if (isNaN(b)) b = localStorage.getItem('theme') === 'light' ? 100 : 20;
+            b = Math.max(0, Math.min(100, b));
+            var t = b / 100;
+            var v = Math.round(30 + 225 * t);
+            var border = Math.round(51 + 183 * t);
+            document.documentElement.style.setProperty('--page-bg', 'rgb(' + v + ',' + v + ',' + v + ')');
+            document.documentElement.style.setProperty('--page-border', 'rgb(' + border + ',' + border + ',' + border + ')');
+            if (b < 60) document.body.classList.add('dark-mode');
+            else document.body.classList.remove('dark-mode');
+        })();
+    </script>
+    <div class="container">
+        <header class="navbar">
+            <div class="logo"><a href="index" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
+            <nav class="nav-links">
+                <a href="index" class="nav-tab active">Work</a>
+                <a href="about" class="nav-tab">About</a>
+                <a href="resume" class="nav-tab">Resume</a>
+                <label class="brightness-control" title="Brightness">
+                    <input id="brightness-scale" class="brightness-scale" type="range" min="0" max="100" value="20" step="1" aria-label="Brightness">
+                </label>
+            </nav>
+        </header>
+        <div class="main-content project-content">
+            <h1>Scales</h1>
+            <div class="grid-4-col">
+                <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+                    <p><b>Client:</b></p>
+                    <p>Self-Initiated</p>
+                </div>
+                <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+                    <p><b>Role:</b></p>
+                    <p>Concept, Design &amp; Development</p>
+                </div>
+                <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+                    <p><b>Year:</b></p>
+                    <p>2025</p>
+                </div>
+                <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+                    <p><b>Tools:</b></p>
+                    <p>HTML, CSS, JavaScript</p>
+                </div>
+            </div>
+
+            <div class="content-row" style="justify-content: center;">
+                <a href="scales-game.html" class="visit-button" target="_blank" rel="noopener">Visit Project</a>
+            </div>
+
+            <div class="content-row">
+                <div class="text-column" style="padding-top:20px;">
+                    <h2>Project overview placeholder.</h2>
+                    <h3>A short one-line description of what Scales is and the question it explores.</h3>
+                    <p>Placeholder body copy. Introduce the project here — the premise, the medium, and why you made it. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+                <div class="image-column" style="padding-top:20px; text-align: center;">
+                    <img src="Assets/Scales/Scales_Banner.png" alt="Scales" style="width: 90%; height: auto; border-radius: 10px;">
+                </div>
+            </div>
+
+            <div class="content-row">
+                <div class="image-column" style="padding-top:20px; text-align: center;">
+                    <img src="Assets/Scales/Scales_Banner.png" alt="Scales detail" style="width: 90%; height: auto; border-radius: 10px;">
+                </div>
+                <div class="text-column" style="padding-top:20px;">
+                    <h2>The concept.</h2>
+                    <h3>Explain the core idea or mechanic here.</h3>
+                    <p>Placeholder body copy describing the concept and the thinking behind it. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+
+            <div class="content-row">
+                <div class="text-column" style="padding-top:20px;">
+                    <h2>Process &amp; build.</h2>
+                    <h3>How it was designed and developed.</h3>
+                    <p>Placeholder body copy covering the process, tools, and any technical or design challenges. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                </div>
+                <div class="image-column" style="padding-top:20px; text-align: center;">
+                    <img src="Assets/Scales/Scales_Banner.png" alt="Scales process" style="width: 90%; height: auto; border-radius: 10px;">
+                </div>
+            </div>
+
+            <div class="content-row" style="justify-content: center; padding-top: 20px;">
+                <a href="scales-game.html" class="visit-button" target="_blank" rel="noopener">Visit Project</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="site.js"></script>
+</body>
+</html>

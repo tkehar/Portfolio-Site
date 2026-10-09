@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Talha Ahmed Kehar | About</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="config.js" defer></script>
 </head>
-<body>
+<body class="about-page">
     <script>
         (function () {
             var b = parseFloat(localStorage.getItem('brightness'));
@@ -36,58 +37,38 @@
 
         <main class="content-wrapper">
             <section id="about" class="page-view active">
-                <div class="about-grid">
-                    <div class="about-visual">
-                        <img src="Assets/Color-test.gif" alt="Portfolio Visual">
+                <div class="about-intro">
+                    <div class="about-photo">
+                        <img src="Assets/Profile_Banner.png" alt="Talha Ahmed Kehar">
+                    </div>
+                    <div class="about-info">
+                        <h2>I am <span id="type-role" class="typing-pill"></span><br>building <span id="type-product" class="typing-pill"></span>.</h1>
+                    </div>
+                </div>
+
+                <div class="about-footer">
+                    <div class="connect-bar">
+                        <div class="connect-icons">
+                            <h4 class="connect-title">Connect with me</h4>
+                            <a class="software-icon" data-tooltip="Email Me" href="mailto:talha.a.kehar@gmail.com"><img src="Assets/Icons/Mail.png" alt="Email"></a>
+                            <a class="software-icon" data-tooltip="LinkedIn" href="https://www.linkedin.com/in/talha-kehar-8a89ba120/" target="_blank" rel="noopener"><img src="Assets/Icons/Linkedin.png" alt="LinkedIn"></a>
+                        </div>
                     </div>
 
-                    <div class="about-info">
-                        <h1>DESIGNING INTENTIONAL, DATA DRIVEN, DIGITAL EXPERIENCES.</h1>
-                        <div class="skills-section">
-                            <div class="skill-row">
-                                <span class="skill-label">Design:</span>
-                                <div class="skill-icons">
-                                    <div class="software-icon" data-tooltip="Figma"><img src="Assets/Icons/Figma.svg" alt="Figma"></div>
-                                    <div class="software-icon" data-tooltip="Adobe Suite"><img src="Assets/Icons/Adobe.svg" alt="Adobe Suite"></div>
-                                    <div class="software-icon" data-tooltip="Blender"><img src="Assets/Icons/Blender.svg" alt="Blender"></div>
-                                    <div class="software-icon" data-tooltip="Procreate"><img src="Assets/Icons/Procreate.svg" alt="Procreate"></div>
-                                </div>
-                            </div>
-                            <div class="skill-row">
-                                <span class="skill-label">Creative:</span>
-                                <div class="skill-icons">
-                                    <div class="software-icon" data-tooltip="Unity 3D"><img src="Assets/Icons/Unity.svg" alt="Unity 3D"></div>
-                                    <div class="software-icon" data-tooltip="Touchdesigner"><img src="Assets/Icons/Touchdesigner.svg" alt="Touchdesigner"></div>
-                                </div>
-                            </div>
-                            <div class="skill-row">
-                                <span class="skill-label">Codebase:</span>
-                                <div class="skill-icons">
-                                    <div class="software-icon" data-tooltip="VS Code"><img src="Assets/Icons/VS Code.svg" alt="VS Code"></div>
-                                    <div class="software-icon" data-tooltip="HTML 5"><img src="Assets/Icons/HTML.svg" alt="HTML"></div>
-                                    <div class="software-icon" data-tooltip="Javascript"><img src="Assets/Icons/JS.svg" alt="Javascript"></div>
-                                    <div class="software-icon" data-tooltip="CSS 3"><img src="Assets/Icons/CSS.svg" alt="CSS"></div>
-                                </div>
-                            </div>
-                            <div class="skill-row">
-                                <span class="skill-label">Planning:</span>
-                                <div class="skill-icons">
-                                    <div class="software-icon" data-tooltip="Notion"><img src="Assets/Icons/Notion.svg" alt="Notion"></div>
-                                    <div class="software-icon" data-tooltip="Miro"><img src="Assets/Icons/Miro.svg" alt="Miro"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="contact" class="about-contact">
-                            <h2>Lets Connect!</h2>
-                            <p class="contact-meta"><strong>Email:</strong> <a href="mailto:talha.a.kehar@gmail.com">talha.a.kehar@gmail.com</a></p>
-                            <p class="contact-meta">Berlin, Germany</p>
-
-                            <div class="software-icons">
-                                <div class="software-icon" data-tooltip="Email Me"><img src="Assets/Icons/Mail.png" alt="Mail" onclick="window.location.href='mailto:talha.a.kehar@gmail.com'"></div>
-                                <div class="software-icon" data-tooltip="Resume"><img src="Assets/Icons/CV.png" alt="Resume" onclick="window.open('https://drive.google.com/file/d/1CWLHV35JuPkYnu6m-MDJmqtJCgySnnU7/view?usp=sharing')"></div>
-                                <div class="software-icon" data-tooltip="Linkedin"><img src="Assets/Icons/Linkedin.png" alt="LinkedIn" onclick="window.open('https://www.linkedin.com/in/talha-kehar-8a89ba120/')"></div>
-                            </div>
+                    <div class="tools-ticker">
+                        <div class="ticker-track">
+                            <img src="Assets/Icons/Figma.svg" alt="Figma">
+                            <img src="Assets/Icons/Adobe.svg" alt="Adobe Suite">
+                            <img src="Assets/Icons/Blender.svg" alt="Blender">
+                            <img src="Assets/Icons/Procreate.svg" alt="Procreate">
+                            <img src="Assets/Icons/Unity.svg" alt="Unity 3D">
+                            <img src="Assets/Icons/Touchdesigner.svg" alt="Touchdesigner">
+                            <img src="Assets/Icons/VS Code.svg" alt="VS Code">
+                            <img src="Assets/Icons/HTML.svg" alt="HTML">
+                            <img src="Assets/Icons/JS.svg" alt="Javascript">
+                            <img src="Assets/Icons/CSS.svg" alt="CSS">
+                            <img src="Assets/Icons/Notion.svg" alt="Notion">
+                            <img src="Assets/Icons/Miro.svg" alt="Miro">
                         </div>
                     </div>
                 </div>
@@ -95,6 +76,82 @@
         </main>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- TYPING WORD SWAP ---
+            const roleEl = document.getElementById('type-role');
+            const productEl = document.getElementById('type-product');
+
+            const roles = [
+                "a storyteller",
+                "a UX designer",
+                "an artist",
+                "a technologist"
+            ];
+
+            const products = [
+                "digital experiences",
+                "installations",
+                "design systems",
+                "AI-powered products",
+                "games"
+            ];
+
+            const sleep = ms => new Promise(res => setTimeout(res, ms));
+
+            function typeText(el, text, speed = 80) {
+                return new Promise(res => {
+                    let i = 0;
+                    (function step() {
+                        el.textContent = text.slice(0, i + 1);
+                        i++;
+                        if (i < text.length) setTimeout(step, speed);
+                        else res();
+                    })();
+                });
+            }
+
+            function deleteText(el, speed = 40) {
+                return new Promise(res => {
+                    const text = el.textContent;
+                    let i = text.length;
+                    (function step() {
+                        el.textContent = text.slice(0, i - 1);
+                        i--;
+                        if (i > 0) setTimeout(step, speed);
+                        else res();
+                    })();
+                });
+            }
+
+            async function runTypingLoop() {
+                let roleIdx = 0;
+                await typeText(roleEl, roles[roleIdx]);
+
+                while (true) {
+                    // Keep the current role while cycling through every product.
+                    for (let p = 0; p < products.length; p++) {
+                        await typeText(productEl, products[p]);
+                        await sleep(1600);
+                        await deleteText(productEl);
+                        await sleep(150);
+                    }
+                    // Products exhausted for this role -> advance the role.
+                    roleIdx = (roleIdx + 1) % roles.length;
+                    await deleteText(roleEl);
+                    await sleep(150);
+                    await typeText(roleEl, roles[roleIdx]);
+                    await sleep(150);
+                }
+            }
+
+            if (roleEl && productEl) runTypingLoop();
+
+            // --- TOOLS TICKER (duplicate the track so the loop is seamless) ---
+            const tickerTrack = document.querySelector('.ticker-track');
+            if (tickerTrack) tickerTrack.innerHTML += tickerTrack.innerHTML;
+});
+    </script>
     <script src="site.js"></script>
 </body>
 </html>
