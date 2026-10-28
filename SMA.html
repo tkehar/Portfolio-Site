@@ -6,28 +6,23 @@
     <title>Sabeen Mahmud Archive</title>
     <link rel="stylesheet" href="styles.css">
     <script src="config.js" defer></script>
+    <script src="lightbox.js" defer></script>
 </head>
 <body class="project-page sma-project">
     <script src="theme.js"></script>
+    <script src="components.js"></script>
     <div class="container">
-        <header class="navbar">
-            <div class="logo"><a href="index" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
-            <nav class="nav-links">
-                <a href="index" class="nav-tab">Work</a>
-                <a href="about" class="nav-tab">About</a>
-                <a href="resume" class="nav-tab">Resume</a>
-                <div class="theme-slider">
-                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
-                    <span class="toggle-label" id="theme-slider-value">100%</span>
-                </div>
-            </nav>
-        </header>
+        <header class="navbar" data-component="header" data-active="work"></header>
         <div class="main-content project-content">
-            <h1>The Sabeen Mahmud Archive</h1>
+            <div class="project-heading">
+                <h1>The Sabeen Mahmud Archive</h1>
+                <p class="project-subtitle">A WebXR Archive about a Pakistani Activist</p>
+                <p class="project-tagline">WebXR · A-Frame · Living archive · Information architecture · Stakeholder mapping · Exhibition design</p>
+            </div>
             <div class="grid-4-col">
                     <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
                         <p><b>Client:</b></p>
-                        <p>-</p>
+                        <p>The Sabeen Mahmud Forum</p>
                     </div>
                     <div class="grid-item" style="height: fit-content;width: 100%;;padding: 1%;">
                         <p><b>Role:</b></p>
@@ -468,11 +463,6 @@
         </div>
     </div>
 
-    <div id="lightbox" class="lightbox">
-        <span class="lightbox-close">&times;</span>
-        <img class="lightbox-content" id="lightbox-img">
-    </div>
-
     <script>
         //dark mode toggle
     
@@ -530,31 +520,6 @@
             popup.addEventListener('click', (e) => {
                 e.stopPropagation();
             });
-        });
-
-        // Lightbox functionality
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxImages = document.querySelectorAll('.lightbox-image');
-        const closeBtn = document.querySelector('.lightbox-close');
-
-        lightboxImages.forEach(image => {
-            image.addEventListener('click', () => {
-                lightbox.style.display = 'block';
-                lightboxImg.src = image.src;
-            });
-        });
-
-        const closeLightbox = () => {
-            lightbox.style.display = 'none';
-        }
-
-        closeBtn.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => {
-            // Close if the overlay is clicked, but not the image itself
-            if (e.target !== lightboxImg) {
-                closeLightbox();
-            }
         });
 
         // Exhibition Slider

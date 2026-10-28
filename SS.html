@@ -5,38 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salesflo Sellorate</title>
     <link rel="stylesheet" href="styles.css">
-    <style>html.gate-wait .container { visibility: hidden; }</style>
-    <script>
-        (function () {
-            var f = (location.pathname || '').toLowerCase().replace(/.*\//, '').replace(/\.html?$/, '') || 'index';
-            try { if (sessionStorage.getItem('unlocked:' + f) === '1') return; } catch (e) {}
-            document.documentElement.className += ' gate-wait';
-        })();
-    </script>
     <script src="config.js" defer></script>
+    <script src="lightbox.js" defer></script>
 </head>
 <body class="project-page ss-project">
     <script src="theme.js"></script>
+    <script src="components.js"></script>
     <div class="container">
-        <header class="navbar">
-            <div class="logo"><a href="index" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
-            <nav class="nav-links">
-                <a href="index" class="nav-tab">Work</a>
-                <a href="about" class="nav-tab">About</a>
-                <a href="resume" class="nav-tab">Resume</a>
-                <div class="theme-slider">
-                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
-                    <span class="toggle-label" id="theme-slider-value">100%</span>
-                </div>
-            </nav>
-        </header>
+        <header class="navbar" data-component="header" data-active="work"></header>
         <div class="main-content project-content">
             <div class="text-column">
-                <h1>Sellorate B2B Retailer App</h1>
+                <div class="project-heading">
+                    <h1>Sellorate B2B Retailer App</h1>
+                    <p class="project-subtitle">Design System and Mobile Ordering App for B2B Retail</p>
+                <p class="project-tagline">Design system · Component library · B2B e-commerce · Mobile app · Rapid delivery · Design leadership.</p>
+                </div>
                 <div class="grid-4-col">
                     <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
                         <p><b>Company:</b></p>
-                        <p>Saleflo</p>
+                        <p>Salesflo</p>
                     </div>
                     <div class="grid-item" style="height: fit-content;width: 100%;;padding: 1%;">
                         <p><b>Role:</b></p>
@@ -44,11 +31,11 @@
                     </div>
                     <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
                         <p><b>Year:</b></p>
-                        <p>2024</p>
+                        <p>2023</p>
                     </div>
                     <div class="grid-item" style="height: fit-content;width: 100%; ;padding: 1%;">
                         <p><b>Team:</b></p>
-                        <p> Saman Farooq (Product Team), Faseeh Abbasi (Product Designer)</p>
+                        <p>Saman Farooq (Product Team), Ali Abbasi (Frontend engineer)</p>
                     </div>
             </div>
         
@@ -57,14 +44,32 @@
                     <img src="Assets/SS/Landing image.png" alt="Project Image" style="width: 100%; height: auto;">
                 </div>
                 <div class="text-column" style="padding-top: 10%; padding-left: 5%;">
-                    <h2>A B2B solution that bridges the gap between retailers and manufacturers.</h2>
+                    <h2>A UAE-based client needed an app for retailers to order directly from manufacturers, delivered in under a week.</h2>
+                    <h3>I worked as UX Lead and Product Designer at Salesflo, working with a product manager and a frontend engineer.</h3>
                 </div>
             </div>
 
             <div class="content-row">
                 <div class="text-column" style="align-items: normal;">
-                    <h2>Design System</h2>
-                    <h3>Prioritising quick delivery, we adapted mental models from similar apps and built a high fidelity design system.</h3>
+                    <h2>Built a design system and flows from familiar retail app patterns to move fast.</h2>
+                    <div class="lightbox-thumbs">
+                        <button type="button" class="lightbox-image" aria-label="View Daraz reference">
+                            <img src="Assets/SS/SS_Daraz.png" alt="Daraz app reference">
+                            <img class="zoom-icon" src="Assets/Icons/Zoom-in.svg" alt="">
+                        </button>
+                        <button type="button" class="lightbox-image" aria-label="View Foodpanda reference">
+                            <img src="Assets/SS/SS_Foodpanda.png" alt="Foodpanda app reference">
+                            <img class="zoom-icon" src="Assets/Icons/Zoom-in.svg" alt="">
+                        </button>
+                        <button type="button" class="lightbox-image" aria-label="View Retailo reference">
+                            <img src="Assets/SS/SS_Retailo.png" alt="Retailo app reference">
+                            <img class="zoom-icon" src="Assets/Icons/Zoom-in.svg" alt="">
+                        </button>
+                        <button type="button" class="lightbox-image" aria-label="View Noon reference">
+                            <img src="Assets/SS/SS_Noon.png" alt="Noon app reference">
+                            <img class="zoom-icon" src="Assets/Icons/Zoom-in.svg" alt="">
+                        </button>
+                    </div>
                 </div>
                 <div class="image-column">
                     <div class="image-overlay-wrapper">
@@ -88,15 +93,14 @@
                     </div>
                 </div>
                 <div class="text-column" style="align-items: normal;">
-                    <h2>Onboarding & Sign up</h2>
-                    <h3>Company code login establishes the manufacturer relationship from the first screen.</h3>
+                    <h2>Value added features</h2>
+                    <h2>Used a company-code login to set up the retailer and manufacturer relationship from the first screen.</h2>
                 </div>
             </div>
 
             <div class="content-row">
                 <div class="text-column" style="align-items: normal;">
-                    <h2>Search & Order </h2>
-                    <h3>Familiar B2C browsing and product card patterns adapted for B2B carton/unit pricing.</h3>
+                    <h2>Adapted B2C browsing and product cards for carton and unit pricing.</h2>
                 </div>
                 <div class="image-column" style="text-align: center;">
                     <div class="image-overlay-wrapper">
@@ -120,15 +124,14 @@
                     </div>
                 </div>
                 <div class="text-column" style="align-items: normal;">
-                    <h2>Payment & Checkout</h2>
-                    <h3>Simplified checkout with visibility on delivery time and itemised bill.</h3>
+                    <h2>Designed a checkout that shows delivery time and an itemised bill</h2>
                 </div>
             </div>
 
             <div class="content-row">
                 <div class="text-column" style="align-items: normal;">
-                    <h2>Loyalty program</h2>
-                    <h3>A flexible rewards system tied to order value to incentivise usage. That could be toggled off by the admin.</h3>
+                    <h2>Structured a loyalty program linked to order value which admins can switch off.</h2>
+                    <h3>The app was designed and handed off within a week and led to the onboarding of pivotal client in the UAE.</h3>
                 </div>
                 <div class="image-column" style="text-align: center;">
                     <div class="image-overlay-wrapper">

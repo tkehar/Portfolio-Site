@@ -6,25 +6,20 @@
     <title>Dastaan-e-Karachi</title>
     <link rel="stylesheet" href="styles.css">
     <script src="config.js" defer></script>
+    <script src="lightbox.js" defer></script>
 </head>
 <body class="project-page dk-project">
     <script src="theme.js"></script>
+    <script src="components.js"></script>
     <div class="container">
-        <header class="navbar">
-            <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
-            <nav class="nav-links">
-                <a href="index" class="nav-tab">Work</a>
-                <a href="about" class="nav-tab">About</a>
-                <a href="resume" class="nav-tab">Resume</a>
-                <div class="theme-slider">
-                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
-                    <span class="toggle-label" id="theme-slider-value">100%</span>
-                </div>
-            </nav>
-        </header>
+        <header class="navbar" data-component="header" data-active="work"></header>
         <div class="main-content project-content">
-            <h1>Dastaan-e-Karachi</h1>
-            <p><I>*This project won best thesis award at Habib University in 2018.</I></p>
+            <div class="project-heading">
+                <h1>Dastaan-e-Karachi</h1>
+                <p class="project-subtitle">Augmented Reality Platform for Intangible Heritage</p>
+                <p class="project-tagline">Augmented reality · Unity · Vuforia · Marker-based AR · Location-based AR · Cultural heritage · Motion design</p>
+            </div>
+            <p class="label">*Awarded best thesis at Habib University in 2018.</p>
                         <div class="grid-4-col">
                     <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
                         <p><b>Company:</b></p>
@@ -50,14 +45,14 @@
                     <img src="Assets/DK/Logo.svg" alt="DKlogo" style="width: 70%; height: auto; padding-left: 20%;">
                 </div>
                 <div class="text-column" style="padding-top: 5%;">
-                    <h2>An AR platform that tackles the problem of Karachi’s fast fading intangible heritage.</h2>     
+                    <h2>Karachi's folklore and intangible heritage are fading, and few young people encounter these stories.</h2>     
                 </div>
             </div>
 
             <div class="content-row">
                 <div class="text-column" style="padding-right: 1%;">
-                    <h2>Making Folklore Novel & Accessible</h2>
-                    <h3>Using marker based and location based AR the app allows users to explore and interact with the cultural heritage of Karachi in a new way.</h3>
+                    <h2>To make folklore accessible we developed an AR platform that preserves folklore.</h2>
+                    <h3>Using the Unity engine and Vuforia plugin, we built marker-based and location-based AR.</h3>
                 </div>
 
                 <div class="image-column">
@@ -78,7 +73,7 @@
                     <p>Karsaz Bride Marker</p>
                 </div>
                 <div class="text-column">
-                    <h2>Zines and Markers</h2>
+                    <h2>Designed a zine of AR markers.</h2>
                     <h3>To enable marker-based AR unique markers were designed and compiled in a zine.</h3>
                     <img src="Assets/DK/Zines 1.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0;">
                 </div>
@@ -86,7 +81,7 @@
 
             <div class="content-row">
                 <div class="text-column">
-                    <h2>Selected Stories & Locations</h2>
+                    <h2>This was done for selected stories &amp; locations:</h2>
                     <p>1. The Ghost Bride of Karsaz Bride</p>
                     <p>2. Abdullah Shah Ghazi Shrine</p>
                     <p>3. Moriro and the <i>Mach</i></p>
@@ -94,21 +89,21 @@
                     <p>5. The shrine and crocodiles of Mangopir</p>
                 </div>
                 <div class="image-column">
-                    <img src="Assets/DK/Map.svg" alt="Project Image" style="width: 100%; height: auto; border-radius: 0;">
+                    <img src="Assets/DK/Map.png" alt="Karachi heritage sites map" style="width: 100%; height: auto; border-radius: 0;">
                 </div>    
             </div>
 
             <div class="content-row" style="text-align: center;">
                  
                 <div class="image-column">
-                    <h2>Interface Design<h2>
+                    <h2>Interface Design</h2>
                     <img src="Assets/DK/UI_AR.png" alt="Project Image" style="width: 100%; height: auto;">
                 </div>
             </div>
             
             <div class="content-row">
                 <div class="text-column" style="text-align: center;">
-                    <h2>Identity Design</h2>
+                    <h2>Created a calligraphic identity for the platform.</h2>
                         <img src="Assets/DK/Calligraphy2.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0;">
                         <p>Calligraphic process</p>
                 </div>

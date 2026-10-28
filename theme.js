@@ -1,86 +1,71 @@
 /* ==========================================================================
-   Lights slider: blends the page background between dark (0%) and light (100%).
-   Load this synchronously as the first thing inside <body> on every page so
-   the saved level is applied before the first paint (no flash).
+   Lights toggle: two states (On = light, Off = dark) with smooth transitions.
+   Load synchronously as the first thing inside <body> so the saved theme
+   applies before the first paint.
    ========================================================================== */
 (function () {
-    // --- Settings (edit these to tune the slider site-wide) ---
-    var DARK_BG = '#1E1E1E';   // background at 0%
-    var LIGHT_BG = '#ffffff';  // background at 100%
-    var TEXT_SWITCH_AT = 60;   // below this %, text uses the dark-mode (light) colors
-    var DEFAULT_LEVEL = 100;   // level for first-time visitors
-
-    var STORAGE_KEY = 'themeLevel';
+    var DARK_BG = '#1E1E1E';
+    var LIGHT_BG = '#ffffff';
+    var STORAGE_KEY = 'theme';
+    var LEGACY_LEVEL_KEY = 'themeLevel';
     var root = document.documentElement;
 
-    function hexToRgb(hex) {
-        var h = hex.replace('#', '');
-        if (h.length === 3) h = h.replace(/./g, '$&$&');
-        var n = parseInt(h, 16);
-        return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
-    }
-
-    var dark = hexToRgb(DARK_BG);
-    var light = hexToRgb(LIGHT_BG);
-
-    function mix(t) {
-        return 'rgb(' + dark.map(function (c, i) {
-            return Math.round(c + (light[i] - c) * t);
-        }).join(', ') + ')';
-    }
-
-    function clamp(level) {
-        return Math.min(100, Math.max(0, Math.round(level)));
-    }
-
-    function readLevel() {
+    function readDark() {
         try {
-            var raw = localStorage.getItem(STORAGE_KEY);
-            if (raw !== null && raw !== '' && !isNaN(raw)) return clamp(Number(raw));
-            // Migrate visitors who used the old on/off toggle.
+            var stored = localStorage.getItem(STORAGE_KEY);
+            if (stored === 'dark') return true;
+            if (stored === 'light') return false;
+            var level = localStorage.getItem(LEGACY_LEVEL_KEY);
+            if (level !== null && level !== '' && !isNaN(level)) return Number(level) < 60;
             var legacy = localStorage.getItem('theme');
-            if (legacy === 'dark') return 0;
-            if (legacy === 'light') return 100;
+            if (legacy === 'dark') return true;
         } catch (e) {}
-        return DEFAULT_LEVEL;
+        return false;
     }
 
-    function saveLevel(level) {
-        try { localStorage.setItem(STORAGE_KEY, String(level)); } catch (e) {}
+    function save(isDark) {
+        try { localStorage.setItem(STORAGE_KEY, isDark ? 'dark' : 'light'); } catch (e) {}
     }
 
-    function apply(level) {
-        root.style.setProperty('--page-bg', mix(level / 100));
-        document.body.classList.toggle('dark-mode', level < TEXT_SWITCH_AT);
+    function apply(isDark) {
+        root.style.setProperty('--page-bg', isDark ? DARK_BG : LIGHT_BG);
+        document.body.classList.toggle('dark-mode', isDark);
+
+        var btn = document.getElementById('theme-toggle');
+        if (!btn) return;
+        var label = btn.querySelector('.theme-toggle-label');
+        btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+        btn.setAttribute('aria-label', isDark ? 'Lights Off' : 'Lights On');
+        if (label) label.textContent = isDark ? 'Lights Off' : 'Lights On';
     }
 
-    var level = readLevel();
-    apply(level);
+    var isDark = readDark();
+    apply(isDark);
 
-    function initSlider() {
-        var slider = document.getElementById('theme-slider');
-        if (!slider) return;
-        var label = document.getElementById('theme-slider-value');
-
-        function render() {
-            slider.value = level;
-            slider.setAttribute('aria-valuetext', level + '%');
-            if (label) label.textContent = level + '%';
-        }
-
-        slider.addEventListener('input', function () {
-            level = clamp(Number(slider.value));
-            apply(level);
-            render();
-            saveLevel(level);
+    function initToggle() {
+        var btn = document.getElementById('theme-toggle');
+        if (!btn) return;
+        apply(isDark);
+        btn.addEventListener('click', function () {
+            isDark = !isDark;
+            apply(isDark);
+            save(isDark);
         });
+    }
 
-        render();
+    window.portfolioTheme = { refresh: initToggle };
+
+    function bootToggle() {
+        if (document.querySelector('[data-component="header"]') && !document.getElementById('theme-toggle')) {
+            document.addEventListener('portfolio:header', initToggle, { once: true });
+            return;
+        }
+        initToggle();
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSlider);
+        document.addEventListener('DOMContentLoaded', bootToggle);
     } else {
-        initSlider();
+        bootToggle();
     }
 })();

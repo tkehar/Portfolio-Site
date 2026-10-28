@@ -6,22 +6,13 @@
     <title>Talha Ahmed Kehar | Resume</title>
     <link rel="stylesheet" href="styles.css">
     <script src="config.js" defer></script>
+    <script src="lightbox.js" defer></script>
 </head>
 <body>
     <script src="theme.js"></script>
+    <script src="components.js"></script>
     <div class="container">
-        <header class="navbar">
-            <div class="logo"><a href="index">TALHA AHMED KEHAR</a></div>
-            <nav class="nav-links">
-                <a href="index" class="nav-tab">Work</a>
-                <a href="about" class="nav-tab">About</a>
-                <a href="resume" class="nav-tab active">Resume</a>
-                <div class="theme-slider">
-                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
-                    <span class="toggle-label" id="theme-slider-value">100%</span>
-                </div>
-            </nav>
-        </header>
+        <header class="navbar" data-component="header" data-active="resume"></header>
 
         <main class="content-wrapper">
             <section id="resume" class="page-view active">

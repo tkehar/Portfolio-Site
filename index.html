@@ -6,173 +6,210 @@
     <title>Talha Ahmed Kehar | Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <script src="config.js" defer></script>
+    <script src="lightbox.js" defer></script>
 </head>
-<body>
+<body class="work-page">
     <script src="theme.js"></script>
+    <script src="components.js"></script>
     <div class="container">
-        <header class="navbar">
-            <div class="logo"><a href="index">TALHA AHMED KEHAR</a></div>
-            <nav class="nav-links">
-                <a href="index" class="nav-tab active">Work</a>
-                <a href="about" class="nav-tab">About</a>
-                <a href="resume" class="nav-tab">Resume</a>
-                <div class="theme-slider">
-                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
-                    <span class="toggle-label" id="theme-slider-value">100%</span>
-                </div>
-            </nav>
-        </header>
+        <header class="navbar" data-component="header" data-active="work"></header>
 
-        <main class="content-wrapper">
-            <section id="projects" class="page-view active">
-                <div class="board-toolbar">
-                    <div class="board-filter" id="boardFilter">
-                        <button class="filter-dropdown-btn" id="filterBtn" aria-haspopup="true" aria-expanded="false">
-                            Selected Works: <span id="filterLabel">All</span>
-                            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                        </button>
-                        <ul class="filter-menu" id="filterMenu" role="menu" hidden>
-                            <li data-filter="all" class="active">All</li>
-                            <li data-filter="UI-UX">Product</li>
-                            <li data-filter="Installation">Installation</li>
-                            <li data-filter="NMD">New Media</li>
-                            <li data-filter="Illustration">Illustration</li>
-                            <li data-filter="Motion">Motion</li>
-                            <li data-filter="Brand">Brand</li>
-                            <li data-filter="Curation">Curation</li>
-                            <li data-filter="Layout">Editorial</li>
-                            <li data-filter="Data">Data</li>
-                        </ul>
-                    </div>
-                </div>
+        <main class="work-main">
+            <div class="board-filter" id="boardFilter">
+                <button class="filter-chip" id="filterBtn" aria-haspopup="true" aria-expanded="false">
+                    <span id="filterLabel">PRODUCT DESIGN</span>
+                    <img src="Assets/Icons/Close.png" alt="" width="24" height="24">
+                </button>
+                <ul class="filter-menu" id="filterMenu" role="menu" hidden>
+                    <li data-filter="product-design" class="active">PRODUCT DESIGN</li>
+                    <li data-filter="xr-new-media">XR AND NEW MEDIA</li>
+                    <li data-filter="graphic-design">GRAPHIC DESIGN</li>
+                    <li data-filter="curation">CURATION</li>
+                </ul>
+            </div>
 
-                <div class="project-grid" id="projectGrid">
-                    <div class="project-card" data-href="SMA" data-category="NMD, Curation, UI-UX, Data">
-                        <img src="Assets/SMA/SMA_Banner.png" alt="The Sabeen Mahmud Archive">
-                        <h5>Sabeen Mahmud Archive</h5>
+            <section class="work-layout">
+                <aside class="work-sidebar">
+                    <img class="work-photo" src="Assets/Artist_Photo.png" alt="Talha Ahmed Kehar">
+                    <h2 class="work-role" id="workRole">Product Designer</h2>
+                    <div class="work-connect">
+                        <span class="work-connect-label">Connect with me</span>
+                        <a href="mailto:talha.a.kehar@gmail.com" aria-label="Email">
+                            <img src="Assets/Icons/Mail.png" alt="">
+                        </a>
+                        <a href="https://www.linkedin.com/in/talha-kehar-8a89ba120/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <img src="Assets/Icons/Linkedin.png" alt="">
+                        </a>
                     </div>
-                    <div class="project-card" data-href="MAN" data-category="UI-UX">
-                        <img src="Assets/MAN/MAN_Banner.png" alt="Makula AI Notetaker">
-                        <h5>Makula - AI Notetaker</h5>
+                    <div class="work-statement">
+                        <h3 class="work-statement-title" id="workStatementTitle">Design Statement</h3>
+                        <p class="work-statement-body" id="workStatementBody">Product designer with experience across online travel and B2B SaaS. Research-led, from discovery to shipped features: a 17.5% conversion uplift in booking funnels at Sastaticket, a design system at Salesflo, and an AI notetaker MVP at Makula. I prototype in Figma and code.</p>
                     </div>
-                    <div class="project-card" data-href="EH" data-category="Motion, Installation, NMD, Data">
-                        <img src="Assets/EH/EH_Banner.png" alt="The Earth's Heartbeat">
-                        <h5>The Earth's Heartbeat</h5>
+                    <div class="work-experience" id="workExperience" hidden>
+                        <h3 class="work-experience-title">CURATORIAL EXPERIENCE</h3>
+                        <p>Curator - 2026<br>Under The Amaltaas Tree<br>T2F, Karachi Pakistan</p>
+                        <p>Assistant Curator - 2019<br>Yahan Say Shehr Ko Dekho<br>Karachi Art Council</p>
+                        <p>Communication Designer - 2018<br>Who Gets To Talk About Whom<br>Gandhara Art Space</p>
                     </div>
-                    <div class="project-card" data-href="OMS" data-category="UI-UX, Data">
-                        <img src="Assets/OMS/OMS_Banner.png" alt="Sastaticket OMS">
-                        <h5>Sastaticket OMS</h5>
+                </aside>
+
+                <div class="work-grid" id="projectGrid">
+                    <div class="project-card" data-href="MAN" data-category="product-design">
+                        <img src="Assets/MAN/MAN_Banner.png" alt="AI Notetaker for Field Service Technicians">
+                        <h5>AI Notetaker for Field Service Technicians</h5>
                     </div>
-                    <div class="project-card" data-href="SS" data-category="UI-UX">
-                        <img src="Assets/SS/SS_Banner.png" alt="Sellorate B2B">
+                    <div class="project-card" data-href="STMS" data-category="product-design">
+                        <img src="Assets/STMS/STMS_Banner.png" alt="Market Segments Research">
+                        <h5>Market Segments Research</h5>
+                    </div>
+                    <div class="project-card" data-href="SS" data-category="product-design">
+                        <img src="Assets/SS/SS_Banner.png" alt="Sellorate B2B Retailer App">
                         <h5>Sellorate B2B Retailer App</h5>
                     </div>
-                    <div class="project-card" data-href="TSW" data-category="Curation,Installation,Layout">
-                        <img src="Assets/TSW/TSW_Banner.png" alt="Look at the City from here">
-                        <h5>Look at the City from here</h5>
+                    <div class="project-card" data-href="Vissibl" data-category="product-design">
+                        <img src="Assets/VIS/VIS_Banner.png" alt="AI ISO Compliance Tool MVP">
+                        <h5>AI ISO Compliance Tool MVP</h5>
                     </div>
-                    <div class="project-card" data-href="TW" data-category="Brand">
-                        <img src="Assets/TW/TW_Banner.png" alt="TICKET WALA">
-                        <h5>Ticket Wala Identity Design</h5>
+                    <div class="project-card" data-href="OMS" data-category="product-design">
+                        <img src="Assets/OMS/OMS_Banner.png" alt="Sastaticket Order Management System">
+                        <h5>Sastaticket Order Management System</h5>
                     </div>
-                    <div class="project-card" data-href="ADA" data-category="Brand,Layout">
-                        <img src="Assets/ADA/ADA_Banner.png" alt="ADA Magazine">
-                        <h5>ADA Magazine</h5>
-                    </div>
-                    <div class="project-card" data-href="SU" data-category="Motion,Brand">
-                        <img src="Assets/SU/SU_Banner.png" alt="Speak Up">
-                        <h5>Speak Up</h5>
-                    </div>
-                    <div class="project-card" data-href="STG" data-category="Layout,Illustration">
-                        <img src="Assets/STG/STG_Banner.png" alt="The Stained Glass Window">
-                        <h5>The Stained Glass Window</h5>
-                    </div>
-                    <div class="project-card" data-href="NFN" data-category="Illustration,Layout">
-                        <img src="Assets/NFN/NFFN_Banner.png" alt="No Funeral For Nazia">
-                        <h5>No Funeral For Nazia</h5>
-                    </div>
-                    <div class="project-card" data-href="WGTW" data-category="Curation,UI-UX,Layout">
-                        <img src="Assets/WGTW/WGTW_Banner.png" alt="Who Gets To Talk About Whom">
-                        <h5>Who Gets To Talk About Whom</h5>
-                    </div>
-                    <div class="project-card" data-href="DK" data-category="Brand, Layout, UI-UX, NMD, Motion">
-                        <img src="Assets/DK/DK_Banner.png" alt="Dastaan-e-Karachi">
-                        <h5>Dastaan-e-Karachi</h5>
-                    </div>
-                    <div class="project-card" data-href="SG" data-category="NMD, Data">
+
+                    <div class="project-card" data-href="SG" data-category="xr-new-media">
                         <img src="Assets/Scales/Scales_Banner.png" alt="Scales">
                         <h5>Scales</h5>
                     </div>
-                    <div class="project-card" data-href="construction" data-category="Brand, Layout">
-                        <img src="Assets/GHAR/Ghar Logo.png" alt="Ghar Logo">
-                        <h5>Ghar Logo</h5>
+                    <div class="project-card" data-href="SMA" data-category="xr-new-media,curation">
+                        <img src="Assets/SMA/SMA_Banner.png" alt="Sabeen Mahmud Archive">
+                        <h5>Sabeen Mahmud Archive</h5>
                     </div>
-                    <div class="project-card" data-lightbox data-title="Snake Eyes" data-company="Inspired by the 2018 Pakistan election rigging scandal" data-year="2018" data-category="Illustration">
+                    <div class="project-card" data-href="DVR" data-category="xr-new-media">
+                        <img src="Assets/DVR/DVR_Banner.png" alt="Descent Virtual Reality">
+                        <h5>Descent Virtual Reality</h5>
+                    </div>
+                    <div class="project-card" data-href="EH" data-category="xr-new-media">
+                        <img src="Assets/EH/EH_Banner.png" alt="The Earth's Heartbeat">
+                        <h5>The Earth's Heartbeat</h5>
+                    </div>
+                    <div class="project-card" data-href="DK" data-category="xr-new-media">
+                        <img src="Assets/DK/DK_Banner.png" alt="Dastaan-e-Karachi">
+                        <h5>Dastaan-e-Karachi</h5>
+                    </div>
+
+                    <div class="project-card" data-lightbox data-title="Snake Eyes" data-category="graphic-design">
                         <img src="Assets/SE/SE_Banner.png" alt="Snake Eyes">
                         <h5>Snake Eyes</h5>
                     </div>
-                    <div class="project-card" data-lightbox data-title="Calligraphy of 'Karachi' in the shape of a sword" data-company="Karachi Calligraphy" data-year="2019" data-category="Illustration">
-                        <img src="Assets/Karachi Sword-01.png" alt="Karachi Sword">
+                    <div class="project-card" data-href="TW" data-category="graphic-design">
+                        <img src="Assets/TW/TW_Banner.png" alt="Ticket Wala Identity Design">
+                        <h5>Ticket Wala Identity Design</h5>
+                    </div>
+                    <div class="project-card" data-lightbox data-title="Karachi Calligraphy" data-category="graphic-design">
+                        <img src="Assets/Karachi Sword-01.png" alt="Karachi Calligraphy">
                         <h5>Karachi Calligraphy</h5>
                     </div>
-                    <div class="project-card" data-lightbox data-title="The Mandalorian" data-company="Personal Project" data-year="2021" data-category="Illustration">
+                    <div class="project-card" data-href="STG" data-category="graphic-design">
+                        <img src="Assets/STG/STG_Banner.png" alt="The Stained Glass Window">
+                        <h5>The Stained Glass Window</h5>
+                    </div>
+                    <div class="project-card" data-href="ADA" data-category="graphic-design">
+                        <img src="Assets/ADA/ADA_Banner.png" alt="ADA Magazine">
+                        <h5>ADA Magazine</h5>
+                    </div>
+                    <div class="project-card" data-href="NFN" data-category="graphic-design">
+                        <img src="Assets/NFN/NFFN_Banner.png" alt="No Funeral For Nazia">
+                        <h5>No Funeral For Nazia</h5>
+                    </div>
+                    <div class="project-card" data-lightbox data-title="The Mandalorian" data-category="graphic-design">
                         <img src="Assets/The Mandalorian.png" alt="The Mandalorian">
                         <h5>The Mandalorian</h5>
                     </div>
-                    <div class="project-card" data-lightbox data-title="Queen Of Roses" data-company="Personal Project" data-year="2017" data-category="Illustration, Motion">
-                        <img src="Assets/Queen_of_Roses.gif" alt="Sasha Velour">
+                    <div class="project-card" data-href="SU" data-category="graphic-design">
+                        <img src="Assets/SU/SU_Banner.png" alt="Speak Up">
+                        <h5>Speak Up</h5>
+                    </div>
+                    <div class="project-card" data-lightbox data-title="Queen Of Roses" data-category="graphic-design">
+                        <img src="Assets/Queen_of_Roses.gif" alt="Queen Of Roses">
                         <h5>Queen Of Roses</h5>
+                    </div>
+                    <div class="project-card" data-href="construction" data-category="graphic-design">
+                        <img src="Assets/GHAR/Ghar Logo.png" alt="Ghar Logo">
+                        <h5>Ghar Logo</h5>
+                    </div>
+
+                    <div class="project-card" data-href="TSW" data-category="curation">
+                        <img src="Assets/TSW/TSW_Banner.png" alt="Look at the City from here">
+                        <h5>Look at the City from here</h5>
+                    </div>
+                    <div class="project-card" data-href="WGTW" data-category="curation">
+                        <img src="Assets/WGTW/WGTW_Banner.png" alt="Who Gets To Talk About Whom">
+                        <h5>Who Gets To Talk About Whom</h5>
                     </div>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- Lightbox overlay (used by projects with data-lightbox, e.g. Snake Eyes) -->
-    <div class="lightbox" id="lightbox" aria-hidden="true">
-        <div class="lightbox-backdrop" data-close></div>
-        <div class="lightbox-panel" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
-            <button class="lightbox-close" type="button" aria-label="Close" data-close>&times;</button>
-            <img class="lightbox-img" id="lightboxImg" src="" alt="">
-            <div class="lightbox-meta">
-                <h2 class="lightbox-title" id="lightboxTitle"></h2>
-                <p class="lightbox-sub">
-                    <span id="lightboxCompany"></span>
-                    <span class="lightbox-dot">&middot;</span>
-                    <span id="lightboxYear"></span>
-                </p>
-            </div>
-        </div>
-    </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const grid = document.getElementById('projectGrid');
-            const cards = Array.from(grid.querySelectorAll('.project-card'));
-
-            // --- CLICK TO OPEN (project page or lightbox) ---
-            cards.forEach(card => {
-                card.addEventListener('click', () => {
-                    if (card.hasAttribute('data-lightbox')) {
-                        openLightbox(card);
-                    } else {
-                        const href = card.getAttribute('data-href');
-                        if (href) window.location.href = href;
-                    }
-                });
-            });
-
-            // --- FILTER DROPDOWN ---
+            const cards = Array.from(document.querySelectorAll('#projectGrid .project-card'));
             const boardFilter = document.getElementById('boardFilter');
             const filterBtn = document.getElementById('filterBtn');
             const filterMenu = document.getElementById('filterMenu');
             const filterLabel = document.getElementById('filterLabel');
+            const workRole = document.getElementById('workRole');
+            const workStatementTitle = document.getElementById('workStatementTitle');
+            const workStatementBody = document.getElementById('workStatementBody');
+            const workExperience = document.getElementById('workExperience');
+
+            const SIDEBAR = {
+                'product-design': {
+                    role: 'Product Designer',
+                    title: 'Design Statement',
+                    body: 'Product designer with experience across online travel and B2B SaaS. Research-led, from discovery to shipped features: a 17.5% conversion uplift in booking funnels at Sastaticket, a design system at Salesflo, and an AI notetaker MVP at Makula. I prototype in Figma and code.',
+                    experience: false
+                },
+                'graphic-design': {
+                    role: 'Graphic Designer',
+                    title: 'Design Statement',
+                    body: 'Product designer with experience across online travel and B2B SaaS. Research-led, from discovery to shipped features: a 17.5% conversion uplift in booking funnels at Sastaticket, a design system at Salesflo, and an AI notetaker MVP at Makula. I prototype in Figma and code.',
+                    experience: false
+                },
+                'xr-new-media': {
+                    role: 'New Media Artist',
+                    title: 'Design Statement',
+                    body: 'Product designer with experience across online travel and B2B SaaS. Research-led, from discovery to shipped features: a 17.5% conversion uplift in booking funnels at Sastaticket, a design system at Salesflo, and an AI notetaker MVP at Makula. I prototype in Figma and code.',
+                    experience: false
+                },
+                curation: {
+                    role: 'Curator',
+                    title: 'Curatorial Statement',
+                    body: 'Product designer with experience across online travel and B2B SaaS. Research-led, from discovery to shipped features: a 17.5% conversion uplift in booking funnels at Sastaticket, a design system at Salesflo, and an AI notetaker MVP at Makula. I prototype in Figma and code.',
+                    experience: true
+                }
+            };
+
+            const DEFAULT_FILTER = 'product-design';
 
             function toggleMenu(open) {
                 const willOpen = open !== undefined ? open : filterMenu.hidden;
                 filterMenu.hidden = !willOpen;
                 boardFilter.classList.toggle('open', willOpen);
                 filterBtn.setAttribute('aria-expanded', String(willOpen));
+            }
+
+            function applyFilter(filter) {
+                const meta = SIDEBAR[filter] || SIDEBAR[DEFAULT_FILTER];
+                workRole.textContent = meta.role;
+                workStatementTitle.textContent = meta.title;
+                workStatementBody.textContent = meta.body;
+                workExperience.hidden = !meta.experience;
+
+                cards.forEach(card => {
+                    const cats = (card.getAttribute('data-category') || '')
+                        .toLowerCase().split(',').map(s => s.trim());
+                    card.hidden = !cats.includes(filter);
+                });
             }
 
             filterBtn.addEventListener('click', () => toggleMenu());
@@ -184,51 +221,28 @@
                 li.addEventListener('click', () => {
                     filterMenu.querySelectorAll('li').forEach(x => x.classList.remove('active'));
                     li.classList.add('active');
-                    filterLabel.textContent = li.textContent;
-                    const filter = li.getAttribute('data-filter');
-                    const filterLower = filter.toLowerCase();
-                    cards.forEach(card => {
-                        const cats = (card.getAttribute('data-category') || '')
-                            .toLowerCase().split(',').map(s => s.trim());
-                        card.style.display = (filter === 'all' || cats.includes(filterLower)) ? '' : 'none';
-                    });
+                    filterLabel.textContent = li.textContent.trim();
+                    applyFilter(li.getAttribute('data-filter'));
                     toggleMenu(false);
                 });
             });
 
-            // --- LIGHTBOX (for projects flagged with data-lightbox) ---
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightboxImg');
-            const lightboxTitle = document.getElementById('lightboxTitle');
-            const lightboxCompany = document.getElementById('lightboxCompany');
-            const lightboxYear = document.getElementById('lightboxYear');
-
-            function openLightbox(card) {
-                const img = card.querySelector('img');
-                const title = card.getAttribute('data-title') ||
-                    (card.querySelector('h5') ? card.querySelector('h5').textContent : '');
-                lightboxImg.src = card.getAttribute('data-image') || (img ? img.src : '');
-                lightboxImg.alt = title;
-                lightboxTitle.textContent = title;
-                lightboxCompany.textContent = card.getAttribute('data-company') || '';
-                lightboxYear.textContent = card.getAttribute('data-year') || '';
-                lightbox.classList.add('open');
-                lightbox.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeLightbox() {
-                lightbox.classList.remove('open');
-                lightbox.setAttribute('aria-hidden', 'true');
-                document.body.style.overflow = '';
-            }
-
-            lightbox.querySelectorAll('[data-close]').forEach(el =>
-                el.addEventListener('click', closeLightbox));
-            document.addEventListener('keydown', e => {
-                if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    if (card.hasAttribute('data-lightbox')) {
+                        const img = card.querySelector('img');
+                        const title = card.getAttribute('data-title') ||
+                            (card.querySelector('h5') ? card.querySelector('h5').textContent : '');
+                        const src = card.getAttribute('data-image') || (img ? img.src : '');
+                        if (window.portfolioLightbox) window.portfolioLightbox.open(src, title);
+                    } else {
+                        const href = card.getAttribute('data-href');
+                        if (href) window.location.href = href;
+                    }
+                });
             });
 
+            applyFilter(DEFAULT_FILTER);
         });
     </script>
 </body>

@@ -3,40 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sastaticket - Order Management System</title>
+    <title>Sastaticket Order Management System</title>
     <link rel="stylesheet" href="styles.css">
-    <style>html.gate-wait .container { visibility: hidden; }</style>
-    <script>
-        (function () {
-            var f = (location.pathname || '').toLowerCase().replace(/.*\//, '').replace(/\.html?$/, '') || 'index';
-            try { if (sessionStorage.getItem('unlocked:' + f) === '1') return; } catch (e) {}
-            document.documentElement.className += ' gate-wait';
-        })();
-    </script>
     <script src="config.js" defer></script>
+    <script src="lightbox.js" defer></script>
 </head>
 <body class="project-page oms-project">
     <script src="theme.js"></script>
+    <script src="components.js"></script>
     <div class="container">
-        <header class="navbar">
-            <div class="logo"><a href="index" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
-            <nav class="nav-links">
-                <a href="index" class="nav-tab">Work</a>
-                <a href="about" class="nav-tab">About</a>
-                <a href="resume" class="nav-tab">Resume</a>
-                <div class="theme-slider">
-                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
-                    <span class="toggle-label" id="theme-slider-value">100%</span>
-                </div>
-            </nav>
-        </header>
+        <header class="navbar" data-component="header" data-active="work"></header>
         <div class="main-content project-content">
             <div class="text-column">
-                <h1>Sastaticket - Order Management System</h1>
+                <div class="project-heading">
+                    <h1>Sastaticket Order Management System</h1>
+                    <p class="project-subtitle">Redesigning a Legacy Product (+20% first-call resolution)</p>
+                <p class="project-tagline">Internal Tools · Legacy Redesign · User Research · Personas · Stakeholder Workshops · Heatmap Analysis · Information Hierarchy · Design System</p>
+                </div>
                 <div class="grid-4-col">
                     <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
                         <p><b>Company:</b></p>
-                        <p>Sastaticket</p>
+                        <p>Sastaticket.pk</p>
                     </div>
                     <div class="grid-item" style="height: fit-content;width: 100%;;padding: 1%;">
                         <p><b>Role:</b></p>
@@ -44,22 +31,20 @@
                     </div>
                     <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
                         <p><b>Year:</b></p>
-                        <p>2021</p>
+                        <p>2021 - 2022</p>
                     </div>
                     <div class="grid-item" style="height: fit-content;width: 100%; ;padding: 1%;">
                         <p><b>Team:</b></p>
                         <p>Fatin Nawaz, Mustafa Hassan (Product Team)</p>
                     </div>
             </div>
-                <img src="Assets/OMS/Header.svg" alt="Header Image" class="header-image" style=" margin-bottom: 60px;">
+                <img src="Assets/OMS/Header.png" alt="Header Image" class="header-image" style=" margin-bottom: 60px;">
             </div>
 
             <div class="content-row">
                 <div class="text-column" style="align-items: normal;">
-                    <h2>Designing For Internal Users</h2>
-                    <p>Sastaticket's customer service team handles all queries from payment failures to last-minute cancellations. 
-                    For this they use an internal order management system. <b>Agents had to navigate a cluttered interface & cross 
-                    check data.</b> This was not an agent performance problem. It was a design problem..</p>
+                    <h2>Customer service agents struggled to use a cluttered internal order system which lacked reliable data on pricing errors and refunds.</h2>
+                    <p>I worked with the product team on research, information hierarchy &amp; UI.</p>
                 </div>
             
                 <div class="image-column" style="text-align: center; padding-top: 5%;">
@@ -74,7 +59,7 @@
                     <p>Survey of employment tenure for CS team</p>
                 </div>    
             <div class="text-column">
-                    <h2>Agent tenure data revealed two broad user groups.</h2>
+                    <h2>Surveyed agent tenure, identifying two user groups.</h2>
                     <table class="methodology-table">
                 <thead>
                     <tr>
@@ -93,6 +78,14 @@
                     </tr> 
                 </tbody> 
             </table>
+                    <div class="content-row" style="margin-top: 20px;">
+                        <div class="image-column" style="text-align: center;">
+                            <img src="Assets/OMS/P1.png" alt="Newer agents" style="width: 70%; height: auto;">
+                        </div>
+                        <div class="image-column" style="text-align: center;">
+                            <img src="Assets/OMS/P2.png" alt="Experienced agents" style="width: 70%; height: auto;">
+                        </div>
+                    </div>
                 </div>
             
         </div>
@@ -106,10 +99,10 @@
 
         <div class="content-row">
                 <div class="text-column" style="align-items: normal; padding-top: 5%;">
-                    <h2>Workshops identified pain points and solutions for agents and customers:</h2>
-                    <p>- Delays in refunds & adjustments.</p>
-                    <p>- Miscalculations in price breakdowns & refund.</p>
-                    <p>- OMS did not show live data on flights.</p>
+                    <h2>Ran workshops to map major pain points.</h2>
+                    <p>Refund delays</p>
+                    <p>Price miscalculations</p>
+                    <p>No live flight data</p>
                 </div>
                 <div class="image-column">
                     <div class="image-overlay-wrapper">
@@ -127,16 +120,14 @@
                     <img src="Assets/OMS/Components.png" alt="Environments" style="width: 100%; height: auto; border-radius: 0;">
                 </div>        
         <div class="text-column">
-                    <h2>Re-designing component hierarchy</h2>
-                    <p>Heatmaps identified the most clicked elements, grouping them by function and frequency of use created a more logical hierarchy.</p>
+                    <h2>Used heatmaps to regroup elements by function &amp; frequency of use.</h2>
                 </div>
 
             </div>
         
         <div class="content-row" style="padding-bottom: 5%;">
             <div class="text-column">
-                    <h2>Colour-coding to reduce cognitive load.</h2>
-                    <p>Colour-coding order status allowed agents to visually determine where a customer was in their journey and respond with speed and clarity.</p>
+                    <h2>Colour-coded order status to easily identify where a customer was in their journey.</h2>
                 </div>
 
             <div class="image-column">
@@ -159,7 +150,7 @@
             </div>
 
             <div class="text-column">
-                <h3> Impact on efficiency & satisfaction.</h3>
+                <h2>Impact of Redesign.</h2>
                 <table class="methodology-table">
                 <thead>
                     <tr>

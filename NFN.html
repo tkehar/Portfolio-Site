@@ -6,24 +6,19 @@
     <title>No Funeral For Nazia</title>
     <link rel="stylesheet" href="styles.css">
     <script src="config.js" defer></script>
+    <script src="lightbox.js" defer></script>
 </head>
 <body class="project-page tdtd-project">
     <script src="theme.js"></script>
+    <script src="components.js"></script>
     <div class="container">
-       <header class="navbar">
-            <div class="logo"><a href="index" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
-            <nav class="nav-links">
-                <a href="index" class="nav-tab">Work</a>
-                <a href="about" class="nav-tab">About</a>
-                <a href="resume" class="nav-tab">Resume</a>
-                <div class="theme-slider">
-                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
-                    <span class="toggle-label" id="theme-slider-value">100%</span>
-                </div>
-            </nav>
-        </header>
+       <header class="navbar" data-component="header" data-active="work"></header>
         <div class="main-content project-content">
-            <h1>No Funeral For Nazia</h1>
+            <div class="project-heading">
+                <h1>No Funeral For Nazia</h1>
+                <p class="project-subtitle">Book Cover Design for a Pakistani Mystery Novel</p>
+                <p class="project-tagline">Book Cover Design · Illustration · Concept Development · Visual Storytelling · Typography · Publishing</p>
+            </div>
                  <div class="grid-4-col">
                     <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
                         <p><b>Company:</b></p>
@@ -42,32 +37,46 @@
                         <p>-</p>
                     </div>
                 </div>
-            </div>
 
-            
-                
             <div class="content-row">
                 <div class="image-column" style="text-align: center;">
-                    <img src="Assets/NFN/NFN -Book Cover.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0;">
-                </div>
-
-                <div class="text-column" style="padding-top: 5%; text-align: center;">
-                     <h2>Book Cover Design for Pakistani edition ofNo Funeral for Nazia by Taha Kehar</h2>
-                     <br></br>
-                        <div style="display: flex; justify-content: center; margin-top: -5px;">
+                    <img src="Assets/NFN/Landing Image.png" alt="No Funeral For Nazia book cover" style="width: 100%; height: auto; border-radius: 0;">
+                    <div style="display: flex; justify-content: center; margin-top: 10px;">
                         <a href="https://www.libertybooks.com/books/Soch-ki-Azaadi/no-funeral-for-nazia-9786277626297?sort=pd.name&amp;limit=50" class="visit-button" target="_blank">Order Now</a>
-                        </div>
+                    </div>
+                </div>
+                <div class="text-column row-copy">
+                     <h2>Liberty Publishing needed a cover for the Pakistani edition of a mystery novel, in which hypnosis drives the plot.</h2>
                 </div>
             </div>
 
             <div class="content-row">
-                <div class="text-column" style="padding-top: 10%; text-align: center;">
-                     <h2>Initial sketches and composition</h2>
+                <div class="text-column row-copy">
+                     <h2>An initial conversation with the author narrowed elements of the story.</h2>
                 </div>
                 <div class="image-column" style="text-align: center;">
-                    <img src="Assets/NFN/Sketch_and_guide.png" alt="Project Image" style="width: 50%; height: auto; border-radius: 0;">
+                    <img src="Assets/NFN/Sketch_and_guide.png" alt="Initial sketch and composition" style="width: 50%; height: auto; border-radius: 0;">
+                    <p class="image-caption">Initial sketch and composition</p>
                 </div>
-                
+            </div>
+
+            <div class="content-row">
+                <div class="image-column" style="text-align: center;">
+                    <img src="Assets/NFN/watch.gif" alt="Stopwatch and spiral pattern" style="width: 74%; height: auto; border-radius: 0;">
+                </div>
+                <div class="text-column motif-copy">
+                     <h2>Stopwatch and Spiral Pattern to represent hypnosis.</h2>
+                </div>
+            </div>
+
+            <div class="content-row">
+                <div class="text-column motif-copy">
+                     <h2>Bougainvillea Petals to situate you in Karachi</h2>
+                     <p class="project-quote">“A riot of pink against an azure Karachi sky”</p>
+                </div>
+                <div class="image-column" style="text-align: center;">
+                    <img src="Assets/NFN/flowers.png" alt="Bougainvillea petals" style="width: 100%; height: auto; border-radius: 0;">
+                </div>
             </div>
 
     </div>

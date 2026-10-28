@@ -7,31 +7,22 @@
     <link rel="stylesheet" href="styles.css">
     <script src="config.js" defer></script>
 </head>
-<body class="about-page">
+<body class="construction-page">
     <script src="theme.js"></script>
+    <script src="components.js"></script>
     <div class="container">
-        <header class="navbar">
-            <div class="logo"><a href="index">TALHA AHMED KEHAR</a></div>
-            <nav class="nav-links">
-                <a href="index" class="nav-tab">Work</a>
-                <a href="about" class="nav-tab">About</a>
-                <a href="resume" class="nav-tab">Resume</a>
-                <div class="theme-slider">
-                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
-                    <span class="toggle-label" id="theme-slider-value">100%</span>
-                </div>
-            </nav>
-        </header>
+        <header class="navbar" data-component="header" data-active="work"></header>
 
-        <main class="content-wrapper">
-            <section class="page-view active construction-view">
-                <div class="construction-msg">
-                    <img class="construction-gif" src="Assets/Color-test.gif" alt="Talha Ahmed Kehar">
-                    <h1>This page is still being developed,<br>try visiting <a href="index">another project</a>.</h1>
-                </div>
-            </section>
+        <main class="construction-view">
+            <div class="construction-msg">
+                <img class="construction-icon" src="Assets/Icons/Challenges.svg" alt="">
+                <h1>This page is still being developed</h1>
+                <a href="index" class="visit-button">
+                    <img src="Assets/Icons/Home.svg" alt="">
+                    Back to home
+                </a>
+            </div>
         </main>
     </div>
-
 </body>
 </html>

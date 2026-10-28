@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sastaticket - Market Segments Research</title>
+    <title>Market Segments Research</title>
     <link rel="stylesheet" href="styles.css">
     <script src="config.js" defer></script>
+    <script src="lightbox.js" defer></script>
 </head>
 <body class="project-page stms-project">
     <script src="theme.js"></script>
+    <script src="components.js"></script>
     <div class="container">
-        <header class="navbar">
-            <div class="logo"><a href="index" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
-            <nav class="nav-links">
-                <a href="index" class="nav-tab">Work</a>
-                <a href="about" class="nav-tab">About</a>
-                <a href="resume" class="nav-tab">Resume</a>
-                <div class="theme-slider">
-                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
-                    <span class="toggle-label" id="theme-slider-value">100%</span>
-                </div>
-            </nav>
-        </header>
+        <header class="navbar" data-component="header" data-active="work"></header>
         <div class="main-content project-content">
-            <h1>Sastaticket - Market Segments Research</h1>
+            <div class="project-heading">
+                <h1>Market Segments Research</h1>
+                <p class="project-subtitle">Research to Guide Product Strategy</p>
+                <p class="project-tagline">Market Segmentation · Quantitative Research · Survey Design · Data Analysis · Personas · Product Strategy</p>
+            </div>
                         <div class="grid-4-col">
                     <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
                         <p><b>Company:</b></p>
@@ -35,7 +30,7 @@
                     </div>
                     <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
                         <p><b>Year:</b></p>
-                        <p>2024</p>
+                        <p>2022</p>
                     </div>
                     <div class="grid-item" style="height: fit-content;width: 100%; ;padding: 1%;">
                         <p><b>Team:</b></p>
@@ -44,105 +39,116 @@
                 </div>
             
             <div class="content-row">
+                <div class="text-column row-copy">
+                    <h2>Sastaticket needed a clear picture of its customers to guide product strategy and prioritise features.</h2>
+                    <h3>I worked with a data scientist and a service designer to discover trends in booking.</h3>
+                </div>
+                <div class="image-column" style="text-align: center;">
+                    <img src="Assets/STMS/Intro.png" alt="Traveller and aircraft" style="width: 80%; height: auto;">
+                </div>
+            </div>
+
+            <div class="content-row">
 
             <div class="text-column">
-                <h2 style="text-align: center;">Research Criteria</h2>
+                <h2 class="section-title">We began by defining eight segmentation criteria:</h2>
             <div class="grid-4-col">
                 <div class="grid-item" style="background-color: #2F54EB;">
                     <img src="Assets/STMS/Frame 1191.png" alt="Segment 1">
                     <div>
-                    <p>This segment classifies users using customer demographics i.e. age, income, gender, race, education, or occupation</p>
+                    <p class="ds-card__title">Demographic Segments</p>
+                    <p>Classifies users using customer demographic data</p>
                     </div>
                 </div>
                 <div class="grid-item" style="background-color: #2F54EB;">
                     <img src="Assets/STMS/Frame 1191-1.png" alt="Segment 2">
                     <div>
-                    <p>This segment  classifies users based on where they are located.</p>
+                    <p class="ds-card__title">Geographic Segments</p>
+                    <p>Classifies users based on where they are located.</p>
                     </div>
                 </div>
                 <div class="grid-item" style="background-color: #2F54EB;">
                     <img src="Assets/STMS/Frame 1191-2.png" alt="Segment 3">
                     <div>
-                    <p>This segment classifies users based on what generational group they fall into i.e. Boomer, millennial, Gen Z</p>
+                    <p class="ds-card__title">Generational Segments</p>
+                    <p>Classifies users based on their generational group.</p>
                     </div>
                 </div>
                 <div class="grid-item" style="background-color: #2F54EB;">
                     <img src="Assets/STMS/Frame 1191-3.png" alt="Segment 4">
                     <div>
-                    <p>This segment seeks to classify users based on where they are in their lives. i.e. in college, married with children, single etc.</p>
+                    <p class="ds-card__title">Life Stage Segments</p>
+                    <p>Classifies users based on what stage they are in their lives.</p>
                     </div>
                 </div>
                 <div class="grid-item" style="background-color: #2F54EB;">
                     <img src="Assets/STMS/Frame 1191-4.png" alt="Segment 5">
                     <div>
-                    <p>This segment classifies users based on their lifestyle, values, interests and personality traits.</p>
+                    <p class="ds-card__title">Psychographic Segments</p>
+                    <p>Classifies users based on their lifestyle, personality, opinions, and interests.</p>
                     </div>
                 </div>
                 <div class="grid-item" style="background-color: #2F54EB;">
                     <img src="Assets/STMS/Frame 1191-5.png" alt="Segment 6">
                     <div>
-                    <p>This segment classifies users based on their decision-making patterns.</p>
+                    <p class="ds-card__title">Behavioral Segments</p>
+                    <p>Classifies users based on their decision-making patterns.</p>
                     </div>
                 </div>
                 <div class="grid-item" style="background-color: #2F54EB;">
                     <img src="Assets/STMS/Frame 1191-6.png" alt="Segment 7">
                     <div>
-                    <p>This segment classifies users based on when they buy i.e. Holidays and events</p>
+                    <p class="ds-card__title">Seasonal Segments</p>
+                    <p>Classifies users based on when they buy i.e. Holidays and events</p>
                     </div>
                 </div>
                 <div class="grid-item" style="background-color: #2F54EB;">
                     <img src="Assets/STMS/Frame 1191-7.png" alt="Segment 8">
                     <div>
-                    <p>This segment  classifies users based on their transactional worth and how much revenue/GMV they bring in.</p>
+                    <p class="ds-card__title">Value Segments</p>
+                    <p>Classifies users based on how much revenue/GMV they bring in.</p>
                     </div>
                 </div>   
             </div>
             </div>
+            </div>
 
-            <h2>Demographic Segments</h2>
-            <p>We largely cater to travelers aged 20-50, however the bulge at the base of our pyramid suggests we also cater to those traveling with dependents.</p>
+            <h2>Analysing 4 years of booking data revealed:</h2>
+            <h3>Millenials accounted for 42% of booking.</h3>
+            <h3>Users are primarily aged between 20-44 and the bulk of users were 25-29.</h3>
+            <h3>Flight passengers also frequently travelled with dependents.</h3>
+            <h3>Younger users were often making secondary bookings for older passengers.</h3>
            
-           <div class="grid-3-col">
-                <div class="grid-item" style="background-color: #2F54EB;">
-                    <img src="Assets/STMS/Chart0.png" alt="Chart 0">
+           <div class="content-row">
+                <div class="image-column">
+                    <img src="Assets/STMS/Age.png" alt="User age by year" style="width: 100%; height: auto;">
+                    <p class="image-caption">Users arrange by age and no. of bookings</p>
                 </div>
-                <div class="grid-item" style="background-color: #2F54EB;">
-                    <img src="Assets/STMS/Chart1.png" alt="Chart 1">
-                    <img src="Assets/STMS/Chart2.png" alt="Chart 2">
-                </div>
-                <div class="grid-item" style="background-color: #2F54EB;">
-                    <img src="Assets/STMS/Chart3.png" alt="Chart 3">
-                    <img src="Assets/STMS/Chart4.png" alt="Chart 4">
+                <div class="image-column">
+                    <img src="Assets/STMS/Gender.png" alt="Passengers by gender and age" style="width: 100%; height: auto;">
+                    <p class="image-caption">Passengers data arranged by gender and age</p>
                 </div>
             </div>
 
             <div class="content-row">
                 <div class="image-column">
-                   <h2>Persona Survey</h2>
-                    <!-- Add image here -->
-                    <img src="Assets/SMA/Concept Sketch.png" alt="User Journey" style="width: 80%; height: auto; border-radius: 0;">
+                   <h2>Purpose of travel</h2>
+                    <img src="Assets/STMS/Persona1.png" alt="Purpose of travel" style="width: 100%; height: auto; border-radius: 0;">
+                    <img src="Assets/STMS/Persona2.png" alt="Travel purpose by income" style="width: 100%; height: auto; border-radius: 0; margin-top: 16px;">
                 </div>
                 <div class="text-column">
-                    <p>In all income brackets the top purpose of travel is business.</p>
+                    <p>The top purpose of travel is business in all income brackets.</p>
                     <p>In higher income brackets we find less people booking for family and friends.</p>
                     <p>Traveling for leisure peaks and declines after the 100,000 PKR income mark.</p>
-                    <p>Fewer people booking for clients</p>
-                     <a href="#" class="visit-button" style="margin-bottom: 10px;" target="_blank">View on Miro</a>
+                    <p>Fewer people booking for clients.</p>
                 </div>
             </div>
             <div class="content-row">
                 <div class="text-column">
                     <h2>Geographic Segments</h2>
                     <p>98.49 % of customers are from Pakistan. Based on frequency of orders we can divide international market into 4 tiers </p>
-                    <br></br>
-                    <p style="text-align: center;"><I>Click on the numbers to learn more about each stakeholder group.</I></p>
-                    <div class="stakeholder-map-container">
-                        <img src="Assets/STMS/Map.svg" alt="Geographic Map">
-                        <svg class="connector-lines">
-                    <path id="connector-path" d="" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" />
-                </svg>
-                
-                <!-- Hotspots would go here -->
+                    <img src="Assets/STMS/Geo.png" alt="International booking tiers" style="width: 100%; height: auto; margin: 20px 0;">
+                </div>
             </div>
             <table class="methodology-table">
                 
@@ -169,13 +175,12 @@
 
             
             <div class="content-row">
-                <div class="text-column" style="align-content: left;">
+                <div class="text-column">
                     <h2>Generational Segments</h2>
-                    <p>Details...</p>
+                    <p>Millenials accounted for 42% of booking.</p>
                 </div>
                 <div class="image-column">
-                    <!-- Add image here -->
-                    <img src="Assets/SMA/17_09_2025.gif" alt="Environments" style="width: 60%; height: auto; margin-left: 20%; border-radius: 0;">
+                    <img src="Assets/STMS/gens.png" alt="Bookings by generation" style="width: 100%; height: auto; border-radius: 0;">
                 </div>
             </div>
         </div>

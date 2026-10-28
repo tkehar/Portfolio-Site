@@ -3,36 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DVR</title>
+    <title>Descent</title>
     <link rel="stylesheet" href="styles.css">
     <script src="config.js" defer></script>
+    <script src="lightbox.js" defer></script>
 </head>
 <body class="project-page dvr-project">
     <script src="theme.js"></script>
+    <script src="components.js"></script>
     <div class="container">
-        <header class="navbar">
-            <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">TALHA AHMED KEHAR</a></div>
-            <nav class="nav-links">
-                <a href="index" class="nav-tab">Work</a>
-                <a href="about" class="nav-tab">About</a>
-                <a href="resume" class="nav-tab">Resume</a>
-                <div class="theme-slider">
-                    <input type="range" id="theme-slider" min="0" max="100" step="1" value="100" aria-label="Lights (0% dark, 100% light)">
-                    <span class="toggle-label" id="theme-slider-value">100%</span>
-                </div>
-            </nav>
-        </header>
+        <header class="navbar" data-component="header" data-active="work"></header>
         <div class="main-content project-content">
             <img src="Assets/DVR/DVR_Banner.png" alt="Header Image" class="header-image" style=" margin-bottom: 60px;">
             <div class="content-row">
                 <div class="text-column" style="padding: 10%;">
-                    <h1>DVR</h1>
-                    <div>
-                        <p>Role: Designer/Developer/ Curator</p>
-                        <p>Year: 2026</p>
-                         <p>Team: Sabeen Mahmud Forum</p>
-                    <p>Project description for DVR goes here. This is a placeholder page.</p>
-                </div>
+                    <div class="project-heading">
+                        <h1>Descent</h1>
+                        <p class="project-subtitle">Confronting Your Shadow Self in Virtual Reality</p>
+                <p class="project-tagline">Virtual reality · Immersive installation · Shadow self · Exhibition</p>
+                    </div>
+                    <div class="grid-4-col">
+                        <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+                            <p><b>Exhibited:</b></p>
+                            <p>Hum of Existence, Catalyst Berlin</p>
+                        </div>
+                        <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+                            <p><b>Role:</b></p>
+                            <p>Project Management / Visual Design</p>
+                        </div>
+                        <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+                            <p><b>Year:</b></p>
+                            <p>2024</p>
+                        </div>
+                        <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+                            <p><b>Team:</b></p>
+                            <p>Diya Bhattacharjee, Elena Dimitrova, Nicola Bisset</p>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
