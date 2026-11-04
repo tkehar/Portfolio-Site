@@ -1,7 +1,9 @@
-/* Shared image lightbox: dimmed page, centered artwork, Cancel close. */
+/* Shared image lightbox: dimmed page, artwork with title/subtitle column, Cancel close. */
 (function () {
     var lightbox;
     var lightboxImg;
+    var lightboxTitle;
+    var lightboxSubtitle;
 
     function ensureOverlay() {
         var existing = document.getElementById('lightbox');
@@ -10,21 +12,34 @@
         var overlay = document.createElement('div');
         overlay.className = 'lightbox';
         overlay.id = 'lightbox';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-labelledby', 'lightboxTitle');
         overlay.setAttribute('aria-hidden', 'true');
         overlay.innerHTML =
             '<div class="lightbox-backdrop" data-close></div>' +
-            '<img class="lightbox-img" id="lightboxImg" src="" alt="">' +
-            '<button class="lightbox-close" type="button" aria-label="Close" data-close>' +
-                '<img src="Assets/Icons/Cancel-light.svg" alt="">' +
-            '</button>';
+            '<div class="lightbox-panel">' +
+                '<img class="lightbox-img" id="lightboxImg" src="" alt="">' +
+                '<div class="lightbox-meta">' +
+                    '<h2 class="lightbox-title" id="lightboxTitle"></h2>' +
+                    '<p class="lightbox-subtitle" id="lightboxSubtitle"></p>' +
+                '</div>' +
+                '<button class="lightbox-close" type="button" aria-label="Close" data-close>' +
+                    '<img src="Assets/Icons/Cancel-light.svg" alt="">' +
+                '</button>' +
+            '</div>';
         document.body.appendChild(overlay);
         return overlay;
     }
 
-    function openLightbox(src, alt) {
+    function openLightbox(src, title, subtitle) {
         if (!src || !lightbox) return;
         lightboxImg.src = src;
-        lightboxImg.alt = alt || '';
+        lightboxImg.alt = title || '';
+        lightboxTitle.textContent = title || '';
+        lightboxTitle.hidden = !title;
+        lightboxSubtitle.textContent = subtitle || '';
+        lightboxSubtitle.hidden = !subtitle;
         lightbox.classList.add('open');
         lightbox.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
@@ -37,9 +52,20 @@
         document.body.style.overflow = '';
     }
 
+    function openFromImage(img, host) {
+        var source = host || img;
+        openLightbox(
+            img.src,
+            source.getAttribute('data-title') || img.alt,
+            source.getAttribute('data-subtitle') || ''
+        );
+    }
+
     function init() {
         lightbox = ensureOverlay();
         lightboxImg = document.getElementById('lightboxImg');
+        lightboxTitle = document.getElementById('lightboxTitle');
+        lightboxSubtitle = document.getElementById('lightboxSubtitle');
 
         lightbox.querySelectorAll('[data-close]').forEach(function (el) {
             el.addEventListener('click', closeLightbox);
@@ -53,7 +79,7 @@
             img.addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-                openLightbox(img.src, img.alt);
+                openFromImage(img);
             });
         });
 
@@ -63,7 +89,7 @@
                 e.preventDefault();
                 e.stopPropagation();
                 var img = host.querySelector('img');
-                if (img) openLightbox(img.src, img.alt);
+                if (img) openFromImage(img, host);
             });
         });
 

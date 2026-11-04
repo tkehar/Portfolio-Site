@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="config.js" defer></script>
     <script src="lightbox.js" defer></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.4.0/dist/model-viewer.min.js"></script>
 </head>
 <body class="work-page">
     <script src="theme.js"></script>
@@ -18,7 +19,7 @@
             <div class="board-filter" id="boardFilter">
                 <button class="filter-chip" id="filterBtn" aria-haspopup="true" aria-expanded="false">
                     <span id="filterLabel">PRODUCT DESIGN</span>
-                    <img src="Assets/Icons/Close.png" alt="" width="24" height="24">
+                    <img src="Assets/Icons/Close.png" alt="" width="24" height="24" id="filterIcon">
                 </button>
                 <ul class="filter-menu" id="filterMenu" role="menu" hidden>
                     <li data-filter="product-design" class="active">PRODUCT DESIGN</li>
@@ -30,7 +31,26 @@
 
             <section class="work-layout">
                 <aside class="work-sidebar">
-                    <img class="work-photo" src="Assets/Artist_Photo.png" alt="Talha Ahmed Kehar">
+                    <model-viewer class="work-photo work-model"
+                        src="Assets/Talha1.glb"
+                        alt="3D model of Talha Ahmed Kehar"
+                        camera-controls disable-zoom disable-pan
+                        auto-rotate rotation-per-second="12deg" auto-rotate-delay="2000"
+                        touch-action="pan-y"
+                        interaction-prompt="none"
+                        environment-image="neutral"
+                        camera-orbit="0deg 80deg 80%"
+                        min-camera-orbit="auto 70deg auto"
+                        max-camera-orbit="auto 95deg auto">
+                        <div slot="poster" class="model-loader" role="status">
+                            <svg class="model-loader-ring" viewBox="0 0 48 48" aria-hidden="true">
+                                <circle class="model-loader-track" cx="24" cy="24" r="21"></circle>
+                                <circle class="model-loader-arc" cx="24" cy="24" r="21" pathLength="100"></circle>
+                            </svg>
+                            <span class="model-loader-label">Building Talha</span>
+                        </div>
+                        <div slot="progress-bar"></div>
+                    </model-viewer>
                     <h2 class="work-role" id="workRole">Product Designer</h2>
                     <div class="work-connect">
                         <span class="work-connect-label">Connect with me</span>
@@ -43,7 +63,7 @@
                     </div>
                     <div class="work-statement">
                         <h3 class="work-statement-title" id="workStatementTitle">Design Statement</h3>
-                        <p class="work-statement-body" id="workStatementBody">Product designer with experience across online travel and B2B SaaS. Research-led, from discovery to shipped features: a 17.5% conversion uplift in booking funnels at Sastaticket, a design system at Salesflo, and an AI notetaker MVP at Makula. I prototype in Figma and code.</p>
+                        <p class="work-statement-body" id="workStatementBody">UX Lead with six years across B2C travel and B2B SaaS, taking products from discovery to launch through research and data. Highlights include a 17.5% conversion uplift at Sastaticket, a design system at Salesflo and an AI notetaker MVP at Makula. I design in Figma, prototype and automate tasks with Claude Code and Cursor, and record and synthesise research calls with Fathom.</p>
                     </div>
                     <div class="work-experience" id="workExperience" hidden>
                         <h3 class="work-experience-title">CURATORIAL EXPERIENCE</h3>
@@ -96,7 +116,7 @@
                         <h5>Dastaan-e-Karachi</h5>
                     </div>
 
-                    <div class="project-card" data-lightbox data-title="Snake Eyes" data-category="graphic-design">
+                    <div class="project-card" data-lightbox data-title="Snake Eyes" data-subtitle="Inspired by the 2018 Pakistan election rigging scandal" data-category="graphic-design">
                         <img src="Assets/SE/SE_Banner.png" alt="Snake Eyes">
                         <h5>Snake Eyes</h5>
                     </div>
@@ -104,7 +124,7 @@
                         <img src="Assets/TW/TW_Banner.png" alt="Ticket Wala Identity Design">
                         <h5>Ticket Wala Identity Design</h5>
                     </div>
-                    <div class="project-card" data-lightbox data-title="Karachi Calligraphy" data-category="graphic-design">
+                    <div class="project-card" data-lightbox data-title="Karachi Calligraphy" data-subtitle="Calligraphy of ‘Karachi’ in the shape of a sword, 2019" data-category="graphic-design">
                         <img src="Assets/Karachi Sword-01.png" alt="Karachi Calligraphy">
                         <h5>Karachi Calligraphy</h5>
                     </div>
@@ -120,7 +140,7 @@
                         <img src="Assets/NFN/NFFN_Banner.png" alt="No Funeral For Nazia">
                         <h5>No Funeral For Nazia</h5>
                     </div>
-                    <div class="project-card" data-lightbox data-title="The Mandalorian" data-category="graphic-design">
+                    <div class="project-card" data-lightbox data-title="The Mandalorian" data-subtitle="Personal Project, 2021" data-category="graphic-design">
                         <img src="Assets/The Mandalorian.png" alt="The Mandalorian">
                         <h5>The Mandalorian</h5>
                     </div>
@@ -128,7 +148,7 @@
                         <img src="Assets/SU/SU_Banner.png" alt="Speak Up">
                         <h5>Speak Up</h5>
                     </div>
-                    <div class="project-card" data-lightbox data-title="Queen Of Roses" data-category="graphic-design">
+                    <div class="project-card" data-lightbox data-title="Queen Of Roses" data-subtitle="Personal Project, 2017" data-category="graphic-design">
                         <img src="Assets/Queen_of_Roses.gif" alt="Queen Of Roses">
                         <h5>Queen Of Roses</h5>
                     </div>
@@ -157,34 +177,40 @@
             const filterBtn = document.getElementById('filterBtn');
             const filterMenu = document.getElementById('filterMenu');
             const filterLabel = document.getElementById('filterLabel');
+            const filterIcon = document.getElementById('filterIcon');
             const workRole = document.getElementById('workRole');
             const workStatementTitle = document.getElementById('workStatementTitle');
             const workStatementBody = document.getElementById('workStatementBody');
             const workExperience = document.getElementById('workExperience');
+            const modelArc = document.querySelector('.model-loader-arc');
+
+            document.querySelector('.work-model').addEventListener('progress', e => {
+                modelArc.style.strokeDashoffset = 100 - 100 * Math.max(e.detail.totalProgress, 0.08);
+            });
 
             const SIDEBAR = {
                 'product-design': {
                     role: 'Product Designer',
                     title: 'Design Statement',
-                    body: 'Product designer with experience across online travel and B2B SaaS. Research-led, from discovery to shipped features: a 17.5% conversion uplift in booking funnels at Sastaticket, a design system at Salesflo, and an AI notetaker MVP at Makula. I prototype in Figma and code.',
+                    body: 'UX Lead with six years across B2C travel and B2B SaaS, taking products from discovery to launch through research and data. Highlights include a 17.5% conversion uplift at Sastaticket, a design system at Salesflo and an AI notetaker MVP at Makula. I design in Figma, prototype and automate tasks with Claude Code and Cursor, and record and synthesise research calls with Fathom.',
                     experience: false
                 },
                 'graphic-design': {
                     role: 'Graphic Designer',
                     title: 'Design Statement',
-                    body: 'Product designer with experience across online travel and B2B SaaS. Research-led, from discovery to shipped features: a 17.5% conversion uplift in booking funnels at Sastaticket, a design system at Salesflo, and an AI notetaker MVP at Makula. I prototype in Figma and code.',
+                    body: 'Graphic designer working across brand identity, editorial and publishing since 2018. I’ve designed bilingual English–Urdu identities, led print and digital design for ADA, an art and architecture magazine, and designed book covers for Liberty Publishing. My work draws on calligraphy and South Asian visual culture to make design feel local and current.',
                     experience: false
                 },
                 'xr-new-media': {
                     role: 'New Media Artist',
                     title: 'Design Statement',
-                    body: 'Product designer with experience across online travel and B2B SaaS. Research-led, from discovery to shipped features: a 17.5% conversion uplift in booking funnels at Sastaticket, a design system at Salesflo, and an AI notetaker MVP at Makula. I prototype in Figma and code.',
+                    body: 'New media artist working with memory, civic space and the politics of emerging technology. I build interactive and immersive work in WebXR, AR, VR and real-time installation, from a living archive of activist Sabeen Mahmud to SCALES, a game on the hidden costs of AI that won Best Thesis at UE in 2026. My tools include TouchDesigner, Unity, A-Frame, Blender and ComfyUI.',
                     experience: false
                 },
                 curation: {
                     role: 'Curator',
                     title: 'Curatorial Statement',
-                    body: 'Product designer with experience across online travel and B2B SaaS. Research-led, from discovery to shipped features: a 17.5% conversion uplift in booking funnels at Sastaticket, a design system at Salesflo, and an AI notetaker MVP at Makula. I prototype in Figma and code.',
+                    body: 'Curator focused on community, archives and public space. I curated Under the Amaltaas Tree at T2F (2026) and was assistant curator of Look at the City from Here, seven photography exhibitions across Karachi neighbourhoods. I design participatory formats, such as a live digital privilege walk, that invite audiences to see their city and their own place in it.',
                     experience: true
                 }
             };
@@ -196,6 +222,7 @@
                 filterMenu.hidden = !willOpen;
                 boardFilter.classList.toggle('open', willOpen);
                 filterBtn.setAttribute('aria-expanded', String(willOpen));
+                filterIcon.src = willOpen ? 'Assets/Icons/Open.png' : 'Assets/Icons/Close.png';
             }
 
             function applyFilter(filter) {
@@ -234,7 +261,8 @@
                         const title = card.getAttribute('data-title') ||
                             (card.querySelector('h5') ? card.querySelector('h5').textContent : '');
                         const src = card.getAttribute('data-image') || (img ? img.src : '');
-                        if (window.portfolioLightbox) window.portfolioLightbox.open(src, title);
+                        const subtitle = card.getAttribute('data-subtitle') || '';
+                        if (window.portfolioLightbox) window.portfolioLightbox.open(src, title, subtitle);
                     } else {
                         const href = card.getAttribute('data-href');
                         if (href) window.location.href = href;

@@ -24,6 +24,8 @@
         applyResumeLink();
     }
 
+    document.addEventListener('portfolio:header', applyResumeLink);
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
