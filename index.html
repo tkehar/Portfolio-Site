@@ -9,37 +9,44 @@
     <script src="lightbox.js" defer></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.4.0/dist/model-viewer.min.js"></script>
 </head>
-<body class="work-page">
+<body class="home-page">
     <script src="theme.js"></script>
     <script src="components.js"></script>
     <div class="container">
         <header class="navbar" data-component="header" data-active="work"></header>
 
-        <main class="work-main">
-            <div class="board-filter" id="boardFilter">
-                <button class="filter-chip" id="filterBtn" aria-haspopup="true" aria-expanded="false">
-                    <span id="filterLabel">PRODUCT DESIGN</span>
-                    <img src="Assets/Icons/Close.png" alt="" width="24" height="24" id="filterIcon">
-                </button>
-                <ul class="filter-menu" id="filterMenu" role="menu" hidden>
-                    <li data-filter="product-design" class="active">PRODUCT DESIGN</li>
-                    <li data-filter="xr-new-media">XR AND NEW MEDIA</li>
-                    <li data-filter="graphic-design">GRAPHIC DESIGN</li>
-                    <li data-filter="curation">CURATION</li>
-                </ul>
+        <main class="home-main">
+            <div class="home-bar">
+                <div class="work-connect home-social">
+                    <a href="https://www.linkedin.com/in/talha-kehar-8a89ba120/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <img src="Assets/Icons/Linkedin.png" alt="">
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <img src="Assets/Icons/Instagram.svg" alt="">
+                    </a>
+                    <a href="mailto:talha.a.kehar@gmail.com" aria-label="Email">
+                        <img src="Assets/Icons/Mail.png" alt="">
+                    </a>
+                </div>
+                <nav class="home-sections" aria-label="Work sections">
+                    <a href="#product-design" data-label="Product Design" class="active" aria-current="true">Product Design</a>
+                    <a href="#xr-new-media" data-label="XR and New Media">XR and New Media</a>
+                    <a href="#graphic-design" data-label="Graphic Design">Graphic Design</a>
+                    <a href="#curation" data-label="Curation">Curation</a>
+                </nav>
             </div>
 
-            <section class="work-layout">
-                <aside class="work-sidebar">
-                    <model-viewer class="work-photo work-model"
-                        src="Assets/Talha1.glb"
+            <div class="home-layout">
+                <aside class="home-intro">
+                    <h1 class="work-role">Product &amp; Experience Designer</h1>
+                    <model-viewer class="home-model work-model"
+                        src="Assets/Bust.glb"
                         alt="3D model of Talha Ahmed Kehar"
                         camera-controls disable-zoom disable-pan
-                        auto-rotate rotation-per-second="12deg" auto-rotate-delay="2000"
                         touch-action="pan-y"
                         interaction-prompt="none"
                         environment-image="neutral"
-                        camera-orbit="0deg 80deg 80%"
+                        camera-orbit="calc(0deg + env(window-scroll-y) * 360deg) 80deg 80%"
                         min-camera-orbit="auto 70deg auto"
                         max-camera-orbit="auto 95deg auto">
                         <div slot="poster" class="model-loader" role="status">
@@ -51,226 +58,214 @@
                         </div>
                         <div slot="progress-bar"></div>
                     </model-viewer>
-                    <h2 class="work-role" id="workRole">Product Designer</h2>
-                    <div class="work-connect">
-                        <span class="work-connect-label">Connect with me</span>
-                        <a href="mailto:talha.a.kehar@gmail.com" aria-label="Email">
-                            <img src="Assets/Icons/Mail.png" alt="">
-                        </a>
-                        <a href="https://www.linkedin.com/in/talha-kehar-8a89ba120/" target="_blank" rel="noopener" aria-label="LinkedIn">
-                            <img src="Assets/Icons/Linkedin.png" alt="">
-                        </a>
-                    </div>
-                    <div class="work-statement">
-                        <h3 class="work-statement-title" id="workStatementTitle">Design Statement</h3>
-                        <p class="work-statement-body" id="workStatementBody">UX Lead with six years across B2C travel and B2B SaaS, taking products from discovery to launch through research and data. Highlights include a 17.5% conversion uplift at Sastaticket, a design system at Salesflo and an AI notetaker MVP at Makula. I design in Figma, prototype and automate tasks with Claude Code and Cursor, and record and synthesise research calls with Fathom.</p>
-                    </div>
-                    <div class="work-experience" id="workExperience" hidden>
-                        <h3 class="work-experience-title">CURATORIAL EXPERIENCE</h3>
-                        <p>Curator - 2026<br>Under The Amaltaas Tree<br>T2F, Karachi Pakistan</p>
-                        <p>Assistant Curator - 2019<br>Yahan Say Shehr Ko Dekho<br>Karachi Art Council</p>
-                        <p>Communication Designer - 2018<br>Who Gets To Talk About Whom<br>Gandhara Art Space</p>
-                    </div>
+                    <p class="home-bio">Building experiences that empower users through automation, secure through decentralized data structures, and delight through play and novelty. Over six years of experience in taking B2C and B2B SaaS products from research to launch. I focus on creating measurable impact and am seeking jobs that prioritize people, systems, and processes.</p>
                 </aside>
 
-                <div class="work-grid" id="projectGrid">
-                    <div class="project-card" data-href="MAN" data-category="product-design">
-                        <img src="Assets/MAN/MAN_Banner.png" alt="AI Notetaker for Field Service Technicians">
-                        <h5>AI Notetaker for Field Service Technicians</h5>
-                    </div>
-                    <div class="project-card" data-href="STMS" data-category="product-design">
-                        <img src="Assets/STMS/STMS_Banner.png" alt="Market Segments Research">
-                        <h5>Market Segments Research</h5>
-                    </div>
-                    <div class="project-card" data-href="SS" data-category="product-design">
-                        <img src="Assets/SS/SS_Banner.png" alt="Sellorate B2B Retailer App">
-                        <h5>Sellorate B2B Retailer App</h5>
-                    </div>
-                    <div class="project-card" data-href="Vissibl" data-category="product-design">
-                        <img src="Assets/VIS/VIS_Banner.png" alt="AI ISO Compliance Tool MVP">
-                        <h5>AI ISO Compliance Tool MVP</h5>
-                    </div>
-                    <div class="project-card" data-href="OMS" data-category="product-design">
-                        <img src="Assets/OMS/OMS_Banner.png" alt="Sastaticket Order Management System">
-                        <h5>Sastaticket Order Management System</h5>
-                    </div>
+                <div class="home-collages">
+                    <section class="collage collage--pd" id="product-design" aria-label="Product Design">
+                        <h2 class="collage-title">Research-led</h2>
+                        <a class="tile tile--man tile--wide" href="MAN" aria-label="AI Notetaker for Field Service Technicians">
+                            <span class="tile-media"><img src="Assets/MAN/MAN_Banner.png" alt=""></span>
+                            <span class="tile-title">AI Notetaker for Field Service Technicians</span>
+                        </a>
+                        <a class="tile tile--ss" href="SS" aria-label="Sellorate B2B Retailer App">
+                            <span class="tile-media"><img src="Assets/SS/SS_Banner.png" alt=""></span>
+                            <span class="tile-title">Sellorate B2B Retailer App</span>
+                        </a>
+                        <a class="tile tile--vis" href="Vissibl" aria-label="AI ISO Compliance Tool MVP">
+                            <span class="tile-media"><img src="Assets/VIS/VIS_Banner.png" alt=""></span>
+                            <span class="tile-title">AI ISO Compliance Tool MVP</span>
+                        </a>
+                        <a class="tile tile--oms tile--wide" href="OMS" aria-label="Sastaticket Order Management System">
+                            <span class="tile-media"><img src="Assets/OMS/OMS_Banner.png" alt=""></span>
+                            <span class="tile-title">Sastaticket Order Management System</span>
+                        </a>
+                        <a class="tile tile--stms" href="STMS" aria-label="Market Segments Research">
+                            <span class="tile-media"><img src="Assets/STMS/STMS_Banner.png" alt=""></span>
+                            <span class="tile-title">Market Segments Research</span>
+                        </a>
+                    </section>
 
-                    <div class="project-card" data-href="SG" data-category="xr-new-media">
-                        <img src="Assets/Scales/Scales_Banner.png" alt="Scales">
-                        <h5>Scales</h5>
-                    </div>
-                    <div class="project-card" data-href="SMA" data-category="xr-new-media,curation">
-                        <img src="Assets/SMA/SMA_Banner.png" alt="Sabeen Mahmud Archive">
-                        <h5>Sabeen Mahmud Archive</h5>
-                    </div>
-                    <div class="project-card" data-href="DVR" data-category="xr-new-media">
-                        <img src="Assets/DVR/DVR_Banner.png" alt="Descent Virtual Reality">
-                        <h5>Descent Virtual Reality</h5>
-                    </div>
-                    <div class="project-card" data-href="EH" data-category="xr-new-media">
-                        <img src="Assets/EH/EH_Banner.png" alt="The Earth's Heartbeat">
-                        <h5>The Earth's Heartbeat</h5>
-                    </div>
-                    <div class="project-card" data-href="DK" data-category="xr-new-media">
-                        <img src="Assets/DK/DK_Banner.png" alt="Dastaan-e-Karachi">
-                        <h5>Dastaan-e-Karachi</h5>
-                    </div>
+                    <section class="collage collage--xr" id="xr-new-media" aria-label="XR and New Media">
+                        <h2 class="collage-title">Design new<br>ways of seeing</h2>
+                        <a class="tile tile--eh tile--wide" href="EH" aria-label="The Earth's Heartbeat">
+                            <span class="tile-media"><img src="Assets/EH/EH_Banner.png" alt=""></span>
+                            <span class="tile-title">The Earth's Heartbeat</span>
+                        </a>
+                        <a class="tile tile--sg" href="SG" aria-label="Scales">
+                            <span class="tile-media"><img src="Assets/Scales/Scales_Banner.png" alt=""></span>
+                            <span class="tile-title">Scales</span>
+                        </a>
+                        <a class="tile tile--dk" href="DK" aria-label="Dastaan-e-Karachi">
+                            <span class="tile-media"><img src="Assets/DK/DK_Banner.png" alt=""></span>
+                            <span class="tile-title">Dastaan-e-Karachi</span>
+                        </a>
+                        <a class="tile tile--sma tile--wide" href="SMA" aria-label="Sabeen Mahmud Archive">
+                            <span class="tile-media"><img src="Assets/SMA/SMA_Banner.png" alt=""></span>
+                            <span class="tile-title">Sabeen Mahmud Archive</span>
+                        </a>
+                    </section>
 
-                    <div class="project-card" data-lightbox data-title="Snake Eyes" data-subtitle="Inspired by the 2018 Pakistan election rigging scandal" data-category="graphic-design">
-                        <img src="Assets/SE/SE_Banner.png" alt="Snake Eyes">
-                        <h5>Snake Eyes</h5>
-                    </div>
-                    <div class="project-card" data-href="TW" data-category="graphic-design">
-                        <img src="Assets/TW/TW_Banner.png" alt="Ticket Wala Identity Design">
-                        <h5>Ticket Wala Identity Design</h5>
-                    </div>
-                    <div class="project-card" data-lightbox data-title="Karachi Calligraphy" data-subtitle="Calligraphy of ‘Karachi’ in the shape of a sword, 2019" data-category="graphic-design">
-                        <img src="Assets/Karachi Sword-01.png" alt="Karachi Calligraphy">
-                        <h5>Karachi Calligraphy</h5>
-                    </div>
-                    <div class="project-card" data-href="STG" data-category="graphic-design">
-                        <img src="Assets/STG/STG_Banner.png" alt="The Stained Glass Window">
-                        <h5>The Stained Glass Window</h5>
-                    </div>
-                    <div class="project-card" data-href="ADA" data-category="graphic-design">
-                        <img src="Assets/ADA/ADA_Banner.png" alt="ADA Magazine">
-                        <h5>ADA Magazine</h5>
-                    </div>
-                    <div class="project-card" data-href="NFN" data-category="graphic-design">
-                        <img src="Assets/NFN/NFFN_Banner.png" alt="No Funeral For Nazia">
-                        <h5>No Funeral For Nazia</h5>
-                    </div>
-                    <div class="project-card" data-lightbox data-title="The Mandalorian" data-subtitle="Personal Project, 2021" data-category="graphic-design">
-                        <img src="Assets/The Mandalorian.png" alt="The Mandalorian">
-                        <h5>The Mandalorian</h5>
-                    </div>
-                    <div class="project-card" data-href="SU" data-category="graphic-design">
-                        <img src="Assets/SU/SU_Banner.png" alt="Speak Up">
-                        <h5>Speak Up</h5>
-                    </div>
-                    <div class="project-card" data-lightbox data-title="Queen Of Roses" data-subtitle="Personal Project, 2017" data-category="graphic-design">
-                        <img src="Assets/Queen_of_Roses.gif" alt="Queen Of Roses">
-                        <h5>Queen Of Roses</h5>
-                    </div>
-                    <div class="project-card" data-href="construction" data-category="graphic-design">
-                        <img src="Assets/GHAR/Ghar Logo.png" alt="Ghar Logo">
-                        <h5>Ghar Logo</h5>
-                    </div>
+                    <section class="collage collage--gd" id="graphic-design" aria-label="Graphic Design">
+                        <h2 class="collage-title">Make what<br>matters.</h2>
+                        <button type="button" class="tile tile--mando tile--portrait" aria-label="The Mandalorian" data-lightbox data-image="Assets/The Mandalorian.png" data-title="The Mandalorian" data-subtitle="Personal Project, 2021">
+                            <span class="tile-media"><img src="Assets/Home/Mandalorian.png" alt=""></span>
+                            <span class="tile-title">The Mandalorian</span>
+                        </button>
+                        <button type="button" class="tile tile--sword" aria-label="Karachi Calligraphy" data-lightbox data-image="Assets/Karachi Sword-01.png" data-title="Karachi Calligraphy" data-subtitle="Calligraphy of ‘Karachi’ in the shape of a sword, 2019">
+                            <span class="tile-media"><img src="Assets/Karachi Sword-01.png" alt=""></span>
+                            <span class="tile-title">Karachi Calligraphy</span>
+                        </button>
+                        <a class="tile tile--ada tile--wide" href="ADA" aria-label="ADA Magazine">
+                            <span class="tile-media">
+                                <span class="tile-crop tile-crop--1"><img src="Assets/Home/ADA_Cover_1.png" alt=""></span>
+                                <span class="tile-crop tile-crop--2"><img src="Assets/Home/ADA_Cover_2.png" alt=""></span>
+                                <span class="tile-crop tile-crop--3"><img src="Assets/Home/ADA_Cover_3.png" alt=""></span>
+                            </span>
+                            <span class="tile-title">ADA Magazine</span>
+                        </a>
+                        <button type="button" class="tile tile--qor" aria-label="Queen Of Roses" data-lightbox data-image="Assets/Queen_of_Roses.gif" data-title="Queen Of Roses" data-subtitle="Personal Project, 2017">
+                            <span class="tile-media"><img src="Assets/Home/QOR_Portrait.png" alt=""></span>
+                            <span class="tile-title">Queen Of Roses</span>
+                        </button>
+                        <a class="tile tile--tw" href="TW" aria-label="Ticket Wala Identity Design">
+                            <span class="tile-media"><img src="Assets/Home/TW_Logo.png" alt=""></span>
+                            <span class="tile-title">Ticket Wala Identity Design</span>
+                        </a>
+                        <button type="button" class="tile tile--se" aria-label="Snake Eyes" data-lightbox data-image="Assets/SE/SE_Banner.png" data-title="Snake Eyes" data-subtitle="Inspired by the 2018 Pakistan election rigging scandal">
+                            <span class="tile-media"><img src="Assets/SE/SE_Banner.png" alt=""></span>
+                            <span class="tile-title">Snake Eyes</span>
+                        </button>
+                        <a class="tile tile--su" href="SU" aria-label="Speak Up">
+                            <span class="tile-media"><img src="Assets/SU/SU_Banner.png" alt=""></span>
+                            <span class="tile-title">Speak Up</span>
+                        </a>
+                        <a class="tile tile--stg tile--portrait" href="STG" aria-label="The Stained Glass Window">
+                            <span class="tile-media"><img src="Assets/STG/STG_Banner.png" alt=""></span>
+                            <span class="tile-title">The Stained Glass<br>Window</span>
+                        </a>
+                        <a class="tile tile--nfn tile--portrait" href="NFN" aria-label="No Funeral For Nazia">
+                            <span class="tile-media"><img src="Assets/NFN/NFFN_Banner.png" alt=""></span>
+                            <span class="tile-title">No Funeral For Nazia</span>
+                        </a>
+                    </section>
 
-                    <div class="project-card" data-href="TSW" data-category="curation">
-                        <img src="Assets/TSW/TSW_Banner.png" alt="Look at the City from here">
-                        <h5>Look at the City from here</h5>
-                    </div>
-                    <div class="project-card" data-href="WGTW" data-category="curation">
-                        <img src="Assets/WGTW/WGTW_Banner.png" alt="Who Gets To Talk About Whom">
-                        <h5>Who Gets To Talk About Whom</h5>
-                    </div>
+                    <section class="collage collage--cur" id="curation" aria-label="Curation">
+                        <h2 class="collage-title">Create<br>Discourse</h2>
+                        <a class="tile tile--wgtw" href="WGTW" aria-label="Who Gets To Talk About Whom">
+                            <span class="tile-media"><img src="Assets/WGTW/WGTW_Banner.png" alt=""></span>
+                            <span class="tile-title">Who Gets To Talk About Whom</span>
+                        </a>
+                        <a class="tile tile--tsw" href="TSW" aria-label="Look at the City from here">
+                            <span class="tile-media"><img src="Assets/TSW/TSW_Banner.png" alt=""></span>
+                            <span class="tile-title">Look at the City from here</span>
+                        </a>
+                        <a class="tile tile--sma-cur" href="SMA" aria-label="Sabeen Mahmud Archive">
+                            <span class="tile-media"><img src="Assets/SMA/SMA_Banner_2.png" alt=""></span>
+                            <span class="tile-title">Sabeen Mahmud Archive</span>
+                        </a>
+                    </section>
                 </div>
-            </section>
+            </div>
         </main>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const cards = Array.from(document.querySelectorAll('#projectGrid .project-card'));
-            const boardFilter = document.getElementById('boardFilter');
-            const filterBtn = document.getElementById('filterBtn');
-            const filterMenu = document.getElementById('filterMenu');
-            const filterLabel = document.getElementById('filterLabel');
-            const filterIcon = document.getElementById('filterIcon');
-            const workRole = document.getElementById('workRole');
-            const workStatementTitle = document.getElementById('workStatementTitle');
-            const workStatementBody = document.getElementById('workStatementBody');
-            const workExperience = document.getElementById('workExperience');
             const modelArc = document.querySelector('.model-loader-arc');
-
-            document.querySelector('.work-model').addEventListener('progress', e => {
+            document.querySelector('.home-model').addEventListener('progress', e => {
                 modelArc.style.strokeDashoffset = 100 - 100 * Math.max(e.detail.totalProgress, 0.08);
             });
 
-            const SIDEBAR = {
-                'product-design': {
-                    role: 'Product Designer',
-                    title: 'Design Statement',
-                    body: 'UX Lead with six years across B2C travel and B2B SaaS, taking products from discovery to launch through research and data. Highlights include a 17.5% conversion uplift at Sastaticket, a design system at Salesflo and an AI notetaker MVP at Makula. I design in Figma, prototype and automate tasks with Claude Code and Cursor, and record and synthesise research calls with Fathom.',
-                    experience: false
-                },
-                'graphic-design': {
-                    role: 'Graphic Designer',
-                    title: 'Design Statement',
-                    body: 'Graphic designer working across brand identity, editorial and publishing since 2018. I’ve designed bilingual English–Urdu identities, led print and digital design for ADA, an art and architecture magazine, and designed book covers for Liberty Publishing. My work draws on calligraphy and South Asian visual culture to make design feel local and current.',
-                    experience: false
-                },
-                'xr-new-media': {
-                    role: 'New Media Artist',
-                    title: 'Design Statement',
-                    body: 'New media artist working with memory, civic space and the politics of emerging technology. I build interactive and immersive work in WebXR, AR, VR and real-time installation, from a living archive of activist Sabeen Mahmud to SCALES, a game on the hidden costs of AI that won Best Thesis at UE in 2026. My tools include TouchDesigner, Unity, A-Frame, Blender and ComfyUI.',
-                    experience: false
-                },
-                curation: {
-                    role: 'Curator',
-                    title: 'Curatorial Statement',
-                    body: 'Curator focused on community, archives and public space. I curated Under the Amaltaas Tree at T2F (2026) and was assistant curator of Look at the City from Here, seven photography exhibitions across Karachi neighbourhoods. I design participatory formats, such as a live digital privilege walk, that invite audiences to see their city and their own place in it.',
-                    experience: true
-                }
-            };
-
-            const DEFAULT_FILTER = 'product-design';
-
-            function toggleMenu(open) {
-                const willOpen = open !== undefined ? open : filterMenu.hidden;
-                filterMenu.hidden = !willOpen;
-                boardFilter.classList.toggle('open', willOpen);
-                filterBtn.setAttribute('aria-expanded', String(willOpen));
-                filterIcon.src = willOpen ? 'Assets/Icons/Open.png' : 'Assets/Icons/Close.png';
-            }
-
-            function applyFilter(filter) {
-                const meta = SIDEBAR[filter] || SIDEBAR[DEFAULT_FILTER];
-                workRole.textContent = meta.role;
-                workStatementTitle.textContent = meta.title;
-                workStatementBody.textContent = meta.body;
-                workExperience.hidden = !meta.experience;
-
-                cards.forEach(card => {
-                    const cats = (card.getAttribute('data-category') || '')
-                        .toLowerCase().split(',').map(s => s.trim());
-                    card.hidden = !cats.includes(filter);
-                });
-            }
-
-            filterBtn.addEventListener('click', () => toggleMenu());
-            document.addEventListener('click', e => {
-                if (!e.target.closest('.board-filter')) toggleMenu(false);
-            });
-
-            filterMenu.querySelectorAll('li').forEach(li => {
-                li.addEventListener('click', () => {
-                    filterMenu.querySelectorAll('li').forEach(x => x.classList.remove('active'));
-                    li.classList.add('active');
-                    filterLabel.textContent = li.textContent.trim();
-                    applyFilter(li.getAttribute('data-filter'));
-                    toggleMenu(false);
-                });
-            });
-
-            cards.forEach(card => {
-                card.addEventListener('click', () => {
-                    if (card.hasAttribute('data-lightbox')) {
-                        const img = card.querySelector('img');
-                        const title = card.getAttribute('data-title') ||
-                            (card.querySelector('h5') ? card.querySelector('h5').textContent : '');
-                        const src = card.getAttribute('data-image') || (img ? img.src : '');
-                        const subtitle = card.getAttribute('data-subtitle') || '';
-                        if (window.portfolioLightbox) window.portfolioLightbox.open(src, title, subtitle);
-                    } else {
-                        const href = card.getAttribute('data-href');
-                        if (href) window.location.href = href;
+            document.querySelectorAll('.tile[data-lightbox]').forEach(tile => {
+                tile.addEventListener('click', () => {
+                    if (window.portfolioLightbox) {
+                        window.portfolioLightbox.open(tile.dataset.image, tile.dataset.title, tile.dataset.subtitle);
                     }
                 });
             });
 
-            applyFilter(DEFAULT_FILTER);
+            // Project taglines → hover skill tags (same source as project pages).
+            const projectKeywords = {
+                MAN: '0→1 · AI product design · Speech-to-text · Journey mapping · Field service · MVP',
+                SS: 'Design system · Component library · B2B e-commerce · Mobile app · Rapid delivery · Design leadership',
+                Vissibl: 'AI · Compliance · Regulatory tech · Rapid ideation · B2B SaaS MVP',
+                OMS: 'Internal Tools · Legacy Redesign · User Research · Personas · Stakeholder Workshops · Heatmap Analysis · Information Hierarchy · Design System',
+                STMS: 'Market Segmentation · Quantitative Research · Survey Design · Data Analysis · Personas · Product Strategy',
+                EH: 'immersive installation · Real-time data visualisation · TouchDesigner · Projection mapping · Sound design',
+                SG: 'Game design · Systems design · Serious games · WebXR · Critical design · AI ethics',
+                DK: 'Augmented reality · Unity · Vuforia · Marker-based AR · Location-based AR · Cultural heritage · Motion design',
+                SMA: 'WebXR · A-Frame · Living archive · Information architecture · Stakeholder mapping · Exhibition design',
+                ADA: 'Editorial Design · Print & Digital Layout · Web Design · Art Direction · Typography · Feature Writing & Editing · Event Production · Content Strategy',
+                TW: 'Brand identity · Bilingual typography · Urdu calligraphy · Custom Kufic logotype',
+                SU: 'Brand Identity · Logo Design · Motion Design · Logo Animation · Video Production · Social Media Content · Design for Children',
+                STG: 'Book Cover Design · Illustration · Concept Development · Visual Storytelling · Typography · Publishing',
+                NFN: 'Book Cover Design · Illustration · Concept Development · Visual Storytelling · Typography · Publishing',
+                WGTW: 'Exhibition Identity · Collateral Design · Web Design · Information Architecture · HTML/CSS · Designing within Constraints',
+                TSW: 'Exhibition design · Curation · Community engagement · Participatory design · Public programming'
+            };
+
+            function skillTagsFromTagline(tagline) {
+                return tagline.split('·').map(s => s.trim().replace(/\.$/, '')).filter(Boolean);
+            }
+
+            document.querySelectorAll('.tile[href]').forEach(tile => {
+                const key = tile.getAttribute('href');
+                const tagline = projectKeywords[key];
+                if (!tagline) return;
+                const media = tile.querySelector('.tile-media');
+                if (!media || media.querySelector('.tile-hover')) return;
+                const hover = document.createElement('span');
+                hover.className = 'tile-hover';
+                hover.setAttribute('aria-hidden', 'true');
+                skillTagsFromTagline(tagline).forEach(skill => {
+                    const tag = document.createElement('span');
+                    tag.className = 'skill-tag';
+                    tag.textContent = skill;
+                    hover.appendChild(tag);
+                });
+                media.appendChild(hover);
+            });
+
+            const nav = document.querySelector('.home-sections');
+            const links = Array.from(nav.querySelectorAll('a'));
+            const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+            let ticking = false;
+            let activeLink = null;
+
+            function updateActive() {
+                ticking = false;
+                const line = window.innerHeight * 0.35;
+                const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+                let current = sections[0];
+                sections.forEach(section => {
+                    if (section.getBoundingClientRect().top <= line) current = section;
+                });
+                if (atBottom) current = sections[sections.length - 1];
+                links.forEach((a, i) => {
+                    const active = sections[i] === current;
+                    a.classList.toggle('active', active);
+                    if (active) a.setAttribute('aria-current', 'true');
+                    else a.removeAttribute('aria-current');
+                });
+
+                const next = links[sections.indexOf(current)];
+                if (next !== activeLink) {
+                    activeLink = next;
+                    if (nav.scrollWidth > nav.clientWidth) {
+                        const left = next.offsetLeft - nav.offsetLeft - (nav.clientWidth - next.offsetWidth) / 2;
+                        nav.scrollTo({ left, behavior: 'smooth' });
+                    }
+                }
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(updateActive);
+                }
+            }, { passive: true });
+            updateActive();
         });
     </script>
 </body>

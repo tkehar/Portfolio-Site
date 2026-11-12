@@ -772,6 +772,424 @@ body.dark-mode .filter-menu li.active {
     color: #ffffff;
 }
 
+/* ==========================================================================
+   HOME PAGE (Figma collage, node 464:788)
+   Collage values are Figma pixels: --W/--H per section, --x/--y/--w/--h per
+   tile, --cx/--cy/--cw/--ch per crop box, and --ix/--iy/--iw/--ih in % of the
+   image's box. Everything scales with the collage width.
+   ========================================================================== */
+.home-main {
+    --bar-pad: 10px;
+    --sticky-top: 64px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html:has(.home-page) { scroll-behavior: smooth; }
+}
+
+.home-bar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: var(--bar-pad) 0;
+    margin: calc(-1 * var(--bar-pad)) 0 calc(20px - var(--bar-pad));
+    background: var(--page-bg, #ffffff);
+}
+
+.home-social {
+    justify-content: flex-start;
+    flex-shrink: 0;
+}
+
+.home-sections {
+    display: flex;
+    gap: 40px;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.home-sections a {
+    display: inline-flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #000000;
+    white-space: nowrap;
+}
+
+/* Reserves the bold width so the row doesn't shift when the active item changes. */
+.home-sections a::after {
+    content: attr(data-label);
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    font-weight: 700;
+}
+
+.home-sections a.active {
+    font-weight: 700;
+}
+
+.home-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 326fr) minmax(0, 1014fr);
+    gap: 20px;
+    align-items: start;
+    padding-bottom: 40px;
+}
+
+.home-intro {
+    position: sticky;
+    top: var(--sticky-top);
+    max-height: calc(100vh - var(--sticky-top) - 20px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.home-model {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 702 / 683;
+    flex: 0 1 auto;
+    min-height: 140px;
+}
+
+.home-bio {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #2e404d;
+    margin: 0;
+}
+
+.home-collages {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.collage {
+    --W: 1014;
+    position: relative;
+    aspect-ratio: var(--W) / var(--H);
+    container-type: inline-size;
+    /* Opaque backdrop so the Ticket Wala logo's difference blend matches Figma. */
+    background: var(--page-bg, #ffffff);
+    scroll-margin-top: var(--sticky-top);
+}
+
+.collage--pd { --H: 789; }
+.collage--xr { --H: 841; }
+.collage--gd { --H: 1014; }
+.collage--cur { --H: 804; }
+
+.collage-title,
+.tile {
+    position: absolute;
+    left: calc(var(--x) / var(--W) * 100%);
+    top: calc(var(--y) / var(--H) * 100%);
+}
+
+.collage-title {
+    margin: 0;
+    font-size: calc(64 / var(--W) * 100cqw);
+    font-weight: 800;
+    line-height: calc(72 / var(--W) * 100cqw);
+    letter-spacing: calc(-1 / var(--W) * 100cqw);
+    color: #000000;
+    white-space: nowrap;
+}
+
+.tile {
+    display: block;
+    width: calc(var(--w) / var(--W) * 100%);
+    height: calc(var(--h) / var(--H) * 100%);
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    text-decoration: none;
+    text-align: left;
+    overflow: visible;
+    cursor: pointer;
+}
+
+.tile[data-lightbox] {
+    cursor: zoom-in;
+}
+
+.tile:focus-visible {
+    outline: 3px solid #4b96ff;
+    outline-offset: 3px;
+}
+
+.tile-media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: inherit;
+}
+
+.tile-hover {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.tile:hover .tile-hover,
+.tile:focus-visible .tile-hover {
+    opacity: 1;
+}
+
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 8px;
+    border-radius: 0;
+    background: #000000;
+    color: #ffffff;
+    font-family: Montserrat, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 24px;
+    white-space: nowrap;
+}
+
+body.dark-mode .tile-hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .skill-tag {
+    background: #ffffff;
+    color: #000000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tile-hover {
+        transition: none;
+    }
+}
+
+.tile-crop {
+    position: absolute;
+    left: calc(var(--cx, 0) / var(--w) * 100%);
+    top: calc(var(--cy, 0) / var(--h) * 100%);
+    width: calc(var(--cw, var(--w)) / var(--w) * 100%);
+    height: calc(var(--ch, var(--h)) / var(--h) * 100%);
+    overflow: hidden;
+}
+
+.tile-media > img,
+.tile-crop img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    display: block;
+}
+
+.tile-crop img {
+    left: calc(var(--ix, 0) * 1%);
+    top: calc(var(--iy, 0) * 1%);
+    right: auto;
+    bottom: auto;
+    width: calc(var(--iw, 100) * 1%);
+    height: calc(var(--ih, 100) * 1%);
+}
+
+.tile-title {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 4px);
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18.2px;
+    color: #111111;
+    white-space: nowrap;
+}
+
+/* Product Design */
+.collage--pd .collage-title { --x: 517; --y: 276; }
+.tile--man { --x: 0; --y: 0; --w: 498; --h: 325; background: #3c27b4; }
+.tile--ss { --x: 518; --y: 7; --w: 226; --h: 226; background: #4b96ff; }
+.tile--vis { --x: 764; --y: 8; --w: 225; --h: 225; background: #000000; }
+.tile--oms { --x: 100; --y: 368; --w: 498; --h: 325; background: #4b96ff; }
+.tile--stms { --x: 618; --y: 368; --w: 325; --h: 325; background: #000000; }
+
+/* XR and New Media */
+.collage--xr .collage-title { --x: 511; --y: 302; }
+.tile--eh { --x: 517; --y: 0; --w: 496; --h: 259; background: #000000; }
+.tile--sg { --x: 174; --y: 95; --w: 325; --h: 326; }
+.tile--dk { --x: 0; --y: 464; --w: 325; --h: 325; }
+.tile--sma { --x: 344; --y: 464; --w: 496; --h: 282; }
+
+/* Graphic Design */
+.collage--gd .collage-title { --x: 345; --y: 365; }
+.tile--mando { --x: 0; --y: 0; --w: 251; --h: 385; }
+.tile--mando .tile-media > img { inset: auto; left: -49.58%; top: -37.8%; width: 209.86%; height: 196.79%; }
+.tile--sword { --x: 271; --y: 50; --w: 228; --h: 228; }
+.tile--ada { --x: 518; --y: 0; --w: 496; --h: 322; background: #d43636; container-type: inline-size; }
+.tile--ada .tile-crop { --ch: 345.87; transform: rotate(var(--r, 0deg)); }
+.tile--ada .tile-crop--1 { --cx: 5.22; --cy: 46.21; --cw: 266.75; --r: -38deg; }
+.tile--ada .tile-crop--2 { --cx: 243.08; --cy: 19.6; --cw: 266.1; --r: 24.5deg; }
+.tile--ada .tile-crop--3 { --cx: 129.61; --cy: 2.9; --cw: 267.21; }
+.tile--qor { --x: 111; --y: 424; --w: 213; --h: 213; }
+.tile--tw { --x: 771; --y: 365; --w: 243; --h: 243; }
+.tile--tw .tile-media > img { mix-blend-mode: difference; }
+.tile--se { --x: 344; --y: 553; --w: 212; --h: 212; background: #000000; }
+.tile--su { --x: 729; --y: 651; --w: 285; --h: 285; background: #faf5e3; }
+.tile--stg { --x: 170; --y: 680; --w: 154; --h: 239; }
+.tile--nfn { --x: 0; --y: 715; --w: 152.5; --h: 228.44; }
+.tile--stg .tile-title,
+.tile--nfn .tile-title { white-space: normal; width: 100%; }
+
+/* Curation */
+.collage--cur .collage-title { --x: 342; --y: 186; }
+.tile--wgtw { --x: 60; --y: 32; --w: 262; --h: 370; }
+.tile--tsw { --x: 527; --y: 349; --w: 319; --h: 350; }
+.tile--sma-cur { --x: 192; --y: 445; --w: 315; --h: 315; }
+
+body.dark-mode .collage-title,
+body.dark-mode .home-sections a {
+    color: #ffffff;
+}
+
+body.dark-mode .home-bio {
+    color: #b0b0b0;
+}
+
+body.dark-mode .tile-title {
+    color: #e0e0e0;
+}
+
+@media (max-width: 1024px) {
+    .home-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 32px;
+    }
+
+    .home-intro {
+        position: static;
+        max-height: none;
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+        grid-template-areas: "model role" "model bio";
+        column-gap: 32px;
+        row-gap: 20px;
+    }
+
+    .home-intro .work-role { grid-area: role; align-self: end; }
+    .home-model { grid-area: model; }
+    .home-bio { grid-area: bio; }
+
+    .home-sections { gap: 24px; }
+}
+
+@media (max-width: 600px) {
+    .home-main { --sticky-top: 100px; }
+
+    .home-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .home-intro {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .collage {
+        aspect-ratio: auto;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-flow: row dense;
+        gap: 12px 12px;
+        row-gap: 28px;
+    }
+
+    .collage-title,
+    .tile {
+        position: relative;
+        left: auto;
+        top: auto;
+    }
+
+    .collage-title {
+        grid-column: 1 / -1;
+        font-size: 36px;
+        line-height: 40px;
+        letter-spacing: -1px;
+        white-space: normal;
+    }
+
+    .tile {
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .tile-media {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        aspect-ratio: 1;
+        flex: none;
+    }
+
+    .tile--wide {
+        grid-column: 1 / -1;
+    }
+
+    .tile--wide .tile-media {
+        aspect-ratio: var(--w) / var(--h);
+    }
+
+    .tile--portrait .tile-media {
+        aspect-ratio: var(--w) / var(--h);
+    }
+
+    .tile-title {
+        position: relative;
+        left: auto;
+        top: auto;
+        white-space: normal;
+    }
+
+    .tile--mando .tile-media > img {
+        left: 0;
+        top: -90%;
+        width: 100%;
+        height: 300.5%;
+    }
+}
+
 .project-card {
     width: 100%;
     cursor: pointer;
