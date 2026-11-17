@@ -1,33 +1,93 @@
-/* Sticky project section nav: visible while scrolling or when the pointer is near the left edge. */
+/* Sticky project heading nav: progress bar always on; labels only on left-side hover. */
 (function () {
-    var HIDE_DELAY = 900;
-    var LEFT_ZONE = 96;
-    var nav;
+    var LEFT_ZONE = 88;
+    var root;
+    var trackFill;
+    var list;
     var links = [];
     var sections = [];
-    var hideTimer = null;
-    var scrolling = false;
     var nearSide = false;
     var overNav = false;
 
-    function setVisible(on) {
-        if (!nav) return;
-        nav.classList.toggle('is-visible', on);
-        nav.setAttribute('aria-hidden', on ? 'false' : 'true');
+    function slugify(text) {
+        return String(text || '')
+            .toLowerCase()
+            .replace(/&/g, ' and ')
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '')
+            .slice(0, 64) || 'section';
     }
 
-    function updateVisibility() {
-        setVisible(scrolling || nearSide || overNav);
+    function uniqueId(base) {
+        var id = base;
+        var n = 2;
+        while (document.getElementById(id)) {
+            id = base + '-' + n;
+            n += 1;
+        }
+        return id;
     }
 
-    function markScrolling() {
-        scrolling = true;
-        updateVisibility();
-        clearTimeout(hideTimer);
-        hideTimer = setTimeout(function () {
-            scrolling = false;
-            updateVisibility();
-        }, HIDE_DELAY);
+    function collectHeadings() {
+        var nodes = Array.prototype.slice.call(
+            document.querySelectorAll(
+                '.project-content h3.project-block-label, .project-content [data-side-section], .project-content h3.project-section-title'
+            )
+        );
+        var seen = {};
+        return nodes.filter(function (el) {
+            var label = (el.getAttribute('data-side-section') || el.textContent || '').trim();
+            if (!label) return false;
+            if (!el.id) {
+                var base = slugify(label);
+                if (seen[base]) {
+                    seen[base] += 1;
+                    el.id = uniqueId(base + '-' + seen[base]);
+                } else {
+                    seen[base] = 1;
+                    el.id = uniqueId(base);
+                }
+            }
+            el.setAttribute('data-side-section', label);
+            return true;
+        });
+    }
+
+    function ensureRoot() {
+        var existing = document.querySelector('.side-scroll');
+        if (existing) return existing;
+
+        var el = document.createElement('nav');
+        el.className = 'side-scroll';
+        el.setAttribute('aria-label', 'On this page');
+        el.setAttribute('aria-hidden', 'true');
+        el.innerHTML =
+            '<div class="side-scroll__rail" aria-hidden="true">' +
+                '<div class="side-scroll__track">' +
+                    '<div class="side-scroll__progress"></div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="side-scroll__labels"></div>';
+        document.body.appendChild(el);
+        return el;
+    }
+
+    function setExpanded(on) {
+        if (!root) return;
+        root.classList.toggle('is-expanded', on);
+        root.setAttribute('aria-hidden', on ? 'false' : 'true');
+    }
+
+    function updateExpanded() {
+        setExpanded(nearSide || overNav);
+    }
+
+    function updateProgress() {
+        if (!trackFill) return;
+        var doc = document.documentElement;
+        var max = Math.max(doc.scrollHeight - window.innerHeight, 1);
+        var ratio = Math.min(Math.max(window.scrollY / max, 0), 1);
+        trackFill.style.height = (ratio * 100).toFixed(2) + '%';
     }
 
     function updateActive() {
@@ -45,63 +105,70 @@
         });
     }
 
-    function buildFromSections() {
-        var targets = Array.prototype.slice.call(document.querySelectorAll('[data-side-section]'));
-        if (!targets.length) return false;
-        nav.innerHTML = '';
-        targets.forEach(function (section) {
-            if (!section.id) return;
+    function build() {
+        var headings = collectHeadings();
+        if (!headings.length) return false;
+
+        list.innerHTML = '';
+        headings.forEach(function (heading) {
             var a = document.createElement('a');
-            a.href = '#' + section.id;
-            a.textContent = section.getAttribute('data-side-section');
-            nav.appendChild(a);
+            a.className = 'side-scroll__link';
+            a.href = '#' + heading.id;
+            a.textContent = heading.getAttribute('data-side-section');
+            list.appendChild(a);
         });
-        return !!nav.children.length;
+
+        links = Array.prototype.slice.call(list.querySelectorAll('a[href^="#"]'));
+        sections = links
+            .map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); })
+            .filter(Boolean);
+
+        return sections.length > 0;
     }
 
     function init() {
-        nav = document.querySelector('.side-scroll');
-        if (!nav) return;
+        if (!document.body.classList.contains('project-page')) return;
 
-        if (!nav.children.length) buildFromSections();
+        root = ensureRoot();
+        trackFill = root.querySelector('.side-scroll__progress');
+        list = root.querySelector('.side-scroll__labels');
 
-        links = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
-        sections = links
-            .map(function (a) { return document.querySelector(a.getAttribute('href')); })
-            .filter(Boolean);
-
-        if (!sections.length) {
-            nav.hidden = true;
+        if (!build()) {
+            root.hidden = true;
             return;
         }
 
-        nav.addEventListener('mouseenter', function () {
+        root.addEventListener('mouseenter', function () {
             overNav = true;
-            updateVisibility();
+            updateExpanded();
         });
-        nav.addEventListener('mouseleave', function () {
+        root.addEventListener('mouseleave', function () {
             overNav = false;
-            updateVisibility();
+            updateExpanded();
         });
 
         window.addEventListener('mousemove', function (e) {
             nearSide = e.clientX <= LEFT_ZONE;
-            updateVisibility();
+            updateExpanded();
         }, { passive: true });
 
         window.addEventListener('scroll', function () {
-            markScrolling();
+            updateProgress();
             updateActive();
         }, { passive: true });
 
+        window.addEventListener('resize', updateProgress, { passive: true });
+
         links.forEach(function (link) {
             link.addEventListener('click', function () {
-                markScrolling();
+                nearSide = true;
+                updateExpanded();
             });
         });
 
+        updateProgress();
         updateActive();
-        setVisible(false);
+        setExpanded(false);
     }
 
     if (document.readyState === 'loading') {

@@ -98,9 +98,20 @@
         });
     }
 
+    function ensureSideScroll() {
+        if (!document.body.classList.contains('project-page')) return;
+        if (document.querySelector('script[data-side-scroll]')) return;
+        var script = document.createElement('script');
+        script.src = 'side-scroll.js?v=3';
+        script.defer = true;
+        script.setAttribute('data-side-scroll', '1');
+        document.head.appendChild(script);
+    }
+
     function mount() {
         mountHeader();
         mountFooter();
+        ensureSideScroll();
     }
 
     window.portfolioProjects = PROJECTS;

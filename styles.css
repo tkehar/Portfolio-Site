@@ -1464,6 +1464,124 @@ body.dark-mode .tile-title {
     transform: translateX(4px);
 }
 
+/* Sticky left progress + hover heading jump links */
+.side-scroll {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 40;
+    display: flex;
+    align-items: stretch;
+    width: 24px;
+    padding: 120px 0 48px;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.side-scroll__rail {
+    pointer-events: auto;
+    display: flex;
+    justify-content: center;
+    width: 24px;
+    height: 100%;
+}
+
+.side-scroll__track {
+    position: relative;
+    width: 2px;
+    height: 100%;
+    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+}
+
+.side-scroll__progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: #000;
+    border-radius: 2px;
+}
+
+.side-scroll__labels {
+    pointer-events: none;
+    position: absolute;
+    top: 120px;
+    left: 28px;
+    bottom: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 14px;
+    min-width: 140px;
+    max-width: 180px;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.side-scroll.is-expanded {
+    width: 220px;
+}
+
+.side-scroll.is-expanded .side-scroll__labels {
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.side-scroll__link {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    color: rgba(0, 0, 0, 0.45);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 140ms ease;
+}
+
+.side-scroll__link:hover,
+.side-scroll__link.is-active {
+    color: #000;
+    font-weight: 700;
+}
+
+.project-content h3.project-block-label,
+.project-content h3.project-section-title,
+.project-content [data-side-section] {
+    scroll-margin-top: 96px;
+}
+
+body.dark-mode .side-scroll__track {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+body.dark-mode .side-scroll__progress {
+    background: #ffffff;
+}
+
+body.dark-mode .side-scroll__link {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+body.dark-mode .side-scroll__link:hover,
+body.dark-mode .side-scroll__link.is-active {
+    color: #ffffff;
+}
+
+@media (max-width: 900px) {
+    .side-scroll {
+        display: none;
+    }
+}
+
 /* Figma text styles
    Heading 1  — Montserrat ExtraBold 42 / 50 / -1
    Heading 2  — Montserrat Bold 28 / 36 / -0.5
@@ -2103,6 +2221,20 @@ body.dark-mode .ds-card__body {
     transform: translateX(-50%);
 }
 
+/* Standalone centered CTAs (no image) — keep in document flow */
+.project-cta-media--center:not(:has(> img)) {
+    display: flex;
+    justify-content: center;
+    min-height: 0;
+    margin-top: 32px;
+    margin-bottom: 12px;
+}
+
+.project-cta-media--center:not(:has(> img)) .ds-button {
+    position: static;
+    transform: none;
+}
+
 .ss-comp-row {
     display: flex;
     align-items: flex-start;
@@ -2313,6 +2445,13 @@ body.dark-mode .ds-card__body {
 
 .sma-stakeholder {
     position: relative;
+}
+
+.sma-stakeholder .stakeholder-map-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
 }
 
 .sma-stakeholder .hotspot-popup {
