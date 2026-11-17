@@ -6,12 +6,12 @@
     <title>Talha Ahmed Kehar | Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <script src="config.js" defer></script>
-    <script src="lightbox.js" defer></script>
+    <script src="lightbox.js?v=3" defer></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.4.0/dist/model-viewer.min.js"></script>
 </head>
 <body class="home-page">
     <script src="theme.js"></script>
-    <script src="components.js"></script>
+    <script src="components.js?v=3"></script>
     <div class="container">
         <header class="navbar" data-component="header" data-active="work"></header>
 
@@ -108,11 +108,11 @@
 
                     <section class="collage collage--gd" id="graphic-design" aria-label="Graphic Design">
                         <h2 class="collage-title">Make what<br>matters.</h2>
-                        <button type="button" class="tile tile--mando tile--portrait" aria-label="The Mandalorian" data-lightbox data-image="Assets/The Mandalorian.png" data-title="The Mandalorian" data-subtitle="Personal Project, 2021">
+                        <button type="button" class="tile tile--mando tile--portrait" aria-label="The Mandalorian" data-lightbox-id="mando">
                             <span class="tile-media"><img src="Assets/Home/Mandalorian.png" alt=""></span>
                             <span class="tile-title">The Mandalorian</span>
                         </button>
-                        <button type="button" class="tile tile--sword" aria-label="Karachi Calligraphy" data-lightbox data-image="Assets/Karachi Sword-01.png" data-title="Karachi Calligraphy" data-subtitle="Calligraphy of ‘Karachi’ in the shape of a sword, 2019">
+                        <button type="button" class="tile tile--sword" aria-label="Karachi Calligraphy" data-lightbox-id="calligraphy">
                             <span class="tile-media"><img src="Assets/Karachi Sword-01.png" alt=""></span>
                             <span class="tile-title">Karachi Calligraphy</span>
                         </button>
@@ -124,7 +124,7 @@
                             </span>
                             <span class="tile-title">ADA Magazine</span>
                         </a>
-                        <button type="button" class="tile tile--qor" aria-label="Queen Of Roses" data-lightbox data-image="Assets/Queen_of_Roses.gif" data-title="Queen Of Roses" data-subtitle="Personal Project, 2017">
+                        <button type="button" class="tile tile--qor" aria-label="Queen Of Roses" data-lightbox-id="qor">
                             <span class="tile-media"><img src="Assets/Home/QOR_Portrait.png" alt=""></span>
                             <span class="tile-title">Queen Of Roses</span>
                         </button>
@@ -132,22 +132,22 @@
                             <span class="tile-media"><img src="Assets/Home/TW_Logo.png" alt=""></span>
                             <span class="tile-title">Ticket Wala Identity Design</span>
                         </a>
-                        <button type="button" class="tile tile--se" aria-label="Snake Eyes" data-lightbox data-image="Assets/SE/SE_Banner.png" data-title="Snake Eyes" data-subtitle="Inspired by the 2018 Pakistan election rigging scandal">
+                        <button type="button" class="tile tile--se" aria-label="Snake Eyes" data-lightbox-id="se">
                             <span class="tile-media"><img src="Assets/SE/SE_Banner.png" alt=""></span>
                             <span class="tile-title">Snake Eyes</span>
                         </button>
-                        <a class="tile tile--su" href="SU" aria-label="Speak Up">
+                        <button type="button" class="tile tile--su" aria-label="Speak Up" data-lightbox-id="su">
                             <span class="tile-media"><img src="Assets/SU/SU_Banner.png" alt=""></span>
                             <span class="tile-title">Speak Up</span>
-                        </a>
-                        <a class="tile tile--stg tile--portrait" href="STG" aria-label="The Stained Glass Window">
+                        </button>
+                        <button type="button" class="tile tile--stg tile--portrait" aria-label="The Stained Glass Window" data-lightbox-id="stg">
                             <span class="tile-media"><img src="Assets/STG/STG_Banner.png" alt=""></span>
                             <span class="tile-title">The Stained Glass<br>Window</span>
-                        </a>
-                        <a class="tile tile--nfn tile--portrait" href="NFN" aria-label="No Funeral For Nazia">
+                        </button>
+                        <button type="button" class="tile tile--nfn tile--portrait" aria-label="No Funeral For Nazia" data-lightbox-id="nfn">
                             <span class="tile-media"><img src="Assets/NFN/NFFN_Banner.png" alt=""></span>
                             <span class="tile-title">No Funeral For Nazia</span>
-                        </a>
+                        </button>
                     </section>
 
                     <section class="collage collage--cur" id="curation" aria-label="Curation">
@@ -177,14 +177,6 @@
                 modelArc.style.strokeDashoffset = 100 - 100 * Math.max(e.detail.totalProgress, 0.08);
             });
 
-            document.querySelectorAll('.tile[data-lightbox]').forEach(tile => {
-                tile.addEventListener('click', () => {
-                    if (window.portfolioLightbox) {
-                        window.portfolioLightbox.open(tile.dataset.image, tile.dataset.title, tile.dataset.subtitle);
-                    }
-                });
-            });
-
             // Project taglines → hover skill tags (same source as project pages).
             const projectKeywords = {
                 MAN: '0→1 · AI product design · Speech-to-text · Journey mapping · Field service · MVP',
@@ -198,20 +190,25 @@
                 SMA: 'WebXR · A-Frame · Living archive · Information architecture · Stakeholder mapping · Exhibition design',
                 ADA: 'Editorial Design · Print & Digital Layout · Web Design · Art Direction · Typography · Feature Writing & Editing · Event Production · Content Strategy',
                 TW: 'Brand identity · Bilingual typography · Urdu calligraphy · Custom Kufic logotype',
-                SU: 'Brand Identity · Logo Design · Motion Design · Logo Animation · Video Production · Social Media Content · Design for Children',
-                STG: 'Book Cover Design · Illustration · Concept Development · Visual Storytelling · Typography · Publishing',
-                NFN: 'Book Cover Design · Illustration · Concept Development · Visual Storytelling · Typography · Publishing',
                 WGTW: 'Exhibition Identity · Collateral Design · Web Design · Information Architecture · HTML/CSS · Designing within Constraints',
                 TSW: 'Exhibition design · Curation · Community engagement · Participatory design · Public programming'
+            };
+
+            const lightboxHoverKeywords = {
+                su: 'Brand Identity · Logo Design · Motion Design · Logo Animation · Video Production · Social Media Content · Design for Children',
+                stg: 'Book Cover Design · Illustration · Concept Development · Visual Storytelling · Typography · Publishing',
+                nfn: 'Book Cover Design · Illustration · Concept Development · Visual Storytelling · Typography · Publishing',
+                mando: 'Illustration · Visual Storytelling',
+                calligraphy: 'Calligraphy · Typography',
+                qor: 'Motion Design · Illustration · Visual Storytelling',
+                se: 'Illustration · Visual Storytelling'
             };
 
             function skillTagsFromTagline(tagline) {
                 return tagline.split('·').map(s => s.trim().replace(/\.$/, '')).filter(Boolean);
             }
 
-            document.querySelectorAll('.tile[href]').forEach(tile => {
-                const key = tile.getAttribute('href');
-                const tagline = projectKeywords[key];
+            function attachHoverTags(tile, tagline) {
                 if (!tagline) return;
                 const media = tile.querySelector('.tile-media');
                 if (!media || media.querySelector('.tile-hover')) return;
@@ -225,6 +222,14 @@
                     hover.appendChild(tag);
                 });
                 media.appendChild(hover);
+            }
+
+            document.querySelectorAll('.tile[href]').forEach(tile => {
+                attachHoverTags(tile, projectKeywords[tile.getAttribute('href')]);
+            });
+
+            document.querySelectorAll('.tile[data-lightbox-id]').forEach(tile => {
+                attachHoverTags(tile, lightboxHoverKeywords[tile.getAttribute('data-lightbox-id')]);
             });
 
             const nav = document.querySelector('.home-sections');

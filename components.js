@@ -17,9 +17,6 @@
         SMA: { id: 'SMA', title: 'Sabeen Mahmud Archive', href: 'SMA', image: 'Assets/SMA/SMA_Banner.png', category: 'xr' },
         ADA: { id: 'ADA', title: 'ADA Magazine', href: 'ADA', image: 'Assets/ADA/ADA_Banner.png', category: 'graphic' },
         TW: { id: 'TW', title: 'Ticket Wala Identity Design', href: 'TW', image: 'Assets/TW/TW_Banner.png', category: 'graphic' },
-        SU: { id: 'SU', title: 'Speak Up', href: 'SU', image: 'Assets/SU/SU_Banner.png', category: 'graphic' },
-        STG: { id: 'STG', title: 'The Stained Glass Window', href: 'STG', image: 'Assets/STG/STG_Banner.png', category: 'graphic' },
-        NFN: { id: 'NFN', title: 'No Funeral For Nazia', href: 'NFN', image: 'Assets/NFN/NFFN_Banner.png', category: 'graphic' },
         WGTW: { id: 'WGTW', title: 'Who Gets To Talk About Whom', href: 'WGTW', image: 'Assets/WGTW/WGTW_Banner.png', category: 'curation' },
         TSW: { id: 'TSW', title: 'Look at the City from here', href: 'TSW', image: 'Assets/TSW/TSW_Banner.png', category: 'curation' }
     };
