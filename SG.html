@@ -5,151 +5,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scales</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="config.js" defer></script>
-    <script src="lightbox.js" defer></script>
+    <script src="config.js?v=2" defer></script>
+    <script src="lightbox.js?v=2" defer></script>
+    <script src="components.js?v=2" defer></script>
 </head>
 <body class="project-page sg-project">
     <script src="theme.js"></script>
-    <script src="components.js"></script>
     <div class="container">
         <header class="navbar" data-component="header" data-active="work"></header>
-        <div class="main-content project-content">
-            
+
+        <main class="main-content project-content">
             <div class="project-heading">
                 <h1>SCALES</h1>
                 <p class="project-subtitle">A Decision-Making Game on the Hidden Costs of AI Development</p>
                 <p class="project-tagline">Game design · Systems design · Serious games · WebXR · Critical design · AI ethics.</p>
             </div>
-            <p><I>* Awarded best thesis at University of Europe for Applied Sciences in July 2026.</I></p>
-            
-            <div class="grid-4-col">
-                <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+
+            <p class="project-award">* Awarded best thesis at University of Europe for Applied Sciences in July 2026.</p>
+
+            <div class="project-details grid-4-col">
+                <div class="grid-item">
                     <p><b>Client:</b></p>
                     <p>-</p>
                 </div>
-                <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+                <div class="grid-item">
                     <p><b>Role:</b></p>
                     <p>Concept, Design &amp; Development</p>
                 </div>
-                <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+                <div class="grid-item">
                     <p><b>Year:</b></p>
                     <p>2026</p>
                 </div>
-                <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
+                <div class="grid-item">
                     <p><b>Team:</b></p>
                     <p>-</p>
                 </div>
             </div>
 
-            
+            <section class="project-block" aria-label="Problem">
+                <h3 class="project-block-label">Problem</h3>
+                <p class="project-block-body">The physical, social and political costs of AI are difficult to identify and public debate rarely makes them concrete. For my masters thesis I researched the cost of developing AI and the decisions that lead up to this cost.</p>
+                <h3 class="project-block-label">Concept</h3>
+                <p class="project-block-body">An interactive game that educates player on the complexity of developing artificial intelligence. It places the viewer inside a gamified model of their data territory as they navigate how technological progress is deeply entangled with physical, social, and political costs.</p>
+            </section>
 
-            
-            <div class="content-row">
-                <div class="text-column" style="padding-top:20px;">
-                    <h2>The physical, social and political costs of building AI are hard to see from the outside, and public debate rarely makes them concrete.</h2>
+            <div class="project-media project-media--narrow">
+                <div class="project-video project-video--560">
+                    <iframe src="https://www.youtube.com/embed/gWhcqoyDYpE" title="Scales game trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
                 </div>
-                <div class="image-column" style="padding-top:20px; text-align: center;">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/gWhcqoyDYpE?si=QynxS2hnuQXPk1RP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> 
-                    <div class="content-row" style="justify-content: center;">
-                        <a href="https://docs.google.com/document/d/1-bJiEwlFkm-JJOiliip14RaA-5oijF_NW5dgo1Vuv9s/edit?usp=sharing" class="visit-button" target="_blank" rel="noopener">View Research</a>
-                        <a href="scales-game.html" class="visit-button" target="_blank" rel="noopener">Launch Game</a>
+                <div class="project-cta-row">
+                    <a class="ds-button" href="https://docs.google.com/document/d/1-bJiEwlFkm-JJOiliip14RaA-5oijF_NW5dgo1Vuv9s/edit?usp=sharing" target="_blank" rel="noopener">View Research</a>
+                    <a class="ds-button" href="scales-game.html" target="_blank" rel="noopener">Launch Game</a>
+                </div>
+            </div>
+
+            <section class="project-block" aria-label="Task">
+                <h3 class="project-block-label">Task</h3>
+                <p class="project-block-body">I adapted Michael Hardt and Antonio Negri's framework of Empire into three playable factions</p>
+                <p class="project-block-body">Players take decisions as they navigate how technological progress is entangled with physical, social, and political costs.</p>
+                <div class="persona-card-stack">
+                    <article class="ds-card ds-card--horizontal">
+                        <div class="ds-card__media"><img src="Assets/Scales/Big Tech.png" alt=""></div>
+                        <div class="ds-card__content">
+                            <h3 class="ds-card__title">Big Tech</h3>
+                            <p class="ds-card__body">Motivated by profit, progress and the imperative of building AGI.</p>
+                        </div>
+                    </article>
+                    <article class="ds-card ds-card--horizontal">
+                        <div class="ds-card__media"><img src="Assets/Scales/State.png" alt=""></div>
+                        <div class="ds-card__content">
+                            <h3 class="ds-card__title">The State</h3>
+                            <p class="ds-card__body">Motivated by military and technological supremacy.</p>
+                        </div>
+                    </article>
+                    <article class="ds-card ds-card--horizontal">
+                        <div class="ds-card__media"><img src="Assets/Scales/Multitude.png" alt=""></div>
+                        <div class="ds-card__content">
+                            <h3 class="ds-card__title">The Multitude</h3>
+                            <p class="ds-card__body">The productive force of our world. They are the ones exploited by others who seek power.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="project-block" aria-label="Game variables">
+                <h3 class="project-block-label">Game variables</h3>
+                <p class="project-block-body">Built decisions around five ways that AI impacts society.</p>
+            </section>
+
+            <div class="feature-card-grid">
+                <article class="ds-card ds-card--stacked">
+                    <div class="ds-card__media"><img src="Assets/Scales/Surveillance.png" alt=""></div>
+                    <div class="ds-card__content">
+                        <h3 class="ds-card__title">Sovereignty</h3>
+                        <p class="ds-card__body">Concerned with questions of autonomy, independence, lawful control.</p>
                     </div>
-                </div>
-            </div>
-
-            <div class="content-row">
-                
-                <div class="image-column">
-                    <img src="Assets/Scales/Scales_Banner.png" style="width: 100%; height: auto;">
-                </div>
-
-                <div class="text-column" style="margin-top: 10%; margin-left: 20px;">
-                    <h2>This was my MA thesis project, designing a game to visualise the impact of AI development.</h2>
-                </div>
-            </div>
-
-            <div class="content-row">
-                <div class="text-column" style="margin-top:4%;">
-                    <h2>I adapted Michael Hardt and Antonio Negri's framework of Empire into three playable factions</h2>
-                    <h3>Players take decisions as they navigate how technological progress is entangled with physical, social, and political costs.</h3>
-                </div>
-
-                <div class="image-column" style="padding-top:20px; text-align: center;">
-                    <div class="image-column" style="padding-top:20px; text-align: center;">    
-                        <div class="content-row" style="align-items: center;">
-                            <img src="Assets/Scales/Big Tech.png" alt="Scales process" style="width: 20%; height: auto; border-radius: 10px;">
-                            <p style="text-align: left;"><b>Big Tech</b> is motivated by profit, progress and the imperative of building AGI.</p>
-                        </div>
-                        <br></br>
-                        <div class="content-row" style="align-items: center;">
-                            <img src="Assets/Scales/State.png" alt="Scales process" style="width: 20%; height: auto; border-radius: 10px;">
-                            <p style="text-align: left;"><b>The State</b> is motivated by military and technological supremacy.</p>
-                        </div>
-                        <br></br>
-                        <div class="content-row" style="align-items: center;">
-                            <img src="Assets/Scales/Multitude.png" alt="Scales process" style="width: 20%; height: auto; border-radius: 10px;">
-                            <p style="text-align: left;"><b>The Multitude</b> are the productive force of our world. They are the ones exploited by other who seek power.</p>
-                        </div>
+                </article>
+                <article class="ds-card ds-card--stacked">
+                    <div class="ds-card__media"><img src="Assets/Scales/Mirror.png" alt=""></div>
+                    <div class="ds-card__content">
+                        <h3 class="ds-card__title">Identity</h3>
+                        <p class="ds-card__body">Concerned with questions related to the self, civic, and collective recognition.</p>
                     </div>
-                </div>
-                
+                </article>
+                <article class="ds-card ds-card--stacked">
+                    <div class="ds-card__media"><img src="Assets/Scales/Scale.png" alt=""></div>
+                    <div class="ds-card__content">
+                        <h3 class="ds-card__title">Power</h3>
+                        <p class="ds-card__body">Concerned with questions of institutional or platform leverage and agency.</p>
+                    </div>
+                </article>
+                <article class="ds-card ds-card--stacked">
+                    <div class="ds-card__media"><img src="Assets/Scales/Box.png" alt=""></div>
+                    <div class="ds-card__content">
+                        <h3 class="ds-card__title">Transparency</h3>
+                        <p class="ds-card__body">Concerned with questions of explainability and opacity of systems.</p>
+                    </div>
+                </article>
+                <article class="ds-card ds-card--stacked">
+                    <div class="ds-card__media"><img src="Assets/Scales/Ecology.png" alt=""></div>
+                    <div class="ds-card__content">
+                        <h3 class="ds-card__title">Ecology</h3>
+                        <p class="ds-card__body">Tracks resource consumption and compares them against projected baselines.</p>
+                    </div>
+                </article>
             </div>
 
-            <div class="content-row">
-                <div class="text-column" style="padding-top:20px;">
-                    <h2>Built decisions around four ways that AI impacts society.</h2>
+            <section class="project-block" aria-label="Scoring system">
+                <h3 class="project-block-label">Scoring system</h3>
+                <p class="project-block-body">Decision impact scores and determines who wins or if ecological collapse is triggered. A decision matrix was used with a list of decisions unique to each territory.</p>
+                <div class="project-cta-row">
+                    <a class="ds-button" href="https://app.notion.com/p/39c54deeecc8807ab3bad655b67e4451?v=39c54deeecc8808c9538000c6bd0b42c&amp;source=copy_link" target="_blank" rel="noopener">View Decision Matrix</a>
                 </div>
-            </div>
-            <div class="content-row">
-                <div class="text-column" style="padding-top:20px; text-align: center;">
-                    <h2>Sovereignty</h2>
-                    <img src="Assets/Scales/Surveillance.png" alt="Scales process" style="width: 90%; height: auto; border-radius: 10px;">
-                    <p style="text-align: left;">Concerned with questions autonomy, independence, lawful control.</p>
-                </div>
-                <div class="text-column" style="padding-top:20px; text-align: center;"">
-                    <h2>Identity</h2>
-                    <img src="Assets/Scales/Mirror.png" alt="Scales process" style="width: 90%; height: auto; border-radius: 10px;">
-                    <p style="text-align: left;">Concerned with questions related to the self, civic, and collective recognition.</p>
-                </div>
-                <div class="text-column" style="padding-top:20px; text-align: center;""> 
-                    <h2>Power</h2>
-                    <img src="Assets/Scales/Scale.png" alt="Scales process" style="width: 90%; height: auto; border-radius: 10px;">
-                    <p style="text-align: left;">Concerned with questions of institutional or platform leverage.</p>
-                </div>
-                <div class="text-column" style="padding-top:20px; text-align: center;""> 
-                    <h2>Transparency</h2>
-                    <img src="Assets/Scales/Box.png" alt="Scales process" style="width: 90%; height: auto; border-radius: 10px;">
-                    <p style="text-align: left;">Concerned with questions of explainability and opacity of systems.</p>
-                </div>
+            </section>
+
+            <div class="project-media project-media--narrow">
+                <img src="Assets/Scales/Score Board.png" alt="Scales scoring board">
             </div>
 
-            <div class="content-row">
-                <div class="text-column" style="padding-top:20px;">
-                    <h2>Decision impact scores and determines who wins or if ecological collapse occurs.</h2>
-                </div>
-
-                <div class="image-column" style="padding-top:20px; text-align: center;">
-                    <img src="Assets/Scales/Score Board.png" alt="Scales process" style="width: 90%; height: auto; border-radius: 10px;">
-                </div>
+            <div class="eh-photo-pair project-media project-media--wide">
+                <img src="Assets/Scales/Scales.png" alt="Scales playtest session">
+                <img src="Assets/Scales/Test3.png" alt="Scales game interface during play">
             </div>
 
-            <div class="content-row">
-                
-                <div class="image-column" style="padding-top:20px; text-align: center;">
-                    <img src="Assets/Scales/IMG_4805.HEIC" alt="Scales process" style="width: 90%; height: auto; border-radius: 10px;">
-                </div>
-                
-                <div class="text-column" style="padding-top:20px;">
-                    <h2>Players must achieve their goals before the simulation reaches or surpasses projected ecological baselines of 2030.</h2>
-                    <img src="Assets/Scales/IMG_4959.HEIC" alt="Scales process" style="width: 90%; height: auto; border-radius: 10px;">
-                </div>
-                
-            </div>
-            
-            
-            
-        </div>
+            <section class="project-block" aria-label="Reflection">
+                <h3 class="project-block-label">Reflection</h3>
+                <p class="project-block-body">Turning theory into rules demanded a precision writing never did. Every argument about Big Tech or the State had to become a number that could tip the game. In playtests, players argued their way to decisions together, which showed me the game works best as a prompt for debate rather than a lesson.</p>
+            </section>
+
+            <footer class="project-footer" data-component="footer" data-project="SG"></footer>
+        </main>
     </div>
-
 </body>
 </html>

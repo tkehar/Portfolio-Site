@@ -5,231 +5,234 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sastaticket Order Management System</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="config.js" defer></script>
-    <script src="lightbox.js" defer></script>
+    <script src="config.js?v=2" defer></script>
+    <script src="lightbox.js?v=2" defer></script>
+    <script src="components.js?v=2" defer></script>
 </head>
 <body class="project-page oms-project">
     <script src="theme.js"></script>
-    <script src="components.js"></script>
     <div class="container">
         <header class="navbar" data-component="header" data-active="work"></header>
-        <div class="main-content project-content">
-            <div class="text-column">
-                <div class="project-heading">
-                    <h1>Sastaticket Order Management System</h1>
-                    <p class="project-subtitle">Redesigning a Legacy Product (+20% first-call resolution)</p>
+
+        <main class="main-content project-content">
+            <div class="project-heading">
+                <h1>Sastaticket Order Management System</h1>
+                <p class="project-subtitle">Redesigning a legacy product (+20% first-call resolution)</p>
                 <p class="project-tagline">Internal Tools · Legacy Redesign · User Research · Personas · Stakeholder Workshops · Heatmap Analysis · Information Hierarchy · Design System</p>
-                </div>
-                <div class="grid-4-col">
-                    <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
-                        <p><b>Company:</b></p>
-                        <p>Sastaticket.pk</p>
-                    </div>
-                    <div class="grid-item" style="height: fit-content;width: 100%;;padding: 1%;">
-                        <p><b>Role:</b></p>
-                        <p>Product Designer</p>
-                    </div>
-                    <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
-                        <p><b>Year:</b></p>
-                        <p>2021 - 2022</p>
-                    </div>
-                    <div class="grid-item" style="height: fit-content;width: 100%; ;padding: 1%;">
-                        <p><b>Team:</b></p>
-                        <p>Fatin Nawaz, Mustafa Hassan (Product Team)</p>
-                    </div>
             </div>
-           
 
-            <div class="content-row">
-                <div class="text-column" style="align-items: normal;">
-                    <h2>Customer service agents struggled to use a cluttered internal order system which lacked reliable data on pricing errors and refunds.</h2>
+            <div class="project-details grid-4-col">
+                <div class="grid-item">
+                    <p><b>Company:</b></p>
+                    <p>Sastaticket.pk</p>
                 </div>
-            
-                <div class="image-column" style="text-align: center; padding-top: 5%;">
-                    <img src="Assets/OMS/Agents.png" alt="stats" style="width: 100%; height: auto;">
+                <div class="grid-item">
+                    <p><b>Role:</b></p>
+                    <p>Product Designer</p>
+                </div>
+                <div class="grid-item">
+                    <p><b>Year:</b></p>
+                    <p>2021 - 2022</p>
+                </div>
+                <div class="grid-item">
+                    <p><b>Team:</b></p>
+                    <p>Fatin Nawaz (Product Manager)
+Mustafa Hassan (Product Manager)</p>
                 </div>
             </div>
 
-            <div class="content-row">
-                <div class="image-column" style="text-align: center; padding-top: 2%;">
-                    <img src="Assets/OMS/Stats.png" alt="stats" style="width: 100%; height: auto;">
-                </div>
-                <div class="text-column">
-                    <h2>I worked with the product team on research, information hierarchy & UI.</h2>
-                </div>
-            </div>
-            
-            <div class="content-row">
-                <div class="text-column" style="align-items: normal; padding-top: 5%;">
-                    <h2>Ran workshops to map major pain points.</h2>
-                    <h3> • Refund delays</h3>
-                    <h3> • Price miscalculations</h3>
-                    <h3> • No live flight data</h3>
-                </div>
-                <div class="image-column">
-                    <div class="image-overlay-wrapper">
-                        <img src="Assets/OMS/Workshops.png" alt="workshops" style="width: 100%; height: auto; border-radius: 0;">
-                        <a href="https://miro.com/app/board/o9J_ln787Oc=/" class="overlay-btn" target="_blank">
-                            <img src="Assets/Icons/Miro.svg" alt="Miro">
-                            View Documentation
-                        </a>
-                    </div>
-                </div>
-            </div>
-        <div class="content-row"> 
+            <section class="project-block" aria-label="Context">
+                <h3 class="project-block-label">Context</h3>
+                <p class="project-block-body">Sastaticket is an online travel agency that relies on its customer service team to handle large volumes of calls from customer queries to order confirmation. This team of 54 agents was the spine of the platform.</p>
+                <h3 class="project-block-label">Problem</h3>
+                <p class="project-block-body">Customer service agents struggled to use a cluttered internal order system which lacked reliable and updated information on flight details, pricing errors and refunds. This had led to an average handle time of 4 mins per query which was too long given the amount of queries the team dealt with daily.</p>
+            </section>
 
-            <div class="image-column" style="text-align: center; margin-top: 10%;">
-                    <img src="Assets/OMS/Survey.png" alt="survey" style="width: 100%; height: auto;">
-                    <p>Survey of employment tenure for CS team</p>
-                </div>    
-            <div class="text-column">
-                    <h2>Surveyed agent tenure, identifying two user groups.</h2>
-                    <div class="content-row">
-                        <article class="ds-card">
-                            <div class="ds-card__media">
-                             <img src="Assets/OMS/P1.png" alt="May You Live in Interesting Times">
-                            </div>
-                            <h3 class="ds-card__title"> Agents with < 3 months of experience</b></h3>
+            <div class="project-media project-media--narrow">
+                <img src="Assets/OMS/Agents.png" alt="Customer service agents at work">
+            </div>
+
+            <section class="project-block" aria-label="Task">
+                <h3 class="project-block-label">Task</h3>
+                <p class="project-block-body">I worked with the product team on discovery workshops, user research, information hierarchy &amp; UI redesign.</p>
+                <h3 class="project-block-label">Discovery workshops</h3>
+                <p class="project-block-body">We ran workshops with the customer service team to understand the major pain points of customer queries and what they struggled with in the current system.</p>
+                <ul class="project-bullet-list">
+                    <li>Refund delays</li>
+                    <li>Price miscalculations</li>
+                    <li>No live flight data</li>
+                </ul>
+            </section>
+
+            <div class="project-cta-media project-media">
+                <img src="Assets/OMS/Workshops.png" alt="Customer service discovery workshops">
+                <a class="ds-button" href="https://miro.com/app/board/o9J_ln787Oc=/" target="_blank" rel="noopener">
+                    <img src="Assets/Icons/Miro.svg" alt="" width="24" height="24">
+                    View Documentation
+                </a>
+            </div>
+
+            <section class="project-block" aria-label="User research">
+                <h3 class="project-block-label">User research</h3>
+                <p class="project-block-body">We conducted interviews and surveys with members of the CS team to flesh out their pain points and personas. The CS team consisted of about 54 agents and 4 managerial leads.</p>
+                <div class="oms-survey-collage" aria-label="CS team survey charts">
+                    <figure class="oms-survey oms-survey--1">
+                        <img class="lightbox-image" src="Assets/OMS/Survey1.png" alt="Survey chart: years of experience" data-title="CS team survey" data-subtitle="Years of experience">
+                        <img class="zoom-hint" src="Assets/Icons/Zoom-in.svg" alt="" aria-hidden="true">
+                    </figure>
+                    <figure class="oms-survey oms-survey--2">
+                        <img class="lightbox-image" src="Assets/OMS/Survey2.png" alt="Survey chart: education" data-title="CS team survey" data-subtitle="Education">
+                        <img class="zoom-hint" src="Assets/Icons/Zoom-in.svg" alt="" aria-hidden="true">
+                    </figure>
+                    <figure class="oms-survey oms-survey--3">
+                        <img class="lightbox-image" src="Assets/OMS/Survey3.png" alt="Survey chart: gender" data-title="CS team survey" data-subtitle="Gender">
+                        <img class="zoom-hint" src="Assets/Icons/Zoom-in.svg" alt="" aria-hidden="true">
+                    </figure>
+                    <figure class="oms-survey oms-survey--4">
+                        <img class="lightbox-image" src="Assets/OMS/Survey4.png" alt="Survey chart: tickets handled" data-title="CS team survey" data-subtitle="Tickets handled">
+                        <img class="zoom-hint" src="Assets/Icons/Zoom-in.svg" alt="" aria-hidden="true">
+                    </figure>
+                </div>
+                <p class="project-media-caption">CS team survey results</p>
+                <p class="project-block-body">A majority of the CS agents were aged 25-35. The most illuminating factor however was length of employment which revealed that approximately 25% of agents had been working for under 3 months, while over 47% had been working for over a year. Based on these findings we developed three personas within the CS Team.</p>
+                <div class="persona-card-stack">
+                    <article class="ds-card ds-card--horizontal">
+                        <div class="ds-card__media"><img src="Assets/OMS/Newbie.png" alt=""></div>
+                        <div class="ds-card__content">
+                            <h3 class="ds-card__title">&lt; 3 months of experience</h3>
                             <p class="ds-card__body">Struggle with workflow complexity, makes frequent calculation errors, Needs guardrails in the system to prevent mistakes.</p>
-                        </article>
-
-                        <article class="ds-card">
-                            <div class="ds-card__media">
-                             <img src="Assets/OMS/P2.png" alt="May You Live in Interesting Times">
-                            </div>
-                            <h3 class="ds-card__title"> Agents with > 1 year of experience</b></h3>
-                            <p class="ds-card__body">Quietly built workarounds, Cross-checks data for pricing, fare rules, and live flight information. The system never earned their trust.</p>
-                        </article>
-                    </div>
-            </div>
-
-
-        </div>
-
-        <div class="content-row">
-            <div class="text-column">
-                
-        </div>
-        </div>
-                
-
-        
-        <div class="text-column">
-                <h2>Used heatmaps to regroup elements by function &amp; frequency of use.</h2>
-            </div>
-        <div class="content-row">
-        <div class="image-column">
-                    <img src="Assets/OMS/Components.png" alt="Environments" style="width: 100%; height: auto; border-radius: 0;">
-                </div>        
-        
-
-            </div>
-        
-        <div class="content-row" style="padding-bottom: 5%;">
-            <div class="image-column">
-                <img src="Assets/OMS/Order Status.png" alt="status" style="width: 100%; height: auto; border-radius: 0; padding-top: 5%;">
-            </div>   
-            <div class="text-column">
-                    <h2>Colour-coded order status to easily identify where a customer was in their journey.</h2>
-            </div>
-                 
-        </div>   
-        
-    
-        <div class="content-row">
-
-            <div class="text-column">
-                <h2>Impact of Redesign.</h2>
-                <table class="methodology-table">
-                <thead>
-                    <tr>
-                        <th>User Metric</th>
-                        <th>Sept 2021</th>
-                        <th>Oct 2022</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>First Call Resolution
-                            <div class="metric-info">
-                                <span class="info-icon">i</span>
-                                <div class="formula-tooltip">(Resolved on first call / Total cases) × 100</div>
-                            </div>
-                        </td>
-                        <td>65%</td>
-                        <td>85%</td>
-                    </tr>
-                     <tr>
-                        <td>Average Handling Time
-                            <div class="metric-info">
-                                <span class="info-icon">i</span>
-                                <div class="formula-tooltip">(Talk + Hold + Wrap time) / Total calls</div>
-                            </div>
-                        </td>
-                        <td>4 mins</td>
-                        <td>2.75 mins</td>
-                    </tr> 
-                    <tr>
-                        <td>Average Customer Wait Time
-                            <div class="metric-info">
-                                <span class="info-icon">i</span>
-                                <div class="formula-tooltip">Total wait time / Total calls</div>
-                            </div>
-                        </td>
-                        <td>3 mins</td>
-                        <td>1.5 mins</td>
-                    </tr>   
-                    <tr>
-                        <td>Customer Satisfaction Score
-                            <div class="metric-info">
-                                <span class="info-icon">i</span>
-                                <div class="formula-tooltip">(Positive ratings / Total responses) × 100</div>
-                            </div>
-                        </td>
-                        <td>85%</td>
-                        <td>90%</td>
-                    </tr>
-                    <tr>
-                        <td>Net Promoter Score
-                            <div class="metric-info">
-                                <span class="info-icon">i</span>
-                                <div class="formula-tooltip">% Promoters - % Detractors</div>
-                            </div>
-                        </td>
-                        <td>8</td>
-                        <td>9</td>
-                    </tr>
-                     <tr>
-                        <td>User Satisfaction
-                            <div class="metric-info">
-                                <span class="info-icon">i</span>
-                                <div class="formula-tooltip">(Avg. survey score / Max possible) × 100</div>
-                            </div>
-                        </td>
-                        <td>70%</td>
-                        <td>87.5%</td>
-                    </tr>
-                </tbody>
-            
-                   
-            </table>
-            </div>
-            <div class="image-column" style="margin-top: 15%;">
-                <div class="image-overlay-wrapper">
-                    <img src="Assets/OMS/Design System.png" alt="workshops" style="width: 100%; height: auto; border-radius: 0;">
-                    <a href="https://www.figma.com/design/PNfPO9jXZmPFcY6vcPzV4a/OMS?node-id=965-166350" class="overlay-btn" target="_blank">
-                        <img src="Assets/Icons/Figma.svg" alt="Figma">
-                        View Design System
-                    </a>
+                        </div>
+                    </article>
+                    <article class="ds-card ds-card--horizontal">
+                        <div class="ds-card__media"><img src="Assets/OMS/Inter.png" alt=""></div>
+                        <div class="ds-card__content">
+                            <h3 class="ds-card__title">1-2 years of experience</h3>
+                            <p class="ds-card__body">Struggle with multitasking, miscommunication and commitment. Frustrated with the limitations of the current OMS.</p>
+                        </div>
+                    </article>
+                    <article class="ds-card ds-card--horizontal">
+                        <div class="ds-card__media"><img src="Assets/OMS/Expert.png" alt=""></div>
+                        <div class="ds-card__content">
+                            <h3 class="ds-card__title">&gt; 2 year of experience</h3>
+                            <p class="ds-card__body">Quietly built workarounds, cross-checking data for pricing, fare rules, and live flight information as the system never earned their trust.</p>
+                        </div>
+                    </article>
                 </div>
+            </section>
 
-        </div>
-        </div>  
-       
-        <div>
-            <img src="Assets/OMS/Header.png" alt="Header Image" class="header-image" style=" margin-bottom: 60px;">
-        </div>    
-    
+            <section class="project-block" aria-label="Interface re-design">
+                <h3 class="project-block-label">Interface re-design</h3>
+                <p class="project-block-body">Using heat maps we identified the most interacted with features, and placed those in single header bar for each order. This practice informed our component design where we grouped actions and functions in terms of priority and similarity.</p>
+            </section>
 
+            <div class="project-media project-media--wide">
+                <img src="Assets/OMS/Components.png" alt="Heatmaps mapped to interface components">
+                <p class="project-media-caption">Heatmaps to component</p>
+                <img class="oms-redesign-ui" src="Assets/OMS/Header.png" alt="Redesigned order management interface">
+                <p class="project-media-caption">Redesigned Interface</p>
+            </div>
+
+            <section class="project-block" aria-label="Design system">
+                <h3 class="project-block-label">Design system</h3>
+                <p class="project-block-body">We developed a design system that presented order information clearly and used a system of color coding to highlight important data. A color coded system to help users differentiate between order statuses. This allowed the agents to understand at glance where in the journey the user is and how to better serve and guide them.</p>
+            </section>
+
+            <div class="project-media project-media--narrow">
+                <img src="Assets/OMS/Order Status.png" alt="Color-coded order status system">
+            </div>
+
+            <div class="project-cta-media project-media">
+                <img src="Assets/OMS/Design System.png" alt="OMS design system components">
+                <a class="ds-button" href="https://www.figma.com/design/PNfPO9jXZmPFcY6vcPzV4a/OMS?node-id=965-166350" target="_blank" rel="noopener">
+                    <img src="Assets/Icons/Figma.svg" alt="" width="24" height="24">
+                    View Design System
+                </a>
+            </div>
+
+            <section class="project-block" aria-label="Outcome">
+                <h3 class="project-block-label">Outcome</h3>
+                <div class="table-responsive">
+                    <table class="methodology-table">
+                        <thead>
+                            <tr>
+                                <th>User Metric</th>
+                                <th>Sept 2021</th>
+                                <th>Oct 2022</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>First Call Resolution
+                                    <div class="metric-info">
+                                        <span class="info-icon">i</span>
+                                        <div class="formula-tooltip">(Resolved on first call / Total cases) × 100</div>
+                                    </div>
+                                </td>
+                                <td>65%</td>
+                                <td>85%</td>
+                            </tr>
+                            <tr>
+                                <td>Average Handling Time
+                                    <div class="metric-info">
+                                        <span class="info-icon">i</span>
+                                        <div class="formula-tooltip">(Talk + Hold + Wrap time) / Total calls</div>
+                                    </div>
+                                </td>
+                                <td>4 mins</td>
+                                <td>2.75 mins</td>
+                            </tr>
+                            <tr>
+                                <td>Average Customer Wait Time
+                                    <div class="metric-info">
+                                        <span class="info-icon">i</span>
+                                        <div class="formula-tooltip">Total wait time / Total calls</div>
+                                    </div>
+                                </td>
+                                <td>3 mins</td>
+                                <td>1.5 mins</td>
+                            </tr>
+                            <tr>
+                                <td>Customer Satisfaction Score
+                                    <div class="metric-info">
+                                        <span class="info-icon">i</span>
+                                        <div class="formula-tooltip">(Positive ratings / Total responses) × 100</div>
+                                    </div>
+                                </td>
+                                <td>85%</td>
+                                <td>90%</td>
+                            </tr>
+                            <tr>
+                                <td>Net Promoter Score
+                                    <div class="metric-info">
+                                        <span class="info-icon">i</span>
+                                        <div class="formula-tooltip">% Promoters - % Detractors</div>
+                                    </div>
+                                </td>
+                                <td>8</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>User Satisfaction
+                                    <div class="metric-info">
+                                        <span class="info-icon">i</span>
+                                        <div class="formula-tooltip">(Avg. survey score / Max possible) × 100</div>
+                                    </div>
+                                </td>
+                                <td>70%</td>
+                                <td>87.5%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="project-block" aria-label="Reflection">
+                <h3 class="project-block-label">Reflection</h3>
+                <p class="project-block-body">This was one of my first professional projects as a product designer. It gave me the opportunity to do primary user research and develop a design system. This project had various stakeholder departments and allowed me to conduct hands on research.</p>
+            </section>
+
+            <footer class="project-footer" data-component="footer" data-project="OMS"></footer>
+        </main>
+    </div>
 </body>
 </html>

@@ -5,132 +5,223 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Notetaker for Field Service Technicians</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="config.js" defer></script>
-    <script src="lightbox.js" defer></script>
+    <script src="config.js?v=2" defer></script>
+    <script src="lightbox.js?v=2" defer></script>
+    <script src="components.js?v=2" defer></script>
 </head>
-<body class="project-page oms-project">
+<body class="project-page man-project">
     <script src="theme.js"></script>
-    <script src="components.js"></script>
     <div class="container">
         <header class="navbar" data-component="header" data-active="work"></header>
-        <div class="main-content project-content">
+
+        <main class="main-content project-content">
             <div class="project-heading">
                 <h1>AI Notetaker for Field Service Technicians</h1>
-                <p class="project-subtitle">Zero to One B2B SaaS MVP</p>
+                <p class="project-subtitle">Zero to one B2B SaaS MVP</p>
                 <p class="project-tagline">0→1 · AI product design · Speech-to-text · Journey mapping · Field service · MVP</p>
             </div>
-            <div class="grid-4-col">
-                    <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
-                        <p><b>Company:</b></p>
-                        <p>Makula</p>
-                    </div>
-                    <div class="grid-item" style="height: fit-content;width: 100%;;padding: 1%;">
-                        <p><b>Role:</b></p>
-                        <p>Freelance Product Designer</p>
-                    </div>
-                    <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
-                        <p><b>Year:</b></p>
-                        <p>2024-2025</p>
-                    </div>
-                    <div class="grid-item" style="height: fit-content;width: 100%; ;padding: 1%;">
-                        <p><b>Team:</b></p>
-                        <p> Saman Farooq, Gohar Nadeem (Product Team), Shahzaib Ali (Sr. Product Designer)</p>
-                    </div>
-            </div>
 
-            <div class="content-row">
-                <h2 class="project-narrative">Technicians documented facility visits manually, causing delays and inconsistency in reports and information gaps for managers.</h2>
-            </div>
-
-            <div class="content-row">
-                <div class="text-column row-copy" style="margin-top: 15%;"> 
-                    <h2 class="project-narrative">I led UI/UX design and prototyping for the MVP, working with the product team and a senior product designer.</h2>
+            <div class="project-details grid-4-col">
+                <div class="grid-item">
+                    <p><b>Company:</b></p>
+                    <p>Makula</p>
                 </div>
-                <div class="image-column">
-                   <img src="Assets/MAN/Landing Image.png" alt="Header Image" class="header-image">
+                <div class="grid-item">
+                    <p><b>Role:</b></p>
+                    <p>Freelance Product Designer</p>
+                </div>
+                <div class="grid-item">
+                    <p><b>Year:</b></p>
+                    <p>2024-2025</p>
+                </div>
+                <div class="grid-item">
+                    <p><b>Team:</b></p>
+                    <p>Saman Farooq (Product Team)
+Gohar Nadeem (Product Team)
+Shahzaib Ali (Sr. Product Designer)</p>
                 </div>
             </div>
 
-            <h2 class="section-title">Designing the User Journey</h2>
-            <table class="methodology-table">
-                <thead>
-                    <tr>
-                        <th>Stage</th>
-                        <th>Before Visit</th>
-                        <th>Arrival & Setup</th>
-                        <th>During Visit</th>
-                        <th>After Visit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><b>Objective</b></td>
-                        <td>Find work orders for the day's visit, Review machine history & previous service notes.</td>
-                        <td>Confirm machine/equipment to be serviced, Take machine history from facility team.</td>
-                        <td>Diagnose the problem, Perform repairs or maintenance.</td>
-                        <td>Write visit report, Share with manager, Share with facility.</td>
-                    </tr>
-                     <tr>
-                        <td><b>Pain Points</b></td>
-                        <td>Searching for logs or context on the previous visit.</td>
-                        <td>Lack of stable Internet connection, Important info missed or forgotten.</td>
-                        <td>Visit interruptions, Difficulty in notation or photography while repairing.</td>
-                        <td>Manual notation, Inconsistent reports & structure, Missing information, Incomplete/Delayed reports, Separated reports & work orders, Documentation not centralised</td>
-                    </tr>
-                </tbody>
-            </table>
-            <img src="Assets/MAN/User Journey.png" alt="User journey from note-taking to shared visit summary" class="user-journey-image">
+            <section class="project-block" aria-label="Context">
+                <h3 class="project-block-label">Context</h3>
+                <p class="project-block-body">Makula is a CMMS and FSM platform for machinery manufacturers and distributors. The team was expanding its AI portfolio by automating tasks for its users.</p>
+                <h3 class="project-block-label">Problem</h3>
+                <p class="project-block-body">A consistent complaint across clients was reporting for maintenance and field visits. Field service technicians made multiple facility visits a day and spent hours after documenting each causing delays, inconsistent reports and information gaps.</p>
+            </section>
 
-            <h2 class="section-title">Features</h2>
-            <div class="content-row">
-                <div class="text-column row-copy" style="margin-top: 10%;">
-                    <h2>Designed summary types that give structured outputs for common tasks and visit types.</h2>
-                </div>
-                <div class="image-column" style="text-align: center;">
-                    <img src="Assets/MAN/Summary.png" alt="Summary types" style="width: 40%; height: auto;">
-                </div>
+            <div class="table-responsive project-media">
+                <table class="methodology-table">
+                    <thead>
+                        <tr>
+                            <th>Stage</th>
+                            <th>Before Visit</th>
+                            <th>Arrival &amp; Setup</th>
+                            <th>During Visit</th>
+                            <th>After Visit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Experience</b></td>
+                            <td class="experience-cell">
+                                <img src="Assets/MAN/confident.png" alt="" width="80" height="80">
+                                <span>Confident</span>
+                            </td>
+                            <td class="experience-cell">
+                                <img src="Assets/MAN/confident.png" alt="" width="80" height="80">
+                                <span>Confident</span>
+                            </td>
+                            <td class="experience-cell">
+                                <img src="Assets/MAN/Stressed.png" alt="" width="80" height="80">
+                                <span>Stressed</span>
+                            </td>
+                            <td class="experience-cell">
+                                <img src="Assets/MAN/Overwhelmed.png" alt="" width="80" height="80">
+                                <span>Overwhelmed</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Objective</b></td>
+                            <td>
+                                <ul class="table-bullets">
+                                    <li>Find work orders for the day's visit.</li>
+                                    <li>Review machine history &amp; previous service notes.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="table-bullets">
+                                    <li>Confirm equipment to be serviced.</li>
+                                    <li>Take history from facility team.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="table-bullets">
+                                    <li>Diagnose the problem.</li>
+                                    <li>Perform repairs or maintenance.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="table-bullets">
+                                    <li>Write visit report.</li>
+                                    <li>Share with manager.</li>
+                                    <li>Share with facility.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Pain Points</b></td>
+                            <td>
+                                <ul class="table-bullets">
+                                    <li>Searching for logs or context on the previous visit.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="table-bullets">
+                                    <li>Lack of stable Internet connection.</li>
+                                    <li>Important info missed or forgotten.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="table-bullets">
+                                    <li>Visit interruptions.</li>
+                                    <li>Difficulty in notation or photography while repairing.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="table-bullets">
+                                    <li>Time spent on manual notation.</li>
+                                    <li>Inconsistent reports &amp; structure, Missing information.</li>
+                                    <li>Separated reports &amp; work orders.</li>
+                                    <li>Lack of centralized documentation.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="content-row">
-                <div class="image-column" style="text-align: center;">
-                    <img src="Assets/MAN/Image Capture.png" alt="Image capture in notes" style="width: 60%; height: auto;">
+
+            <section class="project-block" aria-label="Task">
+                <h3 class="project-block-label">Task</h3>
+                <p class="project-block-body">I was tasked with developing an MVP for an AI notetaker. I conducted comp scans, led UI/UX design and prototyping for the MVP, working with the product team and a customer success team to iteratively improve the usability.</p>
+                <h3 class="project-block-label">Competitor scans</h3>
+                <p class="project-block-body">We examined existing notetakers in the market to establish best practices and look for opportunities to develop USPs for our users.</p>
+                <div class="project-comp-scans">
+                    <figure>
+                        <img class="lightbox-image" src="Assets/MAN/Comp Scans.png" alt="Competitor scan board" data-title="Competitor scans" data-subtitle="Market notetaker review">
+                        <img class="zoom-hint" src="Assets/Icons/Zoom-in.svg" alt="" aria-hidden="true">
+                    </figure>
+                    <figure>
+                        <img class="lightbox-image" src="Assets/MAN/Comp Scans Web.png" alt="Competitor scan detail" data-title="Competitor scans" data-subtitle="Web competitor review">
+                        <img class="zoom-hint" src="Assets/Icons/Zoom-in.svg" alt="" aria-hidden="true">
+                    </figure>
                 </div>
-                <div class="text-column row-copy" style="margin-top: 10%;">
-                    <h2>Added image capture so technicians could attach evidence to summaries.</h2>
-                </div>
+                <h3 class="project-block-label">User journey</h3>
+                <p class="project-block-body">Based on this we developed a revised user journey that addressed user pain points.</p>
+            </section>
+
+            <div class="project-media">
+                <img src="Assets/MAN/User Journey.png" alt="User journey from note-taking to shared visit summary" class="user-journey-image">
             </div>
-            <div class="content-row">
-                <div class="text-column row-copy" style="margin-top: 10%;">
-                    <h2>Linked notes to assets, making documentation part of the platform's operational record.</h2>
-                </div>
-                <div class="image-column" style="text-align: center;">
-                    <img src="Assets/MAN/Publish.png" alt="Publish notes to assets" style="width: 60%; height: auto;">
-                </div>
-            </div>
-            <div class="content-row">
-                <div class="image-column" style="text-align: center;">
-                    <img src="Assets/MAN/Vocab.png" alt="Custom vocabulary" style="width: 60%; height: auto;">
-                </div>
-                <div class="text-column row-copy" style="margin-top: 10%;">
-                    <h2>Added custom vocabulary so admins could improve transcription of domain terms.</h2>
-                </div>
-            </div>
-            <div class="content-row">
-                <div class="text-column">
-                    <h2>Users reported spending less time on documentation.</h2> 
-                    <h2>The signal was strong enough for the team to give every user 30 free minutes of transcription.</h2>
-                </div>
-                <div class="image-column">
-                    <div class="image-overlay-wrapper">
-                        <img src="Assets/MAN/Desktop.png" alt="Desktop" style="width: 100%; height: auto;">
-                        <a href="https://miro.com/app/board/o9J_ln787Oc=/" class="overlay-btn" target="_blank">
-                            <img src="Assets/Icons/Figma.svg" alt="Figma">
-                            View Design File
-                        </a>
+
+            <h3 class="project-section-title">Features designed</h3>
+            <div class="feature-card-grid">
+                <article class="ds-card ds-card--stacked">
+                    <div class="ds-card__media"><img src="Assets/MAN/Landing Image.png" alt=""></div>
+                    <div class="ds-card__content">
+                        <h3 class="ds-card__title">Speech to text transcription</h3>
+                        <p class="ds-card__body">An audio notation flow with options to pause the recording and upload later when connected to Wifi.</p>
                     </div>
-                </div>
+                </article>
+                <article class="ds-card ds-card--stacked">
+                    <div class="ds-card__media"><img src="Assets/MAN/Summary.png" alt=""></div>
+                    <div class="ds-card__content">
+                        <h3 class="ds-card__title">Summary Types</h3>
+                        <p class="ds-card__body">Summary types that give structured outputs for common tasks and visit types to standardize reporting.</p>
+                    </div>
+                </article>
+                <article class="ds-card ds-card--stacked">
+                    <div class="ds-card__media"><img src="Assets/MAN/Image Capture.png" alt=""></div>
+                    <div class="ds-card__content">
+                        <h3 class="ds-card__title">Image Capture</h3>
+                        <p class="ds-card__body">Image capture allows technicians to attach photos while recording for more detailed visit documentation.</p>
+                    </div>
+                </article>
+                <article class="ds-card ds-card--stacked">
+                    <div class="ds-card__media"><img src="Assets/MAN/Publish.png" alt=""></div>
+                    <div class="ds-card__content">
+                        <h3 class="ds-card__title">Notes &amp; Assets Linkage</h3>
+                        <p class="ds-card__body">Linked notes to assets, to centralize documentation and link it to part of the platform's operational record.</p>
+                    </div>
+                </article>
+                <article class="ds-card ds-card--stacked">
+                    <div class="ds-card__media"><img src="Assets/MAN/Vocab.png" alt=""></div>
+                    <div class="ds-card__content">
+                        <h3 class="ds-card__title">Custom Vocabulary</h3>
+                        <p class="ds-card__body">Added custom vocabulary so admins could improve transcription of domain specific terms.</p>
+                    </div>
+                </article>
             </div>
-        </div>
+
+            <section class="project-block" aria-label="Outcome">
+                <h3 class="project-block-label">Outcome</h3>
+                <p class="project-block-body">Users reported that the notetaker allowed them to continue their work while documenting it simultaneously. This automated the entire post-visit documentation stage, which typically took about 1-2 hours per day. It was a strong enough signal for the Makula team to offer 30 mins of free transcription to all app users. This was the first feature of the industrial AI module.</p>
+            </section>
+
+            <div class="project-cta-media project-media">
+                <img src="Assets/MAN/Desktop.png" alt="AI notetaker desktop designs">
+                <a class="ds-button" href="https://miro.com/app/board/o9J_ln787Oc=/" target="_blank" rel="noopener">
+                    <img src="Assets/Icons/Figma.svg" alt="" width="24" height="24">
+                    View Design File
+                </a>
+            </div>
+
+            <section class="project-block" aria-label="Reflection">
+                <h3 class="project-block-label">Reflection</h3>
+                <p class="project-block-body">This project was my first designed with automation in mind and taught me the value of selecting small and high impact problems first.</p>
+            </section>
+
+            <footer class="project-footer" data-component="footer" data-project="MAN"></footer>
+        </main>
     </div>
-
 </body>
 </html>

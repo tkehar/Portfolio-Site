@@ -5,158 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dastaan-e-Karachi</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="config.js" defer></script>
-    <script src="lightbox.js" defer></script>
+    <script src="config.js?v=2" defer></script>
+    <script src="lightbox.js?v=2" defer></script>
+    <script src="components.js?v=2" defer></script>
 </head>
 <body class="project-page dk-project">
     <script src="theme.js"></script>
-    <script src="components.js"></script>
     <div class="container">
         <header class="navbar" data-component="header" data-active="work"></header>
-        <div class="main-content project-content">
+
+        <main class="main-content project-content">
             <div class="project-heading">
                 <h1>Dastaan-e-Karachi</h1>
-                <p class="project-subtitle">Augmented Reality Platform for Intangible Heritage</p>
+                <p class="project-subtitle">Augmented reality platform for intangible heritage</p>
                 <p class="project-tagline">Augmented reality · Unity · Vuforia · Marker-based AR · Location-based AR · Cultural heritage · Motion design</p>
             </div>
-            <p class="label">*Awarded best thesis at Habib University in 2018.</p>
-                        <div class="grid-4-col">
-                    <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
-                        <p><b>Company:</b></p>
-                        <p>-</p>
-                    </div>
-                    <div class="grid-item" style="height: fit-content;width: 100%;;padding: 1%;">
-                        <p><b>Role:</b></p>
-                        <p>-</p>
-                    </div>
-                    <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
-                        <p><b>Year:</b></p>
-                        <p>2018</p>
-                    </div>
-                    <div class="grid-item" style="height: fit-content;width: 100%; ;padding: 1%;">
-                        <p><b>Team:</b></p>
-                        <p>Fatin Nawaz</p>
-                    </div>
-                </div>
 
-            
-            <div class="content-row">
-                <div class="image-column">
-                    <img src="Assets/DK/Logo.svg" alt="DKlogo" style="width: 70%; height: auto; padding-left: 20%;">
+            <p class="project-award">*Awarded best thesis at Habib University in 2018.</p>
+
+            <div class="project-details grid-4-col">
+                <div class="grid-item">
+                    <p><b>Company:</b></p>
+                    <p>-</p>
                 </div>
-                <div class="text-column" style="padding-top: 5%;">
-                    <h2>Karachi's folklore and intangible heritage are fading, and few young people encounter these stories.</h2>     
+                <div class="grid-item">
+                    <p><b>Role:</b></p>
+                    <p>-</p>
+                </div>
+                <div class="grid-item">
+                    <p><b>Year:</b></p>
+                    <p>2018</p>
+                </div>
+                <div class="grid-item">
+                    <p><b>Team:</b></p>
+                    <p>Fatin Nawaz</p>
                 </div>
             </div>
 
-            <div class="content-row">
-                <div class="text-column" style="padding-top: 4%;">
-                    <h2>To make folklore accessible we developed an AR platform that preserves folklore.</h2>
-                </div>
+            <section class="project-block" aria-label="Context">
+                <h3 class="project-block-label">Context</h3>
+                <p class="project-block-body">Karachi's folklore and intangible heritage are fading, and few young people encounter these stories.</p>
+            </section>
 
-                <div class="image-column">
-                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin-top: 20px; margin-bottom: 20px; border-radius: 0;">
-                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                                src="https://www.youtube.com/embed/lANtRPbLtcM?si=eepZfMNOz8U6-M4t" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
+            <section class="project-block" aria-label="Task">
+                <h3 class="project-block-label">Task</h3>
+                <p class="project-block-body">To make folklore accessible to public audiences we developed an AR platform to preserve it.</p>
+                <div class="project-video">
+                    <iframe src="https://www.youtube.com/embed/lANtRPbLtcM" title="Dastaan-e-Karachi demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
                 </div>
+            </section>
+
+            <section class="project-block" aria-label="Development">
+                <h3 class="project-block-label">Development</h3>
+                <p class="project-block-body">We built marker-based and location-based AR using Unity as the base engine and the Vuforia plugin to generate both markers.</p>
+                <div class="dk-tool-row">
+                    <figure>
+                        <img src="Assets/Icons/Unity.svg" alt="">
+                        <figcaption>Unity Engine</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="Assets/DK/Vuforia.jpg" alt="">
+                        <figcaption>Vuforia</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="project-block" aria-label="Location-based AR">
+                <h3 class="project-block-label">Location-based AR</h3>
+                <p class="project-block-body">This was done for selected stories &amp; locations:</p>
+                <ol class="project-numbered-list">
+                    <li>The Ghost Bride of Karsaz</li>
+                    <li>Abdullah Shah Ghazi Shrine</li>
+                    <li>Moriro and the Mach</li>
+                    <li>Ram in Aram Bagh</li>
+                    <li>The shrine and crocodiles of Mangopir</li>
+                </ol>
+            </section>
+
+            <div class="project-media project-media--narrow">
+                <img src="Assets/DK/Map.png" alt="Karachi heritage sites map">
             </div>
 
-            <div class="content-row" style="padding-bottom: 5%;">
-                <div class="image-column" style="text-align: center;">
-                    <img src="Assets/Icons/Unity.svg" alt="Project Image" style="width: 20%; height: auto; border-radius: 0;">
-                    <h3>Unity Engine </h3>
-                    
-                    <img src="Assets/DK/Vuforia.jpg" alt="Project Image" style="width: 20%; height: auto; border-radius: 0;">
-                    <h3>Vuforia</h3>
-                </div>
-                   
-            
-                <div class="text-column">
-                    <h2>Using the Unity engine and Vuforia plugin, we built marker-based and location-based AR.</h2>    
-                </div>
+            <section class="project-block" aria-label="Marker-based AR">
+                <h3 class="project-block-label">Marker-based AR</h3>
+                <p class="project-block-body">To enable marker-based AR, unique markers were designed and compiled in a zine. Markers work well when they have high contrast and are unique patterns that the camera is easily able to distinguish. We wanted the markers to have a relationship to the stories they brought to life. For the story of the ghost Bride of Karsaz we appropriated the designs of mehendi (henna) as it is worn during festive occasions like weddings.</p>
+            </section>
+
+            <div class="project-media project-media--narrow">
+                <img src="Assets/DK/Final Markers-04.jpg" alt="Karsaz Bride AR marker">
+                <p class="project-media-caption">Karsaz Bride Marker</p>
             </div>
 
-            <div class="content-row">
-                <div class="text-column">
-                    <h2>This was done for selected stories &amp; locations:</h2>
-                    <h3>1. The Ghost Bride of Karsaz</h3>
-                    <h3>2. Abdullah Shah Ghazi Shrine</h3>
-                    <h3>3. Moriro and the Mach</h3>
-                    <h3>4. Ram in Aram Bagh</h3>
-                    <h3>5. The shrine and crocodiles of Mangopir</h3>
-                </div>
-                <div class="image-column">
-                    <img src="Assets/DK/Map.png" alt="Karachi heritage sites map" style="width: 100%; height: auto; border-radius: 0;">
-                </div>    
+            <div class="project-media project-media--narrow">
+                <img src="Assets/DK/Zines 1.png" alt="Dastaan-e-Karachi AR marker zine">
             </div>
 
-            <div class="content-row">
-                <div class="image-column" style="text-align: center;">
-                    <img src="Assets/DK/Final Markers-04.jpg" alt="Project Image" style="width: 90%; height: auto; border-radius: 0;">
-                    <p>Karsaz Bride Marker</p>
-                </div>
-                <div class="text-column">
-                    <h2>Designed a zine of AR markers.</h2>
-                    <h3>To enable marker-based AR unique markers were designed and compiled in a zine.</h3>
-                    <img src="Assets/DK/Zines 1.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0;">
-                </div>
+            <section class="project-block" aria-label="Motion design">
+                <h3 class="project-block-label">Motion design</h3>
+                <p class="project-block-body">Each story was turned into a series of animations paired with audio.</p>
+            </section>
+
+            <div class="dk-gif-grid">
+                <img src="Assets/DK/wedding night.gif" alt="Ghost Bride wedding night animation">
+                <img src="Assets/DK/baraat.gif" alt="Baraat animation">
+                <img src="Assets/DK/Blink.gif" alt="Blink animation">
+                <img src="Assets/DK/Scare.gif" alt="Scare animation">
             </div>
 
-            <div class="content-row" >
-                
-                <div class="text-column">
-                    <h2>Each story was turned into a series of 2D short form animations paired with audio.</h2>
-                </div>
+            <section class="project-block" aria-label="Interface design">
+                <h3 class="project-block-label">Interface design</h3>
+                <p class="project-block-body">We designed an interface that allows you to toggle between marker-based and location-based AR.</p>
+            </section>
 
-                <div class="image-column">
-                    <img src="Assets/DK/wedding night.gif" alt="Project Image" style="width: 80%; height: auto; border-radius: 0;">
-                </div>
-                
-            </div>
-            <div class="content-row" style="text-align: center;">
-                <div class="image-column">
-                    <img src="Assets/DK/baraat.gif" alt="Project Image" style="width: 80%; height: auto; border-radius: 0;">
-                </div>
-                <div class="image-column">
-                    <img src="Assets/DK/Blink.gif" alt="Project Image" style="width: 80%; height: auto; border-radius: 0;">
-                </div>
-                <div class="image-column">
-                    <img src="Assets/DK/Scare.gif" alt="Project Image" style="width: 80%; height: auto; border-radius: 0;">
-                </div>
-        
+            <div class="project-media project-media--narrow">
+                <img src="Assets/DK/UI_AR.png" alt="Dastaan-e-Karachi AR interface">
             </div>
 
-            <div class="content-row" style="text-align: center;">
-                 
-                <div class="image-column">
-                    <h2>Interface Design</h2>
-                    <img src="Assets/DK/UI_AR.png" alt="Project Image" style="width: 100%; height: auto;">
-                </div>
-            </div>
-            
-            <div class="content-row">
-                <div class="text-column">
-                    <h2>Created a calligraphic identity for the platform.</h2>
-                        <img src="Assets/DK/Calligraphy2.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0;">
-                        <p>Calligraphic process</p>
-                </div>
+            <section class="project-block" aria-label="Identity design">
+                <h3 class="project-block-label">Identity design</h3>
+                <p class="project-block-body">The app logo was created using calligraphy to underscore the platform’s relationship to culture and tradition.</p>
+            </section>
 
-                <div class="image-column" style="text-align: center; padding-top: 2%;">
-                    <img src="Assets/DK/Calligraphy.png" alt="Project Image" style="width:85%; height: auto;">
-                    <p>Calligraphy samples for the logo</p>
-                </div>
-                
+            <div class="project-media project-media--narrow">
+                <img src="Assets/DK/Calligraphy2.png" alt="Calligraphic process">
+                <p class="project-media-caption project-media-caption--left">Calligraphic process</p>
             </div>
-            
-            
-            
-        </div>
+
+            <div class="eh-photo-pair project-media project-media--wide">
+                <figure>
+                    <img src="Assets/DK/Calligraphy.png" alt="Calligraphy samples for the logo">
+                    <figcaption class="project-media-caption">Calligraphy samples for the logo</figcaption>
+                </figure>
+                <figure>
+                    <img src="Assets/DK/Logo.png" alt="Final Dastaan-e-Karachi logo">
+                    <figcaption class="project-media-caption">Final Logo</figcaption>
+                </figure>
+            </div>
+
+            <section class="project-block" aria-label="Reflection">
+                <h3 class="project-block-label">Reflection</h3>
+                <p class="project-block-body">This was my first time designing alongside a developer, and it shaped how I’ve worked with engineers since: design for what the technology can reliably do, and make the constraints meaningful. The markers worked because they carried the stories, like henna for the Ghost Bride. Researching folklore and calligraphy here started a thread that runs through my later work, from Ticket Wala to the Sabeen Mahmud Archive.</p>
+            </section>
+
+            <footer class="project-footer" data-component="footer" data-project="DK"></footer>
+        </main>
     </div>
-
 </body>
 </html>

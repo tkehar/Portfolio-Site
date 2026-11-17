@@ -7,146 +7,157 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
-    <script src="config.js" defer></script>
-    <script src="lightbox.js" defer></script>
+    <script src="config.js?v=2" defer></script>
+    <script src="lightbox.js?v=2" defer></script>
+    <script src="components.js?v=2" defer></script>
 </head>
 <body class="project-page tsw-project">
     <script src="theme.js"></script>
-    <script src="components.js"></script>
     <div class="container">
         <header class="navbar" data-component="header" data-active="work"></header>
-        <div class="main-content project-content">
+
+        <main class="main-content project-content">
             <div class="project-heading">
                 <h1>Look at The City from Here</h1>
-                <p class="project-subtitle">Curating a City-Wide Photography Exhibition</p>
+                <p class="project-subtitle">Curating a city-wide photography exhibition</p>
                 <p class="project-tagline">Exhibition design · Curation · Community engagement · Participatory design · Public programming</p>
             </div>
-                <div class="grid-4-col">
-                    <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
-                        <p><b>Client:</b></p>
-                        <p>The School of Writing (TSW)</p>
-                    </div>
-                    <div class="grid-item" style="height: fit-content;width: 100%;;padding: 1%;">
-                        <p><b>Role:</b></p>
-                        <p>Assistant Curator</p>
-                    </div>
-                    <div class="grid-item" style="height: fit-content;width: 100%; padding: 1%;">
-                        <p><b>Year:</b></p>
-                        <p>2019</p>
-                    </div>
-                    <div class="grid-item" style="height: fit-content;width: 100%; ;padding: 1%;">
-                        <p><b>Team:</b></p>
-                        <p>Fiza Khatri (Lead Curator), Sara Nisar, Fatin Umrani (Assistant Curators)</p>
-                    </div>
+
+            <div class="project-details grid-4-col">
+                <div class="grid-item">
+                    <p><b>Client:</b></p>
+                    <p>The School of Writing (TSW)</p>
                 </div>
-            </div>
-            
-            <div class="content-row">
-                <div class="image-column" style="text-align: center;">
-                    <img src="Assets/TSW/IMG_0003.png" alt="Header Image" class="header-image" style=" margin-bottom: 60px;">
+                <div class="grid-item">
+                    <p><b>Role:</b></p>
+                    <p>Assistant Curator</p>
                 </div>
-                <div class="text-column">
-                    <h2>Students from The School of Writing's photography program documented life in their own neighbourhoods and needed to organise exhibitions where residents could see art.</h2> 
+                <div class="grid-item">
+                    <p><b>Year:</b></p>
+                    <p>2019</p>
+                </div>
+                <div class="grid-item">
+                    <p><b>Team:</b></p>
+                    <p>Fiza Khatri (Lead Curator), Sara Nisar, Fatin Umrani (Assistant Curators)</p>
                 </div>
             </div>
 
-            <div class="text-column" style="padding-bottom: 2%;">
-                <h1>We sorted each photo essay by location and theme. Noting where these themes intersected or were most prominent.</h1>
+            <section class="project-block" aria-label="Context">
+                <h3 class="project-block-label">Context</h3>
+                <p class="project-block-body">Students from The School of Writing's photography program documented life in their own neighbourhoods and needed to organise exhibitions where residents could see art.</p>
+            </section>
+
+            <div class="project-media project-media--narrow">
+                <img src="Assets/TSW/IMG_0003.png" alt="Look at The City from Here exhibition">
             </div>
 
-            <div class="content-row">
-                <div class="text-column">
-                    <div class="map-component">
-                        <div class="map-sidebar">
-                            <div class="map-filter-section">
-                                <label>Filter by theme</label>
-                                <button class="map-filter-btn active" data-theme="all">All Themes</button>
-                                <div id="theme-filters"></div>
-                            </div>
-                            <div class="map-story-list" id="map-story-list"></div>
+            <section class="project-block" aria-label="Curatorial design">
+                <h3 class="project-block-label">Curatorial design</h3>
+                <p class="project-block-body">We sorted each photo essay by location and theme, noting where these themes intersected or were most prominent.</p>
+            </section>
+
+            <div class="project-media project-media--wide">
+                <div class="map-component">
+                    <div class="map-sidebar">
+                        <div class="map-filter-section">
+                            <label>Filter by theme</label>
+                            <button class="map-filter-btn active" data-theme="all" type="button">All Themes</button>
+                            <div id="theme-filters"></div>
                         </div>
-                        <div id="map"></div>
+                        <div class="map-story-list" id="map-story-list"></div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="content-row">
-                <div class="text-column" style="padding-top: 5%;">
-                    <h2>Local sites were chosen by accessibility and community activity, and staged six exhibitions in union councils.</h2>
-                    <h2> Selected photos from each photo essay were printed and displayed on reuable stands in each locality.</h2>
-                </div>
-                <div class="image-column">
-                    <img src="Assets/TSW/Stands.png" alt="Project Image" style="width: 80%; height: auto; border-radius: 0;">
-                </div>
-            </div>
-            
-            <div class="content-row">
-                <div class="image-column">
-                    <img src="Assets/TSW/IMG_1950 1.png" style="width: 100%;height: auto;">
-                </div>
-
-                <div class="text-column" style="padding-top: 4%;">
-                    <h2>The final exhibition was orgaised into themed spaces</h2>
-                    <img src="Assets/TSW/Floor Plan.svg" alt="Project Image" style="width: 100%; height: auto; border-radius: 0;">
-                </div>
-            </div>
-            
-            <div class="content-row">
-                <div class="text-column" style="padding-top: 2%;">
-                    <h2>Two photo essays were formatted as brochure. We designed an accordion brochure that folds into the shape of a national ID card for a story about an Afghan refugee.</h2>
-                    <img src="Assets/TSW/Brochure.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0;">
-                </div>
-                <div class="text-column" style="padding-top: 2%;">
-                    <h2>A PVC pipe installation displayed images and essay on water shortage and was accoompanied by sounds of dripping-water audio. </h2>
-                    <div style="text-align: center;"><img src="Assets/TSW/IMG_0007 1.png" alt="Project Image" style="width: 70%; height: auto; border-radius: 0;">
-                    </div>
+                    <div id="map"></div>
                 </div>
             </div>
 
-            <div class="content-row" style="padding-top: 5%;">
-                <div class="text-column" style="padding-right: 8%;">
-                    <h2>Built a digital privilege walk: visitors answered questions on tablets that fed a live infographic in Urdu.</h2>
-                    <img src="Assets/TSW/Screens 1.png" alt="Project Image" style="width: 100%; height: auto; border-radius: 0;">
-                
-                </div>
-                
-                <div class="image-column" style="padding-bottom: 2%;">
-                    <img src="Assets/TSW/94.jpg" alt="Project Image" style="width: 95%; height: auto; border-radius: 0;">
-                </div>
+            <section class="project-block" aria-label="Local exhibition">
+                <h3 class="project-block-label">Local exhibition</h3>
+                <p class="project-block-body">Local sites were chosen by accessibility and community activity, and staged seven exhibitions in union councils.</p>
+                <p class="project-block-body">Selected photos from each photo essay were printed and displayed on reusable stands in each locality.</p>
+            </section>
+
+            <div class="eh-photo-pair project-media project-media--wide">
+                <figure>
+                    <img src="Assets/TSW/IMG_1950 1.png" alt="Local exhibition installation">
+                </figure>
+                <figure>
+                    <img src="Assets/TSW/Stands.png" alt="Reusable photo stands">
+                </figure>
             </div>
 
-            <div class="content-row">
-                <div class="image-column">
-                    <div class="slider-container" id="exhibition-slider">
-                        <img src="Assets/TSW/36.jpg" alt="Exhibition Image 1" class="slider-image active">
-                        <img src="Assets/TSW/37.jpg" alt="Exhibition Image 2" class="slider-image">
-                        <img src="Assets/TSW/40.jpg" alt="Exhibition Image 3" class="slider-image">
-                        <img src="Assets/TSW/41.jpg" alt="Exhibition Image 4" class="slider-image">
-                        <img src="Assets/TSW/44.jpg" alt="Exhibition Image 5" class="slider-image">
-                        <img src="Assets/TSW/46.jpg" alt="Exhibition Image 6" class="slider-image">
-                        <img src="Assets/TSW/49.jpg" alt="Exhibition Image 7" class="slider-image">
-                        <img src="Assets/TSW/53.jpg" alt="Exhibition Image 8" class="slider-image">
-                        <img src="Assets/TSW/119.jpg" alt="Exhibition Image 9" class="slider-image">
-                    </div>
-                    <div class="slider-nav" id="slider-nav"></div>
-                </div>
+            <section class="project-block" aria-label="Mega exhibition">
+                <h3 class="project-block-label">Mega exhibition</h3>
+                <p class="project-block-body">The final exhibition was divided into themed spaces</p>
+            </section>
 
-                <div class="text-column" style="padding-top: 4%;">
-                    <h1>7 one-day exhibitions held in Union Councils</h1>
-                    <h1>1 mega exhibition held in Karachi Arts Councils</h1>
-
-                </div>
+            <div class="project-media project-media--narrow">
+                <img src="Assets/TSW/Floor Plan.svg" alt="Mega exhibition floor plan">
             </div>
 
-        </div>
+            <section class="project-block" aria-label="Identity brochures">
+                <h3 class="project-block-label">Identity brochures</h3>
+                <p class="project-block-body">Two photo essays were formatted as brochures. We designed an accordion brochure that folds into the shape of a national ID card for a story about an Afghan refugee.</p>
+            </section>
+
+            <div class="project-media project-media--narrow">
+                <img src="Assets/TSW/Brochure.png" alt="Identity accordion brochure">
+            </div>
+
+            <section class="project-block" aria-label="Water shortage installation">
+                <h3 class="project-block-label">Water shortage installation</h3>
+                <p class="project-block-body">A PVC pipe installation displayed images and essay on water shortage and was accompanied by sounds of dripping-water audio.</p>
+            </section>
+
+            <div class="project-media project-media--portrait">
+                <img src="Assets/TSW/IMG_0007 1.png" alt="Water shortage PVC pipe installation">
+            </div>
+
+            <section class="project-block" aria-label="Digital privilege walk">
+                <h3 class="project-block-label">Digital privilege walk</h3>
+                <p class="project-block-body">Built a digital privilege walk: visitors answered questions on tablets that fed a live infographic in Urdu.</p>
+            </section>
+
+            <div class="eh-photo-pair project-media project-media--wide">
+                <figure>
+                    <img src="Assets/TSW/Screens 1.png" alt="Privilege walk tablet screens">
+                </figure>
+                <figure>
+                    <img src="Assets/TSW/94.jpg" alt="Privilege walk exhibition view">
+                </figure>
+            </div>
+
+            <section class="project-block" aria-label="Outcome">
+                <h3 class="project-block-label">Outcome</h3>
+                <p class="project-block-body">7 mini exhibitions in Union Councils.</p>
+                <p class="project-block-body">1 mega exhibition in Karachi Arts Council.</p>
+            </section>
+
+            <div class="sma-slider project-media project-media--narrow">
+                <div class="slider-container" id="exhibition-slider">
+                    <img src="Assets/TSW/36.jpg" alt="Exhibition photo 1" class="slider-image active">
+                    <img src="Assets/TSW/37.jpg" alt="Exhibition photo 2" class="slider-image">
+                    <img src="Assets/TSW/40.jpg" alt="Exhibition photo 3" class="slider-image">
+                    <img src="Assets/TSW/41.jpg" alt="Exhibition photo 4" class="slider-image">
+                    <img src="Assets/TSW/44.jpg" alt="Exhibition photo 5" class="slider-image">
+                    <img src="Assets/TSW/46.jpg" alt="Exhibition photo 6" class="slider-image">
+                    <img src="Assets/TSW/49.jpg" alt="Exhibition photo 7" class="slider-image">
+                    <img src="Assets/TSW/53.jpg" alt="Exhibition photo 8" class="slider-image">
+                    <img src="Assets/TSW/119.jpg" alt="Exhibition photo 9" class="slider-image">
+                </div>
+                <div class="slider-nav" id="slider-nav"></div>
+            </div>
+
+            <section class="project-block" aria-label="Reflection">
+                <h3 class="project-block-label">Reflection</h3>
+                <p class="project-block-body">Taking the exhibitions into union councils taught me that where work is shown matters as much as what is shown: residents saw their own streets on display. My first curatorial project taught me to design for audiences who don’t usually walk into galleries, and that still guides how I approach exhibitions.</p>
+            </section>
+
+            <footer class="project-footer" data-component="footer" data-project="TSW"></footer>
+        </main>
     </div>
 
-
-     <script>
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- THEME TOGGLE ---
-
-            // --- MAP IMPLEMENTATION ---
             const STORIES = [{"name":"Shumaila & Ali Bakhsh","project_title":"Child Labor","location":"Gulzar-e-Hijri","theme_covered":"Youth Culture","lat":24.9673851207,"lon":67.1220016479},{"name":"Muzamil & Mehtab","project_title":"Polio Worker","location":"Gulzar-e-Hijri","theme_covered":"Community Service","lat":24.9543124041,"lon":67.1391677856},{"name":"Abdullah & Musaib","project_title":"Drug Addict","location":"Chakiwara","theme_covered":"Drug Abuse","lat":24.8680210475,"lon":66.9965171814},{"name":"Haseeb & Kabeeer","project_title":"Bike Accident","location":"Gulzar-e-Hijri","theme_covered":"Access & Ability","lat":24.9499545234,"lon":67.1031188965},{"name":"Sumaira & Burhan","project_title":"Harassment","location":"Gulzar-e-Hijri","theme_covered":"Gender","lat":24.942483512,"lon":67.1504974365},{"name":"Walid & Jamshed","project_title":"The impact Drug addiction on the working class","location":"Sakhi Hassan","theme_covered":"Drug Abuse","lat":24.9459077818,"lon":67.0609760284},{"name":"Murtaza & Agha","project_title":"Beggers Supporting their families","location":"Sakhi Hassan","theme_covered":"Access & Ability","lat":24.9485537433,"lon":67.0560836792},{"name":"Fazal, Wahid, & Ismail","project_title":"Paani Ki Qillat","location":"Sakhi Hassan","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.951121828,"lon":67.058057785},{"name":"Filza & Rukhsar","project_title":"Water & Sewerage","location":"Sakhi Hassan","theme_covered":"Pollution & Urban Degradation","lat":24.9496432403,"lon":67.060546875},{"name":"Ayesha","project_title":"Trash","location":"Sakhi Hassan","theme_covered":"Pollution & Urban Degradation","lat":24.9473864144,"lon":67.0638942719},{"name":"Furqan","project_title":"Child labour in the bike Shop","location":"Sakhi Hassan","theme_covered":"Youth Culture","lat":24.9473864144,"lon":67.0579719543},{"name":"Laraib","project_title":"Old Park is now a land fill","location":"Sakhi Hassan","theme_covered":"Pollution & Urban Degradation","lat":24.9438843612,"lon":67.0615768433},{"name":"Faizan & Zareen","project_title":"CNIC","location":"Paposh Nagar","theme_covered":"Identity","lat":24.9254483011,"lon":67.0197665691},{"name":"Hafsa Faheem & Ayesha Rabi","project_title":"Death Certificate","location":"Paposh Nagar","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.9254580306,"lon":67.0206999779},{"name":"Warda Butt, M. Zain Ali, & Furrukh Malik","project_title":"Water Shortage","location":"Paposh Nagar","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.9250007424,"lon":67.0201635361},{"name":"Misbah Akram","project_title":"Water Shortage & Pollution","location":"Paposh Nagar","theme_covered":"Pollution & Urban Degradation","lat":24.9245823709,"lon":67.0197665691},{"name":"Rab Nawaz","project_title":"Trash","location":"Paposh Nagar","theme_covered":"Pollution & Urban Degradation","lat":24.9241250794,"lon":67.0208394527},{"name":"Jawad Afridi & Faiza Shahzadi","project_title":"Education","location":"Paposh Nagar","theme_covered":"Education","lat":24.9237942718,"lon":67.0194768906},{"name":"Sharjeel Siddiqui & Ejaz Shamsher","project_title":"Lack of education & employment","location":"Paposh Nagar","theme_covered":"Education","lat":24.9230353568,"lon":67.0190048218},{"name":"Khan Alam & Usama Asif","project_title":"Ghost Schools","location":"Paposh Nagar","theme_covered":"Education","lat":24.9236288676,"lon":67.0203459263},{"name":"Muhammad Ahmed","project_title":"Education","location":"Paposh Nagar","theme_covered":"Education","lat":24.9231715726,"lon":67.0208394527},{"name":"Jahangir Khan","project_title":"A family's Photographs","location":"Paposh Nagar","theme_covered":"Undefined","lat":24.9221304904,"lon":67.0187044144},{"name":"Midhat Jamal & Ammar Khan","project_title":"Marriage & dowry","location":"Paposh Nagar","theme_covered":"Gender","lat":24.9230548162,"lon":67.0198738575},{"name":"Mudassir Khan & Zohaib Waris","project_title":"Drugs","location":"Paposh Nagar","theme_covered":"Drug Abuse","lat":24.9225391406,"lon":67.0195305347},{"name":"Bushra Asif & Mohiman Ahmad","project_title":"Disability","location":"Paposh Nagar","theme_covered":"Access & Ability","lat":24.922597519,"lon":67.0204639435},{"name":"Anees Zehra & Hira Muhammad","project_title":"Beggars","location":"Paposh Nagar","theme_covered":"Access & Ability","lat":24.922013733,"lon":67.0201206207},{"name":"Anum","project_title":"Waste, water pollution, & marine Life","location":"Mauripur","theme_covered":"Life by the Sea","lat":24.8598052395,"lon":66.9312858582},{"name":"Murad Jan","project_title":"Waste & Water pollution","location":"Mauripur","theme_covered":"Pollution & Urban Degradation","lat":24.8631539285,"lon":66.9303417206},{"name":"Bilal & Faizan","project_title":"Lack of Sewage System","location":"Mauripur","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.866969766,"lon":66.9329166412},{"name":"Adnan & Maria","project_title":"Women's Safety, lack of opportunities","location":"Mauripur","theme_covered":"Gender","lat":24.8682157282,"lon":66.9178962708},{"name":"Uzair & Abrar","project_title":"Ghost Schools","location":"Mauripur","theme_covered":"Education","lat":24.8739781402,"lon":66.9107723236},{"name":"Nusrat & Areesha","project_title":"Coastal Pollution","location":"Mauripur","theme_covered":"Life by the Sea","lat":24.8619857915,"lon":66.9177246094},{"name":"Allah Buksh & Nabeel","project_title":"No Access to Electricity","location":"Mauripur","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.8684493448,"lon":66.9072532654},{"name":"Usman & Shoaib","project_title":"Water Shortage","location":"Mauripur","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.8679042389,"lon":66.9260501862},{"name":"Wazir & Azdil","project_title":"Absence of teachers in schools","location":"Mauripur","theme_covered":"Education","lat":24.8702403901,"lon":66.9119739532},{"name":"Adeen & Muzammil","project_title":"Water Shortage - A Womens Responsibility","location":"Mauripur","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.8651786733,"lon":66.9120597839},{"name":"Fiza & Murwarid","project_title":"Water Shortage The Womens Responsibility","location":"Mauripur","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.8656459174,"lon":66.9215011597},{"name":"Aqsa & Anisa","project_title":"Bike racing culture, no images","location":"Mauripur","theme_covered":"Youth Culture","lat":24.879350958,"lon":66.9094848633},{"name":"Mubashir & Mehboob","project_title":"Forgotten Football Stars","location":"Mauripur","theme_covered":"Youth Culture","lat":24.8746789558,"lon":66.9165229797},{"name":"Zahid","project_title":"Fishery & Shipbreaking industry","location":"Lyari Khadda Market","theme_covered":"Life by the Sea","lat":24.8562228205,"lon":66.9885349274},{"name":"Swaleh","project_title":"Lack of Green Spaces","location":"Lyari Khadda Market","theme_covered":"Public Space","lat":24.8555219003,"lon":66.9896936417},{"name":"Latifee","project_title":"Sanitation & Water","location":"Lyari Khadda Market","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.8564564597,"lon":66.9913673401},{"name":"Shazia","project_title":"Haseena Bibi's CNIC","location":"Lyari Khadda Market","theme_covered":"Identity","lat":24.8574299515,"lon":66.9925689697},{"name":"Not Specified","project_title":"Toy Gun","location":"Nayabad","theme_covered":"Youth Culture","lat":24.8603893197,"lon":66.9936847687},{"name":"Not Specified","project_title":"Gutka","location":"Nayabad","theme_covered":"Drug Abuse","lat":24.8585202533,"lon":66.988363266},{"name":"Not Specified","project_title":"Traffic Encroachment","location":"Nayabad","theme_covered":"Public Space","lat":24.8599999332,"lon":66.9914960861},{"name":"Shehnaz","project_title":"Medical Emergency","location":"Lyari Khadda Market","theme_covered":"Identity","lat":24.8581698002,"lon":66.9950580597},{"name":"Khudadad & Owais","project_title":"Larki do na do, Pani do","location":"Lyari Khadda Market","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.8585981316,"lon":66.9905090332},{"name":"Anush & Shahzeb Baloch","project_title":"Transport Mafia & Congestion","location":"Chakiwara","theme_covered":"Mafia","lat":24.8650229249,"lon":66.9982123375},{"name":"A.Jabbar & Asad ullah","project_title":"Load Shedding","location":"Chakiwara","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.8701819868,"lon":66.998898983},{"name":"Jahanzeb & Haseeb","project_title":"Inaccurate Lab Reports","location":"Chakiwara","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.8705324059,"lon":67.0005083084},{"name":"Abdul Ahad & Mahaz","project_title":"Bike racing culture and impact on youth","location":"Chakiwara","theme_covered":"Youth Culture","lat":24.8685466848,"lon":66.9984912872},{"name":"Sajid & Mustafa","project_title":"Gutka Mafia & Consumption","location":"Chakiwara","theme_covered":"Mafia","lat":24.8669308295,"lon":66.9989848137},{"name":"Umer & Owais","project_title":"Water Pollution","location":"Chakiwara","theme_covered":"Pollution & Urban Degradation","lat":24.8687997687,"lon":67.000079155},{"name":"Inayaullah & Amantullah","project_title":"Girls Education","location":"Shireen Jinnah","theme_covered":"Gender","lat":24.8163614135,"lon":66.9968605042},{"name":"Hassan & Ishaq","project_title":"Gardish Iyam ki Talkhi","location":"Shireen Jinnah","theme_covered":"Drug Abuse","lat":24.8148033061,"lon":66.9964957237},{"name":"Sharjeel","project_title":"Sewage Line ka Maslah","location":"Shireen Jinnah","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.8173546968,"lon":66.9961094856},{"name":"Abdullah & Saeed","project_title":"Sports ground in Shireen Jinnah","location":"Shireen Jinnah","theme_covered":"Public Space","lat":24.8157186966,"lon":66.9957017899},{"name":"Mia M. Furqan & M Younus","project_title":"Pollution and Street crime in Chakra Goth","location":"Chakra Goth","theme_covered":"Pollution & Urban Degradation","lat":24.8190685786,"lon":67.1269798279},{"name":"Rahat Saleem & Nadir Ali","project_title":"Sewage ka Pani","location":"Chakra Goth","theme_covered":"Pollution & Urban Degradation","lat":24.8198476079,"lon":67.1301555634},{"name":"Shayan & Saqib","project_title":"Manshiyat - Easy Access to drugs","location":"Chakra Goth","theme_covered":"Drug Abuse","lat":24.8179779293,"lon":67.1304130554},{"name":"Ali & Haris","project_title":"Model Park","location":"Chakra Goth","theme_covered":"Drug Abuse","lat":24.8168872703,"lon":67.1272373199},{"name":"Anmol","project_title":"Load-shedding","location":"Chakra Goth","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.8210940447,"lon":67.1325588226},{"name":"Saba Aslam & Bakht","project_title":"Imran - The Pain behind the smile","location":"Chakra Goth","theme_covered":"Youth Culture","lat":24.8180558331,"lon":67.1329879761},{"name":"Hasnain","project_title":"School Ki Kahani","location":"Chakra Goth","theme_covered":"Education","lat":24.8197697052,"lon":67.1351337433},{"name":"Mustafa & Saqlain","project_title":"School bana Football Maidaan","location":"Chakra Goth","theme_covered":"Public Space","lat":24.8186790621,"lon":67.1377944946},{"name":"Naveed & Wazir","project_title":"Water & Sewage","location":"Ibrahim Hyderi","theme_covered":"Lack of Civic Amenities & Healthcare","lat":24.7976433522,"lon":67.1442317963},{"name":"Waqas, Zeeshan, & Saba","project_title":"Child labour in fishing industry","location":"Ibrahim Hyderi","theme_covered":"Life by the Sea","lat":24.7875916975,"lon":67.1401119232},{"name":"Mehboob, Hamid, & Rehan","project_title":"Harrasment of Fisherman","location":"Ibrahim Hyderi","theme_covered":"Life by the Sea","lat":24.7928903457,"lon":67.1464633942},{"name":"Yasmin and Kainat","project_title":"Zainab Inhaling Gas Emissions","location":"Ibrahim Hyderi","theme_covered":"Gender","lat":24.7991237597,"lon":67.1401977539},{"name":"Sahiba, Sheeraz, & Bakhtawar","project_title":"Water Contamination","location":"Ibrahim Hyderi","theme_covered":"Pollution & Urban Degradation","lat":24.7927345063,"lon":67.1423435211},{"name":"Shafique Ali & Shahzaib Akbar","project_title":"Sabzi Wala is a Gambling Shop owner","location":"Pehelwan Goth","theme_covered":"Un/employment and Rozgari","lat":24.9094422033,"lon":67.1416139603},{"name":"Noor Ali and Owais Ali","project_title":"My Uncle the Addict","location":"Pehelwan Goth","theme_covered":"Drug Abuse","lat":24.9066591683,"lon":67.1399831772},{"name":"Irfan Haider & Zubair Ali","project_title":"Pakoray Wala","location":"Pehelwan Goth","theme_covered":"Drug Abuse","lat":24.9086832,"lon":67.1404123306},{"name":"Faheem & Abdul Sami","project_title":"Trash Receptacles","location":"Pehelwan Goth","theme_covered":"Pollution & Urban Degradation","lat":24.9124392478,"lon":67.1416783333},{"name":"Raheel Ahmed","project_title":"Kheerwala","location":"Pehelwan Goth","theme_covered":"Identity","lat":24.9136458295,"lon":67.1422147751},{"name":"Shahjan Ali & Taufique Ali","project_title":"The Drug Addict","location":"Pehelwan Goth","theme_covered":"Drug Abuse","lat":24.9114078056,"lon":67.1425151825},{"name":"Aqeel Haider & Shezan Taufique","project_title":"Fruit Seller","location":"Pehelwan Goth","theme_covered":"Youth Culture","lat":24.9106098916,"lon":67.1406912804},{"name":"Usman and Iqra","project_title":"Fouder Of Hunar Ghar","location":"Saeedabad","theme_covered":"Community Service","lat":24.90990928,"lon":66.9694805145},{"name":"Zainab & Noshaba","project_title":"Disabled Shop Owner","location":"Saeedabad","theme_covered":"Access & Ability","lat":24.9049270379,"lon":66.9691371918},{"name":"Kainat & Zeeshan","project_title":"Kainat's Education","location":"Saeedabad","theme_covered":"Gender","lat":24.9124781699,"lon":66.9711971283},{"name":"Saba & Ahmer","project_title":"Hunar Ghar Women","location":"Saeedabad","theme_covered":"Gender","lat":24.9109991186,"lon":66.9723558426},{"name":"Usama & Zeenat","project_title":"Asan Rizq","location":"Saeedabad","theme_covered":"Community Service","lat":24.9092086643,"lon":66.967291832},{"name":"Shoaib & Adil","project_title":"RIckshaw Driver","location":"Saeedabad","theme_covered":"Un/employment and Rozgari","lat":24.907573879,"lon":66.9712400436},{"name":"M. Ahmad Hasan & Sawera","project_title":"Portrait of Tailor Ahmed Nisar","location":"Saeedabad","theme_covered":"Un/employment and Rozgari","lat":24.9071457174,"lon":66.9683647156},{"name":"Shehnaz Khan & Nain tara","project_title":"Shehzad Khan","location":"Saeedabad","theme_covered":"Community Service","lat":24.909948203,"lon":66.971154213},{"name":"Meer, Altaf, & Sultan","project_title":"Land Grabbing - Grave yard","location":"Ibrahim Hyderi","theme_covered":"Mafia","lat":24.7959291742,"lon":67.1383094788},{"name":"M. Talha","project_title":"Hamari Zindagi ki qeemti cheez kya hay?","location":"Shireen Jinnah","theme_covered":"Public Space","lat":24.8155628859,"lon":66.9974184036}];
 
             const THEME_COLORS = {"Youth Culture":"#e07b39","Community Service":"#4a9e6b","Drug Abuse":"#c84b2f","Access & Ability":"#7b6db5","Gender":"#c45c8e","Lack of Civic Amenities & Healthcare":"#2a7fb5","Pollution & Urban Degradation":"#5a8f3c","Identity":"#c9a227","Education":"#3a8fa5","Undefined":"#888","Life by the Sea":"#1a7a9a","Public Space":"#8a6a3e","Mafia":"#8b2020","Un/employment and Rozgari":"#6a5f8b"};
